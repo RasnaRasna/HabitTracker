@@ -43,7 +43,8 @@ class _BottomNavigationBarState extends State<BottomNavigationbar> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_month), label: "month"),
             BottomNavigationBarItem(icon: Icon(Icons.apps), label: "year"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "challenge"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.back_hand), label: "challenge"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search), label: "discover"),
           ]),
