@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/Add_habits.dart';
 
+import '../side_drawer.dart';
+
 class MyHomePageToday extends StatelessWidget {
   const MyHomePageToday({super.key});
 
@@ -12,21 +14,21 @@ class MyHomePageToday extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const Addhabits()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (ctx) => Addhabits()));
               },
-              icon: const Icon(Icons.add))
+              icon: Icon(Icons.add))
         ],
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
       ),
-      body: const Center(
+      drawer: SideDrawer(),
+      body: Center(
         child: Card(
           child: SizedBox(
             width: 300,
             height: 150,
             child: Center(
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "\n    If you want to change your   \n    world you need to start\n   cultivating good habits",
                   style: TextStyle(fontSize: 20),
