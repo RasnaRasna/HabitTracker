@@ -6,14 +6,14 @@ import 'Year.dart';
 import 'discover.dart';
 import 'month.dart';
 
-class BottomNavigationbar extends StatefulWidget {
-  const BottomNavigationbar({super.key});
+class bottombar extends StatefulWidget {
+  const bottombar({super.key});
 
   @override
-  State<BottomNavigationbar> createState() => _BottomNavigationBarState();
+  State<bottombar> createState() => _BottomNavigationBarState();
 }
 
-class _BottomNavigationBarState extends State<BottomNavigationbar> {
+class _BottomNavigationBarState extends State<bottombar> {
   int selectedindex = 0;
   final List<Widget> tabs = [
     const MyHomePageToday(),

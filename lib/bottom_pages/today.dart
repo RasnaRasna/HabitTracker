@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/Add_habits.dart';
 
+import '../addhabits.dart/add_habits.dart';
 import '../side_drawer.dart';
 
 class MyHomePageToday extends StatelessWidget {
