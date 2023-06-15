@@ -1,17 +1,53 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/reminder/reminder.dart';
 import 'package:habits_track/reminder/reminderweekbox.dart';
 
 import '../const.dart';
 
-class AddReminders extends StatelessWidget {
+class AddReminders extends StatefulWidget {
   const AddReminders({super.key});
+
+  @override
+  State<AddReminders> createState() => _AddRemindersState();
+}
+
+class _AddRemindersState extends State<AddReminders> {
+  TimeOfDay? selectedTime;
+
+  void _showTimePicker() {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300.0,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.time,
+            initialDateTime: DateTime.now(),
+            onDateTimeChanged: (DateTime dateTime) {
+              setState(() {
+                selectedTime = TimeOfDay.fromDateTime(dateTime);
+              });
+            },
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           leading: Icon(Icons.cancel),
-          actions: [TextButton(onPressed: () {}, child: Text("Save"))],
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => Reminderpage()));
+                },
+                child: Text("Save"))
+          ],
         ),
         body: ListView(children: [
           kheight10,
@@ -76,25 +112,33 @@ class AddReminders extends StatelessWidget {
             ),
           ),
           kheight10,
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Text(
-              "Time",
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-            ),
-          ),
-          kheight10,
-          Center(
-            child: SizedBox(
-              width: 350,
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+            child: Column(
+              children: [
+                Text(
+                  "Time",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                GestureDetector(
+                  onTap: _showTimePicker,
+                  child: AbsorbPointer(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      controller: TextEditingController(
+                        text: selectedTime != null
+                            ? selectedTime!.format(context)
+                            : '',
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
           kheight20,
