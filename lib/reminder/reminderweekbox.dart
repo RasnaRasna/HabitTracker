@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 
 Container Reminderweeks() {
   return Container(
@@ -13,7 +14,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -28,7 +29,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -43,7 +44,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -58,7 +59,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -73,7 +74,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -88,7 +89,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(
@@ -103,7 +104,7 @@ Container Reminderweeks() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border: Border.all(color: lightgrey)),
           width: 40,
           child: const Center(
               child: Text(

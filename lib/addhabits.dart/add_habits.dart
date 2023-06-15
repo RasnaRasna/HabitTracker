@@ -52,8 +52,8 @@ class _AddhabitsState extends State<Addhabits> {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => bottombar()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const bottombar()));
               },
               child: const Text(
                 "Save",
@@ -86,10 +86,13 @@ class _AddhabitsState extends State<Addhabits> {
           Center(
             child: SizedBox(
               width: 350,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(10.0),
+                    border: Border.all(color: Colors.grey)),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
                   ),
                 ),
               ),
@@ -116,8 +119,8 @@ class _AddhabitsState extends State<Addhabits> {
           kheight10,
           weetemapltes(),
           kheight10,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               "Start Date ",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
@@ -130,14 +133,14 @@ class _AddhabitsState extends State<Addhabits> {
             },
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 25,
                 ),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
-                          color: const Color.fromARGB(255, 71, 70, 70))),
+                          color: const Color.fromARGB(255, 199, 199, 199))),
                   width: 350,
                   height: 50,
                   child: Center(
@@ -145,7 +148,7 @@ class _AddhabitsState extends State<Addhabits> {
                       selectedDate != null
                           ? selectedDate.toString()
                           : 'Select Date',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: const TextStyle(fontSize: 18, color: Colors.black),
                     ),
                   ),
                 ),
@@ -163,21 +166,21 @@ class _AddhabitsState extends State<Addhabits> {
           kheight10,
           GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => Reminderpage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const Reminderpage()));
             },
             child: Row(children: [
-              SizedBox(
+              const SizedBox(
                 width: 25,
               ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
-                        color: const Color.fromARGB(255, 71, 70, 70))),
+                        color: const Color.fromARGB(255, 163, 162, 162))),
                 width: 350,
                 height: 50,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Remindes ',
                     style: TextStyle(fontSize: 18, color: Colors.black),

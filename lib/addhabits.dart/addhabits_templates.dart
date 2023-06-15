@@ -13,7 +13,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -28,7 +29,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -43,7 +45,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -58,7 +61,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -73,7 +77,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -88,7 +93,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -103,7 +109,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -118,7 +125,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -133,7 +141,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -148,7 +157,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -163,7 +173,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -178,7 +189,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(
@@ -193,7 +205,8 @@ Container habitTemplates() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: const Color.fromARGB(255, 71, 70, 70))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
           width: 130,
           child: const Center(
               child: Text(

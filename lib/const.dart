@@ -18,3 +18,4 @@ const kheight20 = SizedBox(
 const kheight50 = SizedBox(
   height: 50,
 );
+const lightgrey = Color.fromARGB(255, 163, 162, 162);

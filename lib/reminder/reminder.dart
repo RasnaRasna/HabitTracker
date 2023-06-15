@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits.dart/add_habits.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/reminder/addreminder.dart';
+import 'package:habits_track/reminder/editreminder.dart';
 
 class Reminderpage extends StatelessWidget {
   const Reminderpage({Key? key}) : super(key: key);
@@ -13,19 +14,19 @@ class Reminderpage extends StatelessWidget {
           leading: GestureDetector(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => Addhabits()));
+                  .push(MaterialPageRoute(builder: (ctx) => const Addhabits()));
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
             ),
           ),
           actions: <Widget>[
             Padding(
-              padding: EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => AddReminders()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (ctx) => const AddReminders()));
                 },
                 child: const Icon(
                   Icons.add,
@@ -35,21 +36,29 @@ class Reminderpage extends StatelessWidget {
             ),
           ],
           centerTitle: true,
-          title: Text("Reminders"),
+          title: const Text("Reminders"),
         ),
         body: ListView(children: [
           Column(children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Notification will be sent if you haven't completed your habit. In the case of non-daily weekly goals, you won't receive any more notifications this week.",
               ),
             ),
             kheight10,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: ListTile(
-                tileColor: const Color.fromARGB(255, 223, 220, 220),
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => EditReminder()));
+                },
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: lightgrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: Color.fromARGB(255, 241, 239, 239),
                 title: Text('🔔   11:30 PM'),
                 subtitle: Text.rich(
                   TextSpan(
@@ -67,11 +76,14 @@ class Reminderpage extends StatelessWidget {
               ),
             ),
             kheight10,
-            kheight10,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: ListTile(
-                tileColor: const Color.fromARGB(255, 223, 220, 220),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: lightgrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: Color.fromARGB(255, 241, 239, 239),
                 title: Text('🔔   11:30 PM'),
                 subtitle: Text.rich(
                   TextSpan(
@@ -81,7 +93,7 @@ class Reminderpage extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: '✍️  Write',
+                        text: '📚 Read',
                       ),
                     ],
                   ),
@@ -89,11 +101,14 @@ class Reminderpage extends StatelessWidget {
               ),
             ),
             kheight10,
-            kheight10,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: ListTile(
-                tileColor: const Color.fromARGB(255, 223, 220, 220),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: lightgrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: Color.fromARGB(255, 241, 239, 239),
                 title: Text('🔔   11:30 PM'),
                 subtitle: Text.rich(
                   TextSpan(
@@ -103,7 +118,7 @@ class Reminderpage extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: '🏃 Run',
+                        text: '📚 Read',
                       ),
                     ],
                   ),
@@ -111,11 +126,14 @@ class Reminderpage extends StatelessWidget {
               ),
             ),
             kheight10,
-            kheight10,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: ListTile(
-                tileColor: const Color.fromARGB(255, 223, 220, 220),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: lightgrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: Color.fromARGB(255, 241, 239, 239),
                 title: Text('🔔   11:30 PM'),
                 subtitle: Text.rich(
                   TextSpan(
@@ -125,7 +143,7 @@ class Reminderpage extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: '🧘 Meditation',
+                        text: '📚 Read',
                       ),
                     ],
                   ),

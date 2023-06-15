@@ -39,12 +39,19 @@ class _AddRemindersState extends State<AddReminders> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.cancel),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => Reminderpage()),
+                );
+              },
+              icon: Icon(Icons.cancel)),
           actions: [
             TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => Reminderpage()));
+                    MaterialPageRoute(builder: (ctx) => Reminderpage()),
+                  );
                 },
                 child: Text("Save"))
           ],
@@ -80,10 +87,13 @@ class _AddRemindersState extends State<AddReminders> {
             child: SizedBox(
               width: 350,
               height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
+              child: Container(
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: lightgrey)),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
                   ),
                 ),
               ),
@@ -102,38 +112,50 @@ class _AddRemindersState extends State<AddReminders> {
             child: SizedBox(
               width: 350,
               height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
+              child: Container(
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                  ),
+                    border: Border.all(color: lightgrey)),
+                child: TextField(
+                  decoration: InputDecoration(border: InputBorder.none),
                 ),
               ),
             ),
           ),
           kheight10,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                Text(
-                  "Time",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Time",
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(height: 10),
                 GestureDetector(
                   onTap: _showTimePicker,
+                  //The AbsorbPointer widget ensures
+                  //that the text field is not editable directly by the user.
                   child: AbsorbPointer(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                    child: Container(
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(color: lightgrey)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          controller: TextEditingController(
+                            text: selectedTime != null
+                                ? selectedTime!.format(context)
+                                : '',
+                          ),
                         ),
-                      ),
-                      controller: TextEditingController(
-                        text: selectedTime != null
-                            ? selectedTime!.format(context)
-                            : '',
                       ),
                     ),
                   ),
