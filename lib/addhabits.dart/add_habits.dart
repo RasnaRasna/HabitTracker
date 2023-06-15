@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:habits_track/addhabits.dart/reminders.dart/reminder.dart';
 import 'package:habits_track/const.dart';
 
 import '../bottom_pages/bottom_bar.dart';
+import '../reminder/reminder.dart';
 import 'addhabits_templates.dart';
 import 'weekbox.dart';
 
@@ -103,6 +103,7 @@ class _AddhabitsState extends State<Addhabits> {
               style: TextStyle(fontSize: 17),
             ),
           ),
+          kheight10,
           habitTemplates(),
           kheight10,
           const Padding(
@@ -122,6 +123,7 @@ class _AddhabitsState extends State<Addhabits> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),
+          kheight10,
           GestureDetector(
             onTap: () {
               _showDatePicker(context);
@@ -158,6 +160,7 @@ class _AddhabitsState extends State<Addhabits> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),
+          kheight10,
           GestureDetector(
             onTap: () {
               Navigator.of(context)
