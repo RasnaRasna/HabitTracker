@@ -6,8 +6,11 @@ const Kwidth = SizedBox(
 const kblack = Colors.black;
 const kgrey = Colors.grey;
 const kwhite = Colors.white;
-const KWidth = SizedBox(
+const KWidth10 = SizedBox(
   width: 10,
+);
+const KWidth7 = SizedBox(
+  width: 7,
 );
 const kheight10 = SizedBox(
   height: 10,
