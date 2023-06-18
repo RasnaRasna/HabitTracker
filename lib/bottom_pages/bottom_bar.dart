@@ -28,7 +28,7 @@ class _BottomNavigationBarState extends State<bottombar> {
         child: Scaffold(
       extendBody: true,
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
+          selectedItemColor: Color.fromARGB(255, 223, 109, 83),
           unselectedItemColor: Colors.grey,
           currentIndex: selectedindex,
           elevation: 20,

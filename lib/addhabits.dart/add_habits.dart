@@ -48,7 +48,10 @@ class _AddhabitsState extends State<Addhabits> {
                     ],
                   ),
                 ),
-            icon: const Icon(Icons.cancel_sharp)),
+            icon: const Icon(
+              Icons.cancel_sharp,
+              color: Colors.black,
+            )),
         actions: [
           TextButton(
               onPressed: () {
@@ -57,12 +60,12 @@ class _AddhabitsState extends State<Addhabits> {
               },
               child: const Text(
                 "Save",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Colors.black),
               ))
         ],
         title: const Text(
           "New habit",
-          style: TextStyle(fontSize: 18.0),
+          style: TextStyle(fontSize: 18.0, color: Colors.black),
         ),
       ),
       body: ListView(
@@ -76,8 +79,10 @@ class _AddhabitsState extends State<Addhabits> {
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: Text(
                       "Habbit Name",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black),
                     ),
                   ),
                 ],
@@ -103,7 +108,7 @@ class _AddhabitsState extends State<Addhabits> {
             padding: EdgeInsets.symmetric(horizontal: 25),
             child: Text(
               "Templates",
-              style: TextStyle(fontSize: 17),
+              style: TextStyle(fontSize: 17, color: Colors.black),
             ),
           ),
           kheight10,
@@ -113,7 +118,10 @@ class _AddhabitsState extends State<Addhabits> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               "How many days per Week should you\n complete that habit? ",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
           ),
           kheight10,
@@ -123,7 +131,10 @@ class _AddhabitsState extends State<Addhabits> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               "Start Date ",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.black),
             ),
           ),
           kheight10,
@@ -160,7 +171,10 @@ class _AddhabitsState extends State<Addhabits> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               "Reminders  ",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.black),
             ),
           ),
           kheight10,

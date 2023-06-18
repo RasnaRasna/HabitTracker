@@ -15,10 +15,12 @@ class _MonthBaseState extends State<MonthBase> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: ListView(
           children: [
             Column(
               children: [
+                monthCalendar(),
                 monthCalendar(),
                 monthCalendar(),
               ],
@@ -37,30 +39,31 @@ class _MonthBaseState extends State<MonthBase> {
           Stack(
             children: [
               Card(
+                color: Colors.white,
                 child: TableCalendar(
                   rowHeight: 50,
-                  headerStyle: HeaderStyle(
+                  headerStyle: const HeaderStyle(
                       leftChevronVisible: false,
                       rightChevronVisible: false,
                       formatButtonVisible: false,
                       titleCentered: true,
-                      titleTextStyle:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      titleTextStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      )),
                   focusedDay: today,
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
-                  calendarStyle: CalendarStyle(
+                  calendarStyle: const CalendarStyle(
                     outsideDaysVisible: false,
                     weekendDecoration: BoxDecoration(
-                      backgroundBlendMode: BlendMode.colorBurn,
-                      color: Color.fromARGB(255, 241, 123, 123),
+                      color: Color.fromARGB(255, 238, 203, 203),
                     ),
                     todayDecoration: BoxDecoration(
-                      color: Color.fromARGB(255, 241, 123, 123),
+                      color: Color.fromARGB(255, 239, 83, 83),
                     ),
                     defaultDecoration: BoxDecoration(
-                      backgroundBlendMode: BlendMode.colorBurn,
-                      color: Color.fromARGB(255, 241, 123, 123),
+                      color: Color.fromARGB(255, 238, 203, 203),
                     ),
                   ),
                 ),
@@ -69,10 +72,13 @@ class _MonthBaseState extends State<MonthBase> {
                 top: 4,
                 left: 3,
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    '🧘‍♂️Meditate',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
+                    '🧘‍♂️  Meditate',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 ),
               ),

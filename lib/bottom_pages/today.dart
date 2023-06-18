@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/edit_habits.dart';
+import 'package:habits_track/reminder/edit_habits.dart';
 
 import '../addhabits.dart/add_habits.dart';
 import '../const.dart';
@@ -12,14 +12,19 @@ class MyHomePageToday extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(" Do the best You can.."),
+        title: const Text(
+          " Do the best You can..",
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) => const Addhabits()));
               },
-              icon: const Icon(Icons.add))
+              icon: const Icon(
+                Icons.add,
+              ))
         ],
       ),
       drawer: const SideDrawer(),
@@ -49,6 +54,7 @@ class MyHomePageToday extends StatelessWidget {
           onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(builder: (ctx) => const EditHabits())),
           child: Card(
+            elevation: 20,
             child: Stack(
               children: [
                 const Positioned(
@@ -56,8 +62,10 @@ class MyHomePageToday extends StatelessWidget {
                     left: 10,
                     child: Text(
                       "🔥 3",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     )),
                 kheight10,
                 const Positioned(
@@ -65,7 +73,7 @@ class MyHomePageToday extends StatelessWidget {
                   left: 10,
                   child: Text(
                     "✍️ Write",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                 ),
                 Padding(
