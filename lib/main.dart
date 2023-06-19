@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/provider.dart/checkbox.dart';
+import 'package:provider/provider.dart';
 import 'bottom_pages/bottom_bar.dart';
 
 void main() {
@@ -11,14 +13,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => CheckboxProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: true,
+        ),
+        home: const bottombar(),
       ),
-      home: const bottombar(),
     );
   }
 }

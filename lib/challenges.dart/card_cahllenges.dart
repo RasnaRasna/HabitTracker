@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges.dart/positivemindset.dart/positivemindset.dart';
 import 'package:habits_track/challenges.dart/selflovee.dart/selflove.dart';
+import 'package:habits_track/challenges.dart/walking.dart/walking.dart';
 
 GridView challengeitems(BuildContext context) {
   return GridView.count(
@@ -14,7 +16,7 @@ GridView challengeitems(BuildContext context) {
       InkWell(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => SelfLove()));
+              .push(MaterialPageRoute(builder: (ctx) => PositiveMindset()));
         },
         child: Card(
           elevation: 10,
@@ -36,41 +38,53 @@ GridView challengeitems(BuildContext context) {
           ),
         ),
       ),
-      Card(
-        elevation: 10,
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Image.asset(
-                "lib/aseetimages.dart/loveeee.jpeg",
-                width: 130,
-                height: 110,
-              ),
-              Text(
-                "Self love",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-              )
-            ],
+      InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (ctx) => SelfLove()));
+        },
+        child: Card(
+          elevation: 10,
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Image.asset(
+                  "lib/aseetimages.dart/loveeee.jpeg",
+                  width: 130,
+                  height: 110,
+                ),
+                Text(
+                  "Self love",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
         ),
       ),
-      Card(
-        elevation: 10,
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Image.asset(
-                "lib/aseetimages.dart/walking.png",
-                width: 130,
-                height: 110,
-              ),
-              Text(
-                "Walking",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-              )
-            ],
+      InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (ctx) => Walking()));
+        },
+        child: Card(
+          elevation: 10,
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Image.asset(
+                  "lib/aseetimages.dart/walking.png",
+                  width: 130,
+                  height: 110,
+                ),
+                Text(
+                  "Walking",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -392,7 +406,7 @@ GridView challengeitems(BuildContext context) {
               Text(
                 "Positive Mindset",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-              )
+              ),
             ],
           ),
         ),
