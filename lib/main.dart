@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/provider.dart/checkbox.dart';
+import 'package:habits_track/provider.dart/colors.dart';
 import 'package:provider/provider.dart';
 import 'bottom_pages/bottom_bar.dart';
 
@@ -14,13 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => CheckboxProvider(),
+      create: (context) => IconColorchangeprovider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true,
         ),
         home: const bottombar(),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges.dart/morningroutine.dart/morngchallenges.dart';
 import 'package:habits_track/const.dart';
 
-import 'challngesofpositivemindset.dart';
-
-class PositiveMindset extends StatelessWidget {
-  const PositiveMindset({super.key});
+class PositiveAffirmation extends StatelessWidget {
+  const PositiveAffirmation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class PositiveMindset extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Positive mindset",
+            "Positive Affirmation",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -26,7 +25,7 @@ class PositiveMindset extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/+mindset.png",
+                "lib/aseetimages.dart/affrmation2.jpg",
                 width: 400,
                 height: 300,
               ),
@@ -37,7 +36,7 @@ class PositiveMindset extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              "Changing the way YOU think can be the key to getting the result YOU want in Your life. if you learn how to your mindset ,your whole world change!",
+              " Practicing Positive affirmation can help you feel more confident and boost positive vibes .it,s a wonderful way to start the day !",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
@@ -50,7 +49,7 @@ class PositiveMindset extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => PositiveChallenges()));
+                          builder: (ctx) => MorningChallenges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

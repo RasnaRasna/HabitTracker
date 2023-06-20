@@ -8,18 +8,17 @@ class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
       child: Column(
         children: [
           kheight50,
           ListTile(
             leading: Icon(
               Icons.settings,
-              color: Colors.white,
+              color: Colors.black,
             ),
             title: Text(
               "settings",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
           ),
           SizedBox(
@@ -36,7 +35,7 @@ class SideDrawer extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                   size: 20,
                 ),
               ),
@@ -60,7 +59,7 @@ class SideDrawer extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(
                   Icons.privacy_tip,
-                  color: Colors.white,
+                  color: Colors.black,
                   size: 20,
                 ),
               ),
@@ -83,7 +82,7 @@ class SideDrawer extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(
                   Icons.share,
-                  color: Colors.white,
+                  color: Colors.black,
                   size: 20,
                 ),
               ),
@@ -107,7 +106,7 @@ class SideDrawer extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                   size: 20,
                 ),
               ),

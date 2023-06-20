@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 
-class PositiveChallenges extends StatefulWidget {
-  PositiveChallenges({Key? key}) : super(key: key);
+class feelgoodchallenges extends StatefulWidget {
+  feelgoodchallenges({Key? key}) : super(key: key);
 
   @override
-  _PositiveChallengesState createState() => _PositiveChallengesState();
+  _feelgoodchallengesState createState() => _feelgoodchallengesState();
 }
 
-class _PositiveChallengesState extends State<PositiveChallenges> {
+class _feelgoodchallengesState extends State<feelgoodchallenges> {
   final List<String> challenges = [
-    "Practice smiling.smile at strangers,in the mirror,smile Whenever you can! You'll feel so much of more positive",
+    "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
     "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
     "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",

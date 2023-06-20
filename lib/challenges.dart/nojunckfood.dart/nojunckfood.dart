@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges.dart/language.dart/languagechallenges.dart';
 import 'package:habits_track/const.dart';
 
-import 'challngesofpositivemindset.dart';
-
-class PositiveMindset extends StatelessWidget {
-  const PositiveMindset({super.key});
+class NojunckFood extends StatelessWidget {
+  const NojunckFood({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class PositiveMindset extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Positive mindset",
+            "No  junk food",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -26,7 +25,7 @@ class PositiveMindset extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/+mindset.png",
+                "lib/aseetimages.dart/no jucnk food.png",
                 width: 400,
                 height: 300,
               ),
@@ -37,7 +36,7 @@ class PositiveMindset extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              "Changing the way YOU think can be the key to getting the result YOU want in Your life. if you learn how to your mindset ,your whole world change!",
+              "Start with baby steps for healthy lifestyle and get rid of all the junk food  during these  days.",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
@@ -46,11 +45,11 @@ class PositiveMindset extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               CircleAvatar(
-                backgroundColor: const Color.fromARGB(255, 225, 222, 222),
+                backgroundColor: Color.fromARGB(255, 193, 192, 192),
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => PositiveChallenges()));
+                          builder: (ctx) => LanguageChallenge()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

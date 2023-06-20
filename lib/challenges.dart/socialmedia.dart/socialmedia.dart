@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges.dart/selflovee.dart/challengesof_selflove.dart';
 import 'package:habits_track/const.dart';
 
-import 'challngesofpositivemindset.dart';
-
-class PositiveMindset extends StatelessWidget {
-  const PositiveMindset({super.key});
+class SocialMedia extends StatelessWidget {
+  const SocialMedia({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class PositiveMindset extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Positive mindset",
+            "Social Media Detox",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -26,7 +25,7 @@ class PositiveMindset extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/+mindset.png",
+                "lib/aseetimages.dart/nophone.jpeg",
                 width: 400,
                 height: 300,
               ),
@@ -37,7 +36,7 @@ class PositiveMindset extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              "Changing the way YOU think can be the key to getting the result YOU want in Your life. if you learn how to your mindset ,your whole world change!",
+              " Small steps Will make you realize how nice  it's to break from the internet",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
@@ -50,7 +49,7 @@ class PositiveMindset extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => PositiveChallenges()));
+                          builder: (ctx) => SelfLoveChallenges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

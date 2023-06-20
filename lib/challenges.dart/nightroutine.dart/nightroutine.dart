@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges.dart/language.dart/languagechallenges.dart';
 import 'package:habits_track/const.dart';
 
-import 'challngesofpositivemindset.dart';
-
-class PositiveMindset extends StatelessWidget {
-  const PositiveMindset({super.key});
+class NightRoutine extends StatelessWidget {
+  const NightRoutine({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        actions: const [
           Text(
-            "Positive mindset",
+            "Night Routine",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -24,20 +23,20 @@ class PositiveMindset extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
-            child: Container(
+            child: SizedBox(
+              width: 500,
+              height: 150,
               child: Image.asset(
-                "lib/aseetimages.dart/+mindset.png",
+                "lib/aseetimages.dart/night.jpeg",
                 width: 400,
                 height: 300,
               ),
-              width: 500,
-              height: 150,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              "Changing the way YOU think can be the key to getting the result YOU want in Your life. if you learn how to your mindset ,your whole world change!",
+              " In this  challenge,you'll find some sleep hacks anf tips to have a bette night's sleep and feel less stressed at bedtime  .",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
@@ -50,11 +49,11 @@ class PositiveMindset extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => PositiveChallenges()));
+                          builder: (ctx) => LanguageChallenge()));
                     },
-                    icon: Icon(Icons.arrow_forward_ios_rounded)),
+                    icon: const Icon(Icons.arrow_forward_ios_rounded)),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               )
             ],
