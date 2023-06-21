@@ -56,7 +56,7 @@ class _AddhabitsState extends State<Addhabits> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const bottombar()));
+                    MaterialPageRoute(builder: (ctx) => const ButtonBar()));
               },
               child: const Text(
                 "Save",
