@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/year.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits.dart/habitedit.dart';
+import 'package:habits_track/edit_habits.dart/heatmap.dart';
 import 'package:habits_track/history.dart/history.dart';
 import 'package:habits_track/reminder/reminder.dart';
 
@@ -152,6 +154,8 @@ class EditHabits extends StatelessWidget {
                 ],
               ),
             ),
+            kheight20,
+            buildHeatMap(),
           ],
         )
       ]),
