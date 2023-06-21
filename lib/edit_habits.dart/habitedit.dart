@@ -56,7 +56,7 @@ class _HabitEditState extends State<HabitEdit> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const ButtonBar()));
+                    MaterialPageRoute(builder: (ctx) => const bottombar()));
               },
               child: const Text(
                 "Save",

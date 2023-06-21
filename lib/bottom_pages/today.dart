@@ -78,7 +78,7 @@ Widget buildListViewSeparated() {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -183,14 +183,16 @@ Widget buildListViewSeparated() {
                                 ),
                               ),
                               KWidth7,
-                              const Icon(
-                                Icons.check_circle,
-                                color: Colors.blue,
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.check_circle,
+                                  color: Colors.blue,
+                                ),
                               ),
-                              KWidth7,
                             ],
                           ),
-                          const SizedBox(height: 17),
+                          const SizedBox(height: 5),
                           const Padding(
                             padding: EdgeInsets.only(right: 20),
                             child: Text(
