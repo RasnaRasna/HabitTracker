@@ -109,7 +109,7 @@ Widget buildHeatMap() {
 Color _getColorForValue(int value) {
   // Define your color mapping logic here
   if (value == 1) {
-    return const Color.fromARGB(255, 229, 157, 152);
+    return Color.fromARGB(255, 229, 113, 151);
   }
-  return const Color.fromARGB(255, 201, 197, 197);
+  return Color.fromARGB(255, 246, 211, 223);
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../addhabits.dart/add_habits.dart';
 import '../const.dart';
 import '../edit_habits.dart/edit_habits.dart';
-import '../side_drawer.dart';
 
 class MyHomePageToday extends StatelessWidget {
   const MyHomePageToday({super.key});
@@ -12,20 +10,11 @@ class MyHomePageToday extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
-          " Do the best You can..",
+          " Today",
           style: TextStyle(color: Colors.black),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const Addhabits()));
-              },
-              icon: const Icon(
-                Icons.add,
-              ))
-        ],
       ),
       body: Column(
         children: [kheight50, Expanded(child: buildListViewSeparated())],
@@ -48,10 +37,10 @@ Widget buildListViewSeparated() {
               // elevation: 10,
               child: Container(
                 decoration: BoxDecoration(
-                  // color: Colors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                      color: Color.fromARGB(255, 210, 210, 210), width: 1),
+                      color: Color.fromARGB(255, 150, 147, 147), width: 1),
                 ),
                 child: Stack(
                   children: [
@@ -85,7 +74,7 @@ Widget buildListViewSeparated() {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
-                                color: Color.fromARGB(255, 54, 104, 78),
+                                color: Color.fromARGB(255, 229, 113, 151),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -99,7 +88,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 54, 104, 78),
+                                color: Color.fromARGB(255, 229, 113, 151),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -113,7 +102,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 54, 104, 78),
+                                color: Color.fromARGB(255, 229, 113, 151),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -127,7 +116,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 54, 104, 78),
+                                color: Color.fromARGB(255, 229, 113, 151),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -141,7 +130,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 176, 212, 193),
+                                color: Color.fromARGB(255, 246, 211, 223),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -155,7 +144,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 176, 212, 193),
+                                color: Color.fromARGB(255, 246, 211, 223),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -169,7 +158,7 @@ Widget buildListViewSeparated() {
                               ),
                               KWidth7,
                               Container(
-                                color: Color.fromARGB(255, 176, 212, 193),
+                                color: Color.fromARGB(255, 246, 211, 223),
                                 width: 18,
                                 height: 18,
                                 child: const Padding(
@@ -186,7 +175,7 @@ Widget buildListViewSeparated() {
                                 onPressed: () {},
                                 icon: const Icon(
                                   Icons.check_circle,
-                                  color: Color.fromARGB(255, 54, 104, 78),
+                                  color: Color.fromARGB(255, 229, 113, 151),
                                 ),
                               ),
                             ],

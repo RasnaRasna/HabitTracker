@@ -70,13 +70,13 @@ class _MonthBaseState extends State<MonthBase> {
                     calendarStyle: const CalendarStyle(
                       outsideDaysVisible: false,
                       weekendDecoration: BoxDecoration(
-                        color: Color.fromARGB(255, 238, 203, 203),
+                        color: Color.fromARGB(255, 246, 211, 223),
                       ),
                       todayDecoration: BoxDecoration(
-                        color: Color.fromARGB(255, 239, 83, 83),
+                        color: Color.fromARGB(255, 229, 113, 151),
                       ),
                       defaultDecoration: BoxDecoration(
-                        color: Color.fromARGB(255, 238, 203, 203),
+                        color: Color.fromARGB(255, 246, 211, 223),
                       ),
                     ),
                   ),

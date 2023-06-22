@@ -13,7 +13,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -28,8 +28,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -44,8 +43,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -60,8 +58,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -76,8 +73,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -92,8 +88,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(
@@ -108,8 +103,7 @@ Container weetemapltes() {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 163, 162, 162))),
+              border: Border.all(color: Color.fromARGB(255, 229, 113, 151))),
           width: 40,
           child: const Center(
               child: Text(

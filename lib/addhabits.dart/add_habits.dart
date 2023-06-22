@@ -94,7 +94,8 @@ class _AddhabitsState extends State<Addhabits> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10.0),
-                    border: Border.all(color: Colors.grey)),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 236, 137, 170))),
                 child: TextField(
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -151,7 +152,7 @@ class _AddhabitsState extends State<Addhabits> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
-                          color: const Color.fromARGB(255, 199, 199, 199))),
+                          color: Color.fromARGB(255, 229, 113, 151))),
                   width: 350,
                   height: 50,
                   child: Center(
@@ -190,8 +191,8 @@ class _AddhabitsState extends State<Addhabits> {
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 163, 162, 162))),
+                    border:
+                        Border.all(color: Color.fromARGB(255, 229, 113, 151))),
                 width: 350,
                 height: 50,
                 child: const Center(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:habits_track/addhabits.dart/add_habits.dart';
 import 'package:habits_track/bottom_pages/moodcheck.dart';
 import 'package:habits_track/bottom_pages/today.dart';
 
@@ -13,11 +15,13 @@ class Homapage extends StatelessWidget {
       appBar: AppBar(
         actions: [
           TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
-              },
-              child: Text("Today"))
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+              );
+            },
+            child: Text("Today"),
+          ),
         ],
       ),
       drawer: const SideDrawer(),
@@ -41,10 +45,9 @@ class Homapage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
                         "Good Morning Rasna ..,",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.acme(fontSize: 25),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 Padding(
@@ -52,9 +55,10 @@ class Homapage extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 177, 177, 177))),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 177, 177, 177)),
+                    ),
                     child: Image.asset(
                       "images/lo.png",
                       width: 400,
@@ -65,26 +69,38 @@ class Homapage extends StatelessWidget {
                   ),
                 ),
                 Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "How are you  feeling today ?",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "How are you feeling today?",
+                    style: GoogleFonts.acme(fontSize: 25),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => Moodchecking()));
-                      },
-                      icon: Icon(Icons.add),
-                      label: Text("Daily modd check_in")),
-                )
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => Moodchecking()),
+                      );
+                    },
+                    icon: Icon(Icons.add),
+                    label: Text("Daily mood check-in"),
+                  ),
+                ),
               ],
             ),
           ),
         ],
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 50),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (ctx) => Addhabits()));
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }

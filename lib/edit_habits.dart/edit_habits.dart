@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/Home_page.dart';
+import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits.dart/habitedit.dart';
 import 'package:habits_track/edit_habits.dart/heatmap.dart';
 import 'package:habits_track/edit_habits.dart/yearheatmap.dart';
-import 'package:habits_track/provider.dart/history.dart/history.dart';
+import 'package:habits_track/history.dart/history.dart';
 import 'package:habits_track/reminder/reminder.dart';
 
 class EditHabits extends StatelessWidget {
@@ -13,6 +15,12 @@ class EditHabits extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (ctx) => bottombar()));
+            },
+            icon: Icon(Icons.arrow_back)),
         centerTitle: true,
         title: Text("🧘‍♂️ Meditation"),
       ),

@@ -90,7 +90,8 @@ class _AddRemindersState extends State<AddReminders> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: lightgrey)),
+                    border:
+                        Border.all(color: Color.fromARGB(255, 229, 113, 151))),
                 child: TextField(
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -115,7 +116,8 @@ class _AddRemindersState extends State<AddReminders> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: lightgrey)),
+                    border:
+                        Border.all(color: Color.fromARGB(255, 229, 113, 151))),
                 child: TextField(
                   decoration: InputDecoration(border: InputBorder.none),
                 ),
@@ -143,7 +145,8 @@ class _AddRemindersState extends State<AddReminders> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(color: lightgrey)),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 229, 113, 151))),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(

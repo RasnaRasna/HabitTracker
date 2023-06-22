@@ -154,7 +154,7 @@ class _HistoryState extends State<History> {
                         child: Icon(
                           Icons.check_circle,
                           color: showAdditionalButtonList[index]
-                              ? Colors.green
+                              ? Color.fromARGB(255, 229, 113, 151)
                               : Colors.grey,
                         ),
                       ),

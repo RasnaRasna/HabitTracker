@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/edit_habits.dart/edit_habits.dart';
 
 import '../addhabits.dart/addhabits_templates.dart';
 import '../addhabits.dart/weekbox.dart';
@@ -56,7 +57,7 @@ class _HabitEditState extends State<HabitEdit> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const bottombar()));
+                    MaterialPageRoute(builder: (ctx) => const EditHabits()));
               },
               child: const Text(
                 "Save",

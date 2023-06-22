@@ -112,7 +112,7 @@ Widget _buildMonthHeatMap(int month, Map<DateTime, int> dataset) {
 Color _getColorForValue(int value) {
   // Define your color mapping logic here
   if (value == 1) {
-    return Color.fromARGB(255, 224, 170, 166);
+    return Color.fromARGB(255, 229, 113, 151);
   }
-  return Color.fromARGB(255, 181, 180, 180);
+  return Color.fromARGB(255, 246, 211, 223);
 }

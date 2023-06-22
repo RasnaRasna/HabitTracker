@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/edit_habits.dart/heatmap.dart';
 import 'package:habits_track/edit_habits.dart/yearheatmap.dart';
 
 class YearBase extends StatelessWidget {
@@ -9,19 +10,20 @@ class YearBase extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                kheight50,
-                Flexible(
-                  child: buildHeatMapYear(),
-                )
-              ],
-            ),
-          ],
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text("2023"),
         ),
+        body: ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [kheight20, Flexible(child: buildHeatMapYear())],
+              );
+            },
+            separatorBuilder: (BuildContext, int index) => kheight20,
+            itemCount: 4),
       ),
     );
   }
