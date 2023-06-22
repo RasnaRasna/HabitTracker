@@ -25,7 +25,7 @@ class FamilyTime extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/family.jpeg",
+                "images/family.jpeg",
                 width: 400,
                 height: 300,
               ),

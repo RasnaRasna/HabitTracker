@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/Home_page.dart';
 
 import 'Challenges.dart';
 import 'Today.dart';
@@ -16,7 +17,8 @@ class bottombar extends StatefulWidget {
 class _BottomNavigationBarState extends State<bottombar> {
   int selectedindex = 0;
   final List<Widget> tabs = [
-    MyHomePageToday(),
+    Homapage(),
+    // MyHomePageToday(),
     MonthBase(),
     const YearBase(),
     const ChallengesPage(),
@@ -28,7 +30,7 @@ class _BottomNavigationBarState extends State<bottombar> {
         child: Scaffold(
       extendBody: true,
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Color.fromARGB(255, 223, 109, 83),
+          selectedItemColor: Color.fromARGB(255, 54, 104, 78),
           unselectedItemColor: Colors.grey,
           currentIndex: selectedindex,
           elevation: 20,

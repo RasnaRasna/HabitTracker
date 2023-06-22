@@ -52,32 +52,33 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-
-    # -  lib/aseetimages.dart
-    - lib/aseetimages.dart/+mindset.png
-    - lib/aseetimages.dart/affrmation2.jpg
-    - lib/aseetimages.dart/feel food.jpeg
-    - lib/aseetimages.dart/happy jump2.jpeg
-    - lib/aseetimages.dart/confident2.jpeg
-    - lib/aseetimages.dart/pamper your self2.jpeg
-    - lib/aseetimages.dart/workout.jpeg
-    - lib/aseetimages.dart/language2.jpg
-    - lib/aseetimages.dart/walking.png
-    - lib/aseetimages.dart/social media detox.jpeg
-    - lib/aseetimages.dart/loveeee.jpeg
-    - lib/aseetimages.dart/slp.jpeg
-    - lib/aseetimages.dart/study.png
-    - lib/aseetimages.dart/productive2.png
-    - lib/aseetimages.dart/no jucnk food.png
-    - lib/aseetimages.dart/night.jpeg
-    - lib/aseetimages.dart/morning.jpeg
-    - lib/aseetimages.dart/sleep shedule.jpg
-    - lib/aseetimages.dart/new day.jpeg
-    - lib/aseetimages.dart/kindness.jpeg
-    - lib/aseetimages.dart/family.jpeg
-    - lib/aseetimages.dart/affrmation.webp
-    - lib/aseetimages.dart/workout.jpeg
-    - lib/aseetimages.dart/nophone.jpeg
+      - images/
+    # - lib/aseetimages.dart
+    # - lib/aseetimages.dart/+mindset.png
+    # - lib/aseetimages.dart/lo.png
+    # - lib/aseetimages.dart/affrmation2.jpg
+    # - lib/aseetimages.dart/feel food.jpeg
+    # - lib/aseetimages.dart/happy jump2.jpeg
+    # - lib/aseetimages.dart/confident2.jpeg
+    # - lib/aseetimages.dart/pamper your self2.jpeg
+    # - lib/aseetimages.dart/workout.jpeg
+    # - lib/aseetimages.dart/language2.jpg
+    # - lib/aseetimages.dart/walking.png
+    # - lib/aseetimages.dart/social media detox.jpeg
+    # - lib/aseetimages.dart/loveeee.jpeg
+    # - lib/aseetimages.dart/slp.jpeg
+    # - lib/aseetimages.dart/study.png
+    # - lib/aseetimages.dart/productive2.png
+    # - lib/aseetimages.dart/no jucnk food.png
+    # - lib/aseetimages.dart/night.jpeg
+    # - lib/aseetimages.dart/morning.jpeg
+    # - lib/aseetimages.dart/sleep shedule.jpg
+    # - lib/aseetimages.dart/new day.jpeg
+    # - lib/aseetimages.dart/kindness.jpeg
+    # - lib/aseetimages.dart/family.jpeg
+    # - lib/aseetimages.dart/affrmation.webp
+    # - lib/aseetimages.dart/workout.jpeg
+    # - lib/aseetimages.dart/nophone.jpeg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

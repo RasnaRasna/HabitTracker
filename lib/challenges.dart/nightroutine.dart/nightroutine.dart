@@ -27,7 +27,7 @@ class NightRoutine extends StatelessWidget {
               width: 500,
               height: 150,
               child: Image.asset(
-                "lib/aseetimages.dart/night.jpeg",
+                "images/night.jpeg",
                 width: 400,
                 height: 300,
               ),

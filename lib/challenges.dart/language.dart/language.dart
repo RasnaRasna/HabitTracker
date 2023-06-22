@@ -25,7 +25,7 @@ class Language extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/language2.jpg",
+                "images/language2.jpg",
                 width: 400,
                 height: 300,
               ),

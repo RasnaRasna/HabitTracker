@@ -44,6 +44,10 @@ Widget buildHeatMapYear() {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
+          Divider(
+            indent: 20,
+            endIndent: 20,
+          ),
           for (int i = 0; i < 12; i += 3) // Display 4 rows
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

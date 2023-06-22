@@ -25,7 +25,7 @@ class PamberYouself extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/pamper your self2.jpeg",
+                "images/pamper your self2.jpeg",
                 width: 400,
                 height: 300,
               ),

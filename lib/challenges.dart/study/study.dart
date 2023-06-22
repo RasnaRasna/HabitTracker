@@ -25,7 +25,7 @@ class Study extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/study.png",
+                "images/study.png",
                 width: 400,
                 height: 300,
               ),

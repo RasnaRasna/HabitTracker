@@ -25,7 +25,7 @@ class PositiveAffirmation extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "lib/aseetimages.dart/affrmation2.jpg",
+                "images/affrmation2.jpg",
                 width: 400,
                 height: 300,
               ),

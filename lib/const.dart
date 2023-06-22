@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 const Kwidth = SizedBox(
   width: 20,
 );
-const kblack = Colors.black;
+const backgroundcolor = Color.fromARGB(255, 214, 208, 188),
+    kblack = Colors.black;
 const kgrey = Colors.grey;
-const kwhite = Colors.white;
+const lightgreen = Color.fromARGB(255, 176, 212, 193),
+    greencolor = Color.fromARGB(255, 54, 104, 78),
+    kwhite = Colors.white;
 const KWidth10 = SizedBox(
   width: 10,
 );

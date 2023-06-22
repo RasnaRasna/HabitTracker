@@ -16,7 +16,7 @@ import 'package:habits_track/challenges.dart/positivemindset.dart/positivemindse
 import 'package:habits_track/challenges.dart/productive.dart/productive.dart';
 import 'package:habits_track/challenges.dart/selflovee.dart/selflove.dart';
 import 'package:habits_track/challenges.dart/socialmedia.dart/socialmedia.dart';
-import 'package:habits_track/challenges.dart/study.dart/study.dart';
+import 'package:habits_track/challenges.dart/study/study.dart';
 import 'package:habits_track/challenges.dart/walking.dart/walking.dart';
 
 import 'fixsleep.dart/fixsleep.dart';
@@ -43,7 +43,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/+mindset.png",
+                  "images/+mindset.png",
                   width: 130,
                   height: 110,
                 ),
@@ -68,7 +68,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/loveeee.jpeg",
+                  "images/loveeee.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -93,7 +93,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/walking.png",
+                  "images/walking.png",
                   width: 130,
                   height: 110,
                 ),
@@ -118,7 +118,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/nophone.jpeg",
+                  "images/nophone.jpeg",
                   width: 120,
                   height: 105,
                 ),
@@ -143,7 +143,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/slp.jpeg",
+                  "images/slp.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -168,7 +168,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/productive2.png",
+                  "images/productive2.png",
                   width: 130,
                   height: 110,
                 ),
@@ -193,7 +193,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/pamper your self2.jpeg",
+                  "images/pamper your self2.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -218,7 +218,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/no jucnk food.png",
+                  "images/no jucnk food.png",
                   width: 130,
                   height: 110,
                 ),
@@ -243,7 +243,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/night.jpeg",
+                  "images/night.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -268,7 +268,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/morning.jpeg",
+                  "images/morning.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -293,7 +293,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/confident2.jpeg",
+                  "images/confident2.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -318,7 +318,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/new day.jpeg",
+                  "images/new day.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -343,7 +343,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/language2.jpg",
+                  "images/language2.jpg",
                   width: 130,
                   height: 110,
                 ),
@@ -368,7 +368,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/kindness.jpeg",
+                  "images/kindness.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -393,7 +393,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/happy jump2.jpeg",
+                  "images/happy jump2.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -418,7 +418,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/family.jpeg",
+                  "images/family.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -443,7 +443,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/affrmation2.jpg",
+                  "images/affrmation2.jpg",
                   width: 130,
                   height: 110,
                 ),
@@ -468,7 +468,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/workout.jpeg",
+                  "images/workout.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -493,7 +493,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/feel food.jpeg",
+                  "images/feel food.jpeg",
                   width: 130,
                   height: 110,
                 ),
@@ -518,7 +518,7 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "lib/aseetimages.dart/study.png",
+                  "images/study.png",
                   width: 130,
                   height: 110,
                 ),
