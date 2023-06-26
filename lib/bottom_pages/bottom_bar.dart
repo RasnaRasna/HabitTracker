@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/Home_page.dart';
 
 import 'Challenges.dart';
-import 'Today.dart';
 import 'Year.dart';
 import 'discover.dart';
 import 'month.dart';
 
 class bottombar extends StatefulWidget {
-  const bottombar({super.key});
+  final String? selectedGender;
+  final String? name;
+
+  const bottombar({
+    Key? key,
+    this.selectedGender,
+    this.name,
+  }) : super(key: key);
 
   @override
   State<bottombar> createState() => _BottomNavigationBarState();
@@ -16,16 +22,23 @@ class bottombar extends StatefulWidget {
 
 class _BottomNavigationBarState extends State<bottombar> {
   int selectedindex = 0;
-  final List<Widget> tabs = [
-    Homapage(),
-    // MyHomePageToday(),
-    MonthBase(),
-    const YearBase(),
-    const ChallengesPage(),
-    const DiscoverPage(),
-  ];
+
   @override
   Widget build(BuildContext context) {
+    final String? selectedGender =
+        widget.selectedGender; // Store the value in a local variable
+    final String? name = widget.name;
+    final List<Widget> tabs = [
+      Homapage(
+        selectedGender: selectedGender,
+        name: name,
+      ),
+      MonthBase(),
+      const YearBase(),
+      const ChallengesPage(),
+      const DiscoverPage(),
+    ];
+
     return SafeArea(
         child: Scaffold(
       extendBody: true,

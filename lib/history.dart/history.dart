@@ -79,7 +79,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
-import 'package:habits_track/provider.dart/colors.dart';
+import 'package:habits_track/provider/colors.dart';
 import 'package:provider/provider.dart';
 
 class History extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/addhabits.dart/add_habits.dart';
+import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/reminder/addreminder.dart';
 import 'package:habits_track/reminder/editreminder.dart';

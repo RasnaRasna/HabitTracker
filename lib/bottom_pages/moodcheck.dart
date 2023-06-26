@@ -1,6 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
 
 class Moodchecking extends StatelessWidget {
@@ -11,31 +11,7 @@ class Moodchecking extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Center(child: Text(' Warning')),
-                    content: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Doy want to exit this page'),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('No'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (ctx) => const bottombar())),
-                        child: const Text(
-                          'Yes',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            onPressed: () => Navigator.pop(context),
             icon: const Icon(
               Icons.cancel_sharp,
               color: Colors.black,
@@ -193,10 +169,14 @@ class Moodchecking extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 15,
               ),
-              child: Text(
-                "Mood changing is a natural part of life. Sometimes we feel happy, and other times we may feel sad or angry. Our moods can shift like the changing weather. It's important to be kind to ourselves during these transitions, understanding that it's okay to not always feel our best. By taking time for self-care and doing things that bring us joy, we can nurture a positive shift in our mood. Remember, even on tough days, there's always a glimmer of hope for brighter moments ahead.",
-                style: GoogleFonts.acme(fontSize: 18),
-              ),
+              child: AnimatedTextKit(animatedTexts: [
+                TyperAnimatedText(
+                    "Mood changing is a natural part of life. Sometimes we feel happy, and other times we may feel sad or angry. Our moods can shift like the changing weather. It's important to be kind to ourselves during these transitions, understanding that it's okay to not always feel our best. By taking time for self-care and doing things that bring us joy, we can nurture a positive shift in our mood. Remember, even on tough days, there's always a glimmer of hope for brighter moments ahead.",
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: const Color.fromARGB(255, 241, 56, 121),
+                        fontSize: 17)),
+              ]),
             )
           ],
         ),
@@ -204,7 +184,9 @@ class Moodchecking extends StatelessWidget {
     );
   }
 }
-//  CircleAvatar(
-//                                         backgroundImage:
-//                                             AssetImage("images/smile.jpeg"),
-//                                       ),
+//Text(
+    //            "Mood changing is a natural part of life. Sometimes we feel happy, and other times we may feel sad or angry. Our moods can shift like the changing weather. It's important to be kind to ourselves during these transitions, understanding that it's okay to not always feel our best. By taking time for self-care and doing things that bring us joy, we can nurture a positive shift in our mood. Remember, even on tough days, there's always a glimmer of hope for brighter moments ahead.",
+ //               style: GoogleFonts.acme(fontSize: 18),
+   //           ),
+//
+//

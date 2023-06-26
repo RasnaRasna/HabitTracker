@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/challenges.dart/card_cahllenges.dart';
+import 'package:habits_track/challenges/card_cahllenges.dart';
 import 'package:habits_track/const.dart';
 
 class ChallengesPage extends StatelessWidget {

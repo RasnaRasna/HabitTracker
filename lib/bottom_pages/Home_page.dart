@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habits_track/addhabits.dart/add_habits.dart';
+import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/moodcheck.dart';
 import 'package:habits_track/bottom_pages/today.dart';
 
 import '../side_drawer.dart';
 
 class Homapage extends StatelessWidget {
-  const Homapage({super.key});
+  final String? selectedGender;
+
+  final String? name;
+
+  const Homapage({Key? key, this.selectedGender, this.name}) : super(key: key);
+
+  String getGreeting() {
+    final currentTime = DateTime.now();
+    final currentHour = currentTime.hour;
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 17) {
+      return 'Good Afternoon';
+    } else if (currentHour >= 17 && currentHour < 21) {
+      return 'Good Evening';
+    } else {
+      return 'Good Night';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    String imagePath =
+        selectedGender == "Female" ? "images/girl.png" : "images/boy.png";
+
     return Scaffold(
       appBar: AppBar(
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+                MaterialPageRoute(builder: (ctx) => const MyHomePageToday()),
               );
             },
             child: Text("Today"),
@@ -37,15 +59,14 @@ class Homapage extends StatelessWidget {
                     CircleAvatar(
                       maxRadius: 30,
                       minRadius: 30,
-                      backgroundImage: AssetImage(
-                        "images/feel food.jpeg",
-                      ),
+                      backgroundImage:
+                          AssetImage(imagePath), // Updated image path
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
-                        "Good Morning Rasna ..,",
-                        style: GoogleFonts.acme(fontSize: 25),
+                        "${getGreeting()} $name ..,",
+                        style: GoogleFonts.acme(fontSize: 20),
                       ),
                     ),
                   ],
@@ -54,18 +75,13 @@ class Homapage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 177, 177, 177)),
-                    ),
                     child: Image.asset(
                       "images/lo.png",
                       width: 400,
                       height: 400,
                     ),
                     width: 360,
-                    height: 230,
+                    height: 200,
                   ),
                 ),
                 Align(
@@ -77,14 +93,17 @@ class Homapage extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.center,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => Moodchecking()),
-                      );
-                    },
-                    icon: Icon(Icons.add),
-                    label: Text("Daily mood check-in"),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => Moodchecking()),
+                        );
+                      },
+                      icon: Icon(Icons.emoji_emotions),
+                      label: Text("Daily mood check-in"),
+                    ),
                   ),
                 ),
               ],

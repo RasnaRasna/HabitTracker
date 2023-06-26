@@ -4,119 +4,71 @@ import 'package:habits_track/const.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: ListView(
         children: [
-          kheight50,
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-            title: Text(
-              "settings",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ListTile(
-            leading: Container(
-              width: 35,
-              height: 35,
-              // decoration: BoxDecoration(
-              //     color: Color.fromARGB(255, 236, 149, 149),
-              //     borderRadius: BorderRadius.circular(10)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.black,
-                  size: 20,
-                ),
+          DrawerHeader(
+            // curve: Curves.easeOut,
+            decoration: BoxDecoration(color: Colors.pink.shade100),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: Text(
+                'Habit Tracker',
+                style: GoogleFonts.acme(color: Colors.white, fontSize: 25),
               ),
+            ),
+          ),
+          ListTile(
+              leading: Icon(
+                Icons.settings,
+                color: Colors.black,
+              ),
+              title: Text(
+                'settings',
+                style: GoogleFonts.acme(fontSize: 18),
+              ),
+              onTap: () {}),
+          ListTile(
+              leading: Icon(
+                Icons.sync,
+                color: Colors.black,
+              ),
+              title: Text(
+                'sync',
+                style: GoogleFonts.acme(fontSize: 18),
+              ),
+              onTap: () {}),
+          ListTile(
+            leading: const Icon(
+              Icons.info_outline,
             ),
             title: Text(
               'About',
-              style: GoogleFonts.acme(
-                  fontSize: 20,
-                  color: const Color.fromARGB(255, 140, 140, 140)),
+              style: GoogleFonts.acme(fontSize: 18),
             ),
-          ),
-          Kwidth,
-          ListTile(
-            leading: Container(
-              width: 35,
-              height: 35,
-              // decoration: BoxDecoration(
-              //     color: Color.fromARGB(255, 236, 149, 149),
-              //     borderRadius: BorderRadius.circular(10)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.privacy_tip,
-                  color: Colors.black,
-                  size: 20,
-                ),
-              ),
-            ),
-            title: Text(
-              'Privacy Policy',
-              style: GoogleFonts.acme(
-                  fontSize: 20,
-                  color: const Color.fromARGB(255, 140, 140, 140)),
-            ),
+            onTap: () {},
           ),
           ListTile(
-            leading: Container(
-              width: 35,
-              height: 35,
-              // decoration: BoxDecoration(
-              //     color: Color.fromARGB(255, 236, 149, 149),
-              //     borderRadius: BorderRadius.circular(10)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.share,
-                  color: Colors.black,
-                  size: 20,
-                ),
-              ),
+            leading: const Icon(
+              Icons.feedback_outlined,
             ),
             title: Text(
-              'share',
-              style: GoogleFonts.acme(
-                  fontSize: 20,
-                  color: const Color.fromARGB(255, 140, 140, 140)),
+              'Feedback',
+              style: GoogleFonts.acme(fontSize: 18),
             ),
+            onTap: () {},
           ),
-          Kwidth,
           ListTile(
-            leading: Container(
-              width: 35,
-              height: 35,
-              // decoration: BoxDecoration(
-              //     color: Color.fromARGB(255, 236, 149, 149),
-              //     borderRadius: BorderRadius.circular(10)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.black,
-                  size: 20,
-                ),
-              ),
+            leading: const Icon(
+              Icons.share,
             ),
             title: Text(
-              'About',
-              style: GoogleFonts.acme(
-                  fontSize: 20,
-                  color: const Color.fromARGB(255, 140, 140, 140)),
+              'Share',
+              style: GoogleFonts.acme(fontSize: 18),
             ),
+            onTap: () {},
           ),
         ],
       ),
