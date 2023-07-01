@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/login/resetpassword.dart';
 import 'package:habits_track/login/reusable.dart';
 import 'package:habits_track/login/signup.dart';
 import 'package:habits_track/onboarding/start.dart';
@@ -48,12 +50,23 @@ class _SignPageState extends State<SignPage> {
                 _passwordcontroller,
               ),
             ),
-            kheight10,
+            // SizedBox(
+            //   height: 4,
+            // ),
+            forgetpassword(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: signInSignupButton(context, true, () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => StartingPage()));
+              child: FirebaseButton(context, "Log in ", () {
+                FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: _emailcontroller.text,
+                        password: _passwordcontroller.text)
+                    .then((value) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => StartingPage()));
+                }).onError((error, stackTrace) {
+                  print("password does not ${error.toString()}");
+                });
               }),
             ),
             signupOption(context)
@@ -87,5 +100,22 @@ class _SignPageState extends State<SignPage> {
         )
       ],
     );
+  }
+
+  Widget forgetpassword() {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 35,
+        alignment: Alignment.bottomRight,
+        child: TextButton(
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (ctx) => ResetPassword())),
+            child: Text(
+              "Forgot password?",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.right,
+            )));
   }
 }

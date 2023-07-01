@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/login/reusable.dart';
@@ -51,9 +53,18 @@ class SignupScreen extends StatelessWidget {
             kheight10,
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: signInSignupButton(context, false, () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => StartingPage()));
+              child: FirebaseButton(context, "Sign up", () {
+                FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: _emailTextcontroller.text,
+                        password: _passwordTextcontroller.text)
+                    .then((value) {
+                  print("Created new account");
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => StartingPage()));
+                }).onError((error, stackTrace) {
+                  print("Error${error.toString()}");
+                });
               }),
             ),
           ],

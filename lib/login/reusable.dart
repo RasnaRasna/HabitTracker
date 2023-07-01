@@ -27,8 +27,7 @@ TextField reusableTextfield(String text, IconData icon, bool isPasswordType,
   );
 }
 
-Container signInSignupButton(
-    BuildContext context, bool isLogin, Function ontap) {
+Container FirebaseButton(BuildContext context, String title, Function ontap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
@@ -40,7 +39,7 @@ Container signInSignupButton(
       onPressed: () {
         ontap();
       },
-      child: Text(isLogin ? "LOG IN" : "SIGN UP",
+      child: Text(title,
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
       style: ButtonStyle(

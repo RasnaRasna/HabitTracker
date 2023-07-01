@@ -29,7 +29,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_text_kit: ^4.2.2
+  cloud_firestore: ^4.8.1
   cupertino_icons: ^1.0.2
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
   flutter:
     sdk: flutter
   flutter_heatmap_calendar: ^1.0.5

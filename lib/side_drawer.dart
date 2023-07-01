@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/login/sign.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});
@@ -32,14 +35,20 @@ class SideDrawer extends StatelessWidget {
               onTap: () {}),
           ListTile(
               leading: Icon(
-                Icons.sync,
+                Icons.logout,
                 color: Colors.black,
               ),
               title: Text(
-                'sync',
+                'Logout',
                 style: GoogleFonts.acme(fontSize: 18),
               ),
-              onTap: () {}),
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  print("Signed Out");
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (ctx) => SignPage()));
+                });
+              }),
           ListTile(
             leading: const Icon(
               Icons.info_outline,
