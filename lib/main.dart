@@ -1,12 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/login/sign.dart';
-import 'package:habits_track/onboarding/onboardingpage.dart';
 import 'package:habits_track/provider/colors.dart';
-import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:provider/provider.dart';
-
-import 'onboarding/start.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -11,7 +11,7 @@ TextField reusableTextfield(String text, IconData icon, bool isPasswordType,
     cursorColor: kwhite,
     style: TextStyle(color: kblack),
     decoration: InputDecoration(
-      fillColor: Colors.pink.shade100,
+      fillColor: Colors.white,
       prefixIcon: Icon(icon, color: Colors.black),
       hintText: text,
       floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -47,7 +47,7 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
             if (states.contains(MaterialState.pressed)) {
               return kblack;
             } else {
-              return Colors.pink.shade100;
+              return Colors.white;
             }
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

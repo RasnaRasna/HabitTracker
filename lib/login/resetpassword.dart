@@ -13,6 +13,7 @@ class ResetPassword extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
           "Reset password",
@@ -22,6 +23,13 @@ class ResetPassword extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:
+                AssetImage("images/waal.jpg"), // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),

@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/login/firebase_services.dart';
 import 'package:habits_track/login/resetpassword.dart';
 import 'package:habits_track/login/reusable.dart';
 import 'package:habits_track/login/signup.dart';
@@ -27,10 +27,21 @@ class _SignPageState extends State<SignPage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:
+                AssetImage("images/waal.jpg"), // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("SIGN IN TO COUNTINUE",
+                style: GoogleFonts.acme(
+                  fontSize: 24,
+                )),
+            kheight20,
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: reusableTextfield(
@@ -56,7 +67,7 @@ class _SignPageState extends State<SignPage> {
             forgetpassword(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FirebaseButton(context, "Log in ", () {
+              child: FirebaseButton(context, "SIGN IN  ", () {
                 FirebaseAuth.instance
                     .signInWithEmailAndPassword(
                         email: _emailcontroller.text,
@@ -69,7 +80,36 @@ class _SignPageState extends State<SignPage> {
                 });
               }),
             ),
-            signupOption(context)
+            signupOption(context), Text("OR"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  "images/google-removebg-preview.png",
+                  width: 40,
+                  height: 40,
+                ),
+                TextButton(
+                    onPressed: () async {
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // Prevent dismissing the dialog by tapping outside
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                      await FirebaseServices().signInWithGoogle();
+                      Navigator.pop(context);
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => StartingPage()));
+                    },
+                    child: Text("Countinue with Gmail"))
+              ],
+            )
           ],
         ),
       ),
