@@ -43,6 +43,12 @@ class ResetPassword extends StatelessWidget {
                     Icons.lock_outline,
                     true,
                     _emailTextcontroller,
+                    (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a username';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 kheight10,

@@ -16,6 +16,13 @@ class Addhabits extends StatefulWidget {
 
 class _AddhabitsState extends State<Addhabits> {
   DateTime? selectedDate;
+  String? selectedHabit;
+  void updateSelectedHabit(String habit) {
+    setState(() {
+      selectedHabit = habit;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +103,9 @@ class _AddhabitsState extends State<Addhabits> {
                     border: Border.all(
                         color: const Color.fromARGB(255, 236, 137, 170))),
                 child: TextField(
+                  controller: TextEditingController(text: selectedHabit),
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
                     border: InputBorder.none,
                   ),
                 ),
@@ -112,7 +121,9 @@ class _AddhabitsState extends State<Addhabits> {
             ),
           ),
           kheight10,
-          habitTemplates(),
+          habitTemplates((habit) {
+            updateSelectedHabit(habit);
+          }),
           kheight10,
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -125,7 +136,7 @@ class _AddhabitsState extends State<Addhabits> {
             ),
           ),
           kheight10,
-          weetemapltes(),
+          SelectableContainer(),
           kheight10,
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),

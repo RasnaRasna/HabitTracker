@@ -35,8 +35,8 @@ class EditHabits extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => HabitEdit()));
+                    // Navigator.of(context)
+                    //     .push(MaterialPageRoute(builder: (ctx) => HabitEdit()));
                   },
                   child: Container(
                     decoration: BoxDecoration(

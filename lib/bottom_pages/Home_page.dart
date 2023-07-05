@@ -39,7 +39,7 @@ class Homapage extends StatelessWidget {
           TextButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => const MyHomePageToday()),
+                MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
               );
             },
             child: Text("Today"),

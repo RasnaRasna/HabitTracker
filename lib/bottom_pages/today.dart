@@ -4,7 +4,8 @@ import '../const.dart';
 import '../edit_habits/edit_habits.dart';
 
 class MyHomePageToday extends StatelessWidget {
-  const MyHomePageToday({Key? key});
+  MyHomePageToday({Key? key});
+  int selectedCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -178,10 +179,10 @@ class MyHomePageToday extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 5),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(right: 20),
                               child: Text(
-                                "3/7",
+                                '$selectedCount/7',
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
