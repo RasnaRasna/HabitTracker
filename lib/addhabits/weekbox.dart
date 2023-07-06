@@ -138,9 +138,9 @@ class _SelectableContainerState extends State<SelectableContainer> {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           const SizedBox(
-            width: 20,
-            height: 20,
-          ),
+              // width: 10,
+              // height: 20,
+              ),
           buildSelectableContainer(0),
           const SizedBox(
             width: 12,

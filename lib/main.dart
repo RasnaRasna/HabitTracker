@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/Home_page.dart';
+import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/provider/colors.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
           useMaterial3: true,
         ),
-        home: SignPage(),
+        home: bottombar(),
       ),
     );
   }
