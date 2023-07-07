@@ -223,7 +223,8 @@ import '../provider/selectDateprovider.dart';
 import '../provider/stateofbutton.dart';
 
 class MyHomePageToday extends StatelessWidget {
-  MyHomePageToday({Key? key});
+  final String? documentId;
+  MyHomePageToday({Key? key, this.documentId});
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +290,12 @@ class MyHomePageToday extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const EditHabits()),
+                    MaterialPageRoute(
+                        builder: (ctx) => EditHabits(
+                            documentId: habitData.id,
+                            habitName: habitName,
+                            daysPerWeek: daysPerWeek,
+                            startDate: startDate)),
                   ),
                   child: Card(
                     child: Container(

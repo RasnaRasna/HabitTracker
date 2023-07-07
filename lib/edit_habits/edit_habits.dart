@@ -10,7 +10,17 @@ import 'package:habits_track/history.dart/history.dart';
 import 'package:habits_track/reminder/reminder.dart';
 
 class EditHabits extends StatelessWidget {
-  const EditHabits({super.key});
+  final String? habitName;
+  final int? daysPerWeek;
+  final DateTime? startDate;
+  final String documentId; // Add documentId parameter
+
+  const EditHabits(
+      {super.key,
+      this.habitName,
+      this.daysPerWeek,
+      this.startDate,
+      required this.documentId});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +46,13 @@ class EditHabits extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (ctx) => HabitEdit()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => HabitEdit(
+                              documentId: documentId,
+                              habitName: habitName,
+                              daysPerWeek: daysPerWeek,
+                              startDate: startDate,
+                            )));
                   },
                   child: Container(
                     decoration: BoxDecoration(

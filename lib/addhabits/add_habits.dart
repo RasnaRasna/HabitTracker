@@ -66,7 +66,7 @@ class _AddhabitsState extends State<Addhabits> {
         actions: [
           TextButton(
               onPressed: () {
-                saveHabitData();
+                AddHabitData();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
               },
@@ -334,15 +334,61 @@ class _AddhabitsState extends State<Addhabits> {
     return formatter.format(date);
   }
 
-  Future<void> saveHabitData() async {
+  // Future<void> AddHabitData() async {
+  //   try {
+  //     await Addhabits.add({
+  //       'name': selectedHabit,
+  //       'daysPerWeek': selectedDaysPerWeek + 1,
+  //       'startDate': Timestamp.fromDate(selectedDate!),
+  //     });
+  //   } catch (e) {
+  //     print('Error saving habit data: $e');
+  //   }
+  // }
+  Future<void> AddHabitData() async {
     try {
-      await Addhabits.add({
-        'name': selectedHabit,
-        'daysPerWeek': selectedDaysPerWeek + 1,
-        'startDate': Timestamp.fromDate(selectedDate!),
-      });
+      final QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('add_habits')
+          .where('name', isEqualTo: selectedHabit)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final DocumentSnapshot habitDocument = snapshot.docs.first;
+        final String documentId = habitDocument.id;
+
+        await FirebaseFirestore.instance
+            .collection('add_habits')
+            .doc(documentId)
+            .update({
+          'daysPerWeek': selectedDaysPerWeek + 1,
+          'startDate': Timestamp.fromDate(selectedDate!),
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Habit updated successfully'),
+          ),
+        );
+      } else {
+        await FirebaseFirestore.instance.collection('add_habits').add({
+          'name': selectedHabit,
+          'daysPerWeek': selectedDaysPerWeek + 1,
+          'startDate': Timestamp.fromDate(selectedDate!),
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Habit added successfully'),
+          ),
+        );
+      }
     } catch (e) {
       print('Error saving habit data: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to save habit'),
+        ),
+      );
     }
   }
 }
