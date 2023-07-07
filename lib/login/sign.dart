@@ -38,7 +38,7 @@ import 'package:habits_track/onboarding/start.dart';
 //           mainAxisAlignment: MainAxisAlignment.center,
 //           children: [
 //             Text("SIGN IN TO COUNTINUE",
-//                 style: GoogleFonts.acme(
+//                 style: TextStyle(
 //                   fontSize: 24,
 //                 )),
 //             kheight20,
@@ -205,7 +205,7 @@ import 'package:habits_track/onboarding/start.dart';
 //             children: [
 //               Text(
 //                 "SIGN IN TO CONTINUE",
-//                 style: GoogleFonts.acme(
+//                 style: TextStyle(
 //                   fontSize: 24,
 //                 ),
 //               ),
@@ -403,7 +403,7 @@ class _SignPageState extends State<SignPage> {
             children: [
               Text(
                 "SIGN IN TO CONTINUE",
-                style: GoogleFonts.acme(
+                style: TextStyle(
                   fontSize: 24,
                 ),
               ),

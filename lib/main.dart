@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/Home_page.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/login/sign.dart';
+import 'package:habits_track/provider/buttonclickedstate.dart';
 import 'package:habits_track/provider/colors.dart';
+import 'package:habits_track/provider/selectDateprovider.dart';
+import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -17,8 +20,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => IconColorchangeprovider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => IconColorchangeprovider()),
+        ChangeNotifierProvider(
+          create: (context) => SelectedDayProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ClickedStateProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MyButtonClickedProvider(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

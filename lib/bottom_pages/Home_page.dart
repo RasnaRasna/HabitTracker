@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/moodcheck.dart';
 import 'package:habits_track/bottom_pages/today.dart';
@@ -66,7 +65,7 @@ class Homapage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
                         "${getGreeting()} $name ..,",
-                        style: GoogleFonts.acme(fontSize: 20),
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ],
@@ -88,7 +87,7 @@ class Homapage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     "How are you feeling today?",
-                    style: GoogleFonts.acme(fontSize: 25),
+                    style: TextStyle(fontSize: 25),
                   ),
                 ),
                 Align(

@@ -19,7 +19,7 @@ class SideDrawer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 50),
               child: Text(
                 'Habit Tracker',
-                style: GoogleFonts.acme(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
           ),
@@ -30,7 +30,7 @@ class SideDrawer extends StatelessWidget {
               ),
               title: Text(
                 'settings',
-                style: GoogleFonts.acme(fontSize: 18),
+                style: TextStyle(fontSize: 18),
               ),
               onTap: () {}),
           ListTile(
@@ -40,7 +40,7 @@ class SideDrawer extends StatelessWidget {
               ),
               title: Text(
                 'Logout',
-                style: GoogleFonts.acme(fontSize: 18),
+                style: TextStyle(fontSize: 18),
               ),
               onTap: () {
                 FirebaseAuth.instance.signOut().then((value) {
@@ -55,7 +55,7 @@ class SideDrawer extends StatelessWidget {
             ),
             title: Text(
               'About',
-              style: GoogleFonts.acme(fontSize: 18),
+              style: TextStyle(fontSize: 18),
             ),
             onTap: () {},
           ),
@@ -65,7 +65,7 @@ class SideDrawer extends StatelessWidget {
             ),
             title: Text(
               'Feedback',
-              style: GoogleFonts.acme(fontSize: 18),
+              style: TextStyle(fontSize: 18),
             ),
             onTap: () {},
           ),
@@ -75,7 +75,7 @@ class SideDrawer extends StatelessWidget {
             ),
             title: Text(
               'Share',
-              style: GoogleFonts.acme(fontSize: 18),
+              style: TextStyle(fontSize: 18),
             ),
             onTap: () {},
           ),

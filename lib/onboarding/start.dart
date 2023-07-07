@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
 
@@ -57,7 +56,7 @@ class _StartingPageState extends State<StartingPage> {
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Text(
                   "Nice to Meet You",
-                  style: GoogleFonts.acme(
+                  style: TextStyle(
                     fontSize: 30,
                   ),
                 ),
@@ -91,7 +90,7 @@ class _StartingPageState extends State<StartingPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Create the life you love  🖤",
-                style: GoogleFonts.acme(
+                style: TextStyle(
                   fontSize: 30,
                 ),
               ),

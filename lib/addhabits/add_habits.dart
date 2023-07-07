@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/today.dart';
 import 'package:habits_track/const.dart';
+import 'package:intl/intl.dart';
 
 import '../bottom_pages/bottom_bar.dart';
 import '../reminder/reminder.dart';
-import 'addhabits_templates.dart';
 import 'weekbox.dart';
 
 class Addhabits extends StatefulWidget {
@@ -18,9 +19,13 @@ class Addhabits extends StatefulWidget {
 class _AddhabitsState extends State<Addhabits> {
   DateTime? selectedDate;
   String? selectedHabit;
+  int selectedDaysPerWeek = -1;
+  TextEditingController Habitname = TextEditingController();
 
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
+  final CollectionReference Addhabits =
+      FirebaseFirestore.instance.collection("add_habits");
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +66,9 @@ class _AddhabitsState extends State<Addhabits> {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                saveHabitData();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
               },
               child: const Text(
                 "Save",
@@ -104,11 +111,18 @@ class _AddhabitsState extends State<Addhabits> {
                       border: Border.all(
                           color: const Color.fromARGB(255, 236, 137, 170))),
                   child: TextField(
-                    controller: TextEditingController(text: selectedHabit),
+                    controller: Habitname,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedHabit = value;
+                      });
+                    },
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      border: InputBorder.none,
-                    ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        border: InputBorder.none,
+                        hintText: selectedHabit,
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                   ),
                 ),
               ),
@@ -142,7 +156,9 @@ class _AddhabitsState extends State<Addhabits> {
                                 ),
                             GestureDetector(
                               onTap: () {
-                                // onHabitSelected('🧘‍♂️Meditate');
+                                setState(() {
+                                  selectedHabit = templates["habit Name"];
+                                });
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -179,14 +195,21 @@ class _AddhabitsState extends State<Addhabits> {
             ),
             kheight10,
             Text(
-              "How many days per Week should you\n complete that habit? ",
+              "How many days per Week should you complete that habit? ",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
             kheight10,
-            SelectableContainer(),
+            SelectableContainer(
+              selectedIndex: selectedDaysPerWeek,
+              onSelected: (Index) {
+                setState(() {
+                  selectedDaysPerWeek = Index;
+                });
+              },
+            ),
             kheight10,
             Text(
               "Start Date ",
@@ -210,12 +233,12 @@ class _AddhabitsState extends State<Addhabits> {
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
                             color: Color.fromARGB(255, 229, 113, 151))),
-                    width: 350,
+                    width: 300,
                     height: 50,
                     child: Center(
                       child: Text(
                         selectedDate != null
-                            ? selectedDate.toString()
+                            ? getFormattedDate(selectedDate!)
                             : 'Select Date',
                         style:
                             const TextStyle(fontSize: 18, color: Colors.black),
@@ -248,7 +271,7 @@ class _AddhabitsState extends State<Addhabits> {
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
                           color: Color.fromARGB(255, 229, 113, 151))),
-                  width: 350,
+                  width: 300,
                   height: 50,
                   child: const Center(
                     child: Text(
@@ -266,28 +289,60 @@ class _AddhabitsState extends State<Addhabits> {
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
-    final newDate = await showCupertinoModalPopup<DateTime>(
+    DateTime? newDate;
+    await showModalBottomSheet(
       context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: 216,
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            initialDateTime: selectedDate ?? DateTime.now(),
-            onDateTimeChanged: (DateTime newDateTime) {
-              setState(() {
-                selectedDate = newDateTime;
-              });
-            },
-          ),
+      builder: (BuildContext builder) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 216,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: selectedDate ?? DateTime.now(),
+                onDateTimeChanged: (DateTime newDateTime) {
+                  newDate = newDateTime;
+                },
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: () {
+                  if (newDate != null) {
+                    setState(() {
+                      selectedDate = newDate;
+                    });
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Done',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
+  }
 
-    if (newDate != null) {
-      setState(() {
-        selectedDate = newDate;
+  String getFormattedDate(DateTime date) {
+    final formatter = DateFormat('d-MMMM-yyyy');
+    return formatter.format(date);
+  }
+
+  Future<void> saveHabitData() async {
+    try {
+      await Addhabits.add({
+        'name': selectedHabit,
+        'daysPerWeek': selectedDaysPerWeek + 1,
+        'startDate': Timestamp.fromDate(selectedDate!),
       });
+    } catch (e) {
+      print('Error saving habit data: $e');
     }
   }
 }

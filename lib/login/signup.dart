@@ -30,7 +30,7 @@
 //           mainAxisAlignment: MainAxisAlignment.center,
 //           children: [
 //             Text("SIGN UP TO COUNTINUE",
-//                 style: GoogleFonts.acme(
+//                 style: TextStyle(
 //                   fontSize: 24,
 //                 )),
 //             kheight20,
@@ -135,7 +135,7 @@ class SignupScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("SIGN UP TO COUNTINUE",
-                  style: GoogleFonts.acme(
+                  style: TextStyle(
                     fontSize: 24,
                   )),
               kheight20,

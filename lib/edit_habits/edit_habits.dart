@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/Home_page.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
+import 'package:habits_track/bottom_pages/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits/habitedit.dart';
 import 'package:habits_track/edit_habits/heatmap.dart';
@@ -18,7 +19,7 @@ class EditHabits extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => bottombar()));
+                  .push(MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
             },
             icon: Icon(Icons.arrow_back)),
         centerTitle: true,

@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
 
 class Moodchecking extends StatelessWidget {
@@ -25,7 +24,7 @@ class Moodchecking extends StatelessWidget {
               children: [
                 Text(
                   "Hello Rasna ....",
-                  style: GoogleFonts.acme(fontSize: 30),
+                  style: TextStyle(fontSize: 30),
                 )
               ],
             ),
