@@ -1,79 +1,23 @@
-// import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:habits_track/bottom_pages/bottom_bar.dart';
-// import 'package:provider/provider.dart';
-// import '../const.dart';
-
-// import '../edit_habits/edit_habits.dart';
-// import '../provider/selectDateprovider.dart';
-
-// class MyHomePageToday extends StatelessWidget {
-//   MyHomePageToday({Key? key});
-
-//   int selectedDayIndex = -1;
-//   List<ValueNotifier<bool>> buttonClickedList = [];
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//           onPressed: () {
-//             Navigator.push(
-//                 context, MaterialPageRoute(builder: (ctx) => bottombar()));
-//           },
-//           icon: Icon(Icons.arrow_back),
-//         ),
-//         centerTitle: true,
-//         title: const Text(
-//           " Today",
-//           style: TextStyle(color: Colors.black),
-//         ),
-//       ),
-//       body: Column(
-//         children: [
-//           kheight50,
-//           Expanded(
-//             child: Consumer<SelectedDayProvider>(
-//               builder: (context, selectedDayProvider, _) {
-//                 return buildListViewSeparated(selectedDayProvider);
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   String _getDaySymbol(int index) {
-//     final List<String> symbols = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-//     return symbols[index];
-//   }
-
-//   Widget buildListViewSeparated(SelectedDayProvider selectedDayProvider) {
+// Widget buildListViewSeparated(SelectedDayProvider selectedDayProvider) {
 //     return StreamBuilder<QuerySnapshot>(
 //       stream: FirebaseFirestore.instance.collection('add_habits').snapshots(),
 //       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 //         if (snapshot.hasError) {
 //           return Text('Error: ${snapshot.error}');
 //         }
-//         // if (snapshot.connectionState == ConnectionState.waiting) {
-//         //   return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-//         // }
 //         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-//           return Text(
-//               'No data available'); // Show a message if no data is found
+//           return Center(
+//               child: Text(
+//             'No data available',
+//             style: TextStyle(fontSize: 25),
+//           ));
 //         }
-//         final habitItems = snapshot.data!.docs;
-//         buttonClickedList = List.generate(
-//           habitItems.length,
-//           (_) => ValueNotifier<bool>(false),
-//         );
+//         final habitItems = snapshot.data!.docs.reversed.toList();
 
 //         return ListView.separated(
 //           itemBuilder: (BuildContext context, int index) {
 //             final habitData = snapshot.data!.docs[index];
-//             final habitName = habitData['name']
-//                 as String?; // Use null-aware operator to handle null value
+//             final habitName = habitData['name'] as String?;
 //             final daysPerWeek = habitData['daysPerWeek'] as int?;
 //             final startDate = (habitData['startDate'] as Timestamp?)?.toDate();
 
@@ -85,7 +29,13 @@
 //                 padding: const EdgeInsets.symmetric(horizontal: 20),
 //                 child: GestureDetector(
 //                   onTap: () => Navigator.of(context).push(
-//                       MaterialPageRoute(builder: (ctx) => const EditHabits())),
+//                     MaterialPageRoute(
+//                         builder: (ctx) => EditHabits(
+//                             documentId: habitData.id,
+//                             habitName: habitName,
+//                             daysPerWeek: daysPerWeek,
+//                             startDate: startDate)),
+//                   ),
 //                   child: Card(
 //                     child: Container(
 //                       decoration: BoxDecoration(
@@ -115,17 +65,19 @@
 //                             top: 60,
 //                             left: 10,
 //                             child: Text(
-//                               habitName ??
-//                                   'Unknown Habit', // Use null-aware operator to provide a default value
+//                               habitName ?? 'Unknown Habit',
 //                               style: TextStyle(
-//                                   fontSize: 20,
-//                                   color: Colors.black,
-//                                   fontWeight: FontWeight.bold),
+//                                 fontSize: 20,
+//                                 color: Colors.black,
+//                                 fontWeight: FontWeight.bold,
+//                               ),
 //                             ),
 //                           ),
 //                           Padding(
 //                             padding: const EdgeInsets.symmetric(
-//                                 vertical: 5, horizontal: 10),
+//                               vertical: 5,
+//                               horizontal: 10,
+//                             ),
 //                             child: Column(
 //                               crossAxisAlignment: CrossAxisAlignment.end,
 //                               children: [
@@ -135,19 +87,25 @@
 //                                     for (int i = 0; i < 7; i++)
 //                                       Padding(
 //                                         padding: const EdgeInsets.symmetric(
-//                                             horizontal: 3),
+//                                           horizontal: 3,
+//                                         ),
 //                                         child: GestureDetector(
 //                                           onTap: () {},
 //                                           child: Container(
 //                                             decoration: BoxDecoration(
-//                                                 color: Colors.white,
-//                                                 border: Border.all(
-//                                                   color: Color.fromARGB(
-//                                                       255, 151, 151, 151),
-//                                                   width: 1,
+//                                               color: Colors.white,
+//                                               border: Border.all(
+//                                                 color: Color.fromARGB(
+//                                                   255,
+//                                                   151,
+//                                                   151,
+//                                                   151,
 //                                                 ),
-//                                                 borderRadius:
-//                                                     BorderRadius.circular(5)),
+//                                                 width: 1,
+//                                               ),
+//                                               borderRadius:
+//                                                   BorderRadius.circular(5),
+//                                             ),
 //                                             width: 20,
 //                                             height: 22,
 //                                             child: Center(
@@ -163,20 +121,20 @@
 //                                         ),
 //                                       ),
 //                                     KWidth7,
-//                                     ValueListenableBuilder(
-//                                       valueListenable: buttonClickedList[index],
-//                                       builder: (context, value, child) {
+//                                     Consumer<MyButtonClickedProvider>(
+//                                       builder: (context, buttonClickedProvider,
+//                                           child) {
 //                                         return IconButton(
 //                                           onPressed: () {
-//                                             buttonClickedList[index].value =
-//                                                 !buttonClickedList[index].value;
+//                                             buttonClickedProvider
+//                                                 .toggleButtonClicked(index);
 //                                           },
 //                                           icon: Icon(
 //                                             Icons.check_circle,
-//                                             color:
-//                                                 buttonClickedList[index].value
-//                                                     ? Colors.pink
-//                                                     : Colors.blue,
+//                                             color: buttonClickedProvider
+//                                                     .isButtonClicked(index)
+//                                                 ? Colors.pink
+//                                                 : Colors.blue,
 //                                           ),
 //                                         );
 //                                       },
@@ -185,7 +143,9 @@
 //                                 ),
 //                                 Padding(
 //                                   padding: EdgeInsets.symmetric(
-//                                       horizontal: 30, vertical: 10),
+//                                     horizontal: 30,
+//                                     vertical: 10,
+//                                   ),
 //                                   child: Text(
 //                                     '${daysPerWeek ?? 0}/7',
 //                                     style: TextStyle(fontSize: 15),
@@ -205,12 +165,11 @@
 //           separatorBuilder: (BuildContext context, int index) {
 //             return SizedBox(height: 10);
 //           },
-//           itemCount: snapshot.data!.docs.length,
+//           itemCount: habitItems.length,
 //         );
 //       },
 //     );
 //   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -271,9 +230,14 @@ class MyHomePageToday extends StatelessWidget {
           return Text('Error: ${snapshot.error}');
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Text('No data available');
+          return Center(
+            child: Text(
+              'No data available',
+              style: TextStyle(fontSize: 25),
+            ),
+          );
         }
-        final habitItems = snapshot.data!.docs;
+        final habitItems = snapshot.data!.docs.reversed.toList();
 
         return ListView.separated(
           itemBuilder: (BuildContext context, int index) {
@@ -284,6 +248,45 @@ class MyHomePageToday extends StatelessWidget {
 
             int completedCount = 0; // TODO: Get the actual completed count
 
+            List<Widget> daySymbols = [];
+
+            for (int i = 0; i < 7; i++) {
+              final borderColor = i < (daysPerWeek ?? 0)
+                  ? Colors.pink // Set the border color for selected days
+                  : Color.fromARGB(
+                      255, 151, 151, 151); // Set the default border color
+
+              daySymbols.add(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: borderColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      width: 20,
+                      height: 22,
+                      child: Center(
+                        child: Text(
+                          _getDaySymbol(i),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+
             return Container(
               height: 125,
               child: Padding(
@@ -291,11 +294,13 @@ class MyHomePageToday extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (ctx) => EditHabits(
-                            documentId: habitData.id,
-                            habitName: habitName,
-                            daysPerWeek: daysPerWeek,
-                            startDate: startDate)),
+                      builder: (ctx) => EditHabits(
+                        documentId: habitData.id,
+                        habitName: habitName,
+                        daysPerWeek: daysPerWeek,
+                        startDate: startDate,
+                      ),
+                    ),
                   ),
                   child: Card(
                     child: Container(
@@ -345,42 +350,7 @@ class MyHomePageToday extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    for (int i = 0; i < 7; i++)
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 3,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                color: Color.fromARGB(
-                                                  255,
-                                                  151,
-                                                  151,
-                                                  151,
-                                                ),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            width: 20,
-                                            height: 22,
-                                            child: Center(
-                                              child: Text(
-                                                _getDaySymbol(i),
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                    ...daySymbols, // Use the daySymbols list here
                                     KWidth7,
                                     Consumer<MyButtonClickedProvider>(
                                       builder: (context, buttonClickedProvider,
@@ -426,7 +396,7 @@ class MyHomePageToday extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(height: 10);
           },
-          itemCount: snapshot.data!.docs.length,
+          itemCount: habitItems.length,
         );
       },
     );

@@ -226,10 +226,10 @@ class _HabitEditState extends State<HabitEdit> {
             ),
             kheight10,
             SelectableContainer(
-              selectedIndex: selectedDaysPerWeek,
+              selectedIndex: selectedDaysPerWeek - 1,
               onSelected: (Index) {
                 setState(() {
-                  selectedDaysPerWeek = Index;
+                  selectedDaysPerWeek = Index + 1;
                 });
               },
             ),
@@ -310,11 +310,45 @@ class _HabitEditState extends State<HabitEdit> {
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Icon(
+                    IconButton(
+                      onPressed: () {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Center(child: Text('Delete Habit')),
+                            content: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Are you sure you want to delete this habit $selectedHabit?',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(
+                                      context); // Close the alert dialog
+                                  deleteHabit(widget.documentId!);
+                                },
+                                child: const Text(
+                                  'Delete',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      icon: const Icon(
                         Icons.delete,
                         color: Colors.red,
+                        size: 30,
                       ),
                     ),
                     const Text(
@@ -396,6 +430,31 @@ class _HabitEditState extends State<HabitEdit> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Failed to update habit'),
+        ),
+      );
+    }
+  }
+
+  void deleteHabit(String documentId) async {
+    try {
+      await Addhabits.doc(documentId).delete();
+      // Display a success message or navigate to a new screen
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Habit deleted successfully'),
+        ),
+      );
+      // Navigate to the desired screen after deleting the habit
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+      );
+    } catch (e) {
+      print('Error deleting habit: $e');
+      // Display an error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to delete habit'),
         ),
       );
     }

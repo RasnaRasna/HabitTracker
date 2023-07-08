@@ -18,7 +18,7 @@ class Addhabits extends StatefulWidget {
 
 class _AddhabitsState extends State<Addhabits> {
   DateTime? selectedDate;
-  String? selectedHabit;
+  String? selectedHabit = '';
   int selectedDaysPerWeek = -1;
   TextEditingController Habitname = TextEditingController();
 
