@@ -174,12 +174,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
+import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
 import '../const.dart';
 
 import '../edit_habits/edit_habits.dart';
 import '../provider/selectDateprovider.dart';
-import '../provider/stateofbutton.dart';
 
 class MyHomePageToday extends StatelessWidget {
   final String? documentId;
@@ -187,6 +187,10 @@ class MyHomePageToday extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
+    if (DateTime.now().hour == 0 && DateTime.now().minute == 0) {
+      buttonProvider.resetHabitSelections();
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -237,7 +241,7 @@ class MyHomePageToday extends StatelessWidget {
             ),
           );
         }
-        final habitItems = snapshot.data!.docs.reversed.toList();
+        final habitItems = snapshot.data!.docs;
 
         return ListView.separated(
           itemBuilder: (BuildContext context, int index) {
@@ -299,6 +303,7 @@ class MyHomePageToday extends StatelessWidget {
                         habitName: habitName,
                         daysPerWeek: daysPerWeek,
                         startDate: startDate,
+                        selectedDate: startDate,
                       ),
                     ),
                   ),
@@ -352,24 +357,26 @@ class MyHomePageToday extends StatelessWidget {
                                   children: [
                                     ...daySymbols, // Use the daySymbols list here
                                     KWidth7,
-                                    Consumer<MyButtonClickedProvider>(
-                                      builder: (context, buttonClickedProvider,
-                                          child) {
-                                        return IconButton(
-                                          onPressed: () {
-                                            buttonClickedProvider
-                                                .toggleButtonClicked(index);
-                                          },
-                                          icon: Icon(
-                                            Icons.check_circle,
-                                            color: buttonClickedProvider
-                                                    .isButtonClicked(index)
-                                                ? Colors.pink
-                                                : Colors.blue,
-                                          ),
-                                        );
-                                      },
-                                    ),
+
+                                    IconButton(
+                                        onPressed: () {
+                                          final buttonProvider = Provider.of<
+                                                  MyButtonClickedProvider>(
+                                              context,
+                                              listen: false);
+                                          buttonProvider.toggleHabitSelection(
+                                              habitData.id);
+                                        },
+                                        icon: Icon(Icons.check_circle,
+                                            color: Provider.of<
+                                                            MyButtonClickedProvider>(
+                                                        context)
+                                                    .isHabitSelected(
+                                                        habitData.id)
+                                                ? Colors
+                                                    .pink // Set the color when selected
+                                                : Colors.grey // S
+                                            )),
                                   ],
                                 ),
                                 Padding(

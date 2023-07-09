@@ -20,7 +20,8 @@ class EditHabits extends StatelessWidget {
       this.habitName,
       this.daysPerWeek,
       this.startDate,
-      required this.documentId});
+      required this.documentId,
+      required selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +105,10 @@ class EditHabits extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => History()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => History(
+                              selectedDate: startDate!,
+                            )));
                   },
                   child: Container(
                     decoration: BoxDecoration(

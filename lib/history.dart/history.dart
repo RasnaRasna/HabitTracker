@@ -77,13 +77,155 @@
 //   }
 // }
 
+// import 'package:flutter/material.dart';
+// import 'package:habits_track/const.dart';
+// import 'package:habits_track/provider/colors.dart';
+// import 'package:provider/provider.dart';
+
+// class History extends StatefulWidget {
+//   const History({Key? key}) : super(key: key);
+
+//   @override
+//   _HistoryState createState() => _HistoryState();
+// }
+
+// class _HistoryState extends State<History> {
+//   late IconColorchangeprovider iconColorProvider;
+//   late List<bool> showAdditionalButtonList;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     iconColorProvider =
+//         Provider.of<IconColorchangeprovider>(context, listen: false);
+//     showAdditionalButtonList = List<bool>.generate(5, (_) => false);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         centerTitle: true,
+//         title: const Text("History & Notes"),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 20),
+//             child: Text(
+//               "Select days on which you completed your habit goal. To add more dates in the past, change the habit's 'start date' by tapping 'Edit' on the previous page. You can attach a note to each day completed.",
+//             ),
+//           ),
+//           kheight20,
+//           ListView.separated(
+//             shrinkWrap: true,
+//             physics: const NeverScrollableScrollPhysics(),
+//             itemCount: 5,
+//             separatorBuilder: (context, index) => const SizedBox(height: 8),
+//             itemBuilder: (context, index) {
+//               return Padding(
+//                 padding: const EdgeInsets.symmetric(horizontal: 20),
+//                 child: ListTile(
+//                   shape: RoundedRectangleBorder(
+//                     side: BorderSide(
+//                       color: const Color.fromARGB(255, 221, 221, 221),
+//                       width: 1,
+//                     ),
+//                     borderRadius: BorderRadius.circular(5),
+//                   ),
+//                   title: const Text("04-Jun-2023 (Sunday)"),
+//                   trailing: Row(
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: [
+//                       if (showAdditionalButtonList[index])
+//                         IconButton(
+//                           onPressed: () {
+//                             _showMyDialog();
+//                           },
+//                           icon: const Icon(Icons.message),
+//                         ),
+//                       GestureDetector(
+//                         onTap: () {
+//                           setState(() {
+//                             showAdditionalButtonList[index] =
+//                                 !showAdditionalButtonList[index];
+//                           });
+//                         },
+//                         child: Icon(
+//                           Icons.check_circle,
+//                           color: showAdditionalButtonList[index]
+//                               ? Color.fromARGB(255, 229, 113, 151)
+//                               : Colors.grey,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               );
+//             },
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Future<void> _showMyDialog() async {
+//     return showDialog<void>(
+//       context: context,
+//       barrierDismissible: false, // user must tap button!
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: const Text('Enter your notes'),
+//           content: SingleChildScrollView(
+//             child: ListBody(children: <Widget>[
+//               Container(
+//                 width: 250,
+//                 height: 200,
+//                 decoration: BoxDecoration(
+//                     borderRadius: BorderRadiusDirectional.circular(10.0),
+//                     border: Border.all(color: Colors.grey)),
+//                 child: TextField(
+//                   decoration: InputDecoration(
+//                     border: InputBorder.none,
+//                   ),
+//                 ),
+//               )
+//             ]),
+//           ),
+//           actions: <Widget>[
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.end,
+//               children: [
+//                 TextButton(
+//                   child: const Text('Cancel'),
+//                   onPressed: () {
+//                     Navigator.of(context).pop();
+//                   },
+//                 ),
+//                 TextButton(
+//                   child: const Text('Save'),
+//                   onPressed: () {
+//                     Navigator.of(context).pop();
+//                   },
+//                 ),
+//               ],
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/provider/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class History extends StatefulWidget {
-  const History({Key? key}) : super(key: key);
+  final DateTime selectedDate;
+
+  const History({Key? key, required this.selectedDate}) : super(key: key);
 
   @override
   _HistoryState createState() => _HistoryState();
@@ -98,7 +240,8 @@ class _HistoryState extends State<History> {
     super.initState();
     iconColorProvider =
         Provider.of<IconColorchangeprovider>(context, listen: false);
-    showAdditionalButtonList = List<bool>.generate(5, (_) => false);
+    showAdditionalButtonList =
+        List<bool>.generate(_getDaysCount(), (_) => false);
   }
 
   @override
@@ -120,9 +263,11 @@ class _HistoryState extends State<History> {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 5,
+            itemCount: _getDaysCount(),
             separatorBuilder: (context, index) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
+              final currentDate = widget.selectedDate
+                  .add(Duration(days: _getDaysCount() - 1 - index));
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ListTile(
@@ -133,7 +278,7 @@ class _HistoryState extends State<History> {
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  title: const Text("04-Jun-2023 (Sunday)"),
+                  title: Text(_getFormattedDate(currentDate)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -167,6 +312,16 @@ class _HistoryState extends State<History> {
         ],
       ),
     );
+  }
+
+  int _getDaysCount() {
+    final difference = DateTime.now().difference(widget.selectedDate).inDays;
+    return difference.abs() + 1;
+  }
+
+  String _getFormattedDate(DateTime date) {
+    final formatter = DateFormat('dd-MMM-yyyy (EEEE)');
+    return formatter.format(date);
   }
 
   Future<void> _showMyDialog() async {
