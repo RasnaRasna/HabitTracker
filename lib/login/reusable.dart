@@ -34,37 +34,6 @@ TextFormField reusableTextfield(
   );
 }
 
-// TextField reusableTextfield(
-//   String text,
-//   IconData icon,
-//   bool isPasswordType,
-//   TextEditingController controller,
-//    FormFieldValidator<String> validator,
-// ) {
-//   return TextField(
-//     controller: controller,
-//     obscureText: isPasswordType,
-//     enableSuggestions: isPasswordType,
-//     autocorrect: isPasswordType,
-//     cursorColor: kwhite,
-//     style: TextStyle(color: kblack),
-//     decoration: InputDecoration(
-//       fillColor: Colors.white,
-//       prefixIcon: Icon(icon, color: Colors.black),
-//       hintText: text,
-//       floatingLabelBehavior: FloatingLabelBehavior.never,
-//       hintStyle: TextStyle(color: kblack),
-//       filled: true,
-//       border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(30.0),
-//           borderSide: BorderSide(width: 0, style: BorderStyle.none)),
-//     ),
-//     keyboardType: isPasswordType
-//         ? TextInputType.visiblePassword
-//         : TextInputType.emailAddress,
-//   );
-// }
-
 Container FirebaseButton(BuildContext context, String title, Function ontap) {
   return Container(
     width: MediaQuery.of(context).size.width,

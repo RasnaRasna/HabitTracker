@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/moodcheck.dart';
 import 'package:habits_track/bottom_pages/today.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/genderprovider.dart';
 import '../side_drawer.dart';
 
 class Homapage extends StatelessWidget {
@@ -10,7 +12,8 @@ class Homapage extends StatelessWidget {
 
   final String? name;
 
-  const Homapage({Key? key, this.selectedGender, this.name}) : super(key: key);
+  const Homapage({Key? key, required this.selectedGender, required this.name})
+      : super(key: key);
 
   String getGreeting() {
     final currentTime = DateTime.now();
@@ -29,6 +32,10 @@ class Homapage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final genderProvider = Provider.of<GenderProvider>(context);
+    final String? selectedGender = genderProvider.selectedGender;
+    final String name = genderProvider.name;
+
     String imagePath =
         selectedGender == "Female" ? "images/girl.png" : "images/boy.png";
 
@@ -56,6 +63,7 @@ class Homapage extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
+                      key: Key(selectedGender ?? ''),
                       maxRadius: 30,
                       minRadius: 30,
                       backgroundImage:

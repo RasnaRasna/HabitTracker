@@ -385,7 +385,7 @@ class MyHomePageToday extends StatelessWidget {
                                     vertical: 10,
                                   ),
                                   child: Text(
-                                    '${daysPerWeek ?? 0}/7',
+                                    '0/7',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),

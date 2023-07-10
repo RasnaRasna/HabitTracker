@@ -371,6 +371,7 @@ class _SignPageState extends State<SignPage> {
   bool isSigningIn = false; // Track the sign-in process
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordcontroller = TextEditingController();
+  String? passwordError;
 
   String? validatePassword(String? value) {
     if (value!.isEmpty) {

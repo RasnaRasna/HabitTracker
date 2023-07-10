@@ -70,8 +70,7 @@ class _HabitEditState extends State<HabitEdit> {
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (ctx) => const bottombar())),
+                            MaterialPageRoute(builder: (ctx) => bottombar())),
                         child: const Text(
                           'Discard changes',
                           style: TextStyle(color: Colors.red),
