@@ -43,7 +43,7 @@ class Reminderpage extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) => kheight10,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return Padding(
+            return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Notification will be sent if you haven't completed your habit. In the case of non-daily weekly goals, you won't receive any more notifications this week.",
@@ -51,15 +51,15 @@ class Reminderpage extends StatelessWidget {
             );
           }
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18),
+            padding: const EdgeInsets.symmetric(horizontal: 18),
             child: ListTile(
               shape: RoundedRectangleBorder(
-                side: BorderSide(
+                side: const BorderSide(
                     width: 1, color: Color.fromARGB(255, 229, 113, 151)),
                 borderRadius: BorderRadius.circular(10),
               ),
-              title: Text('🔔   11:30 PM'),
-              subtitle: Text.rich(
+              title: const Text('🔔   11:30 PM'),
+              subtitle: const Text.rich(
                 TextSpan(
                   text: 'Mon-Tue-Wed-Thu-Fri-Sat-Sun \n',
                   style: TextStyle(
@@ -74,7 +74,7 @@ class Reminderpage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => EditReminder()),
+                  MaterialPageRoute(builder: (ctx) => const EditReminder()),
                 );
               },
             ),

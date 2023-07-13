@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 
 class Moodchecking extends StatelessWidget {
-  const Moodchecking({super.key});
+  final name;
+  const Moodchecking({super.key, this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class Moodchecking extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "Hello Rasna ....",
+                  "Hello $name ....",
                   style: TextStyle(fontSize: 30),
                 )
               ],
@@ -56,6 +57,18 @@ class Moodchecking extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "😁ok",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        // Perform any action you want when the user clicks the "OK" button
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             },
@@ -77,6 +90,18 @@ class Moodchecking extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "😁ok",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        // Perform any action you want when the user clicks the "OK" button
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             },
@@ -98,6 +123,18 @@ class Moodchecking extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "😁ok",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        // Perform any action you want when the user clicks the "OK" button
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             },
@@ -119,6 +156,18 @@ class Moodchecking extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "😁ok",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        // Perform any action you want when the user clicks the "OK" button
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             },
@@ -141,6 +190,18 @@ class Moodchecking extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "😁ok",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        // Perform any action you want when the user clicks the "OK" button
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             },

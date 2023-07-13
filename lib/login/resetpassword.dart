@@ -6,7 +6,7 @@ import 'package:habits_track/login/reusable.dart';
 class ResetPassword extends StatelessWidget {
   ResetPassword({super.key});
 
-  TextEditingController _emailTextcontroller = TextEditingController();
+  final TextEditingController _emailTextcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class ResetPassword extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Reset password",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -23,7 +23,7 @@ class ResetPassword extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image:
                 AssetImage("images/waal.jpg"), // Replace with your image path

@@ -182,7 +182,6 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/provider/genderprovider.dart';
 import 'package:provider/provider.dart';
 
-import '../bottom_pages/Home_page.dart';
 import '../bottom_pages/bottom_bar.dart';
 
 class StartingPage extends StatelessWidget {
@@ -219,7 +218,6 @@ class StartingPage extends StatelessWidget {
                   onChanged: (value) =>
                       Provider.of<GenderProvider>(context, listen: false)
                           .setName(value),
-                  textAlign: TextAlign.center,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.symmetric(vertical: 20),
                     hintText: "What is your name?",
@@ -236,9 +234,7 @@ class StartingPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Create the life you love 🖤",
-                style: TextStyle(
-                  fontSize: 30,
-                ),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(

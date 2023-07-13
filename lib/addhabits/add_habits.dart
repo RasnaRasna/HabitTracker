@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/today.dart';
@@ -49,7 +50,8 @@ class _AddhabitsState extends State<Addhabits> {
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => bottombar())),
+                            MaterialPageRoute(
+                                builder: (ctx) => const bottombar())),
                         child: const Text(
                           'Discard changes',
                           style: TextStyle(color: Colors.red),
@@ -117,10 +119,11 @@ class _AddhabitsState extends State<Addhabits> {
                       });
                     },
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
                         border: InputBorder.none,
                         hintText: selectedHabit,
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                   ),
                 ),
@@ -135,65 +138,9 @@ class _AddhabitsState extends State<Addhabits> {
               ),
             ),
             kheight10,
-            StreamBuilder(
-              stream: HabitsTemplates.snapshots(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return Container(
-                    height: 50, // Specify a fixed height for the ListView
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final DocumentSnapshot templates =
-                            snapshot.data!.docs[index];
-                        return Row(
-                          children: [
-                            const SizedBox(
-                                // width: 10,
-                                // height: 10,
-                                ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedHabit = templates["habit Name"];
-                                });
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 229, 113, 151),
-                                  ),
-                                ),
-                                width: 130,
-                                child: Center(
-                                  child: Text(
-                                    templates['habit Name'],
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                              height: 10,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  );
-                }
-                return Text(
-                    "No templates"); // Return a widget when snapshot does not have data
-              },
-            ),
+            habitTemplateItems(),
             kheight10,
-            Text(
+            const Text(
               "How many days per Week should you complete that habit? ",
               style: TextStyle(
                   fontSize: 20,
@@ -210,7 +157,7 @@ class _AddhabitsState extends State<Addhabits> {
               },
             ),
             kheight10,
-            Text(
+            const Text(
               "Start Date ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -231,8 +178,8 @@ class _AddhabitsState extends State<Addhabits> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 229, 113, 151))),
-                    width: 300,
+                            color: const Color.fromARGB(255, 229, 113, 151))),
+                    width: 350,
                     height: 50,
                     child: Center(
                       child: Text(
@@ -248,7 +195,7 @@ class _AddhabitsState extends State<Addhabits> {
               ),
             ),
             kheight10,
-            Text(
+            const Text(
               "Reminders  ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -269,8 +216,8 @@ class _AddhabitsState extends State<Addhabits> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
-                          color: Color.fromARGB(255, 229, 113, 151))),
-                  width: 300,
+                          color: const Color.fromARGB(255, 229, 113, 151))),
+                  width: 350,
                   height: 50,
                   child: const Center(
                     child: Text(
@@ -287,6 +234,65 @@ class _AddhabitsState extends State<Addhabits> {
     );
   }
 
+  StreamBuilder<QuerySnapshot<Object?>> habitTemplateItems() {
+    return StreamBuilder(
+      stream: HabitsTemplates.snapshots(),
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return SizedBox(
+            height: 50, // Specify a fixed height for the ListView
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot templates = snapshot.data!.docs[index];
+                return Row(
+                  children: [
+                    const SizedBox(
+                        // width: 10,
+                        // height: 10,
+                        ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedHabit = templates["habit Name"];
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 229, 113, 151),
+                          ),
+                        ),
+                        width: 130,
+                        child: Center(
+                          child: Text(
+                            templates['habit Name'],
+                            style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                      height: 10,
+                    ),
+                  ],
+                );
+              },
+            ),
+          );
+        }
+        return const Text("No templates");
+        // Return a widget when snapshot does not have data
+      },
+    );
+  }
+
   Future<void> _showDatePicker(BuildContext context) async {
     DateTime? newDate;
     await showModalBottomSheet(
@@ -295,13 +301,21 @@ class _AddhabitsState extends State<Addhabits> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
+            SizedBox(
               height: 216,
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
                 initialDateTime: selectedDate ?? DateTime.now(),
+                minimumDate: selectedDate != null &&
+                        selectedDate!.isAfter(DateTime.now())
+                    ? DateTime.now()
+                    : null,
                 onDateTimeChanged: (DateTime newDateTime) {
-                  newDate = newDateTime;
+                  // Check if selected date is before or equal to current date
+                  if (newDateTime.isBefore(DateTime.now()) ||
+                      newDateTime.isAtSameMomentAs(DateTime.now())) {
+                    newDate = newDateTime;
+                  }
                 },
               ),
             ),
@@ -328,44 +342,63 @@ class _AddhabitsState extends State<Addhabits> {
     );
   }
 
-  String getFormattedDate(DateTime date) {
-    final formatter = DateFormat('d-MMMM-yyyy');
-    return formatter.format(date);
-  }
+//   Future<void> AddHabitData() async {
+//     try {
 
-  // Future<void> AddHabitData() async {
-  //   try {
-  //     await Addhabits.add({
-  //       'name': selectedHabit,
-  //       'daysPerWeek': selectedDaysPerWeek + 1,
-  //       'startDate': Timestamp.fromDate(selectedDate!),
-  //     });
-  //   } catch (e) {
-  //     print('Error saving habit data: $e');
-  //   }
-  // }
+//       final QuerySnapshot snapshot = await FirebaseFirestore.instance
+//           .collection('add_habits')
+//           .where('name', isEqualTo: selectedHabit)
+//           .get();
+// //not empty (i.e., there are documents that match the query
+//       if (snapshot.docs.isNotEmpty) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(
+//             backgroundColor: Colors.red,
+//             content: Text('Habit already exists'),
+//           ),
+//         );
+//       } else {
+//         await FirebaseFirestore.instance.collection('add_habits').add({
+//           'name': selectedHabit,
+//           'daysPerWeek': selectedDaysPerWeek + 1,
+//           'startDate': Timestamp.fromDate(selectedDate!),
+//         });
+
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(
+//             backgroundColor: Colors.green,
+//             content: Text('Habit added successfully'),
+//           ),
+//         );
+//       }
+//     } catch (e) {
+//       print('Error saving habit data: $e');
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(
+//           backgroundColor: Colors.red,
+//           content: Text('Failed to save habit'),
+//         ),
+//       );
+//     }
+//   }
   Future<void> AddHabitData() async {
     try {
+      // Retrieve the current user ID
+      final user = FirebaseAuth.instance.currentUser;
+      final userId = user?.uid;
+
       final QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('add_habits')
           .where('name', isEqualTo: selectedHabit)
+          .where('userId',
+              isEqualTo: userId) // Add the query to check the user ID
           .get();
 
       if (snapshot.docs.isNotEmpty) {
-        final DocumentSnapshot habitDocument = snapshot.docs.first;
-        final String documentId = habitDocument.id;
-
-        await FirebaseFirestore.instance
-            .collection('add_habits')
-            .doc(documentId)
-            .update({
-          'daysPerWeek': selectedDaysPerWeek + 1,
-          'startDate': Timestamp.fromDate(selectedDate!),
-        });
-
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Habit updated successfully'),
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Habit already exists'),
           ),
         );
       } else {
@@ -373,10 +406,12 @@ class _AddhabitsState extends State<Addhabits> {
           'name': selectedHabit,
           'daysPerWeek': selectedDaysPerWeek + 1,
           'startDate': Timestamp.fromDate(selectedDate!),
+          'userId': userId, // Store the user ID with the habit data
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
+            backgroundColor: Colors.green,
             content: Text('Habit added successfully'),
           ),
         );
@@ -384,10 +419,16 @@ class _AddhabitsState extends State<Addhabits> {
     } catch (e) {
       print('Error saving habit data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
           content: Text('Failed to save habit'),
         ),
       );
     }
   }
+}
+
+String getFormattedDate(DateTime date) {
+  final formatter = DateFormat('d-MMMM-yyyy');
+  return formatter.format(date);
 }

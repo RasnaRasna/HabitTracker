@@ -105,7 +105,8 @@ class Homapage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (ctx) => Moodchecking()),
+                          MaterialPageRoute(
+                              builder: (ctx) => Moodchecking(name: name)),
                         );
                       },
                       icon: Icon(Icons.emoji_emotions),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SelectedDayProvider extends ChangeNotifier {
   int _selectedDayIndex = -1;
-  bool _isButtonClicked = false;
+  final bool _isButtonClicked = false;
   int get selectedDayIndex => _selectedDayIndex;
   bool get isButtonClicked => _isButtonClicked;
 

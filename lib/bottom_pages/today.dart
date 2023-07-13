@@ -171,6 +171,7 @@
 //     );
 //   }
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
@@ -195,10 +196,10 @@ class MyHomePageToday extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (ctx) => bottombar()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (ctx) => const bottombar()));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
         centerTitle: true,
         title: const Text(
@@ -227,16 +228,32 @@ class MyHomePageToday extends StatelessWidget {
   }
 
   Widget buildListViewSeparated(SelectedDayProvider selectedDayProvider) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      // User is not authenticated
+      return const Center(
+        child: Text(
+          'User not authenticated',
+          style: TextStyle(fontSize: 25),
+        ),
+      );
+    }
+
+    final userId = currentUser.uid;
+
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('add_habits').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('add_habits')
+          .where('userId', isEqualTo: userId)
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(
+          return const Center(
             child: Text(
-              'No data available',
+              'No habits available',
               style: TextStyle(fontSize: 25),
             ),
           );
@@ -257,7 +274,7 @@ class MyHomePageToday extends StatelessWidget {
             for (int i = 0; i < 7; i++) {
               final borderColor = i < (daysPerWeek ?? 0)
                   ? Colors.pink // Set the border color for selected days
-                  : Color.fromARGB(
+                  : const Color.fromARGB(
                       255, 151, 151, 151); // Set the default border color
 
               daySymbols.add(
@@ -279,7 +296,7 @@ class MyHomePageToday extends StatelessWidget {
                       child: Center(
                         child: Text(
                           _getDaySymbol(i),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
@@ -291,7 +308,7 @@ class MyHomePageToday extends StatelessWidget {
               );
             }
 
-            return Container(
+            return SizedBox(
               height: 125,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -313,7 +330,7 @@ class MyHomePageToday extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Color.fromARGB(255, 150, 147, 147),
+                          color: const Color.fromARGB(255, 150, 147, 147),
                           width: 1,
                         ),
                       ),
@@ -324,7 +341,7 @@ class MyHomePageToday extends StatelessWidget {
                             left: 10,
                             child: Text(
                               '🔥 $completedCount',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -337,7 +354,7 @@ class MyHomePageToday extends StatelessWidget {
                             left: 10,
                             child: Text(
                               habitName ?? 'Unknown Habit',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -357,29 +374,30 @@ class MyHomePageToday extends StatelessWidget {
                                   children: [
                                     ...daySymbols, // Use the daySymbols list here
                                     KWidth7,
-
                                     IconButton(
-                                        onPressed: () {
-                                          final buttonProvider = Provider.of<
-                                                  MyButtonClickedProvider>(
-                                              context,
-                                              listen: false);
-                                          buttonProvider.toggleHabitSelection(
-                                              habitData.id);
-                                        },
-                                        icon: Icon(Icons.check_circle,
-                                            color: Provider.of<
-                                                            MyButtonClickedProvider>(
-                                                        context)
-                                                    .isHabitSelected(
-                                                        habitData.id)
-                                                ? Colors
-                                                    .pink // Set the color when selected
-                                                : Colors.grey // S
-                                            )),
+                                      onPressed: () {
+                                        final buttonProvider = Provider.of<
+                                                MyButtonClickedProvider>(
+                                            context,
+                                            listen: false);
+                                        buttonProvider
+                                            .toggleHabitSelection(habitData.id);
+                                      },
+                                      icon: Icon(
+                                        Icons.check_circle,
+                                        color: Provider.of<
+                                                        MyButtonClickedProvider>(
+                                                    context)
+                                                .isHabitSelected(habitData.id)
+                                            ? Colors
+                                                .pink // Set the color when selected
+                                            : Colors
+                                                .grey, // Set the default color
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 30,
                                     vertical: 10,
@@ -401,7 +419,7 @@ class MyHomePageToday extends StatelessWidget {
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 10);
+            return const SizedBox(height: 10);
           },
           itemCount: habitItems.length,
         );

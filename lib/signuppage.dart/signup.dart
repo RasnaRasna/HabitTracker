@@ -105,10 +105,11 @@ class SignupScreen extends StatelessWidget {
           email: _emailTextcontroller.text.trim(),
           password: _passwordTextcontroller.text.trim(),
         );
-        print('Create new account');
+
         Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => StartingPage()));
+            context, MaterialPageRoute(builder: (ctx) => const StartingPage()));
       } catch (error) {
+        // ignore: avoid_print
         print('Error:$error');
       }
     }

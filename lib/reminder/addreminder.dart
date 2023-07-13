@@ -19,7 +19,7 @@ class _AddRemindersState extends State<AddReminders> {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: 300.0,
           child: CupertinoDatePicker(
             mode: CupertinoDatePickerMode.time,

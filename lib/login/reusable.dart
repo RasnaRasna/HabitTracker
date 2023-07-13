@@ -14,17 +14,17 @@ TextFormField reusableTextfield(
     enableSuggestions: isPasswordType,
     autocorrect: isPasswordType,
     cursorColor: kwhite,
-    style: TextStyle(color: kblack),
+    style: const TextStyle(color: kblack),
     decoration: InputDecoration(
       fillColor: Colors.white,
       prefixIcon: Icon(icon, color: Colors.black),
       hintText: text,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      hintStyle: TextStyle(color: kblack),
+      hintStyle: const TextStyle(color: kblack),
       filled: true,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 0, style: BorderStyle.none),
+        borderSide: const BorderSide(width: 0, style: BorderStyle.none),
       ),
     ),
     keyboardType: isPasswordType
@@ -38,7 +38,7 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
-    margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(90),
     ),
@@ -46,9 +46,6 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
       onPressed: () {
         ontap();
       },
-      child: Text(title,
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -59,6 +56,9 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      child: Text(title,
+          style: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
     ),
   );
 }

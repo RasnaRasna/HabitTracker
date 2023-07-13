@@ -255,7 +255,7 @@ class _HabitEditState extends State<HabitEdit> {
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
                             color: Color.fromARGB(255, 229, 113, 151))),
-                    width: 300,
+                    width: 350,
                     height: 50,
                     child: Center(
                       child: Text(
@@ -293,7 +293,7 @@ class _HabitEditState extends State<HabitEdit> {
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
                           color: Color.fromARGB(255, 229, 113, 151))),
-                  width: 300,
+                  width: 350,
                   height: 50,
                   child: const Center(
                     child: Text(
@@ -305,62 +305,64 @@ class _HabitEditState extends State<HabitEdit> {
               ]),
             ),
             kheight20,
-            Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Center(child: Text('Delete Habit')),
-                            content: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Are you sure you want to delete this habit $selectedHabit?',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(
-                                      context); // Close the alert dialog
-                                  deleteHabit(widget.documentId!);
-                                },
-                                child: const Text(
-                                  'Delete',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                        size: 30,
-                      ),
-                    ),
-                    const Text(
-                      "Delete Habit",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            deletbutton(context),
           ],
         ),
       ),
+    );
+  }
+
+  Column deletbutton(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Center(child: Text('Delete Habit')),
+                    content: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Are you sure you want to delete this habit $selectedHabit?',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Close the alert dialog
+                          deleteHabit(widget.documentId!);
+                        },
+                        child: const Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+                size: 30,
+              ),
+            ),
+            const Text(
+              "Delete Habit",
+              style: TextStyle(color: Colors.red),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -420,6 +422,7 @@ class _HabitEditState extends State<HabitEdit> {
       // Display a success message or navigate to a new screen
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Colors.green,
           content: Text('Habit updated successfully'),
         ),
       );
@@ -428,6 +431,7 @@ class _HabitEditState extends State<HabitEdit> {
       // Display an error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Colors.red,
           content: Text('Failed to update habit'),
         ),
       );
@@ -440,6 +444,7 @@ class _HabitEditState extends State<HabitEdit> {
       // Display a success message or navigate to a new screen
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Colors.green,
           content: Text('Habit deleted successfully'),
         ),
       );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits/habitedit.dart';
@@ -11,7 +12,7 @@ class EditHabits extends StatelessWidget {
   final String? habitName;
   final int? daysPerWeek;
   final DateTime? startDate;
-  final String documentId; // Add documentId parameter
+  final String documentId;
 
   const EditHabits(
       {super.key,
@@ -173,7 +174,13 @@ class EditHabits extends StatelessWidget {
                       Kwidth,
                       Text("Start Date"),
                       Kwidth,
-                      Text(" 01-may-2023")
+                      Text(
+                        startDate != null
+                            ? getFormattedDate(startDate!)
+                            : 'Select Date',
+                        style:
+                            const TextStyle(fontSize: 15, color: Colors.black),
+                      ),
                     ],
                   )
                 ],
