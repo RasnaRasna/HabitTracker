@@ -1,159 +1,65 @@
-// // import 'dart:async';
-
-// // import 'package:cloud_firestore/cloud_firestore.dart';
-// // import 'package:flutter/material.dart';
-
-// // class MyButtonClickedProvider with ChangeNotifier {
-// //   List<bool> _buttonClickedList = [];
-// //   final CollectionReference Addhabits =
-// //       FirebaseFirestore.instance.collection("add_habits");
-// //   List<bool> get buttonClickedList => _buttonClickedList;
-
-// //   MyButtonClickedProvider(int length) {
-// //     _buttonClickedList = List.generate(length, (_) => false);
-// //     _resetButtonStateAtMidnight();
-// //   }
-
-// //   void _resetButtonStateAtMidnight() {
-// //     Timer.periodic(Duration(days: 1), (timer) {
-// //       final currentTime = DateTime.now();
-// //       if (currentTime.hour == 0 && currentTime.minute == 0) {
-// //         _resetButtonState();
-// //       }
-// //     });
-// //   }
-
-// //   void _resetButtonState() {
-// //     _buttonClickedList = List.generate(_buttonClickedList.length, (_) => false);
-// //     notifyListeners();
-// //   }
-
-// //   void toggleButtonClicked(int index) {
-// //     _buttonClickedList[index] = !_buttonClickedList[index];
-// //     notifyListeners();
-// //   }
-
-// //   bool isButtonClicked(int index) {
-// //     return _buttonClickedList[index];
-// //   }
-// // // }
-// // import 'dart:async';
-// // import 'package:cloud_firestore/cloud_firestore.dart';
-// // import 'package:flutter/material.dart';
-
-// // class MyButtonClickedProvider with ChangeNotifier {
-// //   List<bool> _buttonClickedList = [];
-// //   final CollectionReference Addhabits =
-// //       FirebaseFirestore.instance.collection("add_habits");
-// //   List<bool> get buttonClickedList => _buttonClickedList;
-
-// //   MyButtonClickedProvider() {
-// //     _fetchDataAndInitialize();
-// //     _resetButtonStateAtMidnight();
-// //   }
-
-// //   Future<void> _fetchDataAndInitialize() async {
-// //     final snapshot = await Addhabits.get();
-// //     final habitItems = snapshot.docs;
-// //     final length = habitItems.length;
-// //     _buttonClickedList = List.generate(length, (_) => false);
-// //     notifyListeners();
-// //   }
-
-// //   void _resetButtonStateAtMidnight() {
-// //     Timer.periodic(Duration(days: 1), (timer) {
-// //       final currentTime = DateTime.now();
-// //       if (currentTime.hour == 0 && currentTime.minute == 0) {
-// //         _resetButtonState();
-// //       }
-// //     });
-// //   }
-
-// //   void _resetButtonState() {
-// //     _buttonClickedList = List.generate(_buttonClickedList.length, (_) => false);
-// //     notifyListeners();
-// //   }
-
-// //   void toggleButtonClicked(int index) {
-// //     if (index >= 0 && index < _buttonClickedList.length) {
-// //       _buttonClickedList[index] = !_buttonClickedList[index];
-// //       notifyListeners();
-// //     }
-// //   }
-
-// //   bool isButtonClicked(int index) {
-// //     if (index < 0 || index >= _buttonClickedList.length) {
-// //       return false;
-// //     }
-// //     return _buttonClickedList[index];
-// //   }
-// // }
-
-// import 'dart:async';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
 
 // class MyButtonClickedProvider with ChangeNotifier {
-//   List<bool> _buttonClickedList = [];
-//   final CollectionReference Addhabits =
-//       FirebaseFirestore.instance.collection("add_habits");
-//   List<bool> get buttonClickedList => _buttonClickedList;
+//   Set<String> selectedHabitIds = {};
 
-//   MyButtonClickedProvider() {
-//     _fetchDataAndInitialize();
-//     _resetButtonStateAtMidnight();
-//   }
+//   Map<String, Set<int>> selectedDaysMap = {};
 
-//   Future<void> _fetchDataAndInitialize() async {
-//     final snapshot = await Addhabits.get();
-//     final habitItems = snapshot.docs;
-//     final length = habitItems.length;
-//     _buttonClickedList = List.generate(length, (_) => false);
+//   void toggleHabitSelection(String habitId) {
+//     if (selectedHabitIds.contains(habitId)) {
+//       selectedHabitIds.remove(habitId);
+
+//       // Clear the selected days for this habit if it was deselected
+//       selectedDaysMap.remove(habitId);
+//     } else {
+//       selectedHabitIds.add(habitId);
+//     }
+
 //     notifyListeners();
 //   }
 
-//   void _resetButtonStateAtMidnight() {
-//     Timer.periodic(Duration(days: 1), (timer) {
-//       final currentTime = DateTime.now();
-//       if (currentTime.hour == 0 && currentTime.minute == 0) {
-//         _resetButtonState();
-//       }
-//     });
+//   bool isHabitSelected(String habitId) {
+//     return selectedHabitIds.contains(habitId);
 //   }
 
-//   void _resetButtonState() {
-//     _buttonClickedList = List.generate(_buttonClickedList.length, (_) => false);
+//   void setSelectedDays(String habitId, Set<int> selectedDays) {
+//     selectedDaysMap[habitId] = selectedDays;
 //     notifyListeners();
 //   }
 
-//   void toggleButtonClicked(int index) {
-//     if (index >= 0 && index < _buttonClickedList.length) {
-//       _buttonClickedList[index] = !_buttonClickedList[index];
-//       notifyListeners();
-//     } else if (index >= _buttonClickedList.length) {
-//       _buttonClickedList = List.generate(index + 1, (_) => false);
-//       _buttonClickedList[index] = true;
-//       notifyListeners();
-//     }
+//   Set<int>? getSelectedDays(String habitId) {
+//     return selectedDaysMap[habitId];
 //   }
 
-//   bool isButtonClicked(int index) {
-//     if (index >= 0 && index < _buttonClickedList.length) {
-//       return _buttonClickedList[index];
-//     }
-//     return false;
+//   void resetHabitSelections() {
+//     selectedHabitIds.clear();
+//     selectedDaysMap.clear();
+//     notifyListeners();
 //   }
 // }
 import 'package:flutter/material.dart';
 
 class MyButtonClickedProvider with ChangeNotifier {
   Set<String> selectedHabitIds = {};
+  Map<String, Set<int>> selectedDaysMap = {};
+  int selectedDayIndex = DateTime.now().weekday - 1;
 
   void toggleHabitSelection(String habitId) {
     if (selectedHabitIds.contains(habitId)) {
       selectedHabitIds.remove(habitId);
+
+      // Clear the selected days for this habit if it was deselected
+      selectedDaysMap.remove(habitId);
+
+      // Update the selected day index if the current day was deselected
+      if (selectedDayIndex == DateTime.now().weekday - 1) {
+        selectedDayIndex = -1;
+      }
     } else {
       selectedHabitIds.add(habitId);
+
+      // Set the selected day index when a habit is selected
+      selectedDayIndex = DateTime.now().weekday - 1;
     }
 
     notifyListeners();
@@ -163,8 +69,18 @@ class MyButtonClickedProvider with ChangeNotifier {
     return selectedHabitIds.contains(habitId);
   }
 
+  void setSelectedDays(String habitId, Set<int> selectedDays) {
+    selectedDaysMap[habitId] = selectedDays;
+    notifyListeners();
+  }
+
+  Set<int>? getSelectedDays(String habitId) {
+    return selectedDaysMap[habitId];
+  }
+
   void resetHabitSelections() {
     selectedHabitIds.clear();
+    selectedDaysMap.clear();
     notifyListeners();
   }
 }
