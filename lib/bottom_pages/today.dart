@@ -259,29 +259,35 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
-import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
-import '../const.dart';
 
+import '../const.dart';
 import '../provider/selectDateprovider.dart';
 
 class MyHomePageToday extends StatelessWidget {
   final String? documentId;
-  MyHomePageToday({Key? key, this.documentId});
+
+  MyHomePageToday({Key? key, this.documentId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
+    final selectedDayProvider = Provider.of<SelectedDayProvider>(context);
+
     if (DateTime.now().hour == 0 && DateTime.now().minute == 0) {
       buttonProvider.resetHabitSelections();
+      selectedDayProvider.selectCurrentDay();
     }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (ctx) => const bottombar()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (ctx) => const bottombar()),
+            );
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -297,7 +303,10 @@ class MyHomePageToday extends StatelessWidget {
           Expanded(
             child: Consumer<SelectedDayProvider>(
               builder: (context, selectedDayProvider, _) {
-                return buildListViewSeparated(selectedDayProvider);
+                return buildListViewSeparated(
+                  selectedDayProvider,
+                  buttonProvider,
+                );
               },
             ),
           ),
@@ -311,7 +320,10 @@ class MyHomePageToday extends StatelessWidget {
     return symbols[index];
   }
 
-  Widget buildListViewSeparated(SelectedDayProvider selectedDayProvider) {
+  Widget buildListViewSeparated(
+    SelectedDayProvider selectedDayProvider,
+    MyButtonClickedProvider buttonProvider,
+  ) {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) {
       // User is not authenticated
@@ -350,6 +362,7 @@ class MyHomePageToday extends StatelessWidget {
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) {
                 final habitData = snapshot.data!.docs[index];
+                final habitId = habitData.id;
                 final habitName = habitData['name'] as String?;
                 final daysPerWeek = habitData['daysPerWeek'] as int?;
                 final startDate =
@@ -359,12 +372,14 @@ class MyHomePageToday extends StatelessWidget {
 
                 List<Widget> daySymbols = [];
                 final currentDayIndex = DateTime.now().weekday - 1;
+                final selectedDayIndex =
+                    buttonProvider.getSelectedDayIndex(habitId) ?? -1;
 
                 for (int i = 0; i < 7; i++) {
-                  final backgroundColor =
-                      i == selectedDayProvider.selectedDayIndex
-                          ? Colors.pink
-                          : Colors.white;
+                  final backgroundColor = i == selectedDayIndex &&
+                          buttonProvider.isHabitSelected(habitId)
+                      ? Colors.pink
+                      : Colors.white;
                   final textColor =
                       i <= currentDayIndex ? Colors.pink : Colors.black;
 
@@ -374,9 +389,7 @@ class MyHomePageToday extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: backgroundColor,
-                          border: Border.all(
-                            width: 1,
-                          ),
+                          border: Border.all(width: 1),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         width: 20,
@@ -448,25 +461,28 @@ class MyHomePageToday extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      ...daySymbols, // Use the daySymbols list here
+                                      ...daySymbols,
                                       KWidth7,
                                       IconButton(
                                         onPressed: () {
-                                          buttonProvider.toggleHabitSelection(
-                                              habitData.id);
                                           if (buttonProvider
-                                              .isHabitSelected(habitData.id)) {
-                                            selectedDayProvider
-                                                .selectCurrentDay();
+                                              .isHabitSelected(habitId)) {
+                                            buttonProvider
+                                                .toggleHabitSelection(habitId);
+                                            buttonProvider.setSelectedDayIndex(
+                                                habitId,
+                                                -1); // Reset the selected day index for the habit
                                           } else {
-                                            selectedDayProvider.selectDay(
-                                                -1); // Reset the selected day index
+                                            buttonProvider
+                                                .toggleHabitSelection(habitId);
+                                            buttonProvider.setSelectedDayIndex(
+                                                habitId, currentDayIndex);
                                           }
                                         },
                                         icon: Icon(
                                           Icons.check_circle,
                                           color: buttonProvider
-                                                  .isHabitSelected(habitData.id)
+                                                  .isHabitSelected(habitId)
                                               ? Colors
                                                   .pink // Set the color when selected
                                               : Colors

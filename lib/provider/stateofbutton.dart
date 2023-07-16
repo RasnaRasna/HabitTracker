@@ -40,47 +40,37 @@
 import 'package:flutter/material.dart';
 
 class MyButtonClickedProvider with ChangeNotifier {
-  Set<String> selectedHabitIds = {};
-  Map<String, Set<int>> selectedDaysMap = {};
-  int selectedDayIndex = DateTime.now().weekday - 1;
+  Map<String, bool> selectedHabitIds = {};
+  Map<String, int> selectedDayIndices = {};
 
   void toggleHabitSelection(String habitId) {
-    if (selectedHabitIds.contains(habitId)) {
+    if (selectedHabitIds.containsKey(habitId)) {
       selectedHabitIds.remove(habitId);
-
-      // Clear the selected days for this habit if it was deselected
-      selectedDaysMap.remove(habitId);
-
-      // Update the selected day index if the current day was deselected
-      if (selectedDayIndex == DateTime.now().weekday - 1) {
-        selectedDayIndex = -1;
-      }
+      selectedDayIndices.remove(habitId);
     } else {
-      selectedHabitIds.add(habitId);
-
-      // Set the selected day index when a habit is selected
-      selectedDayIndex = DateTime.now().weekday - 1;
+      selectedHabitIds[habitId] = true;
+      selectedDayIndices[habitId] = DateTime.now().weekday - 1;
     }
 
     notifyListeners();
   }
 
   bool isHabitSelected(String habitId) {
-    return selectedHabitIds.contains(habitId);
+    return selectedHabitIds.containsKey(habitId);
   }
 
-  void setSelectedDays(String habitId, Set<int> selectedDays) {
-    selectedDaysMap[habitId] = selectedDays;
+  int? getSelectedDayIndex(String habitId) {
+    return selectedDayIndices[habitId];
+  }
+
+  void setSelectedDayIndex(String habitId, int index) {
+    selectedDayIndices[habitId] = index;
     notifyListeners();
-  }
-
-  Set<int>? getSelectedDays(String habitId) {
-    return selectedDaysMap[habitId];
   }
 
   void resetHabitSelections() {
     selectedHabitIds.clear();
-    selectedDaysMap.clear();
+    selectedDayIndices.clear();
     notifyListeners();
   }
 }
