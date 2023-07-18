@@ -140,16 +140,16 @@
 //   child: Padding(
 //     padding: const EdgeInsets.symmetric(horizontal: 20),
 //     child: GestureDetector(
-//       onTap: () => Navigator.of(context).push(
-//         MaterialPageRoute(
-//           builder: (ctx) => EditHabits(
-//             documentId: habitData.id,
-//             habitName: habitName,
-//             daysPerWeek: daysPerWeek,
-//             startDate: startDate,
-//             selectedDate: startDate,
-//           ),
-//         ),
+// onTap: () => Navigator.of(context).push(
+//   MaterialPageRoute(
+//     builder: (ctx) => EditHabits(
+//       documentId: habitData.id,
+//       habitName: habitName,
+//       daysPerWeek: daysPerWeek,
+//       startDate: startDate,
+//       selectedDate: startDate,
+//     ),
+//   ),
 //       ),
 //                   child: Card(
 //                     child: Container(
@@ -259,6 +259,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
+import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
 
@@ -376,35 +377,63 @@ class MyHomePageToday extends StatelessWidget {
                     buttonProvider.getSelectedDayIndex(habitId) ?? -1;
 
                 for (int i = 0; i < 7; i++) {
-                  final backgroundColor = i == selectedDayIndex &&
-                          buttonProvider.isHabitSelected(habitId)
-                      ? Colors.pink
-                      : Colors.white;
-                  final textColor =
-                      i <= currentDayIndex ? Colors.pink : Colors.black;
-
                   daySymbols.add(
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 3),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: backgroundColor,
-                          border: Border.all(width: 1),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        width: 20,
-                        height: 22,
-                        child: Center(
-                          child: Text(
-                            _getDaySymbol(i),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
+                    StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('add_habits')
+                          .doc(habitId)
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        // if (snapshot.connectionState ==
+                        //     ConnectionState.waiting) {
+                        //   // Show a loading indicator if data is still loading
+                        //   return CircularProgressIndicator();
+                        // }
+
+                        if (snapshot.hasError) {
+                          // Handle any errors that occur while fetching data
+                          return Text('Error: ${snapshot.error}');
+                        }
+
+                        final habitData =
+                            snapshot.data?.data() as Map<String, dynamic>?;
+
+                        final bool isSelected =
+                            habitData?['selected'] as bool? ?? false;
+                        final int? storedDayIndex =
+                            habitData?['selectedDayIndex'] as int?;
+
+                        final backgroundColor =
+                            i == storedDayIndex && isSelected
+                                ? Colors.pink
+                                : Colors.white;
+                        final textColor =
+                            i <= currentDayIndex ? Colors.pink : Colors.black;
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 3),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: backgroundColor,
+                              border: Border.all(width: 1),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            width: 20,
+                            height: 22,
+                            child: Center(
+                              child: Text(
+                                _getDaySymbol(i),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   );
                 }
@@ -414,97 +443,144 @@ class MyHomePageToday extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Card(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 150, 147, 147),
-                            width: 1,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => EditHabits(
+                              documentId: habitData.id,
+                              habitName: habitName,
+                              daysPerWeek: daysPerWeek,
+                              startDate: startDate,
+                              selectedDate: startDate,
+                            ),
                           ),
                         ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              top: 20,
-                              left: 10,
-                              child: Text(
-                                '🔥 $completedCount',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 150, 147, 147),
+                              width: 1,
+                            ),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 20,
+                                left: 10,
+                                child: Text(
+                                  '🔥 $completedCount',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
-                            ),
-                            kheight10,
-                            Positioned(
-                              top: 60,
-                              left: 10,
-                              child: Text(
-                                habitName ?? 'Unknown Habit',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                              kheight10,
+                              Positioned(
+                                top: 60,
+                                left: 10,
+                                child: Text(
+                                  habitName ?? 'Unknown Habit',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 10,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      ...daySymbols,
-                                      KWidth7,
-                                      IconButton(
-                                        onPressed: () {
-                                          if (buttonProvider
-                                              .isHabitSelected(habitId)) {
-                                            buttonProvider
-                                                .toggleHabitSelection(habitId);
-                                            buttonProvider.setSelectedDayIndex(
-                                                habitId,
-                                                -1); // Reset the selected day index for the habit
-                                          } else {
-                                            buttonProvider
-                                                .toggleHabitSelection(habitId);
-                                            buttonProvider.setSelectedDayIndex(
-                                                habitId, currentDayIndex);
-                                          }
-                                        },
-                                        icon: Icon(
-                                          Icons.check_circle,
-                                          color: buttonProvider
-                                                  .isHabitSelected(habitId)
-                                              ? Colors
-                                                  .pink // Set the color when selected
-                                              : Colors
-                                                  .grey, // Set the default color
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 10,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        ...daySymbols,
+                                        KWidth7,
+                                        IconButton(
+                                          onPressed: () {
+                                            if (buttonProvider
+                                                .isHabitSelected(habitId)) {
+                                              buttonProvider
+                                                  .toggleHabitSelection(
+                                                      habitId);
+                                              buttonProvider.setSelectedDayIndex(
+                                                  habitId,
+                                                  -1); // Reset the selected day index for the habit
+                                            } else {
+                                              buttonProvider
+                                                  .toggleHabitSelection(
+                                                      habitId);
+                                              buttonProvider
+                                                  .setSelectedDayIndex(
+                                                      habitId, currentDayIndex);
+                                            }
+                                          },
+                                          icon: StreamBuilder<DocumentSnapshot>(
+                                            stream: FirebaseFirestore.instance
+                                                .collection('add_habits')
+                                                .doc(habitId)
+                                                .snapshots(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<DocumentSnapshot>
+                                                    snapshot) {
+                                              // if (snapshot.connectionState ==
+                                              //     ConnectionState.waiting) {
+                                              //   // Show a loading indicator if data is still loading
+                                              //   return Text("");
+                                              // }
+
+                                              if (snapshot.hasError) {
+                                                // Handle any errors that occur while fetching data
+                                                return Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors
+                                                      .grey, // Set the default color
+                                                );
+                                              }
+
+                                              final habitData =
+                                                  snapshot.data?.data()
+                                                      as Map<String, dynamic>?;
+
+                                              final bool isSelected =
+                                                  habitData?['selected']
+                                                          as bool? ??
+                                                      false;
+
+                                              return Icon(
+                                                Icons.check_circle,
+                                                color: isSelected
+                                                    ? Colors.pink
+                                                    : Colors.grey,
+                                              );
+                                            },
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 30,
+                                        vertical: 10,
                                       ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 30,
-                                      vertical: 10,
+                                      child: Text(
+                                        '0/$daysPerWeek',
+                                        style: TextStyle(fontSize: 15),
+                                      ),
                                     ),
-                                    child: Text(
-                                      '0/$daysPerWeek',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -1,196 +1,29 @@
 
 // class MyHomePageToday extends StatelessWidget {
-//   MyHomePageToday({Key? key});
-//   int selectedDayIndex = -1;
+//   final String? documentId;
+
+//   MyHomePageToday({Key? key, this.documentId}) : super(key: key);
+
 //   @override
 //   Widget build(BuildContext context) {
+//     final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
+//     final selectedDayProvider = Provider.of<SelectedDayProvider>(context);
+
+//     if (DateTime.now().hour == 0 && DateTime.now().minute == 0) {
+//       buttonProvider.resetHabitSelections();
+//       selectedDayProvider.selectCurrentDay();
+//     }
+
 //     return Scaffold(
 //       appBar: AppBar(
 //         leading: IconButton(
 //           onPressed: () {
 //             Navigator.push(
-//                 context, MaterialPageRoute(builder: (ctx) => bottombar()));
-//           },
-//           icon: Icon(Icons.arrow_back),
-//         ),
-//         centerTitle: true,
-//         title: const Text(
-//           " Today",
-//           style: TextStyle(color: Colors.black),
-//         ),
-//       ),
-//       body: Column(
-//         children: [
-//           kheight50,
-//           Expanded(child: buildListViewSeparated()),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget buildListViewSeparated() {
-//     return StreamBuilder<QuerySnapshot>(
-//       stream: FirebaseFirestore.instance.collection('add_habits').snapshots(),
-//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-//         if (snapshot.hasError) {
-//           return Text('Error: ${snapshot.error}');
-//         }
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-//         }
-//         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-//           return Text(
-//               'No data available'); // Show a message if no data is found
-//         }
-
-//         return ListView.separated(
-//           itemBuilder: (BuildContext context, int index) {
-//             final habitData = snapshot.data!.docs[index];
-//             final habitName = habitData['name']
-//                 as String?; // Use null-aware operator to handle null value
-//             final daysPerWeek = habitData['daysPerWeek'] as int?;
-//             final startDate = (habitData['startDate'] as Timestamp?)?.toDate();
-
-//             int completedCount = 0; // TODO: Get the actual completed count
-
-//             return Container(
-//               height: 125,
-//               child: Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: GestureDetector(
-//                   onTap: () => Navigator.of(context).push(
-//                       MaterialPageRoute(builder: (ctx) => const EditHabits())),
-//                   child: Card(
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         borderRadius: BorderRadius.circular(10),
-//                         border: Border.all(
-//                           color: Color.fromARGB(255, 150, 147, 147),
-//                           width: 1,
-//                         ),
-//                       ),
-//                       child: Stack(
-//                         children: [
-//                           Positioned(
-//                             top: 20,
-//                             left: 10,
-//                             child: Text(
-//                               '🔥 $completedCount',
-//                               style: TextStyle(
-//                                 fontSize: 20,
-//                                 fontWeight: FontWeight.bold,
-//                                 color: Colors.black,
-//                               ),
-//                             ),
-//                           ),
-//                           kheight10,
-//                           Positioned(
-//                             top: 60,
-//                             left: 10,
-//                             child: Text(
-//                               habitName ??
-//                                   'Unknown Habit', // Use null-aware operator to provide a default value
-//                               style:
-//                                   TextStyle(fontSize: 20, color: Colors.black),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding: const EdgeInsets.symmetric(vertical: 15),
-//                             child: Column(
-//                               crossAxisAlignment: CrossAxisAlignment.end,
-//                               children: [
-//                                 Row(
-//                                   mainAxisAlignment: MainAxisAlignment.end,
-//                                   children: [
-//                                     for (int i = 0; i < 7; i++)
-//                                       InkWell(
-//                                         onTap: () {
-//                                           // Handle the selection logic here
-//                                         },
-//                                         child: Container(
-//                                           color: i < daysPerWeek!
-//                                               ? Color.fromARGB(
-//                                                   255, 229, 113, 151)
-//                                               : Color.fromARGB(
-//                                                   255, 246, 211, 223),
-//                                           width: 18,
-//                                           height: 18,
-//                                           child: Padding(
-//                                             padding: EdgeInsets.symmetric(
-//                                                 horizontal: 3.5),
-//                                             child: Text(
-//                                               i < daysPerWeek ? '✓' : '',
-//                                               style: TextStyle(
-//                                                   color: Colors.white),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     KWidth7,
-//                                     IconButton(
-//                                       onPressed: () {},
-//                                       icon: Icon(
-//                                         Icons.check_circle,
-//                                         color:
-//                                             Color.fromARGB(255, 229, 113, 151),
-//                                       ),
-//                                     )
-//                                   ],
-//                                 ),
-//                                 SizedBox(height: 5),
-//                                 Padding(
-//                                   padding: EdgeInsets.only(right: 20),
-//                                   child: Text(
-//                                     '${daysPerWeek ?? 0}/7',
-//                                     style: TextStyle(fontSize: 15),
-//                                   ),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
+//               context,
+//               MaterialPageRoute(builder: (ctx) => const bottombar()),
 //             );
 //           },
-//           separatorBuilder: (BuildContext context, int index) {
-//             return SizedBox(height: 10);
-//           },
-//           itemCount: snapshot.data!.docs.length,
-//         );
-//       },
-//     );
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:habits_track/bottom_pages/bottom_bar.dart';
-// import 'package:provider/provider.dart';
-// import '../const.dart';
-
-// import '../edit_habits/edit_habits.dart';
-// import '../provider/selectDateprovider.dart';
-// import '../provider/stateofbutton.dart';
-
-// class MyHomePageToday extends StatelessWidget {
-//   final String? documentId;
-//   MyHomePageToday({Key? key, this.documentId});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//           onPressed: () {
-//             Navigator.push(
-//                 context, MaterialPageRoute(builder: (ctx) => bottombar()));
-//           },
-//           icon: Icon(Icons.arrow_back),
+//           icon: const Icon(Icons.arrow_back),
 //         ),
 //         centerTitle: true,
 //         title: const Text(
@@ -204,7 +37,10 @@
 //           Expanded(
 //             child: Consumer<SelectedDayProvider>(
 //               builder: (context, selectedDayProvider, _) {
-//                 return buildListViewSeparated(selectedDayProvider);
+//                 return buildListViewSeparated(
+//                   selectedDayProvider,
+//                   buttonProvider,
+//                 );
 //               },
 //             ),
 //           ),
@@ -218,183 +54,221 @@
 //     return symbols[index];
 //   }
 
-//   Widget buildListViewSeparated(SelectedDayProvider selectedDayProvider) {
-//     return StreamBuilder<QuerySnapshot>(
-//       stream: FirebaseFirestore.instance.collection('add_habits').snapshots(),
-//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-//         if (snapshot.hasError) {
-//           return Text('Error: ${snapshot.error}');
-//         }
-//         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-//           return Center(
-//             child: Text(
-//               'No data available',
-//               style: TextStyle(fontSize: 25),
-//             ),
-//           );
-//         }
-//         final habitItems = snapshot.data!.docs.reversed.toList();
+//   Widget buildListViewSeparated(
+//     SelectedDayProvider selectedDayProvider,
+//     MyButtonClickedProvider buttonProvider,
+//   ) {
+//     final currentUser = FirebaseAuth.instance.currentUser;
+//     if (currentUser == null) {
+//       // User is not authenticated
+//       return const Center(
+//         child: Text(
+//           'User not authenticated',
+//           style: TextStyle(fontSize: 25),
+//         ),
+//       );
+//     }
 
-//         return ListView.separated(
-//           itemBuilder: (BuildContext context, int index) {
-//             final habitData = snapshot.data!.docs[index];
-//             final habitName = habitData['name'] as String?;
-//             final daysPerWeek = habitData['daysPerWeek'] as int?;
-//             final startDate = (habitData['startDate'] as Timestamp?)?.toDate();
+//     final userId = currentUser.uid;
 
-//             int completedCount = 0; // TODO: Get the actual completed count
-
-//             List<Widget> daySymbols = [];
-
-//             for (int i = 0; i < 7; i++) {
-//               final borderColor = i < (daysPerWeek ?? 0)
-//                   ? Colors.pink // Set the border color for selected days
-//                   : Color.fromARGB(
-//                       255, 151, 151, 151); // Set the default border color
-
-//               daySymbols.add(
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 3),
-//                   child: GestureDetector(
-//                     onTap: () {},
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         border: Border.all(
-//                           color: borderColor,
-//                           width: 1,
-//                         ),
-//                         borderRadius: BorderRadius.circular(5),
-//                       ),
-//                       width: 20,
-//                       height: 22,
-//                       child: Center(
-//                         child: Text(
-//                           _getDaySymbol(i),
-//                           style: TextStyle(
-//                             fontSize: 12,
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
+//     return Consumer<MyButtonClickedProvider>(
+//       builder: (context, buttonProvider, _) {
+//         return StreamBuilder<QuerySnapshot>(
+//           stream: FirebaseFirestore.instance
+//               .collection('add_habits')
+//               .where('userId', isEqualTo: userId)
+//               .snapshots(),
+//           builder:
+//               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//             if (snapshot.hasError) {
+//               return Text('Error: ${snapshot.error}');
+//             }
+//             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//               return const Center(
+//                 child: Text(
+//                   'No habits available',
+//                   style: TextStyle(fontSize: 25),
 //                 ),
 //               );
 //             }
+//             final habitItems = snapshot.data!.docs;
 
-//             return Container(
-//               height: 125,
-//               child: Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: GestureDetector(
-//                   onTap: () => Navigator.of(context).push(
-//                     MaterialPageRoute(
-//                       builder: (ctx) => EditHabits(
-//                         documentId: habitData.id,
-//                         habitName: habitName,
-//                         daysPerWeek: daysPerWeek,
-//                         startDate: startDate,
-//                       ),
-//                     ),
-//                   ),
-//                   child: Card(
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         borderRadius: BorderRadius.circular(10),
-//                         border: Border.all(
-//                           color: Color.fromARGB(255, 150, 147, 147),
-//                           width: 1,
+//             return ListView.separated(
+//               itemBuilder: (BuildContext context, int index) {
+//                 final habitData = snapshot.data!.docs[index];
+//                 final habitId = habitData.id;
+//                 final habitName = habitData['name'] as String?;
+//                 final daysPerWeek = habitData['daysPerWeek'] as int?;
+//                 final startDate =
+//                     (habitData['startDate'] as Timestamp?)?.toDate();
+
+//                 int completedCount = 0; // TODO: Get the actual completed count
+
+//                 List<Widget> daySymbols = [];
+//                 final currentDayIndex = DateTime.now().weekday - 1;
+//                 final selectedDayIndex =
+//                     buttonProvider.getSelectedDayIndex(habitId) ?? -1;
+
+//                 for (int i = 0; i < 7; i++) {
+//                   final backgroundColor = i == selectedDayIndex &&
+//                           buttonProvider.isHabitSelected(habitId)
+//                       ? Colors.pink.shade200
+//                       : Colors.white;
+//                   final textColor =
+//                       i <= currentDayIndex ? Colors.pink : Colors.black;
+
+//                   daySymbols.add(
+//                     Padding(
+//                       padding: const EdgeInsets.symmetric(horizontal: 3),
+//                       child: Container(
+//                         decoration: BoxDecoration(
+//                           color: backgroundColor,
+//                           border: Border.all(width: 1),
+//                           borderRadius: BorderRadius.circular(5),
+//                         ),
+//                         width: 20,
+//                         height: 22,
+//                         child: Center(
+//                           child: Text(
+//                             _getDaySymbol(i),
+//                             style: TextStyle(
+//                               fontSize: 12,
+//                               fontWeight: FontWeight.bold,
+//                               color: textColor,
+//                             ),
+//                           ),
 //                         ),
 //                       ),
-//                       child: Stack(
-//                         children: [
-//                           Positioned(
-//                             top: 20,
-//                             left: 10,
-//                             child: Text(
-//                               '🔥 $completedCount',
-//                               style: TextStyle(
-//                                 fontSize: 20,
-//                                 fontWeight: FontWeight.bold,
-//                                 color: Colors.black,
-//                               ),
+//                     ),
+//                   );
+//                 }
+
+//                 return SizedBox(
+//                   height: 125,
+//                   child: Padding(
+//                     padding: const EdgeInsets.symmetric(horizontal: 20),
+//                     child: Card(
+//                       child: GestureDetector(
+//                         onTap: () => Navigator.of(context).push(
+//                           MaterialPageRoute(
+//                             builder: (ctx) => EditHabits(
+//                               documentId: habitData.id,
+//                               habitName: habitName,
+//                               daysPerWeek: daysPerWeek,
+//                               startDate: startDate,
+//                               selectedDate: startDate,
 //                             ),
 //                           ),
-//                           kheight10,
-//                           Positioned(
-//                             top: 60,
-//                             left: 10,
-//                             child: Text(
-//                               habitName ?? 'Unknown Habit',
-//                               style: TextStyle(
-//                                 fontSize: 20,
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold,
-//                               ),
+//                         ),
+//                         child: Container(
+//                           decoration: BoxDecoration(
+//                             color: Colors.white,
+//                             borderRadius: BorderRadius.circular(10),
+//                             border: Border.all(
+//                               color: const Color.fromARGB(255, 150, 147, 147),
+//                               width: 1,
 //                             ),
 //                           ),
-//                           Padding(
-//                             padding: const EdgeInsets.symmetric(
-//                               vertical: 5,
-//                               horizontal: 10,
-//                             ),
-//                             child: Column(
-//                               crossAxisAlignment: CrossAxisAlignment.end,
-//                               children: [
-//                                 Row(
-//                                   mainAxisAlignment: MainAxisAlignment.end,
+//                           child: Stack(
+//                             children: [
+//                               Positioned(
+//                                 top: 20,
+//                                 left: 10,
+//                                 child: Text(
+//                                   '🔥 $completedCount',
+//                                   style: const TextStyle(
+//                                     fontSize: 20,
+//                                     fontWeight: FontWeight.bold,
+//                                     color: Colors.black,
+//                                   ),
+//                                 ),
+//                               ),
+//                               kheight10,
+//                               Positioned(
+//                                 top: 60,
+//                                 left: 10,
+//                                 child: Text(
+//                                   habitName ?? 'Unknown Habit',
+//                                   style: const TextStyle(
+//                                     fontSize: 20,
+//                                     color: Colors.black,
+//                                     fontWeight: FontWeight.bold,
+//                                   ),
+//                                 ),
+//                               ),
+//                               Padding(
+//                                 padding: const EdgeInsets.symmetric(
+//                                   vertical: 5,
+//                                   horizontal: 10,
+//                                 ),
+//                                 child: Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.end,
 //                                   children: [
-//                                     ...daySymbols, // Use the daySymbols list here
-//                                     KWidth7,
-//                                     Consumer<MyButtonClickedProvider>(
-//                                       builder: (context, buttonClickedProvider,
-//                                           child) {
-//                                         return IconButton(
+//                                     Row(
+//                                       mainAxisAlignment: MainAxisAlignment.end,
+//                                       children: [
+//                                         ...daySymbols,
+//                                         KWidth7,
+//                                         IconButton(
 //                                           onPressed: () {
-//                                             buttonClickedProvider
-//                                                 .toggleButtonClicked(index);
+//                                             if (buttonProvider
+//                                                 .isHabitSelected(habitId)) {
+//                                               buttonProvider
+//                                                   .toggleHabitSelection(
+//                                                       habitId);
+//                                               buttonProvider.setSelectedDayIndex(
+//                                                   habitId,
+//                                                   -1); // Reset the selected day index for the habit
+//                                             } else {
+//                                               buttonProvider
+//                                                   .toggleHabitSelection(
+//                                                       habitId);
+//                                               buttonProvider
+//                                                   .setSelectedDayIndex(
+//                                                       habitId, currentDayIndex);
+//                                             }
 //                                           },
 //                                           icon: Icon(
 //                                             Icons.check_circle,
-//                                             color: buttonClickedProvider
-//                                                     .isButtonClicked(index)
+//                                             color: buttonProvider
+//                                                     .isHabitSelected(habitId)
 //                                                 ? Colors.pink
-//                                                 : Colors.blue,
+//                                                     .shade200 // Set the color when selected
+//                                                 : Colors
+//                                                     .grey, // Set the default color
 //                                           ),
-//                                         );
-//                                       },
+//                                         ),
+//                                       ],
+//                                     ),
+//                                     Padding(
+//                                       padding: EdgeInsets.symmetric(
+//                                         horizontal: 30,
+//                                         vertical: 10,
+//                                       ),
+//                                       child: Text(
+//                                         '0/$daysPerWeek',
+//                                         style: TextStyle(fontSize: 15),
+//                                       ),
 //                                     ),
 //                                   ],
 //                                 ),
-//                                 Padding(
-//                                   padding: EdgeInsets.symmetric(
-//                                     horizontal: 30,
-//                                     vertical: 10,
-//                                   ),
-//                                   child: Text(
-//                                     '${daysPerWeek ?? 0}/7',
-//                                     style: TextStyle(fontSize: 15),
-//                                   ),
-//                                 ),
-//                               ],
-//                             ),
+//                               ),
+//                             ],
 //                           ),
-//                         ],
+//                         ),
 //                       ),
 //                     ),
 //                   ),
-//                 ),
-//               ),
+//                 );
+//               },
+//               separatorBuilder: (BuildContext context, int index) {
+//                 return const SizedBox(height: 10);
+//               },
+//               itemCount: habitItems.length,
 //             );
 //           },
-//           separatorBuilder: (BuildContext context, int index) {
-//             return SizedBox(height: 10);
-//           },
-//           itemCount: habitItems.length,
 //         );
 //       },
 //     );
 //   }
-
+// }

@@ -37,19 +37,31 @@
 //     notifyListeners();
 //   }
 // }
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MyButtonClickedProvider with ChangeNotifier {
   Map<String, bool> selectedHabitIds = {};
   Map<String, int> selectedDayIndices = {};
 
-  void toggleHabitSelection(String habitId) {
+  void toggleHabitSelection(String habitId) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final CollectionReference habitsCollection =
+        firestore.collection('add_habits');
+
     if (selectedHabitIds.containsKey(habitId)) {
       selectedHabitIds.remove(habitId);
       selectedDayIndices.remove(habitId);
+      await habitsCollection.doc(habitId).update({
+        'selected': false,
+      });
     } else {
       selectedHabitIds[habitId] = true;
       selectedDayIndices[habitId] = DateTime.now().weekday - 1;
+      await habitsCollection.doc(habitId).update({
+        'selected': true,
+        'selectedDayIndex': DateTime.now().weekday - 1,
+      });
     }
 
     notifyListeners();
