@@ -444,11 +444,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:habits_track/bottom_pages/today.dart';
+import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../bottom_pages/bottom_bar.dart';
+import '../provider/notesand_iconcolors.dart';
 import '../reminder/reminder.dart';
 import 'weekbox.dart';
 
@@ -467,8 +469,6 @@ class _AddhabitsState extends State<Addhabits> {
 
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
-  final CollectionReference Addhabits =
-      FirebaseFirestore.instance.collection("add_habits");
 
   @override
   Widget build(BuildContext context) {

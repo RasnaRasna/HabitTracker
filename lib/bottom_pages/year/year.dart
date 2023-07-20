@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 
-import '../edit_habits/yearheatmap.dart';
+import '../../edit_habits/yearheatmap.dart';
 
 class YearBase extends StatelessWidget {
   const YearBase({super.key});

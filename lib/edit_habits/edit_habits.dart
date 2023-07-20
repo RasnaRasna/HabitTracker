@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
-import 'package:habits_track/bottom_pages/today.dart';
+import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits/habitedit.dart';
 import 'package:habits_track/edit_habits/heatmap.dart';
@@ -12,15 +13,17 @@ class EditHabits extends StatelessWidget {
   final String? habitName;
   final int? daysPerWeek;
   final DateTime? startDate;
-  final String documentId;
+  final String habitId;
+  final QueryDocumentSnapshot<Object?> habitData; // Add this parameter
 
   const EditHabits(
       {super.key,
       this.habitName,
       this.daysPerWeek,
       this.startDate,
-      required this.documentId,
-      required selectedDate});
+      required this.habitId,
+      required selectedDate,
+      required this.habitData});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +51,11 @@ class EditHabits extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (ctx) => HabitEdit(
-                              documentId: documentId,
+                              documentId: habitId,
                               habitName: habitName,
                               daysPerWeek: daysPerWeek,
                               startDate: startDate,
+                              habitData: habitData,
                             )));
                   },
                   child: Container(
@@ -105,9 +109,13 @@ class EditHabits extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => History(
-                              selectedDate: startDate!,
-                            )));
+                      builder: (ctx) => History(
+                        selectedDate: startDate!,
+                        habitId: habitId,
+
+                        // Pass the documentId to the History widget
+                      ),
+                    ));
                   },
                   child: Container(
                     decoration: BoxDecoration(

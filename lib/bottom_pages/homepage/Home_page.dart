@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
-import 'package:habits_track/bottom_pages/moodcheck.dart';
-import 'package:habits_track/bottom_pages/today.dart';
+import 'package:habits_track/bottom_pages/homepage/moodcheck.dart';
+import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/genderprovider.dart';
-import '../side_drawer.dart';
+import '../../provider/genderprovider.dart';
+import '../../side_drawer.dart';
 
 class Homapage extends StatelessWidget {
   final String? selectedGender;

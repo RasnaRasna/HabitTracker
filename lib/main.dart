@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/provider/buttonclickedstate.dart';
-import 'package:habits_track/provider/colors.dart';
+import 'package:habits_track/provider/notesand_iconcolors.dart';
 import 'package:habits_track/provider/genderprovider.dart';
 import 'package:habits_track/provider/selectDateprovider.dart';
 import 'package:habits_track/provider/stateofbutton.dart';

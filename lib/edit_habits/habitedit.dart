@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/weekbox.dart';
-import 'package:habits_track/bottom_pages/today.dart';
+import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:intl/intl.dart';
 
 import '../bottom_pages/bottom_bar.dart';
@@ -14,12 +15,15 @@ class HabitEdit extends StatefulWidget {
   final String? habitName;
   final int? daysPerWeek;
   final DateTime? startDate;
+  final QueryDocumentSnapshot<Object?> habitData; // Add this parameter
+
   const HabitEdit({
     super.key,
     this.habitName,
     this.daysPerWeek,
     this.startDate,
     this.documentId,
+    required this.habitData,
   });
 
   @override
@@ -28,10 +32,10 @@ class HabitEdit extends StatefulWidget {
 
 class _HabitEditState extends State<HabitEdit> {
   DateTime? selectedDate;
+
   String? selectedHabit;
   int selectedDaysPerWeek = -1;
   TextEditingController habitNameController = TextEditingController();
-
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
   final CollectionReference Addhabits =
@@ -69,8 +73,13 @@ class _HabitEditState extends State<HabitEdit> {
                         child: const Text('Cancel'),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => bottombar())),
+                        onPressed: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => EditHabits(
+                                      habitId: '',
+                                      selectedDate: null,
+                                      habitData: widget.habitData,
+                                    ))),
                         child: const Text(
                           'Discard changes',
                           style: TextStyle(color: Colors.red),
@@ -438,17 +447,61 @@ class _HabitEditState extends State<HabitEdit> {
     }
   }
 
+  // void deleteHabit(String documentId) async {
+  //   try {
+  //     await Addhabits.doc(documentId).delete();
+  //     // Display a success message or navigate to a new screen
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         backgroundColor: Colors.green,
+  //         content: Text('Habit deleted successfully'),
+  //       ),
+  //     );
+  //     // Navigate to the desired screen after deleting the habit
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+  //     );
+  //   } catch (e) {
+  //     print('Error deleting habit: $e');
+  //     // Display an error message
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text('Failed to delete habit'),
+  //       ),
+  //     );
+  //   }
+  // }
   void deleteHabit(String documentId) async {
     try {
+      // Get the habit data to retrieve the habit ID
+      final habitSnapshot = await Addhabits.doc(documentId).get();
+      final habitData = habitSnapshot.data() as Map<String, dynamic>;
+
+      // Delete the habit
       await Addhabits.doc(documentId).delete();
+
+      // Delete the associated history
+      final historySnapshot = await FirebaseFirestore.instance
+          .collection('history')
+          .where('habitId',
+              isEqualTo:
+                  documentId) // Use the documentId directly as the habitId
+          .get();
+
+      // Delete each history document one by one
+      for (final doc in historySnapshot.docs) {
+        await doc.reference.delete();
+      }
+
       // Display a success message or navigate to a new screen
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.green,
-          content: Text('Habit deleted successfully'),
+          content: Text('Habit and associated history deleted successfully'),
         ),
       );
-      // Navigate to the desired screen after deleting the habit
+      // Navigate to the desired screen after deleting the habit and history
       Navigator.push(
         context,
         MaterialPageRoute(builder: (ctx) => MyHomePageToday()),

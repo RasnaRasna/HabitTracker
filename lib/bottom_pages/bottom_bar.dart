@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/bottom_pages/Home_page.dart';
+import 'package:habits_track/bottom_pages/homepage/Home_page.dart';
+import 'package:habits_track/bottom_pages/year/year.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/genderprovider.dart';
-import 'Challenges.dart';
-import 'Year.dart';
-import 'discover.dart';
-import 'month.dart';
+import 'challenges/Challenges.dart';
+import 'discover/discover.dart';
+import 'month/month.dart';
 
 // class bottombar extends StatefulWidget {
 //   final String? selectedGender;
