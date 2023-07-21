@@ -157,13 +157,11 @@
 //     );
 //   }
 // }
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/provider/notesand_iconcolors.dart';
-
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class History extends StatefulWidget {
   final DateTime selectedDate;
@@ -180,23 +178,7 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  late List<bool> showAdditionalButtonList;
   late List<Map<String, dynamic>> habitHistory;
-
-  @override
-  void initState() {
-    super.initState();
-    showAdditionalButtonList =
-        List<bool>.generate(_getDaysCount(), (_) => false);
-    // Initialize the habitHistory list with default values for each day
-    habitHistory = List.generate(
-      _getDaysCount(),
-      (_) => {
-        'isSelected': false,
-        'notes': '',
-      },
-    );
-  }
 
   final CollectionReference historyCollection =
       FirebaseFirestore.instance.collection('history');
@@ -219,6 +201,7 @@ class _HistoryState extends State<History> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           }
+
           // Map the habit history data from Firestore
           habitHistory = snapshot.data!.docs
               .map((doc) => doc.data() as Map<String, dynamic>)
@@ -273,7 +256,8 @@ class _HistoryState extends State<History> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               if (iconColorchangeprovider
-                                  .isAdditionalButtonVisible(index))
+                                  .isAdditionalButtonVisible(
+                                      widget.habitId, index))
                                 IconButton(
                                   onPressed: () {
                                     _showMyDialog(index);
@@ -282,19 +266,31 @@ class _HistoryState extends State<History> {
                                 ),
                               GestureDetector(
                                 onTap: () {
-                                  iconColorchangeprovider.updateColor(index);
-                                  // Toggle the isSelected value
                                   setState(() {
+                                    // Toggle the isSelected value when the check_circle icon is tapped
                                     habitHistory[index]['isSelected'] =
                                         !habitHistory[index]['isSelected'];
+
+                                    // Toggle the additional button visibility when the check_circle icon is tapped
+                                    Provider.of<IconColorchangeprovider>(
+                                      context,
+                                      listen: false,
+                                    ).toggleAdditionalButtonVisibility(
+                                        widget.habitId, index);
                                   });
                                 },
                                 child: Icon(
                                   Icons.check_circle,
-                                  color: iconColorchangeprovider
-                                          .isAdditionalButtonVisible(index)
+                                  color: Provider.of<IconColorchangeprovider>(
+                                              context)
+                                          .isAdditionalButtonVisible(
+                                    widget.habitId,
+                                    index,
+                                  )
                                       ? Color.fromARGB(255, 229, 113, 151)
-                                      : Colors.grey,
+                                      : habitHistory[index]['isSelected']
+                                          ? Color.fromARGB(255, 229, 113, 151)
+                                          : Colors.grey,
                                 ),
                               )
                             ],
@@ -337,7 +333,7 @@ class _HistoryState extends State<History> {
                   width: 250,
                   height: 200,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.circular(10.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(color: Colors.grey),
                   ),
                   child: TextField(
@@ -368,7 +364,8 @@ class _HistoryState extends State<History> {
                     final habitId = widget.habitId;
                     final currentDate = widget.selectedDate
                         .add(Duration(days: _getDaysCount() - 1 - index));
-                    final isSelected = habitHistory[index]['isSelected'];
+                    final isSelected = !habitHistory[index]
+                        ['isSelected']; // Invert the isSelected value here
                     final timestamp = Timestamp.now();
                     final documentId =
                         "$habitId-${currentDate.toIso8601String()}";
@@ -382,11 +379,17 @@ class _HistoryState extends State<History> {
                       "timestamp": timestamp,
                     });
 
+                    // Update the local isSelected value and notes in the habitHistory list
                     setState(() {
                       habitHistory[index]['notes'] = notes;
-                      habitHistory[index]['isSelected'] =
-                          isSelected; // Update the local isSelected value
+                      habitHistory[index]['isSelected'] = isSelected;
                     });
+
+                    // Toggle the additional button visibility when the check_circle icon is clicked
+                    Provider.of<IconColorchangeprovider>(context, listen: false)
+                        .toggleAdditionalButtonVisibility(
+                            widget.habitId, index);
+
                     Navigator.of(context).pop();
                   },
                 ),
