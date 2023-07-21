@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/provider/buttonclickedstate.dart';
 import 'package:habits_track/provider/notesand_iconcolors.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
           useMaterial3: true,
         ),
-        home: const SignPage(),
+        home: SignPage(),
       ),
     );
   }

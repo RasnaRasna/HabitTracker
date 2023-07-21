@@ -235,7 +235,15 @@ class _HistoryState extends State<History> {
                     itemBuilder: (context, index) {
                       final currentDate = widget.selectedDate
                           .add(Duration(days: _getDaysCount() - 1 - index));
-                      final habitData = habitHistory[index];
+                      final habitData = habitHistory.firstWhere((data) {
+                        final selectedDayIndex = data['selectedDayIndex'];
+                        if (selectedDayIndex != null) {
+                          final selectedDate = widget.selectedDate
+                              .add(Duration(days: selectedDayIndex));
+                          return selectedDate == currentDate;
+                        }
+                        return false;
+                      }, orElse: () => {'isSelected': false, 'notes': ''});
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -267,16 +275,15 @@ class _HistoryState extends State<History> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    // Toggle the isSelected value when the check_circle icon is tapped
                                     habitHistory[index]['isSelected'] =
                                         !habitHistory[index]['isSelected'];
 
-                                    // Toggle the additional button visibility when the check_circle icon is tapped
+                                    // Toggle the additional button visibility when the check_circle icon is clicked
                                     Provider.of<IconColorchangeprovider>(
-                                      context,
-                                      listen: false,
-                                    ).toggleAdditionalButtonVisibility(
-                                        widget.habitId, index);
+                                            context,
+                                            listen: false)
+                                        .toggleAdditionalButtonVisibility(
+                                            widget.habitId, index);
                                   });
                                 },
                                 child: Icon(
@@ -364,9 +371,12 @@ class _HistoryState extends State<History> {
                     final habitId = widget.habitId;
                     final currentDate = widget.selectedDate
                         .add(Duration(days: _getDaysCount() - 1 - index));
-                    final isSelected = !habitHistory[index]
-                        ['isSelected']; // Invert the isSelected value here
+                    final isSelected = !habitHistory[index]['isSelected'];
                     final timestamp = Timestamp.now();
+                    final selectedDayIndex = _getDaysCount() -
+                        1 -
+                        index; // Calculate the selectedDayIndex
+
                     final documentId =
                         "$habitId-${currentDate.toIso8601String()}";
 
@@ -375,20 +385,16 @@ class _HistoryState extends State<History> {
                       "habitId": habitId,
                       "isSelected": isSelected,
                       "notes": notes,
-                      "selectedDayIndex": index,
+                      "selectedDayIndex":
+                          selectedDayIndex, // Store the selectedDayIndex
                       "timestamp": timestamp,
                     });
 
-                    // Update the local isSelected value and notes in the habitHistory list
+                    // Update the local isSelected value and notes in the habitHistory list for the correct date
                     setState(() {
                       habitHistory[index]['notes'] = notes;
                       habitHistory[index]['isSelected'] = isSelected;
                     });
-
-                    // Toggle the additional button visibility when the check_circle icon is clicked
-                    Provider.of<IconColorchangeprovider>(context, listen: false)
-                        .toggleAdditionalButtonVisibility(
-                            widget.habitId, index);
 
                     Navigator.of(context).pop();
                   },
