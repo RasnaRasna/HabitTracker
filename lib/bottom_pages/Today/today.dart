@@ -276,7 +276,7 @@ class MyHomePageToday extends StatelessWidget {
     final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
     final selectedDayProvider = Provider.of<SelectedDayProvider>(context);
 
-    if (DateTime.now().hour == 0 && DateTime.now().minute == 0) {
+    if (DateTime.now().hour >= 0 && DateTime.now().minute == 0) {
       buttonProvider.resetHabitSelections();
       selectedDayProvider.selectCurrentDay();
     }

@@ -23,6 +23,14 @@ class IconColorchangeprovider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetAdditionalButtonVisibility(String habitId, int index) {
+    if (habitShowAdditionalButtonMap.containsKey(habitId) &&
+        habitShowAdditionalButtonMap[habitId]!.containsKey(index)) {
+      habitShowAdditionalButtonMap[habitId]![index] = false;
+      notifyListeners();
+    }
+  }
+
   bool isAdditionalButtonVisible(String habitId, int index) {
     if (habitShowAdditionalButtonMap.containsKey(habitId) &&
         habitShowAdditionalButtonMap[habitId]!.containsKey(index)) {
