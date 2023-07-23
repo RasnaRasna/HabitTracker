@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -10,6 +11,27 @@ class MonthBase extends StatefulWidget {
 
 class _MonthBaseState extends State<MonthBase> {
   final DateTime today = DateTime.now();
+  late List<String> habitNames = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchHabitNames(); // Fetch the habit names from Firestore on initialization
+  }
+
+  Future<void> fetchHabitNames() async {
+    try {
+      final QuerySnapshot habitSnapshot =
+          await FirebaseFirestore.instance.collection('add_habits').get();
+
+      setState(() {
+        habitNames = habitSnapshot.docs
+            .map((doc) => doc['name'] as String)
+            .toList(); // Extract habit names from Firestore documents
+      });
+    } catch (e) {
+      print('Error fetching habits: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +45,20 @@ class _MonthBaseState extends State<MonthBase> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: ListView(
-          children: [
-            Column(
-              children: [
-                monthCalendar(),
-                monthCalendar(),
-                monthCalendar(),
-              ],
-            ),
-          ],
+        body: ListView.builder(
+          itemCount: habitNames
+              .length, // Use the length of habitNames list as the itemCount
+          itemBuilder: (context, index) {
+            final selectedHabit =
+                habitNames[index]; // Get the habit name at the current index
+            return monthCalendar(selectedHabit);
+          },
         ),
       ),
     );
   }
 
-  Widget monthCalendar() {
+  Widget monthCalendar(String selectedHabit) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -87,8 +107,8 @@ class _MonthBaseState extends State<MonthBase> {
                 left: 3,
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    '🧘‍♂️  Meditate',
+                  child: Text(
+                    selectedHabit,
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

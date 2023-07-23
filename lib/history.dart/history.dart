@@ -334,9 +334,66 @@ class _HistoryState extends State<History> {
     return formatter.format(date);
   }
 
+  Future<void> _handleCheckCircle(int index) async {
+    final currentDate = widget.selectedDate.add(Duration(days: index));
+    final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
+    final habitData = habitHistory[index];
+    final isSelected = !habitData['isSelected'];
+
+    if (isSelected == false && habitData['notes'].isNotEmpty) {
+      final shouldUncheck = await _showUncheckConfirmationDialog(index);
+      if (!shouldUncheck) {
+        return;
+      }
+    }
+
+    try {
+      final docSnapshot = await historyCollection.doc(documentId).get();
+      if (docSnapshot.exists) {
+        await historyCollection.doc(documentId).update({
+          "isSelected": isSelected,
+        });
+      } else {
+        final timestamp = Timestamp.now();
+        final selectedDayIndex = index;
+
+        await historyCollection.doc(documentId).set({
+          "habitId": widget.habitId,
+          "isSelected": isSelected,
+          "notes": "",
+          "selectedDayIndex": selectedDayIndex,
+          "timestamp": timestamp,
+        });
+      }
+
+      setState(() {
+        habitData['isSelected'] = isSelected;
+      });
+    } catch (e) {
+      print("Error updating document: $e");
+    }
+  }
+
+  Future<void> _updateNoteInFirestore(int index, String newNotes) async {
+    final currentDate = widget.selectedDate.add(Duration(days: index));
+    final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
+
+    try {
+      await historyCollection.doc(documentId).update({
+        "notes": newNotes,
+      });
+
+      setState(() {
+        habitHistory[index]['notes'] = newNotes;
+      });
+    } catch (e) {
+      print("Error updating notes: $e");
+    }
+  }
+
   Future<void> _showMyDialog(int index) async {
     String notes = habitHistory[index]['notes'];
-    final habitData = habitHistory[index]; // Define habitData here
+    final habitData = habitHistory[index];
 
     await showDialog<void>(
       context: context,
@@ -383,33 +440,8 @@ class _HistoryState extends State<History> {
                     TextButton(
                       child: const Text('Save'),
                       onPressed: () async {
-                        final habitId = widget.habitId;
-                        final currentDate =
-                            widget.selectedDate.add(Duration(days: index));
-                        final isSelected = !habitHistory[index]['isSelected'];
-                        final timestamp = Timestamp.now();
-                        final selectedDayIndex =
-                            index; // Use the provided index directly
-
-                        final documentId =
-                            "$habitId-${currentDate.toIso8601String()}";
-
-                        // Append the new notes to the existing notes
-                        final newNotes =
-                            "${habitHistory[index]['notes']}  $notes";
-
-                        // Save the notes to the "history" collection with the specified document ID
-                        await historyCollection.doc(documentId).set({
-                          "habitId": habitId,
-                          "isSelected": isSelected,
-                          "notes":
-                              newNotes, // Use the newNotes instead of notes
-                          "selectedDayIndex": selectedDayIndex,
-                          "timestamp": timestamp,
-                        });
-
-                        // Update the local notes in the habitHistory list for the correct date
-                        habitHistory[index]['notes'] = newNotes;
+                        // Save the notes to Firestore
+                        await _updateNoteInFirestore(index, notes);
 
                         // Close the notes dialog
                         Navigator.of(context).pop();
@@ -423,50 +455,6 @@ class _HistoryState extends State<History> {
         );
       },
     );
-  }
-
-  Future<void> _handleCheckCircle(int index) async {
-    final currentDate = widget.selectedDate.add(Duration(days: index));
-    final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
-    final habitData = habitHistory[index];
-    final isSelected = !habitData['isSelected'];
-
-    if (isSelected == false && habitData['notes'].isNotEmpty) {
-      // Show the confirmation dialog only if the day is unchecked and notes are entered
-      final shouldUncheck = await _showUncheckConfirmationDialog(index);
-      if (!shouldUncheck) {
-        return; // If the user cancels the uncheck, do not proceed further
-      }
-    }
-
-    try {
-      final docSnapshot = await historyCollection.doc(documentId).get();
-      if (docSnapshot.exists) {
-        // If the document exists, update the isSelected field
-        await historyCollection.doc(documentId).update({
-          "isSelected": isSelected,
-        });
-      } else {
-        // If the document doesn't exist, create a new one in Firestore
-        final timestamp = Timestamp.now();
-        final selectedDayIndex = index;
-
-        await historyCollection.doc(documentId).set({
-          "habitId": widget.habitId,
-          "isSelected": isSelected,
-          "notes": "", // Initialize notes as an empty string (optional step)
-          "selectedDayIndex": selectedDayIndex,
-          "timestamp": timestamp,
-        });
-      }
-
-      // Update the local isSelected value immediately to reflect the user's interaction
-      // setState(() {
-      //   habitData['isSelected'] = isSelected;
-      // });
-    } catch (e) {
-      print("Error updating document: $e");
-    }
   }
 
   Future<bool> _showUncheckConfirmationDialog(int index) async {
@@ -488,37 +476,14 @@ class _HistoryState extends State<History> {
             TextButton(
               child: const Text('Yes'),
               onPressed: () {
-                Navigator.of(context).pop(true);
+                Navigator.of(context).pop();
               },
             ),
           ],
         );
       },
     );
-    if (result == true) {
-      await _resetNotesAndCompletion(index);
-    }
+
     return result ?? false;
-  }
-
-  Future<void> _resetNotesAndCompletion(int index) async {
-    final currentDate = widget.selectedDate.add(Duration(days: index));
-    final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
-
-    try {
-      await historyCollection.doc(documentId).delete();
-
-      setState(() {
-        habitHistory[index]['isSelected'] = false;
-        habitHistory[index]['notes'] = '';
-        isNotesAdded[index] = false; // Mark notes as not added for this day
-      });
-
-      // Reset additional button visibility state in the IconColorchangeprovider
-      Provider.of<IconColorchangeprovider>(context, listen: false)
-          .resetAdditionalButtonVisibility(widget.habitId, index);
-    } catch (e) {
-      print("Error deleting document: $e");
-    }
   }
 }
