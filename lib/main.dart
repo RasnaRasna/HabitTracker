@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/provider/buttonclickedstate.dart';
+import 'package:habits_track/provider/monthbase.dart';
 import 'package:habits_track/provider/notesand_iconcolors.dart';
 import 'package:habits_track/provider/genderprovider.dart';
 import 'package:habits_track/provider/selectDateprovider.dart';
 import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
+
+import 'bottom_pages/month/month.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => GenderProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HabitCompletionProvider(),
         )
       ],
       child: MaterialApp(

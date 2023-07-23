@@ -46,6 +46,7 @@ class HabitItemsCard extends StatelessWidget {
                   startDate: startDate,
                   selectedDate: startDate,
                   habitData: habitData,
+                  habitHistory: [],
                 ),
               ),
             ),

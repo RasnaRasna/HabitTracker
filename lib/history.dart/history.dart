@@ -204,9 +204,15 @@ class _HistoryState extends State<History> {
             return CircularProgressIndicator();
           }
 
-          habitHistory = snapshot.data!.docs
-              .map((doc) => doc.data() as Map<String, dynamic>)
-              .toList();
+          habitHistory = snapshot.data!.docs.map((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            // Retrieve the 'completionDate' from the document and update the 'habitData' map
+            final completionDate = data['completionDate'] as Timestamp?;
+            if (completionDate != null) {
+              data['completionDate'] = completionDate.toDate();
+            }
+            return data;
+          }).toList();
 
           for (int i = habitHistory.length; i < _getDaysCount(); i++) {
             habitHistory.add({
@@ -273,8 +279,8 @@ class _HistoryState extends State<History> {
                                   icon: const Icon(Icons.message),
                                 ),
                               GestureDetector(
-                                onTap: () async {
-                                  await _handleCheckCircle(
+                                onTap: () {
+                                  _handleCheckCircle(
                                       index); // Call the _handleCheckCircle function
                                   setState(() {
                                     final habitData = habitHistory[index];
@@ -352,6 +358,7 @@ class _HistoryState extends State<History> {
       if (docSnapshot.exists) {
         await historyCollection.doc(documentId).update({
           "isSelected": isSelected,
+          "completionDate": Timestamp.fromDate(currentDate),
         });
       } else {
         final timestamp = Timestamp.now();
@@ -363,12 +370,12 @@ class _HistoryState extends State<History> {
           "notes": "",
           "selectedDayIndex": selectedDayIndex,
           "timestamp": timestamp,
+          "completionDate": Timestamp.fromDate(currentDate),
         });
       }
 
-      setState(() {
-        habitData['isSelected'] = isSelected;
-      });
+      habitData['isSelected'] = isSelected;
+      habitData['isCompleted'] = isSelected;
     } catch (e) {
       print("Error updating document: $e");
     }
@@ -377,14 +384,18 @@ class _HistoryState extends State<History> {
   Future<void> _updateNoteInFirestore(int index, String newNotes) async {
     final currentDate = widget.selectedDate.add(Duration(days: index));
     final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
+    final existingNotes =
+        habitHistory[index]['notes'] as String; // Get existing notes
 
     try {
+      // Append the new notes to the existing notes
+      final updatedNotes = "$existingNotes  $newNotes";
       await historyCollection.doc(documentId).update({
-        "notes": newNotes,
+        "notes": updatedNotes,
       });
 
       setState(() {
-        habitHistory[index]['notes'] = newNotes;
+        habitHistory[index]['notes'] = updatedNotes;
       });
     } catch (e) {
       print("Error updating notes: $e");
@@ -439,9 +450,9 @@ class _HistoryState extends State<History> {
                     ),
                     TextButton(
                       child: const Text('Save'),
-                      onPressed: () async {
+                      onPressed: () {
                         // Save the notes to Firestore
-                        await _updateNoteInFirestore(index, notes);
+                        _updateNoteInFirestore(index, notes);
 
                         // Close the notes dialog
                         Navigator.of(context).pop();

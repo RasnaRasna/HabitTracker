@@ -14,6 +14,8 @@ class EditHabits extends StatelessWidget {
   final int? daysPerWeek;
   final DateTime? startDate;
   final String habitId;
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+
   final QueryDocumentSnapshot<Object?> habitData; // Add this parameter
 
   const EditHabits(
@@ -23,7 +25,8 @@ class EditHabits extends StatelessWidget {
       this.startDate,
       required this.habitId,
       required selectedDate,
-      required this.habitData});
+      required this.habitData,
+      required this.habitHistory});
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +198,7 @@ class EditHabits extends StatelessWidget {
               ),
             ),
             kheight20,
-            buildHeatMap(),
+            buildHeatMap(habitId),
             // buildHeatMapyear(context)
             kheight20,
             buildHeatMapYear(),

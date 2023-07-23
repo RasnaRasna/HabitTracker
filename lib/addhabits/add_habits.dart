@@ -784,45 +784,6 @@ class _AddhabitsState extends State<Addhabits> {
     );
   }
 
-//   Future<void> AddHabitData() async {
-//     try {
-
-//       final QuerySnapshot snapshot = await FirebaseFirestore.instance
-//           .collection('add_habits')
-//           .where('name', isEqualTo: selectedHabit)
-//           .get();
-// //not empty (i.e., there are documents that match the query
-//       if (snapshot.docs.isNotEmpty) {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           const SnackBar(
-//             backgroundColor: Colors.red,
-//             content: Text('Habit already exists'),
-//           ),
-//         );
-//       } else {
-//         await FirebaseFirestore.instance.collection('add_habits').add({
-//           'name': selectedHabit,
-//           'daysPerWeek': selectedDaysPerWeek + 1,
-//           'startDate': Timestamp.fromDate(selectedDate!),
-//         });
-
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           const SnackBar(
-//             backgroundColor: Colors.green,
-//             content: Text('Habit added successfully'),
-//           ),
-//         );
-//       }
-//     } catch (e) {
-//       print('Error saving habit data: $e');
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(
-//           backgroundColor: Colors.red,
-//           content: Text('Failed to save habit'),
-//         ),
-//       );
-//     }
-//   }
   Future<void> AddHabitData() async {
     try {
       // Retrieve the current user ID

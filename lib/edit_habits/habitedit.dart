@@ -79,6 +79,7 @@ class _HabitEditState extends State<HabitEdit> {
                                       habitId: '',
                                       selectedDate: null,
                                       habitData: widget.habitData,
+                                      habitHistory: [],
                                     ))),
                         child: const Text(
                           'Discard changes',
