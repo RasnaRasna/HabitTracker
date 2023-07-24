@@ -491,9 +491,14 @@ class _AddhabitsState extends State<Addhabits> {
                         child: const Text('Cancel'),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (ctx) => const bottombar())),
+                        onPressed: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => bottombar(
+                                      habitHistory: [],
+                                      habitId: '',
+                                      startDate: DateTime.now(),
+                                      habitName: '',
+                                    ))),
                         child: const Text(
                           'Discard changes',
                           style: TextStyle(color: Colors.red),

@@ -324,6 +324,10 @@ class StartingPage extends StatelessWidget {
                           builder: (ctx) => bottombar(
                             selectedGender: selectedGender,
                             name: name,
+                            habitHistory: [],
+                            startDate: DateTime.now(),
+                            habitId: '',
+                            habitName: '',
                           ),
                         ),
                         (route) => false,

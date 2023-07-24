@@ -287,7 +287,13 @@ class MyHomePageToday extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (ctx) => const bottombar()),
+              MaterialPageRoute(
+                  builder: (ctx) => bottombar(
+                        habitHistory: [],
+                        habitId: '',
+                        startDate: DateTime.now(),
+                        habitName: '',
+                      )),
             );
           },
           icon: const Icon(Icons.arrow_back),

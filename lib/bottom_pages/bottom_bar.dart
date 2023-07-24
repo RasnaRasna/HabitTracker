@@ -72,11 +72,20 @@ import 'month/month.dart';
 class bottombar extends StatefulWidget {
   final String? selectedGender;
   final String? name;
+  final String? habitName;
+
+  final String habitId;
+  final DateTime? startDate;
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
 
   const bottombar({
     Key? key,
+    required this.habitId,
+    required this.habitHistory,
     this.selectedGender,
     this.name,
+    required this.startDate,
+    required this.habitName,
   }) : super(key: key);
 
   @override
@@ -105,7 +114,11 @@ class _bottombarState extends State<bottombar> {
         ),
       ),
       MonthBase(),
-      const YearBase(),
+      YearBase(
+          habitName: widget.habitName,
+          selectedDate: widget.startDate!,
+          habitHistory: widget.habitHistory,
+          habitId: widget.habitId),
       const ChallengesPage(),
       const DiscoverPage(),
     ];

@@ -39,7 +39,7 @@ class EditHabits extends StatelessWidget {
             },
             icon: Icon(Icons.arrow_back)),
         centerTitle: true,
-        title: Text("🧘‍♂️ Meditation"),
+        title: Text(habitName!),
       ),
       body: ListView(children: [
         Column(
@@ -201,7 +201,7 @@ class EditHabits extends StatelessWidget {
             buildHeatMap(habitId),
             // buildHeatMapyear(context)
             kheight20,
-            buildHeatMapYear(),
+            buildHeatMapYear(startDate!, habitHistory, habitId, habitName!),
             kheight20,
           ],
         ),
