@@ -487,7 +487,7 @@ class _HistoryState extends State<History> {
             TextButton(
               child: const Text('Yes'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(true);
               },
             ),
           ],
@@ -495,6 +495,33 @@ class _HistoryState extends State<History> {
       },
     );
 
-    return result ?? false;
+    if (result == true) {
+      _resetCompletionAndNotes(index);
+    }
+    return result ?? false; // Add a return statement here
+  }
+
+  Future<void> _resetCompletionAndNotes(int index) async {
+    final currentDate = widget.selectedDate.add(Duration(days: index));
+    final documentId = "${widget.habitId}-${currentDate.toIso8601String()}";
+    final habitData = habitHistory[index];
+
+    try {
+      // Update the Firestore document to reset completion and remove notes
+      await historyCollection.doc(documentId).update({
+        "isSelected": false,
+        "completionDate": null,
+        "notes": "",
+      });
+
+      // Update the local habitHistory list to reflect the changes
+      setState(() {
+        habitData['isSelected'] = false;
+        habitData['isCompleted'] = false;
+        habitData['notes'] = "";
+      });
+    } catch (e) {
+      print("Error updating document: $e");
+    }
   }
 }

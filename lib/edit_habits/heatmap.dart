@@ -25,7 +25,9 @@ class HeatMapCell extends StatelessWidget {
         padding: const EdgeInsets.all(0.3),
         child: Container(
           decoration: BoxDecoration(
-            color: isCompleted ? Color.fromARGB(255, 0, 128, 0) : Colors.grey,
+            color: isCompleted
+                ? Color.fromARGB(255, 229, 113, 151)
+                : const Color.fromARGB(255, 246, 211, 223),
             borderRadius: BorderRadius.circular(3),
           ),
           child: Center(
@@ -89,9 +91,8 @@ Widget buildHeatMap(String habitId) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Text(
                   "Last 365 Days",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
