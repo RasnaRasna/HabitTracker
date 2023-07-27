@@ -107,7 +107,7 @@ class SignupScreen extends StatelessWidget {
         );
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => const StartingPage()));
+            context, MaterialPageRoute(builder: (ctx) => StartingPage()));
       } catch (error) {
         // ignore: avoid_print
         print('Error:$error');

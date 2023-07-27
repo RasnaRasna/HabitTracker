@@ -72,22 +72,24 @@ import 'month/month.dart';
 class bottombar extends StatefulWidget {
   final String? selectedGender;
   final String? name;
+  final String? habitId;
   final String? habitName;
-
-  final String habitId;
   final DateTime? startDate;
-  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+  final List<Map<String, dynamic>> habitHistory;
 
-  const bottombar({
+  bottombar({
     Key? key,
-    required this.habitId,
-    required this.habitHistory,
     this.selectedGender,
     this.name,
+    this.habitId,
+    this.habitName,
     required this.startDate,
-    required this.habitName,
-  }) : super(key: key);
-
+    required this.habitHistory,
+  }) : super(key: key) {
+    print('habitName bottombar: $habitName');
+    print('habitId bottombar : $habitId');
+    print('habitHistory bottombar : $habitHistory');
+  }
   @override
   State<bottombar> createState() => _bottombarState();
 }
@@ -101,7 +103,11 @@ class _bottombarState extends State<bottombar> {
     super.initState();
     genderProvider = GenderProvider();
     genderProvider.setGender(widget.selectedGender);
-    genderProvider.setName(widget.name ?? '');
+    genderProvider.setName(
+      widget.name ?? '',
+    );
+
+    print('initState executed');
   }
 
   @override
@@ -111,14 +117,17 @@ class _bottombarState extends State<bottombar> {
         builder: (context, genderProvider, _) => Homapage(
           selectedGender: genderProvider.selectedGender,
           name: genderProvider.name,
+          habitHistory: widget.habitHistory,
         ),
       ),
       MonthBase(),
-      YearBase(
-          habitName: widget.habitName,
-          selectedDate: widget.startDate!,
-          habitHistory: widget.habitHistory,
-          habitId: widget.habitId),
+      YearBase(),
+      // YearBase(
+      //     habitName: widget.habitName,
+      //     selectedDate: widget.startDate!,
+      //     habitHistory: widget.habitHistory,
+      //     // habitId: widget.habitId!),
+      //     habitId: widget.habitId ?? ""),
       const ChallengesPage(),
       const DiscoverPage(),
     ];

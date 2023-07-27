@@ -41,8 +41,9 @@ dependencies:
   provider: ^6.0.5
   shared_preferences: ^2.2.0
   table_calendar: ^3.0.9
-
+  flutter_blurhash: ^0.7.0
 dev_dependencies:
+  
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

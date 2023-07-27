@@ -267,9 +267,12 @@ import '../../provider/selectDateprovider.dart';
 import 'habititemcard.dart';
 
 class MyHomePageToday extends StatelessWidget {
+  final List<Map<String, dynamic>> habitHistory;
+
   final String? documentId;
 
-  MyHomePageToday({Key? key, this.documentId}) : super(key: key);
+  const MyHomePageToday({Key? key, this.documentId, required this.habitHistory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -280,7 +283,7 @@ class MyHomePageToday extends StatelessWidget {
       buttonProvider.resetHabitSelections();
       selectedDayProvider.selectCurrentDay();
     }
-
+    print("intodaypage${habitHistory}");
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -289,8 +292,8 @@ class MyHomePageToday extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (ctx) => bottombar(
-                        habitHistory: [],
-                        habitId: '',
+                        habitHistory: habitHistory,
+                        habitId: documentId,
                         startDate: DateTime.now(),
                         habitName: '',
                       )),
@@ -389,14 +392,16 @@ class MyHomePageToday extends StatelessWidget {
                 }
 
                 return HabitItemsCard(
-                    habitData: habitData,
-                    habitName: habitName,
-                    daysPerWeek: daysPerWeek,
-                    startDate: startDate,
-                    completedCount: completedCount,
-                    daySymbols: daySymbols,
-                    habitId: habitId,
-                    currentDayIndex: currentDayIndex);
+                  habitData: habitData,
+                  habitName: habitName,
+                  daysPerWeek: daysPerWeek,
+                  startDate: startDate,
+                  completedCount: completedCount,
+                  daySymbols: daySymbols,
+                  habitId: habitId,
+                  currentDayIndex: currentDayIndex,
+                  habitHistory: habitHistory,
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(height: 10);

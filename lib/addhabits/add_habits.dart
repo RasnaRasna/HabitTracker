@@ -466,6 +466,7 @@ class _AddhabitsState extends State<Addhabits> {
   String? selectedHabit = '';
   int selectedDaysPerWeek = -1;
   TextEditingController Habitname = TextEditingController();
+  late final List<Map<String, dynamic>> habitHistory;
 
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
@@ -494,7 +495,7 @@ class _AddhabitsState extends State<Addhabits> {
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (ctx) => bottombar(
-                                      habitHistory: [],
+                                      habitHistory: habitHistory,
                                       habitId: '',
                                       startDate: DateTime.now(),
                                       habitName: '',
@@ -515,8 +516,12 @@ class _AddhabitsState extends State<Addhabits> {
           TextButton(
               onPressed: () {
                 AddHabitData();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => MyHomePageToday(
+                              habitHistory: [],
+                            )));
               },
               child: const Text(
                 "Save",

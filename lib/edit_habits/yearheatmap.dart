@@ -199,7 +199,7 @@ import '../const.dart';
 Widget buildHeatMapYear(
   DateTime selectedDate,
   List<Map<String, dynamic>> habitHistory,
-  String habitId,
+  String? habitId,
   String habitName, // New parameter to pass the habit name
 ) {
   final startDate = DateTime(DateTime.now().year, 1, 1);
@@ -349,8 +349,8 @@ Widget _buildMonthHeatMap(int month, Map<DateTime, int> dataset,
 Color _getColorForValue(int value, bool isSelected) {
   // If the day is selected (completed), return green color
   if (isSelected) {
-    return Colors.green;
+    return Color.fromARGB(255, 229, 113, 151);
   }
   // Return the default color (grey) for other cases
-  return Colors.grey;
+  return Color.fromARGB(255, 246, 211, 223);
 }

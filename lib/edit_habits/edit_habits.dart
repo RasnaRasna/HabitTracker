@@ -22,7 +22,7 @@ class EditHabits extends StatelessWidget {
       {super.key,
       this.habitName,
       this.daysPerWeek,
-      this.startDate,
+      required this.startDate,
       required this.habitId,
       required selectedDate,
       required this.habitData,
@@ -30,12 +30,17 @@ class EditHabits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("habit name in editpage${habitName}");
+    print("habit history in editpage${habitHistory}");
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => MyHomePageToday(
+                        habitHistory: habitHistory,
+                      )));
             },
             icon: Icon(Icons.arrow_back)),
         centerTitle: true,
@@ -59,6 +64,7 @@ class EditHabits extends StatelessWidget {
                               daysPerWeek: daysPerWeek,
                               startDate: startDate,
                               habitData: habitData,
+                              habitHistory: habitHistory,
                             )));
                   },
                   child: Container(
@@ -101,6 +107,7 @@ class EditHabits extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(
               height: 15,
             ),
@@ -114,7 +121,7 @@ class EditHabits extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (ctx) => History(
                         selectedDate: startDate!,
-                        habitId: habitId,
+                        habitId: habitId, habitHistory: habitHistory,
 
                         // Pass the documentId to the History widget
                       ),
@@ -170,7 +177,6 @@ class EditHabits extends StatelessWidget {
                       Text("4 Days")
                     ],
                   ),
-                  kheight10,
                   Row(
                     children: [
                       Kwidth,
@@ -179,7 +185,6 @@ class EditHabits extends StatelessWidget {
                       Text("24 %(9 of 37 days)")
                     ],
                   ),
-                  kheight10,
                   Row(
                     children: [
                       Kwidth,

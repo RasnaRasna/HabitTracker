@@ -6,13 +6,20 @@ import 'package:provider/provider.dart';
 
 import '../../provider/genderprovider.dart';
 import '../../side_drawer.dart';
+import 'card.dart';
 
 class Homapage extends StatelessWidget {
+  final List<Map<String, dynamic>> habitHistory;
+
   final String? selectedGender;
 
   final String? name;
 
-  const Homapage({Key? key, required this.selectedGender, required this.name})
+  const Homapage(
+      {Key? key,
+      required this.selectedGender,
+      required this.name,
+      required this.habitHistory})
       : super(key: key);
 
   String getGreeting() {
@@ -38,6 +45,7 @@ class Homapage extends StatelessWidget {
 
     String imagePath =
         selectedGender == "Female" ? "images/girl.png" : "images/boy.png";
+    print('habitHistory homapge : $habitHistory');
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +53,10 @@ class Homapage extends StatelessWidget {
           TextButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+                MaterialPageRoute(
+                    builder: (ctx) => MyHomePageToday(
+                          habitHistory: habitHistory,
+                        )),
               );
             },
             child: Text("Today"),
@@ -117,6 +128,7 @@ class Homapage extends StatelessWidget {
               ],
             ),
           ),
+          Hompagecard(),
         ],
       ),
       floatingActionButton: Padding(

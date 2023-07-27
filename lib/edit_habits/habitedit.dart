@@ -15,6 +15,8 @@ class HabitEdit extends StatefulWidget {
   final String? habitName;
   final int? daysPerWeek;
   final DateTime? startDate;
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+
   final QueryDocumentSnapshot<Object?> habitData; // Add this parameter
 
   const HabitEdit({
@@ -24,6 +26,7 @@ class HabitEdit extends StatefulWidget {
     this.startDate,
     this.documentId,
     required this.habitData,
+    required this.habitHistory,
   });
 
   @override
@@ -36,14 +39,17 @@ class _HabitEditState extends State<HabitEdit> {
   String? selectedHabit;
   int selectedDaysPerWeek = -1;
   TextEditingController habitNameController = TextEditingController();
+
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
   final CollectionReference Addhabits =
       FirebaseFirestore.instance.collection("add_habits");
+
   @override
   void initState() {
     super.initState();
     print('Document ID: ${widget.documentId}');
+    print("habit history in editpage${widget.habitHistory}");
 
     // Set the initial values from the widget arguments
     selectedHabit = widget.habitName;
@@ -73,14 +79,20 @@ class _HabitEditState extends State<HabitEdit> {
                         child: const Text('Cancel'),
                       ),
                       TextButton(
-                        onPressed: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => EditHabits(
-                                      habitId: '',
-                                      selectedDate: null,
-                                      habitData: widget.habitData,
-                                      habitHistory: [],
-                                    ))),
+                        onPressed: () {},
+                        // onPressed: () =>
+                        //     Navigator.of(context).push(MaterialPageRoute(
+                        //         builder: (ctx) => EditHabits(
+                        //               habitId: '',
+                        //               selectedDate: null,
+                        //               habitData: widget.habitData,
+                        //               habitHistory: widget.habitHistory,
+                        //               habitName: '',
+                        //               startDate: DateTime.now(),
+
+                        //             )
+                        //             )
+                        //             ),
                         child: const Text(
                           'Discard changes',
                           style: TextStyle(color: Colors.red),
@@ -97,8 +109,12 @@ class _HabitEditState extends State<HabitEdit> {
           TextButton(
               onPressed: () {
                 updateHabitData(widget.documentId!);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => MyHomePageToday()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => MyHomePageToday(
+                              habitHistory: widget.habitHistory,
+                            )));
               },
               child: const Text(
                 "Update",
@@ -505,7 +521,10 @@ class _HabitEditState extends State<HabitEdit> {
       // Navigate to the desired screen after deleting the habit and history
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+        MaterialPageRoute(
+            builder: (ctx) => MyHomePageToday(
+                  habitHistory: [],
+                )),
       );
     } catch (e) {
       print('Error deleting habit: $e');
