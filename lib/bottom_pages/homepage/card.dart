@@ -8,10 +8,10 @@ class Hompagecard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 1,
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
-        childAspectRatio: 0.9,
+        childAspectRatio: 3.0,
         shrinkWrap: true,
         padding: EdgeInsets.all(20.0),
         physics: NeverScrollableScrollPhysics(),
@@ -26,11 +26,11 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      fit: BoxFit.cover,
-                      "images/workout.jpeg",
-                      width: 120,
-                    ),
+                    // Image.asset(
+                    //   fit: BoxFit.cover,
+                    //   "images/workout.jpeg",
+                    //   width: 120,
+                    // ),
                   ],
                 ),
               ),
@@ -44,10 +44,10 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/workout.jpeg",
-                      width: 130,
-                    ),
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    //   width: 130,
+                    // ),
                   ],
                 ),
               ),
@@ -61,10 +61,10 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/workout.jpeg",
-                      width: 130,
-                    ),
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    //   width: 130,
+                    // ),
                   ],
                 ),
               ),
@@ -78,10 +78,10 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/workout.jpeg",
-                      width: 130,
-                    ),
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    //   width: 130,
+                    // ),
                   ],
                 ),
               ),
@@ -95,10 +95,10 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/workout.jpeg",
-                      width: 130,
-                    ),
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    //   width: 130,
+                    // ),
                   ],
                 ),
               ),
@@ -112,9 +112,9 @@ class Hompagecard extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    Image.asset(
-                      "images/workout.jpeg",
-                    ),
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    // ),
                   ],
                 ),
               ),

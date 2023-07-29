@@ -246,39 +246,53 @@ class _YearBaseState extends State<YearBase> {
         children: habitsData.entries.map((entry) {
           final habitName = entry.key;
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  habitName,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Text(
-                    ("${today.year}"), // Display the current year dynamically
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadiusDirectional.circular(20),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 196, 195, 195),
+                ), // Border color
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 15),
+                    child: Text(
+                      habitName, // Replace 0 with the index of the habit name you want to display
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-                ),
-                Divider(
-                  indent: 20,
-                  endIndent: 20,
-                ),
-                for (int i = 0; i < 12; i += 3)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      for (int monthIndex = i + 1;
-                          monthIndex <= i + 3;
-                          monthIndex++)
-                        if (monthIndex <= 12)
-                          Expanded(
-                            child: _buildMonthHeatMap(monthIndex, habitName),
-                          ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 22),
+                    child: Text(
+                      ("${today.year}"), // Display the current year dynamically
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-              ],
+                  const Divider(
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  for (int i = 0; i < 12; i += 3)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (int monthIndex = i + 1;
+                            monthIndex <= i + 3;
+                            monthIndex++)
+                          if (monthIndex <= 12)
+                            Expanded(
+                              child: _buildMonthHeatMap(monthIndex, habitName),
+                            ),
+                      ],
+                    ),
+                ],
+              ),
             ),
           );
         }).toList(),
@@ -296,42 +310,47 @@ class _YearBaseState extends State<YearBase> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text(
-            DateFormat('MMMM').format(startDate), // Display month name
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-          GridView.count(
-            crossAxisCount: 7,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: List.generate(endDate.day, (dayIndex) {
-              final date = startDate.add(Duration(days: dayIndex));
-              final color = completionStatus![date] == true
-                  ? const Color.fromARGB(255, 5, 86, 8)
-                  : Colors.grey;
-              return Padding(
-                padding: const EdgeInsets.all(1),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(2),
+          Text(DateFormat('MMMM').format(startDate), // Display month name
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Color.fromARGB(255, 64, 64, 64),
+              )),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.count(
+              crossAxisCount: 7,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: List.generate(endDate.day, (dayIndex) {
+                final date = startDate.add(Duration(days: dayIndex));
+                final color = completionStatus![date] == true
+                    ? const Color.fromARGB(255, 229, 113, 151)
+                    : Color.fromARGB(255, 246, 211, 223);
+                return Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    width: 10,
+                    height: 10,
                   ),
-                  width: 10,
-                  height: 10,
-                ),
-              );
-            }),
+                );
+              }),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Color _getColorForValue(int value) {
-    // Define your color mapping logic here
-    if (value == 1) {
-      return Colors.green;
-    }
-    return Colors.grey;
-  }
+  // Color _getColorForValue(int value) {
+  //   // Define your color mapping logic here
+  //   if (value == 1) {
+  //     return Colors.green;
+  //   }
+  //   return Colors.grey;
+  // }
 }

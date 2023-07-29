@@ -455,7 +455,8 @@ import '../reminder/reminder.dart';
 import 'weekbox.dart';
 
 class Addhabits extends StatefulWidget {
-  const Addhabits({super.key});
+  final List<Map<String, dynamic>> habitHistory;
+  const Addhabits({super.key, required this.habitHistory});
 
   @override
   State<Addhabits> createState() => _AddhabitsState();
@@ -466,7 +467,6 @@ class _AddhabitsState extends State<Addhabits> {
   String? selectedHabit = '';
   int selectedDaysPerWeek = -1;
   TextEditingController Habitname = TextEditingController();
-  late final List<Map<String, dynamic>> habitHistory;
 
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
@@ -495,7 +495,7 @@ class _AddhabitsState extends State<Addhabits> {
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (ctx) => bottombar(
-                                      habitHistory: habitHistory,
+                                      habitHistory: widget.habitHistory,
                                       habitId: '',
                                       startDate: DateTime.now(),
                                       habitName: '',

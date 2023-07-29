@@ -13,8 +13,10 @@ class Reminderpage extends StatelessWidget {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => const Addhabits()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => Addhabits(
+                      habitHistory: [],
+                    )));
           },
           child: const Icon(
             Icons.arrow_back,

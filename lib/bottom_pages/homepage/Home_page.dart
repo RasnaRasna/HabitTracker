@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
+import 'package:habits_track/bottom_pages/homepage/hidden_drawe.dart';
 import 'package:habits_track/bottom_pages/homepage/moodcheck.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,8 @@ class Homapage extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const SideDrawer(),
+      drawer: HiddenDrawer(),
+      // drawer: const SideDrawer(),
       body: ListView(
         children: [
           Padding(
@@ -128,15 +130,37 @@ class Homapage extends StatelessWidget {
               ],
             ),
           ),
-          Hompagecard(),
+          InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.brown)),
+                height: 150,
+                child: Column(
+                  children: [
+                    // Image.asset(
+                    //   "images/workout.jpeg",
+                    //   width: 130,
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // Hompagecard(),
         ],
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50),
+        padding: const EdgeInsets.symmetric(vertical: 70),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => Addhabits()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => Addhabits(
+                      habitHistory: habitHistory,
+                    )));
           },
           child: Icon(Icons.add),
         ),

@@ -69,6 +69,96 @@ import 'month/month.dart';
 //     ));
 //   }
 // }
+
+// class bottombar extends StatefulWidget {
+//   final String? selectedGender;
+//   final String? name;
+//   final String? habitId;
+//   final String? habitName;
+//   final DateTime? startDate;
+//   final List<Map<String, dynamic>> habitHistory;
+
+//   bottombar({
+//     Key? key,
+//     this.selectedGender,
+//     this.name,
+//     this.habitId,
+//     this.habitName,
+//     required this.startDate,
+//     required this.habitHistory,
+//   }) : super(key: key) {
+
+//   }
+//   @override
+//   State<bottombar> createState() => _bottombarState();
+// }
+
+// class _bottombarState extends State<bottombar> {
+//   int selectedIndex = 0;
+//   late GenderProvider genderProvider;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     genderProvider = GenderProvider();
+//     genderProvider.setGender(widget.selectedGender);
+//     genderProvider.setName(
+//       widget.name ?? '',
+//     );
+
+//     print('initState executed');
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final List<Widget> tabs = [
+//       Consumer<GenderProvider>(
+//         builder: (context, genderProvider, _) => Homapage(
+//           selectedGender: genderProvider.selectedGender,
+//           name: genderProvider.name,
+//           habitHistory: widget.habitHistory,
+//         ),
+//       ),
+//       MonthBase(),
+//       YearBase(),
+
+//       const ChallengesPage(),
+//       const DiscoverPage(),
+//     ];
+
+//     return SafeArea(
+//       child: Scaffold(
+//         extendBody: true,
+//         bottomNavigationBar: BottomNavigationBar(
+//           selectedItemColor: Color.fromARGB(255, 229, 113, 151),
+//           unselectedItemColor: Colors.grey,
+//           currentIndex: selectedIndex,
+//           elevation: 20,
+//           onTap: (newSelectedIndex) {
+//             setState(() {
+//               selectedIndex = newSelectedIndex;
+//             });
+//           },
+//           type: BottomNavigationBarType.fixed,
+//           items: const [
+//             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Today"),
+//             BottomNavigationBarItem(
+//                 icon: Icon(Icons.calendar_month), label: "Month"),
+//             BottomNavigationBarItem(icon: Icon(Icons.apps), label: "Year"),
+//             BottomNavigationBarItem(
+//                 icon: Icon(Icons.back_hand), label: "Challenge"),
+//             BottomNavigationBarItem(
+//                 icon: Icon(Icons.search), label: "Discover"),
+//           ],
+//         ),
+//         body: tabs[selectedIndex],
+//       ),
+//     );
+//   }
+// }
+
+import 'package:google_nav_bar/google_nav_bar.dart';
+
 class bottombar extends StatefulWidget {
   final String? selectedGender;
   final String? name;
@@ -85,11 +175,8 @@ class bottombar extends StatefulWidget {
     this.habitName,
     required this.startDate,
     required this.habitHistory,
-  }) : super(key: key) {
-    print('habitName bottombar: $habitName');
-    print('habitId bottombar : $habitId');
-    print('habitHistory bottombar : $habitHistory');
-  }
+  }) : super(key: key);
+
   @override
   State<bottombar> createState() => _bottombarState();
 }
@@ -103,9 +190,7 @@ class _bottombarState extends State<bottombar> {
     super.initState();
     genderProvider = GenderProvider();
     genderProvider.setGender(widget.selectedGender);
-    genderProvider.setName(
-      widget.name ?? '',
-    );
+    genderProvider.setName(widget.name ?? '');
 
     print('initState executed');
   }
@@ -122,12 +207,6 @@ class _bottombarState extends State<bottombar> {
       ),
       MonthBase(),
       YearBase(),
-      // YearBase(
-      //     habitName: widget.habitName,
-      //     selectedDate: widget.startDate!,
-      //     habitHistory: widget.habitHistory,
-      //     // habitId: widget.habitId!),
-      //     habitId: widget.habitId ?? ""),
       const ChallengesPage(),
       const DiscoverPage(),
     ];
@@ -135,27 +214,59 @@ class _bottombarState extends State<bottombar> {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Color.fromARGB(255, 229, 113, 151),
-          unselectedItemColor: Colors.grey,
-          currentIndex: selectedIndex,
-          elevation: 20,
-          onTap: (newSelectedIndex) {
-            setState(() {
-              selectedIndex = newSelectedIndex;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Today"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month), label: "Month"),
-            BottomNavigationBarItem(icon: Icon(Icons.apps), label: "Year"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.back_hand), label: "Challenge"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: "Discover"),
-          ],
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Color.fromARGB(116, 226, 164, 193),
+              boxShadow: [
+                BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+              ],
+            ),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: GNav(
+                tabBorderRadius: 20,
+                gap: 2,
+                activeColor: Colors.black,
+                curve: Curves.fastLinearToSlowEaseIn,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                duration: Duration(milliseconds: 800),
+                tabBackgroundColor: Colors.white,
+                tabs: [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Today',
+                  ),
+                  GButton(
+                    icon: Icons.calendar_month,
+                    text: 'Month',
+                  ),
+                  GButton(
+                    icon: Icons.apps,
+                    text: 'Year',
+                  ),
+                  GButton(
+                    icon: Icons.back_hand,
+                    text: 'Challenge',
+                  ),
+                  GButton(
+                    icon: Icons.search,
+                    text: 'Discover',
+                  ),
+                ],
+                selectedIndex: selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
+            ),
+          ),
         ),
         body: tabs[selectedIndex],
       ),

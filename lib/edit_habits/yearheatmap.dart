@@ -204,7 +204,7 @@ Widget buildHeatMapYear(
 ) {
   final startDate = DateTime(DateTime.now().year, 1, 1);
   final endDate = DateTime(DateTime.now().year, 12, 31);
-
+  final DateTime today = DateTime.now();
   // Fill the dataset with values for each day
   final Map<DateTime, int> dataset = {};
   for (DateTime date = startDate;
@@ -261,7 +261,7 @@ Widget buildHeatMapYear(
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: Text(
-                  "2023",
+                  ("${today.year}"), // Display the current year dynamically
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
