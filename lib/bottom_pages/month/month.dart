@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
+import 'package:table_calendar/table_calendar.dart';
+
 class MonthBase extends StatefulWidget {
   const MonthBase({Key? key}) : super(key: key);
 
@@ -12,48 +17,50 @@ class MonthBase extends StatefulWidget {
 
 class _MonthBaseState extends State<MonthBase> {
   final DateTime today = DateTime.now();
-  late List<String> habitNames = [];
-  late List<Map<String, dynamic>> habitHistory = [];
-  late List<bool> isSelectedList = [];
+  Map<String, Map<DateTime, bool>> habitsData = {};
 
   @override
   void initState() {
     super.initState();
-    fetchHabitNames();
-    fetchHabitHistory();
+    fetchHabitsData();
   }
 
-  Future<void> fetchHabitNames() async {
-    try {
-      final QuerySnapshot habitSnapshot =
-          await FirebaseFirestore.instance.collection('add_habits').get();
+  Future<void> fetchHabitsData() async {
+    final habitSnapshot =
+        await FirebaseFirestore.instance.collection('add_habits').get();
+    final habitNames =
+        habitSnapshot.docs.map((doc) => doc['name'] as String).toList();
 
-      setState(() {
-        habitNames =
-            habitSnapshot.docs.map((doc) => doc['name'] as String).toList();
-      });
-    } catch (e) {
-      print('Error fetching habits: $e');
+    // Initialize the habitsData map with an empty map for each habit
+    for (var habitName in habitNames) {
+      habitsData[habitName] = {}; // Store completion status in a nested map
     }
-  }
+    print("Habits Data:");
+    print(habitsData);
+    // Fetch habit data (completion dates) for each habit
+    for (var habitName in habitNames) {
+      final habitId =
+          habitSnapshot.docs.firstWhere((doc) => doc['name'] == habitName).id;
+      final habitDataSnapshot = await FirebaseFirestore.instance
+          .collection('history')
+          .where('habitId', isEqualTo: habitId)
+          .get();
 
-  Future<void> fetchHabitHistory() async {
-    try {
-      final QuerySnapshot historySnapshot =
-          await FirebaseFirestore.instance.collection('history').get();
-
-      setState(() {
-        habitHistory = historySnapshot.docs
-            .map((doc) => doc.data() as Map<String, dynamic>)
-            .toList();
-        isSelectedList = List.generate(habitHistory.length, (index) {
-          final selectedDayIndex = habitHistory[index]['selectedDayIndex'];
-          return selectedDayIndex != null && selectedDayIndex >= 0;
-        });
-      });
-    } catch (e) {
-      print('Error fetching habit history: $e');
+      for (var doc in habitDataSnapshot.docs) {
+        final data = doc.data();
+        final completionDate = data['completionDate'] as Timestamp?;
+        if (completionDate != null) {
+          final date = DateTime(
+            completionDate.toDate().year,
+            completionDate.toDate().month,
+            completionDate.toDate().day,
+          );
+          habitsData[habitName]![date] = true;
+        }
+      }
     }
+
+    setState(() {});
   }
 
   @override
@@ -69,18 +76,18 @@ class _MonthBaseState extends State<MonthBase> {
         ),
         backgroundColor: Colors.white,
         body: ListView.builder(
-          itemCount: habitNames.length,
+          itemCount: habitsData.length,
           itemBuilder: (context, index) {
-            final selectedHabit = habitNames[index];
-            return monthCalendar(selectedHabit, index, habitHistory);
+            final habitName = habitsData.keys.toList()[index];
+            return monthCalendar(habitName);
           },
         ),
       ),
     );
   }
 
-  Widget monthCalendar(String selectedHabit, int index,
-      List<Map<String, dynamic>> habitHistory) {
+  Widget monthCalendar(String habitName) {
+    final completionStatus = habitsData[habitName];
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -91,8 +98,9 @@ class _MonthBaseState extends State<MonthBase> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: kredcolor)),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: kredcolor),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCalendar(
@@ -107,43 +115,35 @@ class _MonthBaseState extends State<MonthBase> {
                           fontSize: 20,
                         ),
                       ),
+                      //calculate the first day of the current month by using DateTime(today.year, today.month, 1)
+                      firstDay: DateTime(today.year, today.month, 1),
+                      lastDay: DateTime(today.year, today.month + 1, 0),
                       focusedDay: today,
-                      firstDay: DateTime.utc(2010, 10, 16),
-                      lastDay: DateTime.utc(2030, 3, 14),
                       calendarStyle: const CalendarStyle(
                         outsideDaysVisible: false,
                       ),
                       calendarBuilders: CalendarBuilders(
-                        // Customize the appearance of each cell
                         defaultBuilder: (context, date, _) {
-                          final isSelected = habitHistory.any((data) {
-                            final selectedDayIndex =
-                                data['selectedDayIndex'] as int?;
-                            final completionDate =
-                                data['completionDate'] as Timestamp?;
+                          if (date.month != today.month) {
+                            return SizedBox.shrink();
+                          }
 
-                            if (completionDate != null &&
-                                selectedDayIndex != null) {
-                              final completedDate = completionDate.toDate();
+                          final isSelected =
+                              completionStatus?.containsKey(date) ?? false;
+                          final isCompleted = completionStatus?[
+                                  DateTime(date.year, date.month, date.day)] ??
+                              false;
 
-                              // Check if the date is either the completion date or one of the selected dates.
-                              return completedDate.year == date.year &&
-                                  completedDate.month == date.month &&
-                                  completedDate.day == date.day;
-                            }
-
-                            return false;
-                          });
                           print(
-                              "history:of${habitNames}in monthbase}${habitHistory}");
-                          // print('Date: $date, isSelected: $isSelected');
-
+                              "Date: $date, isSelected: $isSelected, isCompleted: $isCompleted");
                           return Container(
                             width: 30,
                             height: 30,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: isSelected ? kredcolor : korangecolor,
+                              color: isSelected
+                                  ? kredcolor
+                                  : (isCompleted ? Colors.green : korangecolor),
                             ),
                             child: Center(
                               child: Text(
@@ -166,7 +166,7 @@ class _MonthBaseState extends State<MonthBase> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      selectedHabit,
+                      habitName,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -177,7 +177,6 @@ class _MonthBaseState extends State<MonthBase> {
               ],
             ),
           ),
-          // Add spacing between the calendar and additional text
         ],
       ),
     );
@@ -185,8 +184,7 @@ class _MonthBaseState extends State<MonthBase> {
 }
 
 
-
-
+  
 // }
 // import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
