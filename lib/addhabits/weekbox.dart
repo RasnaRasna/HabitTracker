@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 
 class SelectableContainer extends StatelessWidget {
   final int selectedIndex;
@@ -17,7 +18,7 @@ class SelectableContainer extends StatelessWidget {
       children: List.generate(7, (index) {
         final isSelected = index == selectedIndex;
         final color = isSelected
-            ? Colors.pink.shade200
+            ? kredcolor
             : const Color.fromARGB(255, 218, 215, 215).withOpacity(0.5);
         final text = (index + 1).toString();
 

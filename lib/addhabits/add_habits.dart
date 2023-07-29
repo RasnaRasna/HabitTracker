@@ -178,7 +178,7 @@
 //                     decoration: BoxDecoration(
 //                         borderRadius: BorderRadius.circular(10.0),
 //                         border: Border.all(
-//                             color: const Color.fromARGB(255, 229, 113, 151))),
+//                             color: kredcolor)),
 //                     width: 350,
 //                     height: 50,
 //                     child: Center(
@@ -216,7 +216,7 @@
 //                   decoration: BoxDecoration(
 //                       borderRadius: BorderRadius.circular(10.0),
 //                       border: Border.all(
-//                           color: const Color.fromARGB(255, 229, 113, 151))),
+//                           color: kredcolor)),
 //                   width: 350,
 //                   height: 50,
 //                   child: const Center(
@@ -262,7 +262,7 @@
 //                         decoration: BoxDecoration(
 //                           borderRadius: BorderRadius.circular(10.0),
 //                           border: Border.all(
-//                             color: const Color.fromARGB(255, 229, 113, 151),
+//                             color: kredcolor,
 //                           ),
 //                         ),
 //                         width: 130,
@@ -561,8 +561,7 @@ class _AddhabitsState extends State<Addhabits> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadiusDirectional.circular(10.0),
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 236, 137, 170))),
+                      border: Border.all(color: kredcolor)),
                   child: TextField(
                     controller: Habitname,
                     onChanged: (value) {
@@ -629,8 +628,7 @@ class _AddhabitsState extends State<Addhabits> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 229, 113, 151))),
+                        border: Border.all(color: kredcolor)),
                     width: 350,
                     height: 50,
                     child: Center(
@@ -667,8 +665,7 @@ class _AddhabitsState extends State<Addhabits> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 229, 113, 151))),
+                      border: Border.all(color: kredcolor)),
                   width: 350,
                   height: 50,
                   child: const Center(
@@ -714,7 +711,7 @@ class _AddhabitsState extends State<Addhabits> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
-                            color: const Color.fromARGB(255, 229, 113, 151),
+                            color: kredcolor,
                           ),
                         ),
                         width: 130,

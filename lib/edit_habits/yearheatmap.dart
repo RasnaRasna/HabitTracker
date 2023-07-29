@@ -349,8 +349,8 @@ Widget _buildMonthHeatMap(int month, Map<DateTime, int> dataset,
 Color _getColorForValue(int value, bool isSelected) {
   // If the day is selected (completed), return green color
   if (isSelected) {
-    return Color.fromARGB(255, 229, 113, 151);
+    return kredcolor;
   }
   // Return the default color (grey) for other cases
-  return Color.fromARGB(255, 246, 211, 223);
+  return Color.fromARGB(255, 226, 217, 188);
 }

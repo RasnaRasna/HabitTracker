@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 
 import 'package:habits_track/login/sign.dart';
 
@@ -12,7 +13,7 @@ class SideDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             // curve: Curves.easeOut,
-            decoration: BoxDecoration(color: Colors.pink.shade100),
+            decoration: BoxDecoration(color: korangecolor),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 50),
               child: Text(
@@ -24,21 +25,21 @@ class SideDrawer extends StatelessWidget {
           ListTile(
               leading: Icon(
                 Icons.settings,
-                color: Colors.black,
+                color: kredcolor,
               ),
               title: Text(
                 'settings',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: kredcolor),
               ),
               onTap: () {}),
           ListTile(
               leading: Icon(
                 Icons.logout,
-                color: Colors.black,
+                color: kredcolor,
               ),
               title: Text(
                 'Logout',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: kredcolor),
               ),
               onTap: () {
                 FirebaseAuth.instance.signOut().then((value) {
@@ -50,30 +51,33 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               Icons.info_outline,
+              color: kredcolor,
             ),
             title: Text(
               'About',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: kredcolor),
             ),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(
               Icons.feedback_outlined,
+              color: kredcolor,
             ),
             title: Text(
               'Feedback',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: kredcolor),
             ),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(
               Icons.share,
+              color: kredcolor,
             ),
             title: Text(
               'Share',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: kredcolor),
             ),
             onTap: () {},
           ),

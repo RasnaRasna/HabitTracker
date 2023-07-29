@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/homepage/Home_page.dart';
 import 'package:habits_track/bottom_pages/year/year.dart';
+import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/genderprovider.dart';
@@ -219,7 +220,7 @@ class _bottombarState extends State<bottombar> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
-              color: Color.fromARGB(116, 226, 164, 193),
+              color: korangecolor,
               boxShadow: [
                 BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
               ],
@@ -230,7 +231,7 @@ class _bottombarState extends State<bottombar> {
               child: GNav(
                 tabBorderRadius: 20,
                 gap: 2,
-                activeColor: Colors.black,
+                activeColor: kredcolor,
                 curve: Curves.fastLinearToSlowEaseIn,
                 iconSize: 24,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
@@ -240,22 +241,27 @@ class _bottombarState extends State<bottombar> {
                   GButton(
                     icon: Icons.home,
                     text: 'Today',
+                    iconColor: kwhite,
                   ),
                   GButton(
                     icon: Icons.calendar_month,
                     text: 'Month',
+                    iconColor: kwhite,
                   ),
                   GButton(
                     icon: Icons.apps,
                     text: 'Year',
+                    iconColor: kwhite,
                   ),
                   GButton(
                     icon: Icons.back_hand,
                     text: 'Challenge',
+                    iconColor: kwhite,
                   ),
                   GButton(
                     icon: Icons.search,
                     text: 'Discover',
+                    iconColor: kwhite,
                   ),
                 ],
                 selectedIndex: selectedIndex,

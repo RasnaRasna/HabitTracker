@@ -153,6 +153,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 
 class HeatMapCell extends StatelessWidget {
   final String value;
@@ -176,9 +177,7 @@ class HeatMapCell extends StatelessWidget {
         padding: const EdgeInsets.all(0.3),
         child: Container(
           decoration: BoxDecoration(
-            color: isCompleted
-                ? Color.fromARGB(255, 229, 113, 151)
-                : const Color.fromARGB(255, 246, 211, 223),
+            color: isCompleted ? kredcolor : Color.fromARGB(255, 226, 217, 188),
             borderRadius: BorderRadius.circular(3),
           ),
           child: Center(
@@ -296,7 +295,7 @@ Widget buildHeatMap(String habitId) {
 
 Color _getColorForValue(int value) {
   if (value == 1) {
-    return Color.fromARGB(255, 229, 113, 151);
+    return kredcolor;
   }
   return Color.fromARGB(255, 246, 211, 223);
 }

@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
 
 class Moodchecking extends StatelessWidget {
@@ -25,7 +26,7 @@ class Moodchecking extends StatelessWidget {
               children: [
                 Text(
                   "Hello $name ....",
-                  style: TextStyle(fontSize: 30),
+                  style: GoogleFonts.acme(fontSize: 25),
                 )
               ],
             ),
@@ -39,7 +40,9 @@ class Moodchecking extends StatelessWidget {
                       child: Text(
                         "How is Your Mood? ",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: kwhite),
                       ),
                     ),
                     Padding(
@@ -219,7 +222,7 @@ class Moodchecking extends StatelessWidget {
                   ],
                 ),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 247, 195, 212),
+                    color: korangecolor,
                     borderRadius: BorderRadius.circular(20)),
                 width: 20,
                 height: 160,
@@ -234,7 +237,7 @@ class Moodchecking extends StatelessWidget {
                     "Mood changing is a natural part of life. Sometimes we feel happy, and other times we may feel sad or angry. Our moods can shift like the changing weather. It's important to be kind to ourselves during these transitions, understanding that it's okay to not always feel our best. By taking time for self-care and doing things that bring us joy, we can nurture a positive shift in our mood. Remember, even on tough days, there's always a glimmer of hope for brighter moments ahead.",
                     textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 241, 56, 121),
+                        color: kredcolor,
                         fontSize: 17)),
               ]),
             )

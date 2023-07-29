@@ -432,8 +432,10 @@ class MyHomePageToday extends StatelessWidget {
         final int? storedDayIndex = habitData?['selectedDayIndex'] as int?;
 
         final backgroundColor =
-            i == storedDayIndex && isSelected ? Colors.pink : Colors.white;
-        final textColor = i <= currentDayIndex ? Colors.pink : Colors.black;
+            i == storedDayIndex && isSelected ? kredcolor : Colors.white;
+        final textColor = (i == storedDayIndex && isSelected)
+            ? Colors.white
+            : (i <= currentDayIndex ? korangecolor : Colors.black);
 
         return GestureDetector(
           onTap: () {

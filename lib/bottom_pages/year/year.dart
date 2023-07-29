@@ -169,6 +169,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
 
 class YearBase extends StatefulWidget {
@@ -325,8 +326,8 @@ class _YearBaseState extends State<YearBase> {
               children: List.generate(endDate.day, (dayIndex) {
                 final date = startDate.add(Duration(days: dayIndex));
                 final color = completionStatus![date] == true
-                    ? const Color.fromARGB(255, 229, 113, 151)
-                    : Color.fromARGB(255, 246, 211, 223);
+                    ? kredcolor
+                    : Color.fromARGB(255, 226, 217, 188);
                 return Padding(
                   padding: const EdgeInsets.all(1),
                   child: Container(

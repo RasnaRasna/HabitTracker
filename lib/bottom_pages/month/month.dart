@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MonthBase extends StatefulWidget {
@@ -62,7 +63,7 @@ class _MonthBaseState extends State<MonthBase> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "2023",
+            "${today.year}",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -84,94 +85,97 @@ class _MonthBaseState extends State<MonthBase> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          Stack(
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Color.fromARGB(255, 205, 205, 205)),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: TableCalendar(
-                    rowHeight: 45,
-                    headerStyle: const HeaderStyle(
-                      leftChevronVisible: false,
-                      rightChevronVisible: false,
-                      formatButtonVisible: false,
-                      titleCentered: true,
-                      titleTextStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kredcolor)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCalendar(
+                      rowHeight: 45,
+                      headerStyle: const HeaderStyle(
+                        leftChevronVisible: false,
+                        rightChevronVisible: false,
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        titleTextStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    focusedDay: today,
-                    firstDay: DateTime.utc(2010, 10, 16),
-                    lastDay: DateTime.utc(2030, 3, 14),
-                    calendarStyle: const CalendarStyle(
-                      outsideDaysVisible: false,
-                    ),
-                    calendarBuilders: CalendarBuilders(
-                      // Customize the appearance of each cell
-                      defaultBuilder: (context, date, _) {
-                        final isSelected = habitHistory.any((data) {
-                          final selectedDayIndex =
-                              data['selectedDayIndex'] as int?;
-                          final completionDate =
-                              data['completionDate'] as Timestamp?;
+                      focusedDay: today,
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      calendarStyle: const CalendarStyle(
+                        outsideDaysVisible: false,
+                      ),
+                      calendarBuilders: CalendarBuilders(
+                        // Customize the appearance of each cell
+                        defaultBuilder: (context, date, _) {
+                          final isSelected = habitHistory.any((data) {
+                            final selectedDayIndex =
+                                data['selectedDayIndex'] as int?;
+                            final completionDate =
+                                data['completionDate'] as Timestamp?;
 
-                          if (completionDate != null &&
-                              selectedDayIndex != null) {
-                            final completedDate = completionDate.toDate();
+                            if (completionDate != null &&
+                                selectedDayIndex != null) {
+                              final completedDate = completionDate.toDate();
 
-                            // Check if the date is either the completion date or one of the selected dates.
-                            return completedDate.year == date.year &&
-                                completedDate.month == date.month &&
-                                completedDate.day == date.day;
-                          }
+                              // Check if the date is either the completion date or one of the selected dates.
+                              return completedDate.year == date.year &&
+                                  completedDate.month == date.month &&
+                                  completedDate.day == date.day;
+                            }
 
-                          return false;
-                        });
-                        print(
-                            "history:of${habitNames}in monthbase}${habitHistory}");
-                        // print('Date: $date, isSelected: $isSelected');
+                            return false;
+                          });
+                          print(
+                              "history:of${habitNames}in monthbase}${habitHistory}");
+                          // print('Date: $date, isSelected: $isSelected');
 
-                        return Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: isSelected ? Colors.green : Colors.pink,
-                          ),
-                          child: Center(
-                            child: Text(
-                              date.day.toString(),
-                              style: TextStyle(
-                                color: isSelected ? Colors.white : Colors.black,
+                          return Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isSelected ? kredcolor : korangecolor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                date.day.toString(),
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: kwhite,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: 10,
-                left: 3,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    selectedHabit,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                Positioned(
+                  top: 10,
+                  left: 3,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      selectedHabit,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           // Add spacing between the calendar and additional text
         ],

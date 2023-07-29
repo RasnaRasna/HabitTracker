@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,7 +47,7 @@ class StartingPage extends StatelessWidget {
                 width: 290,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.pink.shade100),
+                  border: Border.all(color: kredcolor),
                 ),
                 child: TextField(
                   onChanged: (value) =>
@@ -88,11 +89,11 @@ class StartingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
                             color: genderProvider.selectedGender == "Male"
-                                ? Colors.pink.shade100
+                                ? kredcolor
                                 : Colors.grey,
                           ),
                           color: genderProvider.selectedGender == "Male"
-                              ? Colors.pink.shade100
+                              ? kredcolor
                               : Colors.transparent,
                         ),
                         width: 100,
@@ -120,11 +121,11 @@ class StartingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
                             color: genderProvider.selectedGender == "Female"
-                                ? Colors.pink.shade100
+                                ? kredcolor
                                 : Colors.grey,
                           ),
                           color: genderProvider.selectedGender == "Female"
-                              ? Colors.pink.shade100
+                              ? kredcolor
                               : Colors.transparent,
                         ),
                         width: 100,

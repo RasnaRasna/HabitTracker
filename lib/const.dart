@@ -7,6 +7,9 @@ const Color backgroundcolor = Color.fromARGB(255, 214, 208, 188),
     kblack = Colors.black;
 const kgrey = Colors.grey;
 const kwhite = Colors.white;
+const Color kredcolor = Color.fromARGB(255, 151, 11, 1);
+const Color korangecolor = Color.fromARGB(255, 178, 104, 7);
+
 const KWidth10 = SizedBox(
   width: 10,
 );

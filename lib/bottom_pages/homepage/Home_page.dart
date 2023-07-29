@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
+import 'package:habits_track/bottom_pages/homepage/card.dart';
 import 'package:habits_track/bottom_pages/homepage/hidden_drawe.dart';
 import 'package:habits_track/bottom_pages/homepage/moodcheck.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
+import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/genderprovider.dart';
 import '../../side_drawer.dart';
-import 'card.dart';
 
 class Homapage extends StatelessWidget {
   final List<Map<String, dynamic>> habitHistory;
@@ -60,12 +62,14 @@ class Homapage extends StatelessWidget {
                         )),
               );
             },
-            child: Text("Today"),
+            child: Text(
+              "Today",
+              style: GoogleFonts.acme(fontSize: 15, color: kredcolor),
+            ),
           ),
         ],
       ),
-      drawer: HiddenDrawer(),
-      // drawer: const SideDrawer(),
+      drawer: const SideDrawer(),
       body: ListView(
         children: [
           Padding(
@@ -75,13 +79,40 @@ class Homapage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      key: Key(selectedGender ?? ''),
-                      maxRadius: 30,
-                      minRadius: 30,
-                      backgroundImage:
-                          AssetImage(imagePath), // Updated image path
+                    Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(35.0)),
+                        border: Border.all(
+                          color: kredcolor,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(imagePath),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                15.0)), // Half of the width/height to make the image circular
+                          ),
+                        ),
+                      ),
                     ),
+
+                    // CircleAvatar(
+
+                    //   key: Key(selectedGender ?? ''),
+
+                    //   maxRadius: 30,
+                    //   minRadius: 30,
+                    //   backgroundImage: AssetImage(
+                    //     imagePath,
+                    //   ), // Updated image path
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
@@ -91,78 +122,127 @@ class Homapage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Container(
-                    child: Image.asset(
-                      "images/lo.png",
-                      width: 400,
-                      height: 400,
-                    ),
-                    width: 360,
-                    height: 200,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "How are you feeling today?",
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                //   child: Container(
+                //     child: Image.asset(
+                //       "images/lo.png",
+                //       width: 400,
+                //       height: 400,
+                //     ),
+                //     width: 360,
+                //     height: 200,
+                //   ),
+                // ),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: Text(
+                //     "How are you feeling today?",
+                //     style: TextStyle(fontSize: 25),
+                //   ),
+                // ),
+                InkWell(
+                  onTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (ctx) => Moodchecking(name: name)),
-                        );
-                      },
-                      icon: Icon(Icons.emoji_emotions),
-                      label: Text("Daily mood check-in"),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: korangecolor),
+                      height: 200,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "DAILY JOURNAL",
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "How are you   \n feeling today?",
+                              // style: TextStyle(fontSize: 25, color: Colors.white),
+                              style: GoogleFonts.acme(
+                                  fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (ctx) =>
+                                          Moodchecking(name: name)),
+                                );
+                              },
+                              icon: Icon(Icons.emoji_emotions),
+                              label: Text(
+                                "Daily mood check-in",
+                                style: TextStyle(color: kredcolor),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+                // Container(
+                //   width: ,
+                //   child: Align(
+                //     alignment: Alignment.center,
+                //     child: Padding(
+                //       padding: const EdgeInsets.symmetric(vertical: 10),
+                //       child:
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.brown)),
-                height: 150,
-                child: Column(
-                  children: [
-                    // Image.asset(
-                    //   "images/workout.jpeg",
-                    //   width: 130,
-                    // ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          // Hompagecard(),
+          // InkWell(
+          //   onTap: () {},
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(16.0),
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(10),
+          //           border: Border.all(color: Colors.brown)),
+          //       height: 150,
+          //       child: Column(
+          //         children: [
+          //           // Image.asset(
+          //           //   "images/workout.jpeg",
+          //           //   width: 130,
+          //           // ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          Hompagecard(),
         ],
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(vertical: 70),
         child: FloatingActionButton(
+          backgroundColor: korangecolor,
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (ctx) => Addhabits(
                       habitHistory: habitHistory,
                     )));
           },
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
     );

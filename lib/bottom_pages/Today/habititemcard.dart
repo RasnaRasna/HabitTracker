@@ -137,8 +137,7 @@ class HabitItemsCard extends StatelessWidget {
 
                                   return Icon(
                                     Icons.check_circle,
-                                    color:
-                                        isSelected ? Colors.pink : Colors.grey,
+                                    color: isSelected ? kredcolor : Colors.grey,
                                   );
                                 },
                               ),
