@@ -1154,3 +1154,11 @@
 //   }
 
 // reset have some issue
+
+
+
+
+
+//  this is the history page in here user mark on the completion status ok
+// you can see here if user mark on the colpletion status by click on the check_circle button it will store to  fire base with true state and also the message iconbutton also visible that is optional if user want to add notes add, like that if the user cunmark the cmpletion if will change to default color and state ,and also the message button also not showing that is also correct the number 1:  after unclick the check_circle the color and the state  isnot resetting  fastly its it taking delay and next 2: if mark on comletion corectly measn up to down direction withou skipping any date it will change the state correctly ok? i will say the example if i select the date on july  25 ok then history is like 25,to 29 right if i mark on 25 next26,next27 and etc that is working correctly,but if i mark on  first  under the start date eg: 26,or 27 or etc the click on the iconstate  is changing correctly at the same time other iconstate also changing without clicking only color ok in firebase correctly working and next issue 3: if mark the completion it will store to firestore and also seeing ui ok then i restart the app that time the message button not visible i think we manged that is not correct i think we need to add that also in firestore ok i will share the provider code of manage the message icon ok,and also insted of this 31 List<bool> isNotesAdded = List.generate(
+//       31, (index) => false); give the correct count based on user mark on the start date to current date right each tile want message want right   i hope you understood my explanation we can solve stepby step right

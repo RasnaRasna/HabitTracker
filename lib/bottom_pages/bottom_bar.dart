@@ -159,6 +159,7 @@ import 'month/month.dart';
 // }
 
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:intl/intl.dart';
 
 class bottombar extends StatefulWidget {
   final String? selectedGender;
@@ -185,6 +186,7 @@ class bottombar extends StatefulWidget {
 class _bottombarState extends State<bottombar> {
   int selectedIndex = 0;
   late GenderProvider genderProvider;
+  final DateTime today = DateTime.now();
 
   @override
   void initState() {
@@ -245,12 +247,12 @@ class _bottombarState extends State<bottombar> {
                   ),
                   GButton(
                     icon: Icons.calendar_month,
-                    text: 'Month',
+                    text: DateFormat('MMMM').format(today),
                     iconColor: kwhite,
                   ),
                   GButton(
                     icon: Icons.apps,
-                    text: 'Year',
+                    text: '${today.year}',
                     iconColor: kwhite,
                   ),
                   GButton(

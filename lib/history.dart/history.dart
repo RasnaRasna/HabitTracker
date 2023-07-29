@@ -1,6 +1,5 @@
 // import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:habits_track/const.dart';
 // import 'package:habits_track/provider/notesand_iconcolors.dart';
 // import 'package:intl/intl.dart';
 // import 'package:provider/provider.dart';
@@ -485,15 +484,15 @@ class _HistoryState extends State<History> {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (iconColorchangeprovider
-                                  .isAdditionalButtonVisible(
-                                      widget.habitId, index))
-                                IconButton(
+                              Visibility(
+                                visible: habitData['isSelected'] ?? false,
+                                child: IconButton(
                                   onPressed: () {
                                     _showMyDialog(index);
                                   },
                                   icon: const Icon(Icons.message),
                                 ),
+                              ),
                               GestureDetector(
                                 onTap: () {
                                   historyAddtofirestor(
@@ -502,11 +501,6 @@ class _HistoryState extends State<History> {
                                     final habitData = habitHistory[index];
                                     // If the day is unchecked, toggle the isSelected state immediately
                                     habitData['isSelected'] = true;
-                                    Provider.of<IconColorchangeprovider>(
-                                            context,
-                                            listen: false)
-                                        .toggleAdditionalButtonVisibility(
-                                            widget.habitId, index);
                                   });
                                 },
                                 child: Builder(
@@ -515,14 +509,8 @@ class _HistoryState extends State<History> {
                                     final bool isSelected =
                                         habitData['isSelected'] ?? false;
 
-                                    final Color iconColor = isSelected
-                                        ? kredcolor
-                                        : Provider.of<IconColorchangeprovider>(
-                                                    context)
-                                                .isAdditionalButtonVisible(
-                                                    widget.habitId, index)
-                                            ? kredcolor
-                                            : Colors.grey;
+                                    final Color iconColor =
+                                        isSelected ? kredcolor : Colors.grey;
 
                                     return Icon(
                                       Icons.check_circle,
@@ -575,6 +563,9 @@ class _HistoryState extends State<History> {
         await historyCollection.doc(documentId).update({
           "isSelected": isSelected,
           "completionDate": isSelected ? Timestamp.fromDate(currentDate) : null,
+          "messageButton": isSelected
+              ? true
+              : habitData['messageButton'], // Preserve the messageButton state
         });
       } else {
         final timestamp = Timestamp.now();
@@ -587,10 +578,14 @@ class _HistoryState extends State<History> {
           "selectedDayIndex": selectedDayIndex,
           "timestamp": timestamp,
           "completionDate": isSelected ? Timestamp.fromDate(currentDate) : null,
+          "messageButton":
+              isSelected, // Set the initial state for messageButton
         });
       }
 
       habitData['isSelected'] = isSelected;
+      habitData['messageButton'] =
+          isSelected; // Update the local messageButton state
       habitData['isCompleted'] = isSelected;
       habitData['completionDate'] = isSelected ? currentDate : null;
     } catch (e) {
@@ -715,7 +710,8 @@ class _HistoryState extends State<History> {
     if (result == true) {
       _resetCompletionAndNotes(index);
     }
-    return result ?? false; // Add a return statement here
+    return result ?? false;
+    // Add a return statement here
   }
 
   Future<void> _resetCompletionAndNotes(int index) async {
