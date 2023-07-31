@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/challenges/savebuttonstate.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,15 +47,11 @@ class _HomeWrokOutChallagesState extends State<HomeWrokOutChallages> {
         .getChallengeValues('HomeWrokOutChallages');
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Home workout",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        title: Text(
+          "Home workout",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

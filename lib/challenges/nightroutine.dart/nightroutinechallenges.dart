@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,15 +48,11 @@ class _NightroutineChallangeState extends State<NightroutineChallange> {
         .getChallengeValues('NightroutineChallange');
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Night Routine",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        title: Text(
+          "Night Routine",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

@@ -79,6 +79,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -127,66 +128,12 @@ class _SelfLoveChallengesState extends State<SelfLoveChallenges> {
         .getChallengeValues('SelfLoveChallenges');
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           "Self Love",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    content: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'if all task are completed you can share',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              content: const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'make sure to tick all before you share',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('share'),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        child: const Text('share'),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              icon: Icon(Icons.info))
-        ],
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

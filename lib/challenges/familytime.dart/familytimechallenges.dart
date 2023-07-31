@@ -3,6 +3,7 @@ import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
 import '../../bottom_pages/challenges/savebuttonstate.dart';
+import '../../bottom_pages/challenges/showdialogue.dart';
 
 class FamilyChallanges extends StatefulWidget {
   FamilyChallanges({Key? key}) : super(key: key);
@@ -45,15 +46,12 @@ class _FamilyChallangesState extends State<FamilyChallanges> {
 
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Family Time",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        centerTitle: true,
+        title: Text(
+          "Family Time",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

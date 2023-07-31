@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/challenges/savebuttonstate.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
@@ -45,15 +46,12 @@ class _FeelGoodChallangesState extends State<FeelGoodChallanges> {
         .getChallengeValues('FeelGoodChallanges');
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Feel good",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        centerTitle: true,
+        title: Text(
+          "Feel good",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

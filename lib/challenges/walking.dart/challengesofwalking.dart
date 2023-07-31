@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
@@ -45,15 +46,12 @@ class _walkingChallengesState extends State<walkingChallenges> {
         context.watch<ChallengeState>().getChallengeValues('walkingChallenges');
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Walking",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        centerTitle: true,
+        title: Text(
+          "Walking",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [

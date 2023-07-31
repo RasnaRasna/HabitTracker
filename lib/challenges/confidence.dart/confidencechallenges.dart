@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/showdialogue.dart';
 import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
@@ -48,15 +49,12 @@ class _confidenceChallangeState extends State<confidenceChallange> {
 
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Text(
-            "Confidence",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        centerTitle: true,
+        title: Text(
+          "Confidence",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        actions: [Showdialoguee(challengeValues: challengeValues)],
       ),
       body: Column(
         children: [
