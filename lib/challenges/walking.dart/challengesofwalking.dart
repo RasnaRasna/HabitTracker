@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:provider/provider.dart';
+
+import '../../bottom_pages/challenges/savebuttonstate.dart';
 
 class walkingChallenges extends StatefulWidget {
   walkingChallenges({Key? key}) : super(key: key);
@@ -18,9 +21,28 @@ class _walkingChallengesState extends State<walkingChallenges> {
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  void initState() {
+    super.initState();
+    // Load the saved checkbox states when the screen is initialized.
+    _loadSavedChallengeValues();
+  }
+
+  Future<void> _loadSavedChallengeValues() async {
+    await context
+        .read<ChallengeState>()
+        .loadSavedChallengeValues('walkingChallenges');
+    // Set the loaded checkbox values to the local variable.
+    setState(() {
+      challengeValues = context
+          .read<ChallengeState>()
+          .getChallengeValues('walkingChallenges');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<bool> challengeValues =
+        context.watch<ChallengeState>().getChallengeValues('walkingChallenges');
     return Scaffold(
       appBar: AppBar(
         actions: const [
@@ -64,7 +86,8 @@ class _walkingChallengesState extends State<walkingChallenges> {
                           side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {});
+                            context.read<ChallengeState>().updateChallengeValue(
+                                'walkingChallenges', index, newValue ?? false);
                           },
                         ),
                         Expanded(

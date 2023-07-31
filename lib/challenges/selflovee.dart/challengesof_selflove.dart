@@ -80,6 +80,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bottom_pages/challenges/savebuttonstate.dart';
@@ -101,9 +102,29 @@ class _SelfLoveChallengesState extends State<SelfLoveChallenges> {
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  void initState() {
+    super.initState();
+    // Load the saved checkbox states when the screen is initialized.
+    _loadSavedChallengeValues();
+  }
+
+  Future<void> _loadSavedChallengeValues() async {
+    await context
+        .read<ChallengeState>()
+        .loadSavedChallengeValues('SelfLoveChallenges');
+    // Set the loaded checkbox values to the local variable.
+    setState(() {
+      challengeValues = context
+          .read<ChallengeState>()
+          .getChallengeValues('SelfLoveChallenges');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<bool> challengeValues = context
+        .watch<ChallengeState>()
+        .getChallengeValues('SelfLoveChallenges');
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -199,7 +220,8 @@ class _SelfLoveChallengesState extends State<SelfLoveChallenges> {
                           side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {});
+                            context.read<ChallengeState>().updateChallengeValue(
+                                'SelfLoveChallenges', index, newValue ?? false);
                           },
                         ),
                         Expanded(

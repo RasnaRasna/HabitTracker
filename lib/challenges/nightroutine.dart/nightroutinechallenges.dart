@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../bottom_pages/challenges/savebuttonstate.dart';
@@ -21,9 +22,29 @@ class _NightroutineChallangeState extends State<NightroutineChallange> {
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  void initState() {
+    super.initState();
+    // Load the saved checkbox states when the screen is initialized.
+    _loadSavedChallengeValues();
+  }
+
+  Future<void> _loadSavedChallengeValues() async {
+    await context
+        .read<ChallengeState>()
+        .loadSavedChallengeValues('NightroutineChallange');
+    // Set the loaded checkbox values to the local variable.
+    setState(() {
+      challengeValues = context
+          .read<ChallengeState>()
+          .getChallengeValues('NightroutineChallange');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<bool> challengeValues = context
+        .watch<ChallengeState>()
+        .getChallengeValues('NightroutineChallange');
     return Scaffold(
       appBar: AppBar(
         actions: const [
@@ -68,7 +89,10 @@ class _NightroutineChallangeState extends State<NightroutineChallange> {
                           side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {});
+                            context.read<ChallengeState>().updateChallengeValue(
+                                'NightroutineChallange',
+                                index,
+                                newValue ?? false);
                           },
                         ),
                         Expanded(
