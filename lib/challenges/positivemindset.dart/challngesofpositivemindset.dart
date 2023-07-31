@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/savebuttonstate.dart';
 import 'package:habits_track/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PositiveChallenges extends StatefulWidget {
   PositiveChallenges({Key? key}) : super(key: key);
@@ -90,9 +94,7 @@ class _PositiveChallengesState extends State<PositiveChallenges> {
             child: Text(
               "Mark the completed challenges",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.pink),
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -104,24 +106,29 @@ class _PositiveChallengesState extends State<PositiveChallenges> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
-                          Border.all(color: Color.fromARGB(255, 218, 213, 213)),
+                          Border.all(color: Color.fromARGB(255, 163, 160, 160)),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            setState(() {});
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

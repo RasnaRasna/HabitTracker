@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../bottom_pages/challenges/savebuttonstate.dart';
 
 class LanguageChallenge extends StatefulWidget {
   LanguageChallenge({Key? key}) : super(key: key);
@@ -18,14 +22,33 @@ class _LanguageChallengeState extends State<LanguageChallenge> {
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  void initState() {
+    super.initState();
+    // Load the saved checkbox states when the screen is initialized.
+    _loadSavedChallengeValues();
+  }
+
+  Future<void> _loadSavedChallengeValues() async {
+    await context
+        .read<ChallengeState>()
+        .loadSavedChallengeValues('LanguageChallenge');
+    // Set the loaded checkbox values to the local variable.
+    setState(() {
+      challengeValues = context
+          .read<ChallengeState>()
+          .getChallengeValues('LanguageChallenge');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<bool> challengeValues =
+        context.watch<ChallengeState>().getChallengeValues('LanguageChallenge');
     return Scaffold(
       appBar: AppBar(
         actions: const [
           Text(
-            "Self Love",
+            "Languages",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +62,8 @@ class _LanguageChallengeState extends State<LanguageChallenge> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -51,6 +75,7 @@ class _LanguageChallengeState extends State<LanguageChallenge> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
                           Border.all(color: Color.fromARGB(255, 218, 213, 213)),
                       borderRadius: BorderRadius.circular(10),
@@ -58,17 +83,22 @@ class _LanguageChallengeState extends State<LanguageChallenge> {
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            context.read<ChallengeState>().updateChallengeValue(
+                                'LanguageChallenge', index, newValue ?? false);
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

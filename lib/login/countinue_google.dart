@@ -37,6 +37,7 @@
 //   );
 // }
 import 'package:flutter/material.dart';
+import '../const.dart';
 import '../onboarding/start.dart';
 import 'firebase_services.dart';
 
@@ -90,7 +91,10 @@ Row continueWithGoogle(BuildContext context) {
             );
           }
         },
-        child: const Text("Continue with Gmail"),
+        child: const Text(
+          "Continue with Gmail",
+          style: TextStyle(color: kwhite),
+        ),
       ),
     ],
   );

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/savebuttonstate.dart';
 import 'package:habits_track/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class NoJunckFoodChallenge extends StatefulWidget {
-  NoJunckFoodChallenge({Key? key}) : super(key: key);
+class NoJunckfoodd extends StatefulWidget {
+  NoJunckfoodd({Key? key}) : super(key: key);
 
   @override
-  _SelfLoveChallengesState createState() => _SelfLoveChallengesState();
+  _NoJunckfooddState createState() => _NoJunckfooddState();
 }
 
-class _SelfLoveChallengesState extends State<NoJunckFoodChallenge> {
+class _NoJunckfooddState extends State<NoJunckfoodd> {
   final List<String> challenges = [
     "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
@@ -25,7 +27,7 @@ class _SelfLoveChallengesState extends State<NoJunckFoodChallenge> {
       appBar: AppBar(
         actions: const [
           Text(
-            "Self Love",
+            "No junk food",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +41,8 @@ class _SelfLoveChallengesState extends State<NoJunckFoodChallenge> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -51,6 +54,7 @@ class _SelfLoveChallengesState extends State<NoJunckFoodChallenge> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
                           Border.all(color: Color.fromARGB(255, 218, 213, 213)),
                       borderRadius: BorderRadius.circular(10),
@@ -58,17 +62,21 @@ class _SelfLoveChallengesState extends State<NoJunckFoodChallenge> {
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            setState(() {});
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

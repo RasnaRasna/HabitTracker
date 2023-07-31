@@ -495,8 +495,7 @@ class _HistoryState extends State<History> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  historyAddtofirestor(
-                                      index); // Call the _handleCheckCircle function
+                                  historyAddtofirestor(index);
                                   setState(() {
                                     final habitData = habitHistory[index];
                                     // If the day is unchecked, toggle the isSelected state immediately

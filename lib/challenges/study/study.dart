@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/challenges/selflovee.dart/challengesof_selflove.dart';
+import 'package:habits_track/challenges/study/studychallanges.dart';
 import 'package:habits_track/const.dart';
 
 class Study extends StatelessWidget {
@@ -49,7 +50,7 @@ class Study extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => SelfLoveChallenges()));
+                          builder: (ctx) => StudyChallanges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

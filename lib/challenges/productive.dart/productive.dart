@@ -48,8 +48,8 @@ class Productive extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 225, 222, 222),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => ProductiveChallenges()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => Productivity()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

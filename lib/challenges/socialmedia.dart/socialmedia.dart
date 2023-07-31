@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/challenges/selflovee.dart/challengesof_selflove.dart';
 import 'package:habits_track/const.dart';
 
+import 'challengesof_socialmedia.dart';
+
 class SocialMedia extends StatelessWidget {
   const SocialMedia({super.key});
 
@@ -48,8 +50,8 @@ class SocialMedia extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 225, 222, 222),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => SelfLoveChallenges()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => Socailmedia()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

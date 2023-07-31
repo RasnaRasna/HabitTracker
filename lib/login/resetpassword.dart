@@ -17,7 +17,8 @@ class ResetPassword extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           "Reset password",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: kwhite),
         ),
       ),
       body: Container(
@@ -25,8 +26,7 @@ class ResetPassword extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image:
-                AssetImage("images/waal.jpg"), // Replace with your image path
+            image: AssetImage("images/download.jpeg"),
             fit: BoxFit.cover,
           ),
         ),

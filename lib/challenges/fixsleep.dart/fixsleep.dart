@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges/fixsleep.dart/fixslepp_challenges.dart';
 import 'package:habits_track/challenges/selflovee.dart/challengesof_selflove.dart';
 import 'package:habits_track/const.dart';
 
@@ -49,7 +50,7 @@ class FixSleep extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => SelfLoveChallenges()));
+                          builder: (ctx) => FixsleepShedule()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

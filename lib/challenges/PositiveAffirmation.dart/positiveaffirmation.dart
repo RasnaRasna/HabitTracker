@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges/PositiveAffirmation.dart/positiveaffir_challenges.dart';
 import 'package:habits_track/challenges/morningroutine.dart/morngchallenges.dart';
 import 'package:habits_track/const.dart';
 
@@ -49,7 +50,7 @@ class PositiveAffirmation extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => MorningChallenges()));
+                          builder: (ctx) => PositiveAffirmationChallanges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

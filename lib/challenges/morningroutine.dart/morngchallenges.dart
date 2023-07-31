@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MorningChallenges extends StatefulWidget {
-  MorningChallenges({Key? key}) : super(key: key);
+import '../../bottom_pages/challenges/savebuttonstate.dart';
+
+class MorningRoutineChallange extends StatefulWidget {
+  MorningRoutineChallange({Key? key}) : super(key: key);
 
   @override
-  _SelfLoveChallengesState createState() => _SelfLoveChallengesState();
+  _MorningRoutineChallangeState createState() =>
+      _MorningRoutineChallangeState();
 }
 
-class _SelfLoveChallengesState extends State<MorningChallenges> {
+class _MorningRoutineChallangeState extends State<MorningRoutineChallange> {
   final List<String> challenges = [
     "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
@@ -25,7 +29,7 @@ class _SelfLoveChallengesState extends State<MorningChallenges> {
       appBar: AppBar(
         actions: const [
           Text(
-            "Self Love",
+            "Morning  Routine",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +43,8 @@ class _SelfLoveChallengesState extends State<MorningChallenges> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -51,6 +56,7 @@ class _SelfLoveChallengesState extends State<MorningChallenges> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
                           Border.all(color: Color.fromARGB(255, 218, 213, 213)),
                       borderRadius: BorderRadius.circular(10),
@@ -58,17 +64,21 @@ class _SelfLoveChallengesState extends State<MorningChallenges> {
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            setState(() {});
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

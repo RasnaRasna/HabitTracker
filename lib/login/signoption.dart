@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 import 'package:habits_track/signuppage.dart/signup.dart';
 
 Row signupOption(BuildContext context) {
@@ -7,7 +8,7 @@ Row signupOption(BuildContext context) {
     children: [
       const Text(
         "Don't have an account? ",
-        style: TextStyle(color: Colors.black45),
+        style: TextStyle(color: kwhite),
       ),
       GestureDetector(
         onTap: () {
@@ -20,9 +21,7 @@ Row signupOption(BuildContext context) {
           padding: EdgeInsets.symmetric(horizontal: 5),
           child: Text(
             "Sign Up",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: kwhite),
           ),
         ),
       ),

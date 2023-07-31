@@ -123,8 +123,8 @@ class SignupScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image:
-                AssetImage("images/waal.jpg"), // Replace with your image path
+            image: AssetImage("images/download.jpeg"),
+// Replace with your image path
             fit: BoxFit.cover,
           ),
         ),
@@ -134,13 +134,14 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("SIGN UP TO COUNTINUE",
+              const Text("SIGN UP TO COUNTINUE",
                   style: TextStyle(
-                    fontSize: 24,
-                  )),
+                      fontSize: 24,
+                      color: kwhite,
+                      fontWeight: FontWeight.bold)),
               kheight20,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
                 child: reusableTextfield(
                   "Enter UserName",
                   Icons.person,
@@ -154,9 +155,8 @@ class SignupScreen extends StatelessWidget {
                   },
                 ),
               ),
-              kheight10,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
                 child: reusableTextfield(
                   "Enter Email Id",
                   Icons.lock_outline,
@@ -171,7 +171,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
                 child: reusableTextfield(
                   "Enter Password",
                   Icons.lock_outline,
@@ -185,9 +185,8 @@ class SignupScreen extends StatelessWidget {
                   },
                 ),
               ),
-              kheight10,
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
                 child: FirebaseButton(context, "Sign up", () {
                   _signUp(context);
                 }),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/challenges/selflovee.dart/challengesof_selflove.dart';
+import 'package:habits_track/challenges/feelgood.dat/feelgoodchallenge.dart';
 import 'package:habits_track/const.dart';
 
 class feelgood extends StatelessWidget {
@@ -49,7 +49,7 @@ class feelgood extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => SelfLoveChallenges()));
+                          builder: (ctx) => FeelGoodChallanges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

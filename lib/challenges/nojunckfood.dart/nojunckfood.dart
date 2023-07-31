@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/challenges/language.dart/languagechallenges.dart';
+import 'package:habits_track/challenges/nojunckfood.dart/nojunckfoodchallenge.dart';
 import 'package:habits_track/const.dart';
 
 class NojunckFood extends StatelessWidget {
@@ -11,7 +12,7 @@ class NojunckFood extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "No  junk food",
+            "No junk food",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -48,8 +49,8 @@ class NojunckFood extends StatelessWidget {
                 backgroundColor: Color.fromARGB(255, 193, 192, 192),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => LanguageChallenge()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => NoJunckfoodd()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

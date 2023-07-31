@@ -268,21 +268,37 @@ import 'habititemcard.dart';
 
 class MyHomePageToday extends StatelessWidget {
   final List<Map<String, dynamic>> habitHistory;
-
   final String? documentId;
 
   const MyHomePageToday({Key? key, this.documentId, required this.habitHistory})
       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
-    final selectedDayProvider = Provider.of<SelectedDayProvider>(context);
+  // Function to reset the check_circle icon after 12 am
+  void resetCompletionStatusIfNeeded(BuildContext context) {
+    final now = DateTime.now();
+    if (now.hour >= 0 && now.minute == 0) {
+      final buttonProvider =
+          Provider.of<MyButtonClickedProvider>(context, listen: false);
+      final selectedDayProvider =
+          Provider.of<SelectedDayProvider>(context, listen: false);
 
-    if (DateTime.now().hour >= 0 && DateTime.now().minute == 0) {
+      // Reset the selected habits and day indices
       buttonProvider.resetHabitSelections();
+
+      // Select the current day
       selectedDayProvider.selectCurrentDay();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Call the resetCompletionStatusIfNeeded function to check and reset the completion status after 12 am
+    resetCompletionStatusIfNeeded(context);
+    final buttonProvider =
+        Provider.of<MyButtonClickedProvider>(context, listen: false);
+    final selectedDayProvider =
+        Provider.of<SelectedDayProvider>(context, listen: false);
+
     print("intodaypage${habitHistory}");
     return Scaffold(
       appBar: AppBar(

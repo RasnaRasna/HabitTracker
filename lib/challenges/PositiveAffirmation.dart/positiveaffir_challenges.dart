@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class PositiveAffirmationChallenges extends StatefulWidget {
-  PositiveAffirmationChallenges({Key? key}) : super(key: key);
+import '../../bottom_pages/challenges/savebuttonstate.dart';
+
+class PositiveAffirmationChallanges extends StatefulWidget {
+  PositiveAffirmationChallanges({Key? key}) : super(key: key);
 
   @override
-  _SelfLoveChallengesState createState() => _SelfLoveChallengesState();
+  _PositiveAffirmationChallangesState createState() =>
+      _PositiveAffirmationChallangesState();
 }
 
-class _SelfLoveChallengesState extends State<PositiveAffirmationChallenges> {
+class _PositiveAffirmationChallangesState
+    extends State<PositiveAffirmationChallanges> {
   final List<String> challenges = [
     "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
@@ -25,7 +30,7 @@ class _SelfLoveChallengesState extends State<PositiveAffirmationChallenges> {
       appBar: AppBar(
         actions: const [
           Text(
-            "Self Love",
+            "Positive Affirmation",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +44,8 @@ class _SelfLoveChallengesState extends State<PositiveAffirmationChallenges> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -51,6 +57,7 @@ class _SelfLoveChallengesState extends State<PositiveAffirmationChallenges> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
                           Border.all(color: Color.fromARGB(255, 218, 213, 213)),
                       borderRadius: BorderRadius.circular(10),
@@ -58,17 +65,21 @@ class _SelfLoveChallengesState extends State<PositiveAffirmationChallenges> {
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            setState(() {});
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

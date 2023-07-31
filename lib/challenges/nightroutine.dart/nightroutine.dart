@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/challenges/language.dart/languagechallenges.dart';
+import 'package:habits_track/challenges/nightroutine.dart/nightroutinechallenges.dart';
 import 'package:habits_track/const.dart';
 
 class NightRoutine extends StatelessWidget {
@@ -49,7 +50,7 @@ class NightRoutine extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => LanguageChallenge()));
+                          builder: (ctx) => NightroutineChallange()));
                     },
                     icon: const Icon(Icons.arrow_forward_ios_rounded)),
               ),

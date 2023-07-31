@@ -120,6 +120,8 @@ class _MonthBaseState extends State<MonthBase> {
                       calendarBuilders: CalendarBuilders(
                         defaultBuilder: (context, date, _) {
                           if (date.month != today.month) {
+                            // Check if the date is either the completion date or one of the selected dates.
+
                             return SizedBox.shrink();
                           }
 
@@ -131,6 +133,7 @@ class _MonthBaseState extends State<MonthBase> {
 
                           print(
                               "Date: $date, isSelected: $isSelected, isCompleted: $isCompleted");
+
                           return Container(
                             width: 30,
                             height: 30,
@@ -138,14 +141,18 @@ class _MonthBaseState extends State<MonthBase> {
                               shape: BoxShape.circle,
                               color: isSelected
                                   ? kredcolor
-                                  : (isCompleted ? kredcolor : korangecolor),
+                                  : (isCompleted
+                                      ? kredcolor
+                                      : calanderbacground),
                             ),
                             child: Center(
                               child: Text(
                                 date.day.toString(),
                                 style: TextStyle(
                                   fontSize: 13,
-                                  color: kwhite,
+                                  color: isSelected
+                                      ? kwhite
+                                      : (isCompleted ? kwhite : kblack),
                                 ),
                               ),
                             ),
@@ -177,3 +184,7 @@ class _MonthBaseState extends State<MonthBase> {
     );
   }
 }
+// }
+//   completedDate.year == date.year &&
+//                                     completedDate.month == date.month &&
+//                                     completedDate.day == date.day;

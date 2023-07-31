@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HappinessChallenges extends StatefulWidget {
-  HappinessChallenges({Key? key}) : super(key: key);
+import '../../bottom_pages/challenges/savebuttonstate.dart';
+
+class HappyChallange extends StatefulWidget {
+  HappyChallange({Key? key}) : super(key: key);
 
   @override
-  _SelfLoveChallengesState createState() => _SelfLoveChallengesState();
+  _HappyChallangeState createState() => _HappyChallangeState();
 }
 
-class _SelfLoveChallengesState extends State<HappinessChallenges> {
+class _HappyChallangeState extends State<HappyChallange> {
   final List<String> challenges = [
     "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
@@ -18,14 +22,32 @@ class _SelfLoveChallengesState extends State<HappinessChallenges> {
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  void initState() {
+    super.initState();
+    // Load the saved checkbox states when the screen is initialized.
+    _loadSavedChallengeValues();
+  }
+
+  Future<void> _loadSavedChallengeValues() async {
+    await context
+        .read<ChallengeState>()
+        .loadSavedChallengeValues('HappyChallange');
+    // Set the loaded checkbox values to the local variable.
+    setState(() {
+      challengeValues =
+          context.read<ChallengeState>().getChallengeValues('HappyChallange');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<bool> challengeValues =
+        context.watch<ChallengeState>().getChallengeValues('HappyChallange');
     return Scaffold(
       appBar: AppBar(
         actions: const [
           Text(
-            "Self Love",
+            "Happiness",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +61,8 @@ class _SelfLoveChallengesState extends State<HappinessChallenges> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,
@@ -51,6 +74,7 @@ class _SelfLoveChallengesState extends State<HappinessChallenges> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: korangecolor,
                       border:
                           Border.all(color: Color.fromARGB(255, 218, 213, 213)),
                       borderRadius: BorderRadius.circular(10),
@@ -58,17 +82,22 @@ class _SelfLoveChallengesState extends State<HappinessChallenges> {
                     child: Row(
                       children: [
                         Checkbox(
+                          activeColor: kwhite,
+                          checkColor: kredcolor,
+                          side: BorderSide(color: kwhite, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
-                            setState(() {
-                              challengeValues[index] = newValue ?? false;
-                            });
+                            context.read<ChallengeState>().updateChallengeValue(
+                                'HappyChallange', index, newValue ?? false);
                           },
                         ),
                         Expanded(
-                          child: Text(
-                            challenges[index],
-                            style: TextStyle(fontSize: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              challenges[index],
+                              style: TextStyle(fontSize: 16, color: kwhite),
+                            ),
                           ),
                         ),
                       ],

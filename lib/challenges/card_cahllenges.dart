@@ -18,7 +18,7 @@ import 'package:habits_track/challenges/selflovee.dart/selflove.dart';
 import 'package:habits_track/challenges/socialmedia.dart/socialmedia.dart';
 import 'package:habits_track/challenges/study/study.dart';
 import 'package:habits_track/challenges/walking.dart/walking.dart';
-
+import 'package:habits_track/const.dart';
 import 'fixsleep.dart/fixsleep.dart';
 
 GridView challengeitems(BuildContext context) {
@@ -39,7 +39,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -64,7 +67,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -89,7 +95,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -114,7 +123,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -139,7 +151,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -164,7 +179,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -189,7 +207,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -214,7 +235,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -239,7 +263,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -264,7 +291,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -289,7 +319,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -314,7 +347,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -339,7 +375,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -364,7 +403,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -389,7 +431,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -414,7 +459,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -439,7 +487,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -449,7 +500,7 @@ GridView challengeitems(BuildContext context) {
                 ),
                 Text(
                   "positive affirmation",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                 )
               ],
             ),
@@ -464,7 +515,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -489,7 +543,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(
@@ -514,7 +571,10 @@ GridView challengeitems(BuildContext context) {
         child: Card(
           elevation: 10,
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(width: 1, color: korangecolor),
+                color: kwhite),
             child: Column(
               children: [
                 Image.asset(

@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:habits_track/bottom_pages/Today/today.dart';
-import 'package:habits_track/login/sign.dart';
+
 import 'package:habits_track/provider/buttonclickedstate.dart';
 import 'package:habits_track/provider/check_cirlebothpage.dart';
 import 'package:habits_track/provider/habitcomplition.dart';
@@ -11,7 +10,7 @@ import 'package:habits_track/provider/selectDateprovider.dart';
 import 'package:habits_track/provider/stateofbutton.dart';
 import 'package:provider/provider.dart';
 
-import 'bottom_pages/month/month.dart';
+import 'bottom_pages/challenges/savebuttonstate.dart';
 import 'onboarding/mainpage.dart';
 
 void main() async {
@@ -43,6 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SelectedDaysProvider()),
         ChangeNotifierProvider(
           create: (_) => HabitCompletionProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ChallengeState(),
         )
       ],
       child: MaterialApp(

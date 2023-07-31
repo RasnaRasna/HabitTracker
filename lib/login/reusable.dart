@@ -16,7 +16,7 @@ TextFormField reusableTextfield(
     cursorColor: kwhite,
     style: const TextStyle(color: kblack),
     decoration: InputDecoration(
-      fillColor: Colors.white,
+      fillColor: Color.fromARGB(255, 200, 186, 186),
       prefixIcon: Icon(icon, color: Colors.black),
       hintText: text,
       floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -51,7 +51,7 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
             if (states.contains(MaterialState.pressed)) {
               return kblack;
             } else {
-              return Colors.white;
+              return Color.fromARGB(255, 200, 186, 186);
             }
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

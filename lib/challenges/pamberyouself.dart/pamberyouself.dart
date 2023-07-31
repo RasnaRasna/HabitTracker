@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/challenges/language.dart/languagechallenges.dart';
+import 'package:habits_track/challenges/pamberyouself.dart/pamberyouselfchallenges.dart';
 import 'package:habits_track/const.dart';
 
 class PamberYouself extends StatelessWidget {
@@ -48,8 +49,8 @@ class PamberYouself extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 225, 222, 222),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => LanguageChallenge()));
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (ctx) => pamber()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

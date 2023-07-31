@@ -35,15 +35,14 @@ dependencies:
   firebase_core: ^2.14.0
   flutter:
     sdk: flutter
+  flutter_blurhash: ^0.7.0
   flutter_heatmap_calendar: ^1.0.5
   google_fonts: ^5.0.0
   google_sign_in: ^6.1.4
   provider: ^6.0.5
   shared_preferences: ^2.2.0
   table_calendar: ^3.0.9
-  flutter_blurhash: ^0.7.0
 dev_dependencies:
-  
   convex_bottom_bar: ^3.2.0
   cuberto_bottom_bar: ^2.0.0
   fancy_bottom_navigation: ^0.3.3

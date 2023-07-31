@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/challenges/kindness.dart/kindnesschallenges.dart';
 import 'package:habits_track/challenges/selflovee.dart/challengesof_selflove.dart';
 import 'package:habits_track/const.dart';
 
@@ -11,7 +12,7 @@ class Kindness extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Self Love",
+            "Kindness",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -49,7 +50,7 @@ class Kindness extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => SelfLoveChallenges()));
+                          builder: (ctx) => KindesChallanges()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

@@ -48,8 +48,8 @@ class NewDay extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 225, 222, 222),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => newyearchallenges()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => NewdayNewYou()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),

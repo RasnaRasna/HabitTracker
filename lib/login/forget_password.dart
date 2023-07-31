@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/const.dart';
 import 'package:habits_track/login/resetpassword.dart';
 
 Widget forgetpassword(BuildContext context) {
@@ -14,7 +15,7 @@ Widget forgetpassword(BuildContext context) {
       child: const Text(
         "Forgot password?",
         style: TextStyle(
-          color: Colors.black,
+          color: kwhite,
         ),
         textAlign: TextAlign.right,
       ),

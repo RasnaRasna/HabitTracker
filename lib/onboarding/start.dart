@@ -98,10 +98,15 @@ class StartingPage extends StatelessWidget {
                         ),
                         width: 100,
                         height: 40,
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             'Male',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: genderProvider.selectedGender == "Male"
+                                  ? kwhite
+                                  : kblack,
+                            ),
                           ),
                         ),
                       ),
@@ -130,10 +135,15 @@ class StartingPage extends StatelessWidget {
                         ),
                         width: 100,
                         height: 40,
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             'Female',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: genderProvider.selectedGender == "Female"
+                                  ? kwhite
+                                  : kblack,
+                            ),
                           ),
                         ),
                       ),
@@ -258,8 +268,12 @@ class StartingPage extends StatelessWidget {
                     }
                   },
                   child: CircleAvatar(
+                    backgroundColor: kredcolor,
                     radius: 30,
-                    child: Icon(Icons.arrow_forward),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: kwhite,
+                    ),
                   ),
                 ),
               ),

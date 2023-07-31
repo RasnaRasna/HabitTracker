@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class walkingChallenges extends StatefulWidget {
-  walkingChallenges({Key? key}) : super(key: key);
+import '../../bottom_pages/challenges/savebuttonstate.dart';
+
+class StudyChallanges extends StatefulWidget {
+  StudyChallanges({Key? key}) : super(key: key);
 
   @override
-  _walkingChallengesState createState() => _walkingChallengesState();
+  _StudyChallangesState createState() => _StudyChallangesState();
 }
 
-class _walkingChallengesState extends State<walkingChallenges> {
+class _StudyChallangesState extends State<StudyChallanges> {
   final List<String> challenges = [
     "Write down 10 things you love about yourself.",
     "Look in the mirror and repeat these things to yourself.",
@@ -25,7 +28,7 @@ class _walkingChallengesState extends State<walkingChallenges> {
       appBar: AppBar(
         actions: const [
           Text(
-            "Walking",
+            "Study",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -39,7 +42,8 @@ class _walkingChallengesState extends State<walkingChallenges> {
             alignment: Alignment.topCenter,
             child: Text(
               "Mark the completed challenges",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: kredcolor),
             ),
           ),
           kheight20,

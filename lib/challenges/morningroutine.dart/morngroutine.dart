@@ -49,7 +49,7 @@ class MorningRoutine extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => MorningChallenges()));
+                          builder: (ctx) => MorningRoutineChallange()));
                     },
                     icon: Icon(Icons.arrow_forward_ios_rounded)),
               ),
