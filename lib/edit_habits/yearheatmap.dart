@@ -225,7 +225,7 @@ Widget buildHeatMapYear(
         return Text('Error: ${snapshot.error}');
       }
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       }
 
       final habitHistory = snapshot.data!.docs.map((doc) {
@@ -255,17 +255,19 @@ Widget buildHeatMapYear(
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                 child: Text(
                   habitName, // Replace 0 with the index of the habit name you want to display
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: Text(
                   ("${today.year}"), // Display the current year dynamically
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Divider(
+              const Divider(
                 indent: 20,
                 endIndent: 20,
               ),
@@ -296,13 +298,13 @@ Widget _buildMonthHeatMap(int month, Map<DateTime, int> dataset,
   final monthDates = dataset.keys.where((date) => date.month == month).toList();
 
   return Container(
-    margin: EdgeInsets.all(4),
+    margin: const EdgeInsets.all(4),
     child: Column(
       children: [
         kheight10,
         Text(
           DateFormat('MMMM').format(DateTime(DateTime.now().year, month)),
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
             color: Color.fromARGB(255, 64, 64, 64),
@@ -313,7 +315,7 @@ Widget _buildMonthHeatMap(int month, Map<DateTime, int> dataset,
           child: GridView.count(
             crossAxisCount: 7,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: monthDates.map((date) {
               final value = dataset[date];
               final isSelected = habitHistory.firstWhere(
@@ -352,5 +354,5 @@ Color _getColorForValue(int value, bool isSelected) {
     return kredcolor;
   }
   // Return the default color (grey) for other cases
-  return Color.fromARGB(255, 226, 217, 188);
+  return const Color.fromARGB(255, 226, 217, 188);
 }

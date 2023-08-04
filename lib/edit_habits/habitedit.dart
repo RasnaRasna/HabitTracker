@@ -164,10 +164,11 @@ class _HabitEditState extends State<HabitEdit> {
                       });
                     },
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
                         border: InputBorder.none,
                         hintText: selectedHabit,
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
                   ),
                 ),
@@ -212,14 +213,15 @@ class _HabitEditState extends State<HabitEdit> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(
-                                    color: Color.fromARGB(255, 229, 113, 151),
+                                    color: const Color.fromARGB(
+                                        255, 229, 113, 151),
                                   ),
                                 ),
                                 width: 130,
                                 child: Center(
                                   child: Text(
                                     templates['habit Name'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
@@ -237,12 +239,12 @@ class _HabitEditState extends State<HabitEdit> {
                     ),
                   );
                 }
-                return Text(
+                return const Text(
                     "No templates"); // Return a widget when snapshot does not have data
               },
             ),
             kheight10,
-            Text(
+            const Text(
               "How many days per Week should you complete that habit? ",
               style: TextStyle(
                   fontSize: 20,
@@ -259,7 +261,7 @@ class _HabitEditState extends State<HabitEdit> {
               },
             ),
             kheight10,
-            Text(
+            const Text(
               "Start Date ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -280,7 +282,7 @@ class _HabitEditState extends State<HabitEdit> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                            color: Color.fromARGB(255, 229, 113, 151))),
+                            color: const Color.fromARGB(255, 229, 113, 151))),
                     width: 350,
                     height: 50,
                     child: Center(
@@ -297,7 +299,7 @@ class _HabitEditState extends State<HabitEdit> {
               ),
             ),
             kheight10,
-            Text(
+            const Text(
               "Reminders  ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -318,7 +320,7 @@ class _HabitEditState extends State<HabitEdit> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
-                          color: Color.fromARGB(255, 229, 113, 151))),
+                          color: const Color.fromARGB(255, 229, 113, 151))),
                   width: 350,
                   height: 50,
                   child: const Center(
@@ -350,10 +352,10 @@ class _HabitEditState extends State<HabitEdit> {
                   builder: (BuildContext context) => AlertDialog(
                     title: const Center(child: Text('Delete Habit')),
                     content: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Are you sure you want to delete this habit $selectedHabit?',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
@@ -447,7 +449,7 @@ class _HabitEditState extends State<HabitEdit> {
       });
       // Display a success message or navigate to a new screen
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.green,
           content: Text('Habit updated successfully'),
         ),
@@ -456,7 +458,7 @@ class _HabitEditState extends State<HabitEdit> {
       print('Error updating habit data: $e');
       // Display an error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.red,
           content: Text('Failed to update habit'),
         ),
@@ -513,7 +515,7 @@ class _HabitEditState extends State<HabitEdit> {
 
       // Display a success message or navigate to a new screen
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.green,
           content: Text('Habit and associated history deleted successfully'),
         ),
@@ -522,7 +524,7 @@ class _HabitEditState extends State<HabitEdit> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (ctx) => MyHomePageToday(
+            builder: (ctx) => const MyHomePageToday(
                   habitHistory: [],
                 )),
       );
@@ -530,7 +532,7 @@ class _HabitEditState extends State<HabitEdit> {
       print('Error deleting habit: $e');
       // Display an error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to delete habit'),
         ),
       );

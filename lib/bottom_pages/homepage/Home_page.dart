@@ -83,7 +83,8 @@ class Homapage extends StatelessWidget {
                       width: 70.0,
                       height: 70.0,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(35.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(35.0)),
                         border: Border.all(
                           color: kredcolor,
                           width: 2.0,
@@ -96,7 +97,7 @@ class Homapage extends StatelessWidget {
                             image: DecorationImage(
                               image: AssetImage(imagePath),
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(
+                            borderRadius: const BorderRadius.all(Radius.circular(
                                 15.0)), // Half of the width/height to make the image circular
                           ),
                         ),
@@ -117,7 +118,7 @@ class Homapage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
                         "${getGreeting()} $name ..,",
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                     ),
                   ],
@@ -154,8 +155,8 @@ class Homapage extends StatelessWidget {
                       height: 200,
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               "DAILY JOURNAL",
                               style:
@@ -181,8 +182,8 @@ class Homapage extends StatelessWidget {
                                           Moodchecking(name: name)),
                                 );
                               },
-                              icon: Icon(Icons.emoji_emotions),
-                              label: Text(
+                              icon: const Icon(Icons.emoji_emotions),
+                              label: const Text(
                                 "Daily mood check-in",
                                 style: TextStyle(color: kredcolor),
                               ),
@@ -226,7 +227,7 @@ class Homapage extends StatelessWidget {
           //     ),
           //   ),
           // ),
-          Hompagecard(),
+          const Hompagecard(),
         ],
       ),
       floatingActionButton: Padding(
@@ -239,7 +240,7 @@ class Homapage extends StatelessWidget {
                       habitHistory: habitHistory,
                     )));
           },
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           ),

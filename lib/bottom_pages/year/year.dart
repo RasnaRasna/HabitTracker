@@ -1,172 +1,3 @@
-// import 'dart:math';
-
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/material.dart';
-
-// class YearBase extends StatefulWidget {
-//   const YearBase({Key? key}) : super(key: key);
-
-//   @override
-//   State<YearBase> createState() => _YearBaseState();
-// }
-
-// class _YearBaseState extends State<YearBase> {
-//   final DateTime today = DateTime.now();
-//   Map<String, int> habitsData =
-//       {}; // Modified to store the item count instead of completion dates
-//   Map<DateTime, bool> completionStatus = {};
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchHabitsData();
-//   }
-
-//   Future<void> fetchHabitsData() async {
-//     final habitSnapshot =
-//         await FirebaseFirestore.instance.collection('add_habits').get();
-//     final habitNames =
-//         habitSnapshot.docs.map((doc) => doc['name'] as String).toList();
-//     print(habitsData);
-//     final startDate = DateTime(DateTime.now().year, 1, 1);
-//     final endDate = DateTime(DateTime.now().year, 12, 31);
-
-//     // Initialize the habitsData map with 0 item count for each habit
-//     for (var habitName in habitNames) {
-//       habitsData[habitName] = 0;
-//     }
-//     // Fetch habit data (completion dates) for each habit
-//     for (var habitName in habitNames) {
-//       final habitId =
-//           habitSnapshot.docs.firstWhere((doc) => doc['name'] == habitName).id;
-//       final habitDataSnapshot = await FirebaseFirestore.instance
-//           .collection('history')
-//           .where('habitId', isEqualTo: habitId)
-//           .get();
-//       print(habitId);
-//       print('Completion Status for Habit $habitName:');
-//       completionStatus.forEach((date, isCompleted) {
-//         print('$date: $isCompleted');
-//       });
-
-//       habitsData[habitName] =
-//           habitDataSnapshot.docs.length; // Update the item count for each habit
-
-//       for (var doc in habitDataSnapshot.docs) {
-//         final data = doc.data();
-//         final completionDate = data['completionDate'] as Timestamp?;
-//         if (completionDate != null) {
-//           final date = completionDate.toDate();
-//           completionStatus[date] = true;
-//         }
-//       }
-//     }
-
-//     setState(() {}); // Trigger a rebuild to display the heatmap
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         appBar: AppBar(
-//           automaticallyImplyLeading: false,
-//           centerTitle: true,
-//           title: Text("2023"),
-//         ),
-//         body: buildHeatMapYeartototalheatmap(),
-//       ),
-//     );
-//   }
-
-//   Widget buildHeatMapYeartototalheatmap() {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 20),
-//       child: ListView(
-//         children: habitsData.entries.map((entry) {
-//           final habitName = entry.key;
-//           // final itemCount = entry.value;
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(
-//                   habitName,
-//                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-//                 ),
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 22),
-//                   child: Text(
-//                     "2023",
-//                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-//                   ),
-//                 ),
-//                 Divider(
-//                   indent: 20,
-//                   endIndent: 20,
-//                 ),
-//                 for (int i = 0; i < 12; i += 3)
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                     children: [
-//                       for (int monthIndex = i + 1;
-//                           monthIndex <= i + 3;
-//                           monthIndex++)
-//                         if (monthIndex <= 12)
-//                           Expanded(
-//                             child: _buildMonthHeatMap(monthIndex, habitName),
-//                           ),
-//                     ],
-//                   ),
-//               ],
-//             ),
-//           );
-//         }).toList(),
-//       ),
-//     );
-//   }
-
-//   Widget _buildMonthHeatMap(int month, String habitName) {
-//     final startDate = DateTime(DateTime.now().year, month, 1);
-//     final endDate = DateTime(DateTime.now().year, month + 1, 0);
-
-//     return Padding(
-//       padding: const EdgeInsets.all(8.0),
-//       child: GridView.count(
-//         crossAxisCount: 7,
-//         shrinkWrap: true,
-//         physics: NeverScrollableScrollPhysics(),
-//         children: List.generate(endDate.day, (dayIndex) {
-//           final date = startDate.add(Duration(days: dayIndex));
-//           final color = completionStatus[date] == true
-//               ? const Color.fromARGB(255, 5, 86, 8)
-//               : Colors.grey;
-//           return Padding(
-//             padding: const EdgeInsets.all(1),
-//             child: Container(
-//               decoration: BoxDecoration(
-//                 color: color,
-//                 borderRadius: BorderRadius.circular(2),
-//               ),
-//               width: 10,
-//               height: 10,
-//             ),
-//           );
-//         }),
-//       ),
-//     );
-//   }
-
-//   Color _getColorForValue(int value) {
-//     // Define your color mapping logic here
-//     if (value == 1) {
-//       return Colors.green;
-//     }
-//     return Colors.grey;
-//   }
-// }
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
@@ -203,22 +34,36 @@ class _YearBaseState extends State<YearBase> {
     }
 
     // Fetch habit data (completion dates) for each habit
+    // Loop through each habitName in the habitNames list
     for (var habitName in habitNames) {
+      // Find the habitId that matches the current habitName
       final habitId =
           habitSnapshot.docs.firstWhere((doc) => doc['name'] == habitName).id;
+
+      // Fetch data from the "history" collection where the habitId matches the current habit
       final habitDataSnapshot = await FirebaseFirestore.instance
           .collection('history')
           .where('habitId', isEqualTo: habitId)
           .get();
+
+      // Print the habitId to the console
       print(habitId);
 
+      // Loop through the documents in the habitDataSnapshot
       for (var doc in habitDataSnapshot.docs) {
+        // Extract the data (fields and values) from the current document
         final data = doc.data();
+
+        // Extract the completionDate from the data (if it exists)
         final completionDate = data['completionDate'] as Timestamp?;
+
+        // Check if completionDate is not null (habit has been completed)
         if (completionDate != null) {
+          // Convert the completionDate to a DateTime object
           final date = completionDate.toDate();
-          habitsData[habitName]![date] =
-              true; // Update the completion status for the specific habit and date
+
+          // Update the habitsData map to indicate that the habit with habitName has been completed on the date
+          habitsData[habitName]![date] = true;
         }
       }
     }
@@ -302,9 +147,13 @@ class _YearBaseState extends State<YearBase> {
   }
 
   Widget _buildMonthHeatMap(int month, String habitName) {
+// Calculate the startDate for the given month
     final startDate = DateTime(DateTime.now().year, month, 1);
+
+// Calculate the endDate for the given month by getting the last day of the current month
     final endDate = DateTime(DateTime.now().year, month + 1, 0);
 
+// Retrieve the completionStatus for the habit with the current habitName from the habitsData map
     final completionStatus = habitsData[habitName];
 
     return Padding(

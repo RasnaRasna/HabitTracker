@@ -177,7 +177,9 @@ class HeatMapCell extends StatelessWidget {
         padding: const EdgeInsets.all(0.3),
         child: Container(
           decoration: BoxDecoration(
-            color: isCompleted ? kredcolor : Color.fromARGB(255, 226, 217, 188),
+            color: isCompleted
+                ? kredcolor
+                : const Color.fromARGB(255, 226, 217, 188),
             borderRadius: BorderRadius.circular(3),
           ),
           child: Center(
@@ -203,7 +205,7 @@ Widget buildHeatMap(String habitId) {
         return Text('Error: ${snapshot.error}');
       }
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       }
 
       final habitHistory = snapshot.data!.docs.map((doc) {
@@ -230,13 +232,15 @@ Widget buildHeatMap(String habitId) {
         dataset[date] = randomValue;
       }
 
+      final int completedDaysCount = habitHistory.length;
+
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Container(
           height: 360,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(17),
-            border: Border.all(color: Color.fromARGB(255, 193, 192, 192)),
+            border: Border.all(color: const Color.fromARGB(255, 193, 192, 192)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,6 +289,35 @@ Widget buildHeatMap(String habitId) {
                   ),
                 ),
               ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize:
+                            16, // Set the desired font size for the whole text
+                      ),
+                      children: [
+                        const TextSpan(
+                          text: "Days Completed ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors
+                                  .black // Set normal font weight for the first part
+                              ),
+                        ),
+                        TextSpan(
+                          text:
+                              "$completedDaysCount of 365 days", // Use the dynamic count here
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black
+                              // Set bold font weight for the second part
+                              ),
+                        ),
+                      ],
+                    ),
+                  ))
             ],
           ),
         ),
@@ -297,5 +330,5 @@ Color _getColorForValue(int value) {
   if (value == 1) {
     return kredcolor;
   }
-  return Color.fromARGB(255, 246, 211, 223);
+  return const Color.fromARGB(255, 246, 211, 223);
 }

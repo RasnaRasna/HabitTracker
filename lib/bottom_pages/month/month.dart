@@ -121,7 +121,6 @@ class _MonthBaseState extends State<MonthBase> {
                         defaultBuilder: (context, date, _) {
                           if (date.month != today.month) {
                             // Check if the date is either the completion date or one of the selected dates.
-
                             return SizedBox.shrink();
                           }
 

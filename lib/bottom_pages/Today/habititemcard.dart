@@ -103,11 +103,14 @@ class HabitItemsCard extends StatelessWidget {
                             KWidth7,
                             IconButton(
                               onPressed: () {
+                                // Check if the habit with habitId is already selected
                                 if (buttonProvider.isHabitSelected(habitId)) {
+                                  // If it is selected, deselect the habit and reset the selected day index for the habit
                                   buttonProvider.toggleHabitSelection(habitId);
-                                  buttonProvider.setSelectedDayIndex(habitId,
-                                      -1); // Reset the selected day index for the habit
+                                  buttonProvider.setSelectedDayIndex(
+                                      habitId, -1);
                                 } else {
+                                  // If it is not selected, select the habit and set the selected day index to the currentDayIndex
                                   buttonProvider.toggleHabitSelection(habitId);
                                   buttonProvider.setSelectedDayIndex(
                                       habitId, currentDayIndex);
@@ -122,19 +125,21 @@ class HabitItemsCard extends StatelessWidget {
                                     AsyncSnapshot<DocumentSnapshot> snapshot) {
                                   if (snapshot.hasError) {
                                     // Handle any errors that occur while fetching data
-                                    return Icon(
+                                    return const Icon(
                                       Icons.check_circle,
-                                      color:
-                                          Colors.grey, // Set the default color
+                                      color: Colors
+                                          .grey, // Set the default color to grey
                                     );
                                   }
 
                                   final habitData = snapshot.data?.data()
                                       as Map<String, dynamic>?;
 
+                                  // Check if the habit is currently selected (defaults to false if data is null)
                                   final bool isSelected =
                                       habitData?['selected'] as bool? ?? false;
 
+                                  // Return the Icon with the appropriate color based on isSelected
                                   return Icon(
                                     Icons.check_circle,
                                     color: isSelected ? kredcolor : Colors.grey,
@@ -145,13 +150,13 @@ class HabitItemsCard extends StatelessWidget {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 30,
                             vertical: 10,
                           ),
                           child: Text(
                             '0/$daysPerWeek',
-                            style: TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 15),
                           ),
                         ),
                       ],

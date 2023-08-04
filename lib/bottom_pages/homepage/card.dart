@@ -7,7 +7,7 @@ class Hompagecard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400,
       width: 400,
       child: GridView.count(
@@ -16,8 +16,8 @@ class Hompagecard extends StatelessWidget {
           mainAxisSpacing: 10.0,
           childAspectRatio: 1.0,
           shrinkWrap: true,
-          padding: EdgeInsets.all(20.0),
-          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(20.0),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             InkWell(
               onTap: () {
@@ -27,7 +27,7 @@ class Hompagecard extends StatelessWidget {
                 elevation: 10,
                 child: Container(
                   color: Colors.white,
-                  child: Column(
+                  child: const Column(
                     children: [
                       // Image.asset(
                       //   fit: BoxFit.cover,
@@ -45,7 +45,7 @@ class Hompagecard extends StatelessWidget {
                 elevation: 10,
                 child: Container(
                   color: Colors.white,
-                  child: Column(
+                  child: const Column(
                     children: [
                       // Image.asset(
                       //   "images/workout.jpeg",
@@ -68,7 +68,7 @@ void _showBottomSheet(BuildContext context) {
       return Container(
         height: 400,
         width: 370,
-        child: Center(
+        child: const Center(
           child: Text(
             'This is the bottom sheet!',
             style: TextStyle(fontSize: 20),

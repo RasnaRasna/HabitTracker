@@ -42,7 +42,7 @@ class EditHabits extends StatelessWidget {
                         habitHistory: habitHistory,
                       )));
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
         centerTitle: true,
         title: Text(habitName!),
       ),
@@ -52,7 +52,7 @@ class EditHabits extends StatelessWidget {
             kheight20,
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 17,
                 ),
                 GestureDetector(
@@ -71,7 +71,7 @@ class EditHabits extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                          color: Color.fromARGB(255, 202, 199, 199),
+                          color: const Color.fromARGB(255, 202, 199, 199),
                         )),
                     width: 150,
                     height: 40,
@@ -82,19 +82,19 @@ class EditHabits extends StatelessWidget {
                     )),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => Reminderpage()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => const Reminderpage()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                          color: Color.fromARGB(255, 202, 199, 199),
+                          color: const Color.fromARGB(255, 202, 199, 199),
                         )),
                     width: 150,
                     height: 40,
@@ -108,12 +108,12 @@ class EditHabits extends StatelessWidget {
               ],
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 110,
                 ),
                 GestureDetector(
@@ -131,7 +131,7 @@ class EditHabits extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                          color: Color.fromARGB(255, 202, 199, 199),
+                          color: const Color.fromARGB(255, 202, 199, 199),
                         )),
                     width: 150,
                     height: 40,
@@ -142,7 +142,7 @@ class EditHabits extends StatelessWidget {
                     )),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
               ],
@@ -155,21 +155,20 @@ class EditHabits extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                    color: Color.fromARGB(255, 202, 199, 199), width: 1),
+                    color: const Color.fromARGB(255, 202, 199, 199), width: 1),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 19, vertical: 6),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 19, vertical: 6),
                     child: Text(
                       "All -time status",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Kwidth,
                       Text("Current Streak"),
@@ -177,10 +176,18 @@ class EditHabits extends StatelessWidget {
                       Text("4 Days")
                     ],
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Kwidth,
                       Text("Completion "),
+                      Kwidth,
+                      Text("0 %(0 of 4 weeks)")
+                    ],
+                  ),
+                  const Row(
+                    children: [
+                      Kwidth,
+                      Text("Days Completion "),
                       Kwidth,
                       Text("24 %(9 of 37 days)")
                     ],
@@ -188,7 +195,7 @@ class EditHabits extends StatelessWidget {
                   Row(
                     children: [
                       Kwidth,
-                      Text("Start Date"),
+                      const Text("Start Date"),
                       Kwidth,
                       Text(
                         startDate != null

@@ -296,8 +296,8 @@ class MyHomePageToday extends StatelessWidget {
     resetCompletionStatusIfNeeded(context);
     final buttonProvider =
         Provider.of<MyButtonClickedProvider>(context, listen: false);
-    final selectedDayProvider =
-        Provider.of<SelectedDayProvider>(context, listen: false);
+    // final selectedDayProvider =
+    //     Provider.of<SelectedDayProvider>(context, listen: false);
 
     print("intodaypage${habitHistory}");
     return Scaffold(
