@@ -372,6 +372,12 @@ class MyHomePageToday extends StatelessWidget {
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   // If data is still loading, show the CircularProgressIndicator
+            //   return Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             }

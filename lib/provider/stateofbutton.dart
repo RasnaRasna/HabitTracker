@@ -44,6 +44,7 @@ import 'package:flutter/material.dart';
 class MyButtonClickedProvider with ChangeNotifier {
   Map<String, bool> selectedHabitIds = {};
   Map<String, int> selectedDayIndices = {};
+  List<Map<String, dynamic>> habitHistory = []; // Add this line
 
   void toggleHabitSelection(String habitId) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -65,6 +66,18 @@ class MyButtonClickedProvider with ChangeNotifier {
       });
     }
 
+    notifyListeners();
+  }
+
+  void updateHabitHistory(List<Map<String, dynamic>> newHabitHistory) {
+    habitHistory = newHabitHistory;
+    notifyListeners(); // Notify listeners of the change
+  }
+
+// Additional method to update isSelected state
+  void updateIsSelected(int index, bool isSelected) {
+    habitHistory[index]['isSelected'] =
+        isSelected; // Remove the underscore here
     notifyListeners();
   }
 

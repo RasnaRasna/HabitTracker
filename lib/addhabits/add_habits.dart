@@ -447,10 +447,8 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../bottom_pages/bottom_bar.dart';
-import '../provider/notesand_iconcolors.dart';
 import '../reminder/reminder.dart';
 import 'weekbox.dart';
 
@@ -570,12 +568,17 @@ class _AddhabitsState extends State<Addhabits> {
                       });
                     },
                     decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        border: InputBorder.none,
-                        hintText: selectedHabit,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 20),
+                      border: InputBorder.none,
+                      hintText: selectedHabit, // Keep the hint text here
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color:
+                            Habitname.text.isEmpty ? Colors.black : Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -797,11 +800,44 @@ class _AddhabitsState extends State<Addhabits> {
       final user = FirebaseAuth.instance.currentUser;
       final userId = user?.uid;
 
+      // Check if the selectedHabit is empty or null
+      if (selectedHabit == null || selectedHabit!.trim().isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please enter a valid habit name'),
+          ),
+        );
+        return;
+      }
+
+      // Check if selectedDaysPerWeek is a valid value
+      if (selectedDaysPerWeek < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please select the number of days per week'),
+          ),
+        );
+        return;
+      }
+
+      // Check if selectedDate is null or not a future date
+      if (selectedDate == null || selectedDate!.isBefore(DateTime.now())) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Please select a valid future date'),
+          ),
+        );
+        return;
+      }
+
+      // All validation checks passed, add the habit data to the database
       final QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('add_habits')
           .where('name', isEqualTo: selectedHabit)
-          .where('userId',
-              isEqualTo: userId) // Add the query to check the user ID
+          .where('userId', isEqualTo: userId)
           .get();
 
       if (snapshot.docs.isNotEmpty) {

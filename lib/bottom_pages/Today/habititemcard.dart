@@ -39,19 +39,22 @@ class HabitItemsCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Card(
           child: GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (ctx) => EditHabits(
-                  habitId: habitData.id,
-                  habitName: habitName,
-                  daysPerWeek: daysPerWeek,
-                  startDate: startDate,
-                  selectedDate: startDate,
-                  habitData: habitData,
-                  habitHistory: habitHistory,
+            onTap: () {
+              print("habitHistory in MyHomePageToday: $habitHistory");
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => EditHabits(
+                    habitId: habitData.id,
+                    habitName: habitName,
+                    daysPerWeek: daysPerWeek,
+                    startDate: startDate,
+                    selectedDate: startDate,
+                    habitData: habitData,
+                    habitHistory: habitHistory,
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,

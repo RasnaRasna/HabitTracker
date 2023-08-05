@@ -208,10 +208,10 @@ class _bottombarState extends State<bottombar> {
           habitHistory: widget.habitHistory,
         ),
       ),
-      MonthBase(),
-      YearBase(),
+      const MonthBase(),
+      const YearBase(),
       const ChallengesPage(),
-      const DiscoverPage(),
+      const EntriesScreen(),
     ];
 
     return SafeArea(
@@ -236,11 +236,12 @@ class _bottombarState extends State<bottombar> {
                 activeColor: kredcolor,
                 curve: Curves.fastLinearToSlowEaseIn,
                 iconSize: 24,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                duration: Duration(milliseconds: 800),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                duration: const Duration(milliseconds: 800),
                 tabBackgroundColor: Colors.white,
                 tabs: [
-                  GButton(
+                  const GButton(
                     icon: Icons.home,
                     text: 'Today',
                     iconColor: kwhite,
@@ -255,14 +256,14 @@ class _bottombarState extends State<bottombar> {
                     text: '${today.year}',
                     iconColor: kwhite,
                   ),
-                  GButton(
+                  const GButton(
                     icon: Icons.back_hand,
                     text: 'Challenge',
                     iconColor: kwhite,
                   ),
-                  GButton(
-                    icon: Icons.search,
-                    text: 'Discover',
+                  const GButton(
+                    icon: Icons.message_sharp,
+                    text: 'Entries',
                     iconColor: kwhite,
                   ),
                 ],

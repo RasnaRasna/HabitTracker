@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DiscoverPage extends StatelessWidget {
-  const DiscoverPage({super.key});
+class EntriesScreen extends StatelessWidget {
+  const EntriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

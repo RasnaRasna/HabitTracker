@@ -53,7 +53,7 @@ class EditHabits extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(
-                  width: 17,
+                  width: 30,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -118,6 +118,8 @@ class EditHabits extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    print("habitHistory in EditHabits: $habitHistory");
+
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (ctx) => History(
                         selectedDate: startDate!,
@@ -149,7 +151,7 @@ class EditHabits extends StatelessWidget {
             ),
             kheight20,
             Container(
-              width: 320,
+              width: 350,
               height: 130,
               decoration: BoxDecoration(
                 color: Colors.white,
