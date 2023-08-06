@@ -822,16 +822,16 @@ class _AddhabitsState extends State<Addhabits> {
         return;
       }
 
-      // Check if selectedDate is null or not a future date
-      if (selectedDate == null || selectedDate!.isBefore(DateTime.now())) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Colors.red,
-            content: Text('Please select a valid future date'),
-          ),
-        );
-        return;
-      }
+      // // Check if selectedDate is null or not a future date
+      // if (selectedDate == null || selectedDate!.isBefore(DateTime.now())) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       backgroundColor: Colors.red,
+      //       content: Text('Please select a valid future date'),
+      //     ),
+      //   );
+      //   return;
+      // }
 
       // All validation checks passed, add the habit data to the database
       final QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -852,7 +852,8 @@ class _AddhabitsState extends State<Addhabits> {
           'name': selectedHabit,
           'daysPerWeek': selectedDaysPerWeek + 1,
           'startDate': Timestamp.fromDate(selectedDate!),
-          'userId': userId, // Store the user ID with the habit data
+          'userId': userId,
+          // Store the user ID with the habit data
         });
 
         ScaffoldMessenger.of(context).showSnackBar(

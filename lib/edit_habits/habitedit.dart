@@ -7,6 +7,7 @@ import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:intl/intl.dart';
 
+import '../Firebase/update.dart';
 import '../bottom_pages/bottom_bar.dart';
 import '../reminder/reminder.dart';
 
@@ -40,10 +41,10 @@ class _HabitEditState extends State<HabitEdit> {
   int selectedDaysPerWeek = -1;
   TextEditingController habitNameController = TextEditingController();
 
-  final CollectionReference HabitsTemplates =
+  final CollectionReference habitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
-  final CollectionReference Addhabits =
-      FirebaseFirestore.instance.collection("add_habits");
+  // final CollectionReference Addhabits =
+  //     FirebaseFirestore.instance.collection("add_habits");
 
   @override
   void initState() {
@@ -63,58 +64,67 @@ class _HabitEditState extends State<HabitEdit> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Center(child: Text(' Warning')),
-                    content: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child:
-                          Text('if you made changes they will\n be discarded'),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        // onPressed: () =>
-                        //     Navigator.of(context).push(MaterialPageRoute(
-                        //         builder: (ctx) => EditHabits(
-                        //               habitId: '',
-                        //               selectedDate: null,
-                        //               habitData: widget.habitData,
-                        //               habitHistory: widget.habitHistory,
-                        //               habitName: '',
-                        //               startDate: DateTime.now(),
-
-                        //             )
-                        //             )
-                        //             ),
-                        child: const Text(
-                          'Discard changes',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
+        leading: TextButton(
+          onPressed: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Center(child: Text(' Warning')),
+              content: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('If you made changes, they will\n be discarded'),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the alert dialog
+                    Navigator.pop(
+                        context); // Navigate back to the previous screen
+                  },
+                  child: const Text(
+                    'Discard changes',
+                    style: TextStyle(color: Colors.red),
                   ),
                 ),
-            icon: const Icon(
-              Icons.cancel_sharp,
-              color: Colors.black,
-            )),
+              ],
+            ),
+          ),
+          child: const Icon(
+            Icons.cancel_sharp,
+            color: Colors.black,
+          ),
+        ),
         actions: [
           TextButton(
-              onPressed: () {
-                updateHabitData(widget.documentId!);
-                Navigator.push(
+              onPressed: () async {
+                bool success = await updateHabitData(widget.documentId!,
+                    selectedHabit, selectedDaysPerWeek, selectedDate);
+                if (success) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text('Habit updated successfully'),
+                    ),
+                  );
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (ctx) => MyHomePageToday(
-                              habitHistory: widget.habitHistory,
-                            )));
+                      builder: (ctx) => const MyHomePageToday(
+                        habitHistory: [],
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text('Failed to update habit'),
+                    ),
+                  );
+                }
               },
               child: const Text(
                 "Update",
@@ -184,7 +194,7 @@ class _HabitEditState extends State<HabitEdit> {
             ),
             kheight10,
             StreamBuilder(
-              stream: HabitsTemplates.snapshots(),
+              stream: habitsTemplates.snapshots(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Container(
@@ -365,9 +375,31 @@ class _HabitEditState extends State<HabitEdit> {
                         child: const Text('Cancel'),
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.pop(context); // Close the alert dialog
-                          deleteHabit(widget.documentId!);
+                        onPressed: () async {
+                          bool success = await deleteHabit(widget.documentId!);
+                          if (success) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                    'Habit and associated history deleted successfully'),
+                              ),
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => const MyHomePageToday(
+                                  habitHistory: [],
+                                ),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Failed to delete habit'),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           'Delete',
@@ -440,102 +472,77 @@ class _HabitEditState extends State<HabitEdit> {
     return formatter.format(date);
   }
 
-  void updateHabitData(String documentId) async {
-    try {
-      await Addhabits.doc(documentId).update({
-        'name': selectedHabit,
-        'daysPerWeek': selectedDaysPerWeek + 1,
-        'startDate': Timestamp.fromDate(selectedDate!),
-      });
-      // Display a success message or navigate to a new screen
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Habit updated successfully'),
-        ),
-      );
-    } catch (e) {
-      print('Error updating habit data: $e');
-      // Display an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Failed to update habit'),
-        ),
-      );
-    }
-  }
+  // void updateHabitData(String documentId) async {
+  //   try {
+  //     await Addhabits.doc(documentId).update({
+  //       'name': selectedHabit,
+  //       'daysPerWeek': selectedDaysPerWeek + 1,
+  //       'startDate': Timestamp.fromDate(selectedDate!),
+  //     });
+  //     // Display a success message or navigate to a new screen
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         backgroundColor: Colors.green,
+  //         content: Text('Habit updated successfully'),
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     print('Error updating habit data: $e');
+  //     // Display an error message
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         backgroundColor: Colors.red,
+  //         content: Text('Failed to update habit'),
+  //       ),
+  //     );
+  //   }
+  // }
 
   // void deleteHabit(String documentId) async {
   //   try {
+  //     // Get the habit data to retrieve the habit ID
+  //     final habitSnapshot = await Addhabits.doc(documentId).get();
+  //     final habitData = habitSnapshot.data() as Map<String, dynamic>;
+
+  //     // Delete the habit
   //     await Addhabits.doc(documentId).delete();
+
+  //     // Delete the associated history
+  //     final historySnapshot = await FirebaseFirestore.instance
+  //         .collection('history')
+  //         .where('habitId',
+  //             isEqualTo:
+  //                 documentId) // Use the documentId directly as the habitId
+  //         .get();
+
+  //     // Delete each history document one by one
+  //     for (final doc in historySnapshot.docs) {
+  //       await doc.reference.delete();
+  //     }
+
   //     // Display a success message or navigate to a new screen
   //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
+  //       const SnackBar(
   //         backgroundColor: Colors.green,
-  //         content: Text('Habit deleted successfully'),
+  //         content: Text('Habit and associated history deleted successfully'),
   //       ),
   //     );
-  //     // Navigate to the desired screen after deleting the habit
+  //     // Navigate to the desired screen after deleting the habit and history
   //     Navigator.push(
   //       context,
-  //       MaterialPageRoute(builder: (ctx) => MyHomePageToday()),
+  //       MaterialPageRoute(
+  //           builder: (ctx) => const MyHomePageToday(
+  //                 habitHistory: [],
+  //               )),
   //     );
   //   } catch (e) {
   //     print('Error deleting habit: $e');
   //     // Display an error message
   //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
+  //       const SnackBar(
   //         content: Text('Failed to delete habit'),
   //       ),
   //     );
   //   }
   // }
-  void deleteHabit(String documentId) async {
-    try {
-      // Get the habit data to retrieve the habit ID
-      final habitSnapshot = await Addhabits.doc(documentId).get();
-      final habitData = habitSnapshot.data() as Map<String, dynamic>;
-
-      // Delete the habit
-      await Addhabits.doc(documentId).delete();
-
-      // Delete the associated history
-      final historySnapshot = await FirebaseFirestore.instance
-          .collection('history')
-          .where('habitId',
-              isEqualTo:
-                  documentId) // Use the documentId directly as the habitId
-          .get();
-
-      // Delete each history document one by one
-      for (final doc in historySnapshot.docs) {
-        await doc.reference.delete();
-      }
-
-      // Display a success message or navigate to a new screen
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Habit and associated history deleted successfully'),
-        ),
-      );
-      // Navigate to the desired screen after deleting the habit and history
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (ctx) => const MyHomePageToday(
-                  habitHistory: [],
-                )),
-      );
-    } catch (e) {
-      print('Error deleting habit: $e');
-      // Display an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to delete habit'),
-        ),
-      );
-    }
-  }
 }

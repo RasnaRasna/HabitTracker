@@ -13,6 +13,7 @@ class MonthBase extends StatefulWidget {
 class _MonthBaseState extends State<MonthBase> {
   final DateTime today = DateTime.now();
   Map<String, Map<DateTime, bool>> habitsData = {};
+  bool isLoading = true; // Add the isLoading variable
 
   @override
   void initState() {
@@ -55,7 +56,9 @@ class _MonthBaseState extends State<MonthBase> {
       }
     }
 
-    setState(() {});
+    setState(() {
+      isLoading = false; // Set isLoading to false after fetching the data
+    });
   }
 
   @override
@@ -70,13 +73,17 @@ class _MonthBaseState extends State<MonthBase> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: ListView.builder(
-          itemCount: habitsData.length,
-          itemBuilder: (context, index) {
-            final habitName = habitsData.keys.toList()[index];
-            return monthCalendar(habitName);
-          },
-        ),
+        body: isLoading // Check the isLoading value
+            ? Center(
+                child: CircularProgressIndicator(), // Show progress indicator
+              )
+            : ListView.builder(
+                itemCount: habitsData.length,
+                itemBuilder: (context, index) {
+                  final habitName = habitsData.keys.toList()[index];
+                  return monthCalendar(habitName);
+                },
+              ),
       ),
     );
   }
@@ -183,7 +190,3 @@ class _MonthBaseState extends State<MonthBase> {
     );
   }
 }
-// }
-//   completedDate.year == date.year &&
-//                                     completedDate.month == date.month &&
-//                                     completedDate.day == date.day;

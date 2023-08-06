@@ -1,45 +1,7 @@
-// import 'package:flutter/material.dart';
-// import '../onboarding/start.dart';
-// import 'firebase_services.dart';
-
-// Row countinuewithgoogle(BuildContext context) {
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.center,
-//     children: <Widget>[
-//       Image.asset(
-//         "images/google-removebg-preview.png",
-//         width: 40,
-//         height: 40,
-//       ),
-//       TextButton(
-//         onPressed: () async {
-//           showDialog(
-//             context: context,
-//             barrierDismissible: false,
-//             builder: (BuildContext context) {
-//               return const Center(
-//                 child: CircularProgressIndicator(),
-//               );
-//             },
-//           );
-//           await FirebaseServices().signInWithGoogle();
-//           Navigator.pop(context);
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//               builder: (ctx) => const StartingPage(),
-//             ),
-//           );
-//         },
-//         child: const Text("Continue with Gmail"),
-//       ),
-//     ],
-//   );
-// }
 import 'package:flutter/material.dart';
 import '../const.dart';
 import '../onboarding/start.dart';
-import 'firebase_services.dart';
+import '../Firebase/firebase_services.dart';
 
 Row continueWithGoogle(BuildContext context) {
   return Row(
@@ -63,7 +25,9 @@ Row continueWithGoogle(BuildContext context) {
           );
           try {
             await FirebaseServices().signInWithGoogle();
+            // ignore: use_build_context_synchronously
             Navigator.pop(context);
+            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               MaterialPageRoute(
