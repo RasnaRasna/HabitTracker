@@ -66,6 +66,7 @@ class _MonthBaseState extends State<MonthBase> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
             "${today.year}",
@@ -175,7 +176,7 @@ class _MonthBaseState extends State<MonthBase> {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       habitName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

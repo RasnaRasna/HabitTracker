@@ -123,26 +123,6 @@ class Homapage extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                //   child: Container(
-                //     child: Image.asset(
-                //       "images/lo.png",
-                //       width: 400,
-                //       height: 400,
-                //     ),
-                //     width: 360,
-                //     height: 200,
-                //   ),
-                // ),
-                // Align(
-                //   alignment: Alignment.center,
-                //   child: Text(
-                //     "How are you feeling today?",
-                //     style: TextStyle(fontSize: 25),
-                //   ),
-                // ),
                 InkWell(
                   onTap: () {},
                   child: Padding(
@@ -194,40 +174,10 @@ class Homapage extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Container(
-                //   width: ,
-                //   child: Align(
-                //     alignment: Alignment.center,
-                //     child: Padding(
-                //       padding: const EdgeInsets.symmetric(vertical: 10),
-                //       child:
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
-          // InkWell(
-          //   onTap: () {},
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(16.0),
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(10),
-          //           border: Border.all(color: Colors.brown)),
-          //       height: 150,
-          //       child: Column(
-          //         children: [
-          //           // Image.asset(
-          //           //   "images/workout.jpeg",
-          //           //   width: 130,
-          //           // ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          const Hompagecard(),
+          Hompagecard(),
         ],
       ),
       floatingActionButton: Padding(

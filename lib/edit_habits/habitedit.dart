@@ -7,6 +7,7 @@ import 'package:habits_track/const.dart';
 import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:intl/intl.dart';
 
+import '../Firebase/delet.dart';
 import '../Firebase/update.dart';
 import '../bottom_pages/bottom_bar.dart';
 import '../reminder/reminder.dart';
@@ -112,8 +113,8 @@ class _HabitEditState extends State<HabitEdit> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => const MyHomePageToday(
-                        habitHistory: [],
+                      builder: (ctx) => MyHomePageToday(
+                        habitHistory: widget.habitHistory,
                       ),
                     ),
                   );
@@ -388,8 +389,8 @@ class _HabitEditState extends State<HabitEdit> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (ctx) => const MyHomePageToday(
-                                  habitHistory: [],
+                                builder: (ctx) => MyHomePageToday(
+                                  habitHistory: widget.habitHistory,
                                 ),
                               ),
                             );

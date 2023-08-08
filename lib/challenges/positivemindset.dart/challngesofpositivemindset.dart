@@ -77,9 +77,7 @@ class _PositiveChallengesState extends State<PositiveChallenges> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: korangecolor,
-                      border:
-                          Border.all(color: Color.fromARGB(255, 163, 160, 160)),
+                      border: Border.all(color: korangecolor),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -87,7 +85,7 @@ class _PositiveChallengesState extends State<PositiveChallenges> {
                         Checkbox(
                           activeColor: kwhite,
                           checkColor: kredcolor,
-                          side: BorderSide(color: kwhite, width: 2),
+                          side: BorderSide(color: kredcolor, width: 2),
                           value: challengeValues[index],
                           onChanged: (newValue) {
                             context.read<ChallengeState>().updateChallengeValue(
@@ -99,7 +97,7 @@ class _PositiveChallengesState extends State<PositiveChallenges> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               challenges[index],
-                              style: TextStyle(fontSize: 16, color: kwhite),
+                              style: TextStyle(fontSize: 16, color: kblack),
                             ),
                           ),
                         ),

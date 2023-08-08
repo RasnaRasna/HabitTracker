@@ -211,7 +211,7 @@ class _bottombarState extends State<bottombar> {
       const MonthBase(),
       const YearBase(),
       const ChallengesPage(),
-      const EntriesScreen(),
+      const Discover(),
     ];
 
     return SafeArea(

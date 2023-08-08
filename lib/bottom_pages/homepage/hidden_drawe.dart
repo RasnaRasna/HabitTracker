@@ -30,7 +30,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: "disc", baseStyle: TextStyle(), selectedStyle: TextStyle()),
-          EntriesScreen()),
+          Discover()),
     ];
   }
 
