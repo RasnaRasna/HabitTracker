@@ -33,19 +33,13 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: kredcolor),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => const Entery()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => Entery(
+                              fromGuidedJournaling: false,
+                            )));
               }),
-          ListTile(
-              leading: const Icon(
-                Icons.settings,
-                color: kredcolor,
-              ),
-              title: const Text(
-                'settings',
-                style: TextStyle(fontSize: 18, color: kredcolor),
-              ),
-              onTap: () {}),
           ListTile(
               leading: const Icon(
                 Icons.logout,

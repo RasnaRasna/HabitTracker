@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:intl/intl.dart';
 
 class Entery extends StatefulWidget {
-  const Entery({Key? key}) : super(key: key);
+  final bool fromGuidedJournaling; // Add this parameter
+
+  const Entery({Key? key, required this.fromGuidedJournaling})
+      : super(key: key);
 
   @override
   _EnteryState createState() => _EnteryState();
 }
 
 class _EnteryState extends State<Entery> {
+  late int initialTabIndex; // To store the initial tab index
+  @override
+  void initState() {
+    super.initState();
+    // Determine the initial tab index based on the source of navigation
+    initialTabIndex = widget.fromGuidedJournaling ? 1 : 0;
+  }
+
   final CollectionReference cardone =
       FirebaseFirestore.instance.collection("enterycardone");
   final CollectionReference cardTwo =
@@ -69,16 +81,26 @@ class _EnteryState extends State<Entery> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: initialTabIndex, // Set the initial tab index
+
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => bottombar(
+                            startDate: DateTime.now(), habitHistory: [])));
+              },
+              icon: Icon(Icons.arrow_back)),
           centerTitle: true,
           title: const Text("Entries"),
           bottom: const TabBar(
             tabs: [
-              Tab(text: "Tab 1"),
-              Tab(text: "Tab 2"),
+              Tab(text: "Prompt of the Day"),
+              Tab(text: "Guided Journaling"),
             ],
           ),
         ),
