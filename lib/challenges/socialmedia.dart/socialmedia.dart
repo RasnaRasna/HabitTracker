@@ -27,7 +27,7 @@ class SocialMedia extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Container(
               child: Image.asset(
-                "images/social media detox.jpeg",
+                "images/nophone.png",
                 width: 400,
                 height: 300,
               ),

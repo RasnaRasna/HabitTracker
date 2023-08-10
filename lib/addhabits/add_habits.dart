@@ -91,7 +91,7 @@ class _AddhabitsState extends State<Addhabits> {
               ))
         ],
         title: const Text(
-          "New habit",
+          "New Habit",
           style: TextStyle(fontSize: 18.0, color: Colors.black),
         ),
       ),
@@ -107,7 +107,7 @@ class _AddhabitsState extends State<Addhabits> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
-                        "Habbit Name",
+                        "Habit Name",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

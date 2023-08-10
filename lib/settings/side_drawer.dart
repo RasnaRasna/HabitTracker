@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
-import 'package:habits_track/entery.dart';
+import 'package:habits_track/settings/entery.dart';
 
 import 'package:habits_track/login/sign.dart';
+import 'package:habits_track/settings/privacy.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'about.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});
@@ -41,6 +45,62 @@ class SideDrawer extends StatelessWidget {
                             )));
               }),
           ListTile(
+            leading: const Icon(
+              Icons.info_outline,
+              color: kredcolor,
+            ),
+            title: const Text(
+              'About',
+              style: TextStyle(fontSize: 18, color: kredcolor),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (ctx) => AboutScreen()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.privacy_tip,
+              color: kredcolor,
+            ),
+            title: const Text(
+              'Privacy Policy',
+              style: TextStyle(fontSize: 18, color: kredcolor),
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => PrivacyPolicyScreen()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.message,
+              color: kredcolor,
+            ),
+            title: const Text(
+              'Feedback',
+              style: TextStyle(fontSize: 18, color: kredcolor),
+            ),
+            onTap: () async {
+              const url =
+                  'mailto:rasnack7@gmail.com?subject=Review on Habit Tracker  &body= need';
+
+              Uri uri = Uri.parse(url);
+              await launchUrl(uri);
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.share,
+              color: kredcolor,
+            ),
+            title: const Text(
+              'Share',
+              style: TextStyle(fontSize: 18, color: kredcolor),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
               leading: const Icon(
                 Icons.logout,
                 color: kredcolor,
@@ -56,39 +116,6 @@ class SideDrawer extends StatelessWidget {
                       MaterialPageRoute(builder: (ctx) => const SignPage()));
                 });
               }),
-          ListTile(
-            leading: const Icon(
-              Icons.info_outline,
-              color: kredcolor,
-            ),
-            title: const Text(
-              'About',
-              style: TextStyle(fontSize: 18, color: kredcolor),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.feedback_outlined,
-              color: kredcolor,
-            ),
-            title: const Text(
-              'Feedback',
-              style: TextStyle(fontSize: 18, color: kredcolor),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.share,
-              color: kredcolor,
-            ),
-            title: const Text(
-              'Share',
-              style: TextStyle(fontSize: 18, color: kredcolor),
-            ),
-            onTap: () {},
-          ),
         ],
       ),
     );

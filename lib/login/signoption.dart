@@ -8,7 +8,6 @@ Row signupOption(BuildContext context) {
     children: [
       const Text(
         "Don't have an account? ",
-        style: TextStyle(color: kwhite),
       ),
       GestureDetector(
         onTap: () {
@@ -21,7 +20,6 @@ Row signupOption(BuildContext context) {
           padding: EdgeInsets.symmetric(horizontal: 5),
           child: Text(
             "Sign Up",
-            style: TextStyle(color: kwhite),
           ),
         ),
       ),

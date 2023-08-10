@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:habits_track/addhabits/weekbox.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
-import 'package:habits_track/edit_habits/edit_habits.dart';
 import 'package:intl/intl.dart';
 
 import '../Firebase/delet.dart';
 import '../Firebase/update.dart';
-import '../bottom_pages/bottom_bar.dart';
 import '../reminder/reminder.dart';
 
 class HabitEdit extends StatefulWidget {

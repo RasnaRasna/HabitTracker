@@ -12,7 +12,7 @@ class MethodTwocontent extends StatelessWidget {
     return Column(
       children: [
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("1 ."),
             style: TextStyle(
@@ -21,8 +21,9 @@ class MethodTwocontent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Create a cue. "),
+            text: ("Create a cue\n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -61,14 +62,14 @@ class MethodTwocontent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/cicle..gif",
+            "images/cicle. (1).gif",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("2 ."),
             style: TextStyle(
@@ -77,8 +78,9 @@ class MethodTwocontent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Change your environment. "),
+            text: ("Change your environment.\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -117,14 +119,14 @@ class MethodTwocontent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/+mindset.png",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("3 ."),
             style: TextStyle(
@@ -133,8 +135,9 @@ class MethodTwocontent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Become more mindful.  "),
+            text: ("Become more mindful\n  "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -192,14 +195,14 @@ class MethodTwocontent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/tell.png",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("4 ."),
             style: TextStyle(
@@ -208,8 +211,9 @@ class MethodTwocontent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Tell people.  "),
+            text: ("Tell people\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -248,14 +252,14 @@ class MethodTwocontent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/tack.gif",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("5 ."),
             style: TextStyle(
@@ -264,8 +268,9 @@ class MethodTwocontent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Track your progress. "),
+            text: ("Track your progress\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -285,14 +290,14 @@ class MethodTwocontent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/reward.webp",
           ),
           width: double.infinity,
-          height: 300,
+          height: 250,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("6 ."),
             style: TextStyle(
@@ -303,6 +308,7 @@ class MethodTwocontent extends StatelessWidget {
           TextSpan(
             text: ("Reward yourself for engaging in your good habit\n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),

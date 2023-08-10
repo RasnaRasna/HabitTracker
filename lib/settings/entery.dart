@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habits_track/bottom_pages/Entry/editcardtwo.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
+import 'package:habits_track/const.dart';
+import 'package:habits_track/settings/favorite.dart';
 import 'package:intl/intl.dart';
 
 class Entery extends StatefulWidget {
-  final bool fromGuidedJournaling; // Add this parameter
+  final bool fromGuidedJournaling;
 
   const Entery({Key? key, required this.fromGuidedJournaling})
       : super(key: key);
@@ -14,11 +17,10 @@ class Entery extends StatefulWidget {
 }
 
 class _EnteryState extends State<Entery> {
-  late int initialTabIndex; // To store the initial tab index
+  late int initialTabIndex;
   @override
   void initState() {
     super.initState();
-    // Determine the initial tab index based on the source of navigation
     initialTabIndex = widget.fromGuidedJournaling ? 1 : 0;
   }
 
@@ -27,7 +29,7 @@ class _EnteryState extends State<Entery> {
   final CollectionReference cardTwo =
       FirebaseFirestore.instance.collection("enterycardtwo");
 
-  List<QueryDocumentSnapshot> notes = []; // List to store notes
+  List<QueryDocumentSnapshot> notes = [];
 
   Future<void> _showDeleteConfirmationDialog(String docId, String question,
       CollectionReference collection, int index) async {
@@ -40,7 +42,7 @@ class _EnteryState extends State<Entery> {
             child: ListBody(
               children: <Widget>[
                 Text('Are you sure you want to delete this entry?'),
-                Text('Question: $question'), // Display the question
+                Text('Question: $question'),
               ],
             ),
           ),
@@ -54,8 +56,8 @@ class _EnteryState extends State<Entery> {
             TextButton(
               child: Text('Delete'),
               onPressed: () async {
-                await _deleteEntry(docId, collection, index); // Pass index here
                 Navigator.of(context).pop();
+                await _deleteEntry(docId, collection, index);
               },
             ),
           ],
@@ -67,9 +69,15 @@ class _EnteryState extends State<Entery> {
   Future<void> _deleteEntry(
       String docId, CollectionReference collection, int index) async {
     try {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Entry deleted successfully'),
+        ),
+      );
+
       await collection.doc(docId).delete();
 
-      // Remove the deleted item from the list
       setState(() {
         notes.removeAt(index);
       });
@@ -81,27 +89,59 @@ class _EnteryState extends State<Entery> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: initialTabIndex, // Set the initial tab index
-
+      initialIndex: initialTabIndex,
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (ctx) => bottombar(
-                            startDate: DateTime.now(), habitHistory: [])));
-              },
-              icon: Icon(Icons.arrow_back)),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (ctx) =>
+                      bottombar(startDate: DateTime.now(), habitHistory: []),
+                ),
+              );
+            },
+            icon: Icon(Icons.arrow_back),
+          ),
           centerTitle: true,
           title: const Text("Entries"),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: "Prompt of the Day"),
-              Tab(text: "Guided Journaling"),
-            ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+            child: Container(
+              height: 50,
+              width: 350,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              decoration: BoxDecoration(color: Colors.white),
+              child: TabBar(
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.black,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: korangecolor,
+                ),
+                tabs: [
+                  Tab(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width *
+                          0.5, // Adjust this value to your preference
+                      child: Center(child: Text("Prompt of the Day")),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width *
+                          0.5, // Adjust this value to your preference
+                      child: Center(child: Text("Guided Journaling")),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
         body: TabBarView(
@@ -126,7 +166,7 @@ class _EnteryState extends State<Entery> {
           return Center(child: Text("No data available"));
         }
 
-        notes = snapshot.data!.docs; // Update the notes list
+        notes = snapshot.data!.docs;
 
         return ListView.builder(
           itemCount: notes.length,
@@ -137,7 +177,6 @@ class _EnteryState extends State<Entery> {
             final formattedDate = date != null
                 ? DateFormat("EEEE, MMMM dd, yyyy").format(date.toDate())
                 : "No date available";
-
             final question = noteData["question"] ?? "No question available";
             final note = noteData["note"] ?? "No note available";
 
@@ -145,7 +184,7 @@ class _EnteryState extends State<Entery> {
               padding: const EdgeInsets.all(15),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange),
+                  border: Border.all(color: korangecolor),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -155,7 +194,10 @@ class _EnteryState extends State<Entery> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(4),
-                        child: Text(formattedDate),
+                        child: Text(
+                          formattedDate,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4),
@@ -166,6 +208,7 @@ class _EnteryState extends State<Entery> {
                           Expanded(
                             child: TextFormField(
                               initialValue: note,
+                              readOnly: true,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                               ),
@@ -176,13 +219,26 @@ class _EnteryState extends State<Entery> {
                               _showDeleteConfirmationDialog(
                                   docId, question, collection, index);
                             },
-                            icon: Icon(Icons.delete),
+                            icon: Icon(
+                              Icons.delete_outline_outlined,
+                            ),
                           ),
                           IconButton(
                             onPressed: () {
-                              // Edit action
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditEntryScreen(
+                                    docId: docId,
+                                    question: question,
+                                    note: note,
+                                    collection: collection,
+                                    formattedDate: formattedDate,
+                                  ),
+                                ),
+                              );
                             },
-                            icon: Icon(Icons.edit),
+                            icon: Icon(Icons.edit_outlined),
                           ),
                         ],
                       ),

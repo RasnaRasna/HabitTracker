@@ -5,7 +5,7 @@ import 'package:habits_track/const.dart';
 
 import 'package:intl/intl.dart';
 
-import '../../entery.dart';
+import '../../settings/entery.dart';
 
 class PromptOfThaDay extends StatefulWidget {
   PromptOfThaDay({Key? key}) : super(key: key);
@@ -105,7 +105,7 @@ class _PromptOfThaDayState extends State<PromptOfThaDay> {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 backgroundColor: isNoteEntered
-                    ? Colors.orange
+                    ? korangecolor
                     : Colors.grey, // Change button color based on validation
                 onPressed: isNoteEntered
                     ? () {
@@ -115,7 +115,7 @@ class _PromptOfThaDayState extends State<PromptOfThaDay> {
                             context,
                             MaterialPageRoute(
                                 builder: (ctx) =>
-                                    const Entery(fromGuidedJournaling: true)));
+                                    const Entery(fromGuidedJournaling: false)));
                       }
                     : null, // Disable button if note is not entered
                 child: const Icon(

@@ -13,7 +13,7 @@ Future<void> AddHabitData(
     final userId = user?.uid;
 
     // Check if the selectedHabit is empty or null
-    if (selectedHabit == null || selectedHabit!.trim().isEmpty) {
+    if (selectedHabit == null || selectedHabit.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
@@ -52,8 +52,9 @@ Future<void> AddHabitData(
       await FirebaseFirestore.instance.collection('add_habits').add({
         'name': selectedHabit,
         'daysPerWeek': selectedDaysPerWeek + 1,
-        'startDate': Timestamp.fromDate(selectedDate!),
+        'startDate': Timestamp.fromDate(selectedDate),
         'userId': userId,
+
         // Store the user ID with the habit data
       });
 

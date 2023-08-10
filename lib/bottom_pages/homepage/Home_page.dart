@@ -9,7 +9,7 @@ import 'package:habits_track/const.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/genderprovider.dart';
-import '../../side_drawer.dart';
+import '../../settings/side_drawer.dart';
 
 class Homapage extends StatelessWidget {
   final List<Map<String, dynamic>> habitHistory;

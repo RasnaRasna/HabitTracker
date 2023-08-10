@@ -5,7 +5,7 @@ import 'package:habits_track/const.dart';
 
 import 'package:intl/intl.dart';
 
-import '../../entery.dart';
+import '../../settings/entery.dart';
 
 class GuidedJournaling extends StatefulWidget {
   GuidedJournaling({Key? key}) : super(key: key);
@@ -19,7 +19,6 @@ class _GuidedJournalingState extends State<GuidedJournaling> {
     "If you could relive any moment from your past, what would it be and why?",
     "What's a fear you've overcome in the past, and how did you do it?",
     "Describe a time when you felt truly grateful and why.",
-    "If you had the power to change one thing in the world, what would it be and why?",
     "What's a challenge you're currently facing, and how can you approach it differently?",
     "Describe a dream or goal that you've always had but haven't pursued yet.",
     "If you could spend a day with your younger self, what advice would you give?",
@@ -108,7 +107,7 @@ class _GuidedJournalingState extends State<GuidedJournaling> {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 backgroundColor: isNoteEntered
-                    ? Colors.orange
+                    ? korangecolor
                     : Colors.grey, // Change button color based on validation
                 onPressed: isNoteEntered
                     ? () {

@@ -14,9 +14,7 @@ Widget forgetpassword(BuildContext context) {
       ),
       child: const Text(
         "Forgot password?",
-        style: TextStyle(
-          color: kwhite,
-        ),
+        style: TextStyle(),
         textAlign: TextAlign.right,
       ),
     ),

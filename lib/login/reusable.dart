@@ -16,11 +16,11 @@ TextFormField reusableTextfield(
     cursorColor: kwhite,
     style: const TextStyle(color: kblack),
     decoration: InputDecoration(
-      fillColor: Color.fromARGB(255, 200, 186, 186),
-      prefixIcon: Icon(icon, color: Colors.black),
+      fillColor: korangecolor,
+      prefixIcon: Icon(icon, color: Colors.white),
       hintText: text,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      hintStyle: const TextStyle(color: kblack),
+      hintStyle: const TextStyle(color: Colors.white),
       filled: true,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30.0),
@@ -51,14 +51,14 @@ Container FirebaseButton(BuildContext context, String title, Function ontap) {
             if (states.contains(MaterialState.pressed)) {
               return kblack;
             } else {
-              return Color.fromARGB(255, 200, 186, 186);
+              return korangecolor;
             }
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
       child: Text(title,
           style: const TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
     ),
   );
 }

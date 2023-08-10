@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/Today/completion.dart';
 
 import 'package:habits_track/provider/buttonclickedstate.dart';
 import 'package:habits_track/provider/check_cirlebothpage.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ChallengeState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CompletedCountProvider(),
         )
       ],
       child: MaterialApp(

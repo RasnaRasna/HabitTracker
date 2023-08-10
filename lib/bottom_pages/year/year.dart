@@ -14,6 +14,7 @@ class _YearBaseState extends State<YearBase> {
   final DateTime today = DateTime.now();
   Map<String, Map<DateTime, bool>> habitsData =
       {}; // Store the completion status for each habit
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -22,6 +23,10 @@ class _YearBaseState extends State<YearBase> {
   }
 
   Future<void> fetchHabitsData() async {
+    setState(() {
+      isLoading = true;
+    });
+
     final habitSnapshot =
         await FirebaseFirestore.instance.collection('add_habits').get();
     final habitNames =
@@ -68,21 +73,26 @@ class _YearBaseState extends State<YearBase> {
       }
     }
 
-    setState(() {}); // Trigger a rebuild to display the heatmap
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text("${today.year}"), // Display the current year dynamically
-        ),
-        body: buildHeatMapYeartototalheatmap(),
+        child: Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text("${today.year}"), // Display the current year dynamically
       ),
-    );
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(), // Show loading indicator
+            )
+          : buildHeatMapYeartototalheatmap(), // Show actual content      ),
+    ));
   }
 
   Widget buildHeatMapYeartototalheatmap() {

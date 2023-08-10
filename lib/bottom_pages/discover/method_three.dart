@@ -12,7 +12,7 @@ class Method_Three extends StatelessWidget {
     return Column(
       children: [
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("1 ."),
             style: TextStyle(
@@ -21,8 +21,9 @@ class Method_Three extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Raise your awareness ."),
+            text: ("Raise your awareness \n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -80,14 +81,14 @@ class Method_Three extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/takesteps.png",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("2 ."),
             style: TextStyle(
@@ -96,8 +97,9 @@ class Method_Three extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Take steps to counteract the bad habit. "),
+            text: ("Take steps to counteract the bad habit\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -136,14 +138,14 @@ class Method_Three extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/reward.png",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("3 ."),
             style: TextStyle(
@@ -152,8 +154,9 @@ class Method_Three extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Reward yourself for resisting your bad habit."),
+            text: ("Reward yourself for resisting your bad habit\n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),

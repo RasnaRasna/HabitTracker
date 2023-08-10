@@ -24,7 +24,7 @@ class Discover extends StatelessWidget {
                   kheight10,
                   const Text(
                     "Are you ready to break old habits and form positive new ones? Having more good habits can help to achieve better overall health or accomplish a larger goal. Some things that you can do to form a new habit include identifying your motivation, creating a cue, and tracking your progress. If you have a bad habit you want to get rid of, just keep in mind that you may need to take steps before trying to replace it with a new good habit.",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 17),
                   ),
                   kheight10,
                   Container(
@@ -144,9 +144,9 @@ class Discover extends StatelessWidget {
                 ],
               ),
               kheight10,
-              Container(
+              SizedBox(
                 child: Image.asset(
-                  "images/Business Man Writing His Day Schedule.jpeg",
+                  "images/awarness.jpeg",
                 ),
                 width: double.infinity,
                 height: 300,

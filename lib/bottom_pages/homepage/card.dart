@@ -5,25 +5,7 @@ import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../entery.dart';
-
 class Hompagecard extends StatelessWidget {
-  final List<String> questions = [
-    "What's something that made you smile today?",
-    "If you could travel anywhere in the world right now, where would you go?",
-    "What's a book that has had a significant impact on your life?",
-    "What's a goal you're currently working towards?",
-    "Describe a moment when you felt proud of yourself recently.",
-    "If you could have dinner with any historical figure, who would it be and why?",
-    "What's a skill you've always wanted to learn?",
-    "What's a place in your city/town you've never visited but want to explore?",
-    "What's a quote that inspires you?",
-    "Share a recent act of kindness you've either given or received.",
-    "Describe a favorite childhood memory.",
-    "What's a hobby that you find relaxing and enjoyable?",
-    // Add more questions here
-  ];
-
   final CollectionReference cardone =
       FirebaseFirestore.instance.collection("enterycardone");
   final CollectionReference cardTwo =
@@ -36,7 +18,7 @@ class Hompagecard extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
@@ -48,7 +30,6 @@ class Hompagecard extends StatelessWidget {
                 "Guided Journal",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Kwidth,
             ],
           ),
           Row(
@@ -96,7 +77,7 @@ class Hompagecard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "New to Journaling ? \nwe are here to help.",
+                "Discover your inner \nthoughts and reflections",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(

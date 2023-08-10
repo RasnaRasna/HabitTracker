@@ -85,6 +85,7 @@
 //     );
 //   }
 // }
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
@@ -123,7 +124,7 @@ class SignupScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/download.jpeg"),
+            image: AssetImage("images/back.jpeg"),
 // Replace with your image path
             fit: BoxFit.cover,
           ),
@@ -131,68 +132,75 @@ class SignupScreen extends StatelessWidget {
         child: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.always,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("SIGN UP TO COUNTINUE",
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: kwhite,
-                      fontWeight: FontWeight.bold)),
-              kheight20,
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: reusableTextfield(
-                  "Enter UserName",
-                  Icons.person,
-                  false,
-                  _usertextcontroller,
-                  (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a username';
-                    }
-                    return null;
-                  },
+          child: ListView(children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("SIGN UP TO COUNTINUE",
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: kblack,
+                        fontWeight: FontWeight.bold)),
+                kheight20,
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: reusableTextfield(
+                    "Enter UserName",
+                    Icons.person,
+                    false,
+                    _usertextcontroller,
+                    (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a username';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: reusableTextfield(
-                  "Enter Email Id",
-                  Icons.lock_outline,
-                  true,
-                  _emailTextcontroller,
-                  (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Email Id';
-                    }
-                    return null;
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: reusableTextfield(
+                    "Enter Email Id",
+                    Icons.email,
+                    true,
+                    _emailTextcontroller,
+                    (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter an Email Id';
+                      } else if (!EmailValidator.validate(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: reusableTextfield(
-                  "Enter Password",
-                  Icons.lock_outline,
-                  true,
-                  _passwordTextcontroller,
-                  (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a Password';
-                    }
-                    return null;
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: reusableTextfield(
+                    "Enter Password",
+                    Icons.lock_outline,
+                    true,
+                    _passwordTextcontroller,
+                    (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a Password';
+                      } else if (value.length < 6) {
+                        // You can adjust the minimum length as needed
+                        return 'Password must be at least 6 characters';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: FirebaseButton(context, "Sign up", () {
-                  _signUp(context);
-                }),
-              )
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: FirebaseButton(context, "Sign up", () {
+                    _signUp(context);
+                  }),
+                )
+              ],
+            )
+          ]),
         ),
       ),
     );

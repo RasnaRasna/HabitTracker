@@ -130,9 +130,9 @@ GridView challengeitems(BuildContext context) {
             child: Column(
               children: [
                 Image.asset(
-                  "images/nophone.jpeg",
-                  width: 120,
-                  height: 90,
+                  "images/nophone.png",
+                  width: 150,
+                  height: 100,
                 ),
                 Text(
                   "Social media detox",

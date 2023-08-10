@@ -32,7 +32,7 @@ class _SignPageState extends State<SignPage> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/download.jpeg"),
+            image: AssetImage("images/back.jpeg"),
             // Replace with your image path
             fit: BoxFit.cover,
           ),
@@ -44,11 +44,13 @@ class _SignPageState extends State<SignPage> {
             children: [
               Text(
                 "SIGN IN TO CONTINUE",
-                style: GoogleFonts.acme(fontSize: 24, color: kwhite),
+                style: GoogleFonts.acme(
+                  fontSize: 24,
+                ),
               ),
               kheight20,
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(15),
                 child: reusableTextfield(
                   "Enter Username",
                   Icons.person,
@@ -63,7 +65,7 @@ class _SignPageState extends State<SignPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(15),
                 child: reusableTextfield(
                   "Enter password",
                   Icons.lock_outline,
@@ -79,7 +81,7 @@ class _SignPageState extends State<SignPage> {
               ),
               forgetpassword(context),
               Padding(
-                padding: const EdgeInsets.all(25),
+                padding: const EdgeInsets.all(20),
                 child:
                     isSigningIn // Display CircularProgressIndicator when signing in
                         ? const CircularProgressIndicator()
@@ -144,7 +146,6 @@ class _SignPageState extends State<SignPage> {
               signupOption(context),
               const Text(
                 "OR",
-                style: TextStyle(color: kwhite),
               ),
               continueWithGoogle(context),
             ],

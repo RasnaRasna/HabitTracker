@@ -12,7 +12,7 @@ class MethodOneContent extends StatelessWidget {
     return Column(
       children: [
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("1 ."),
             style: TextStyle(
@@ -22,15 +22,16 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Set your goal."),
+            text: ("Set your goal\n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
           ),
           TextSpan(
             text:
-                " Set your goal. Before you can begin to work on your new habit, it is worthwhile to consider your goal. Figure out exactly what you hope to accomplish. Make sure that your goal is specific, measurable, action oriented, realistic, and time bound (SMART) to increase your chances of success. Consider what you want to achieve and get as detailed as you can. Here are some questions to help..",
+                " Before you can begin to work on your new habit, it is worthwhile to consider your goal. Figure out exactly what you hope to accomplish. Make sure that your goal is specific, measurable, action oriented, realistic, and time bound (SMART) to increase your chances of success. Consider what you want to achieve and get as detailed as you can. Here are some questions to help..",
             style: TextStyle(
                 wordSpacing: 2,
                 height: 1.4,
@@ -40,7 +41,7 @@ class MethodOneContent extends StatelessWidget {
           )
         ])),
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: (".  "),
             style: TextStyle(
@@ -134,13 +135,13 @@ class MethodOneContent extends StatelessWidget {
         ])),
         Container(
           child: Image.asset(
-            "images/identify.gif",
+            "images/identifyyy.gif",
           ),
           width: double.infinity,
           height: 400,
         ),
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("2 ."),
             style: TextStyle(
@@ -149,8 +150,9 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("dentify the habit you want to form."),
+            text: ("dentify the habit you want to form\n"),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -188,14 +190,14 @@ class MethodOneContent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/que.gif",
+            "images/que (1).gif",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("3 ."),
             style: TextStyle(
@@ -204,15 +206,16 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Consider your motivation. "),
+            text: ("Consider your motivation\n "),
             style: TextStyle(
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
           ),
           TextSpan(
             text:
-                " Once you have identified your goal and the new habit you need to form to accomplish this goal, take some time to consider your motivation. Your motivation is the reason you want to form this new habit. Good motivation can be the difference between succeeding and failing at forming a new habit, so take your time to consider your motivation\n",
+                "Once you have identified your goal and the new habit you need to form to accomplish this goal, take some time to consider your motivation. Your motivation is the reason you want to form this new habit. Good motivation can be the difference between succeeding and failing at forming a new habit, so take your time to consider your motivation\n",
             style: TextStyle(
                 wordSpacing: 2,
                 height: 1.4,
@@ -261,14 +264,14 @@ class MethodOneContent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/plantgrowth.gif",
+            "images/plantgrowth (1).gif",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("4 ."),
             style: TextStyle(
@@ -277,8 +280,9 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Start small. "),
+            text: ("Start small\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -316,13 +320,13 @@ class MethodOneContent extends StatelessWidget {
         ])),
         Container(
           child: Image.asset(
-            "images/self.gif",
+            "images/loveeee.jpeg",
           ),
           width: double.infinity,
           height: 300,
         ),
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("5 ."),
             style: TextStyle(
@@ -331,8 +335,9 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Give yourself time.. "),
+            text: ("Give yourself time\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
@@ -352,14 +357,14 @@ class MethodOneContent extends StatelessWidget {
         kheight10,
         Container(
           child: Image.asset(
-            "images/Business Man Writing His Day Schedule.jpeg",
+            "images/obstacle.png",
           ),
           width: double.infinity,
           height: 300,
         ),
         kheight10,
         RichText(
-            text: const TextSpan(style: TextStyle(fontSize: 18), children: [
+            text: const TextSpan(style: TextStyle(fontSize: 15), children: [
           TextSpan(
             text: ("6 ."),
             style: TextStyle(
@@ -368,15 +373,16 @@ class MethodOneContent extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: ("Expect obstacles. "),
+            text: ("Expect obstacles\n "),
             style: TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.black // Set normal font weight for the first part
                 ),
           ),
           TextSpan(
             text:
-                "n the process of forming a new habit, you are bound to face some obstacles along the way. Understanding that you will face obstacles may help you to overcome them and keep working towards your new habit. It is also good to remember that even if you stumble along the way, that does not mean that you will fail.\n",
+                "the process of forming a new habit, you are bound to face some obstacles along the way. Understanding that you will face obstacles may help you to overcome them and keep working towards your new habit. It is also good to remember that even if you stumble along the way, that does not mean that you will fail.\n",
             style: TextStyle(
                 wordSpacing: 2,
                 height: 1.4,
