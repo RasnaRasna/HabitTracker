@@ -6,7 +6,7 @@ import '../../const.dart';
 import '../../edit_habits/edit_habits.dart';
 import '../../provider/stateofbutton.dart';
 
-class HabitItemsCard extends StatelessWidget {
+class HabitItemsCard extends StatefulWidget {
   const HabitItemsCard({
     super.key,
     required this.habitData,
@@ -28,11 +28,25 @@ class HabitItemsCard extends StatelessWidget {
   final List<Widget> daySymbols;
   final String habitId;
   final int currentDayIndex;
-  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+  final List<Map<String, dynamic>> habitHistory;
+  @override
+  State<HabitItemsCard> createState() => _HabitItemsCardState();
+}
 
+class _HabitItemsCardState extends State<HabitItemsCard> {
+  int _completionCount = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _completionCount = widget.completedCount;
+  }
+
+  // Add this parameter
   @override
   Widget build(BuildContext context) {
     final buttonProvider = Provider.of<MyButtonClickedProvider>(context);
+
     return SizedBox(
       height: 125,
       child: Padding(
@@ -40,17 +54,17 @@ class HabitItemsCard extends StatelessWidget {
         child: Card(
           child: GestureDetector(
             onTap: () {
-              print("habitHistory in MyHomePageToday: $habitHistory");
+              print("habitHistory in MyHomePageToday: ${widget.habitHistory}");
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (ctx) => EditHabits(
-                    habitId: habitData.id,
-                    habitName: habitName,
-                    daysPerWeek: daysPerWeek,
-                    startDate: startDate,
-                    selectedDate: startDate,
-                    habitData: habitData,
-                    habitHistory: habitHistory,
+                    habitId: widget.habitData.id,
+                    habitName: widget.habitName,
+                    daysPerWeek: widget.daysPerWeek,
+                    startDate: widget.startDate,
+                    selectedDate: widget.startDate,
+                    habitData: widget.habitData,
+                    habitHistory: widget.habitHistory,
                   ),
                 ),
               );
@@ -67,10 +81,10 @@ class HabitItemsCard extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 20,
+                    top: 15,
                     left: 10,
                     child: Text(
-                      '🔥 $completedCount',
+                      '🔥 $_completionCount',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -83,7 +97,7 @@ class HabitItemsCard extends StatelessWidget {
                     top: 60,
                     left: 10,
                     child: Text(
-                      habitName ?? 'Unknown Habit',
+                      widget.habitName ?? 'Unknown Habit',
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -102,27 +116,36 @@ class HabitItemsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ...daySymbols,
+                            ...widget.daySymbols,
                             KWidth7,
                             IconButton(
                               onPressed: () {
                                 // Check if the habit with habitId is already selected
-                                if (buttonProvider.isHabitSelected(habitId)) {
+                                if (buttonProvider
+                                    .isHabitSelected(widget.habitId)) {
                                   // If it is selected, deselect the habit and reset the selected day index for the habit
-                                  buttonProvider.toggleHabitSelection(habitId);
+                                  buttonProvider
+                                      .toggleHabitSelection(widget.habitId);
                                   buttonProvider.setSelectedDayIndex(
-                                      habitId, -1);
+                                      widget.habitId, -1);
+                                  setState(() {
+                                    _completionCount--; // Decrease the completion count
+                                  });
                                 } else {
                                   // If it is not selected, select the habit and set the selected day index to the currentDayIndex
-                                  buttonProvider.toggleHabitSelection(habitId);
+                                  buttonProvider
+                                      .toggleHabitSelection(widget.habitId);
                                   buttonProvider.setSelectedDayIndex(
-                                      habitId, currentDayIndex);
+                                      widget.habitId, widget.currentDayIndex);
+                                  setState(() {
+                                    _completionCount++; // Increase the completion count
+                                  });
                                 }
                               },
                               icon: StreamBuilder<DocumentSnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('add_habits')
-                                    .doc(habitId)
+                                    .doc(widget.habitId)
                                     .snapshots(),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -154,11 +177,11 @@ class HabitItemsCard extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 10,
+                            horizontal: 20,
+                            vertical: 15,
                           ),
                           child: Text(
-                            '0/$daysPerWeek',
+                            '$_completionCount/${widget.daysPerWeek}',
                             style: const TextStyle(fontSize: 15),
                           ),
                         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/homepage/card.dart';
-import 'package:habits_track/bottom_pages/homepage/hidden_drawe.dart';
 import 'package:habits_track/bottom_pages/homepage/moodcheck.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
@@ -48,7 +47,6 @@ class Homapage extends StatelessWidget {
 
     String imagePath =
         selectedGender == "Female" ? "images/girl.png" : "images/boy.png";
-    print('habitHistory homapge : $habitHistory');
 
     return Scaffold(
       appBar: AppBar(
@@ -103,21 +101,10 @@ class Homapage extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    // CircleAvatar(
-
-                    //   key: Key(selectedGender ?? ''),
-
-                    //   maxRadius: 30,
-                    //   minRadius: 30,
-                    //   backgroundImage: AssetImage(
-                    //     imagePath,
-                    //   ), // Updated image path
-                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
-                        "${getGreeting()} $name ..,",
+                        "${getGreeting()} $name .,",
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),

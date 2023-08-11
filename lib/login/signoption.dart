@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:habits_track/const.dart';
 import 'package:habits_track/signuppage.dart/signup.dart';
 
 Row signupOption(BuildContext context) {

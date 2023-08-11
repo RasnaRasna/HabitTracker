@@ -37,7 +37,7 @@ class StartingPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 40),
                     child: RichText(
                         text: TextSpan(
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                             children: [
                           TextSpan(
@@ -54,7 +54,7 @@ class StartingPage extends StatelessWidget {
                         ])),
                   ),
                 ),
-                Text(
+                const Text(
                   "You're Taking the first step in changing your \nlife.Let us guide you through it.",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -133,7 +133,7 @@ class StartingPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Consumer<GenderProvider>(
                         builder: (context, genderProvider, _) =>
                             GestureDetector(
@@ -230,7 +230,6 @@ class StartingPage extends StatelessWidget {
 
                                       if (!snapshot.hasData ||
                                           snapshot.data!.docs.isEmpty) {
-                                        print('No data available yet.');
                                         // Handle case when no habits are available
                                         return const Center(
                                             child: CircularProgressIndicator());
@@ -241,10 +240,6 @@ class StartingPage extends StatelessWidget {
                                       final habitId = habitData.id;
                                       final habitName =
                                           habitData['name'] as String?;
-                                      print(
-                                          'Received habitName startpage: ${habitName}');
-                                      print(
-                                          'Received id startpage: ${habitId}');
 
                                       // Retrieve habitHistory data from the snapshot
                                       final habitHistory =
@@ -280,15 +275,15 @@ class StartingPage extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Alert"),
-                                  content: Text(
+                                  title: const Text("Alert"),
+                                  content: const Text(
                                       "Please enter your name and select a gender."),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text("OK"),
+                                      child: const Text("OK"),
                                     ),
                                   ],
                                 );
@@ -302,15 +297,15 @@ class StartingPage extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text("Error"),
-                                content: Text(
+                                title: const Text("Error"),
+                                content: const Text(
                                     "An error occurred. Please try again later."),
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                   ),
                                 ],
                               );
@@ -318,7 +313,7 @@ class StartingPage extends StatelessWidget {
                           );
                         }
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: kredcolor,
                         radius: 30,
                         child: Icon(

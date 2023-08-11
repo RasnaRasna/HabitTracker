@@ -18,20 +18,27 @@ class Hompagecard extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
+          kheight20,
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "Prompt of the Day",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: EdgeInsetsDirectional.only(end: 30),
+                child: Text(
+                  "Prompt of the Day",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
-              Kwidth,
-              Text(
-                "Guided Journal",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: EdgeInsetsDirectional.only(end: 20),
+                child: Text(
+                  "Guided Journal",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
+          kheight20,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -73,19 +80,6 @@ class Hompagecard extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "Discover your inner \nthoughts and reflections",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "New to Journaling ? \nwe are here to \nhelp.☝️",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          )
         ],
       ),
     );
@@ -101,42 +95,42 @@ void showGuidedJournalBottomSheet(BuildContext context) {
           return Container(
             height: 400,
             width: 370,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "Welcome to Guided Journaling!",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       "Guided journaling provides a structured approach to introspection and self-discovery.",
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "Each day, you'll receive a thought-provoking question designed to stimulate your creativity and self-reflection.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "Take your time to contemplate and express your thoughts. Your journey to self-awareness starts here!",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: korangecolor,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -172,42 +166,42 @@ showBottomSheetnotes(
           return Container(
             height: 400,
             width: 370,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "Here's a thought-provoking question for you:",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       "Take a moment to reflect and jot down your thoughts:",
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "This question is designed to inspire introspection and creativity. Embrace this opportunity to explore your thoughts, feelings, and experiences.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       "Feel free to write as little or as much as you'd like. Your thoughts matter.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FloatingActionButton(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: korangecolor,
                         onPressed: () {
                           Navigator.push(
                             context,

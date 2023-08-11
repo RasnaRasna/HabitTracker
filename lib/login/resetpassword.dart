@@ -26,7 +26,7 @@ class ResetPassword extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/download.jpeg"),
+            image: AssetImage("images/back.jpeg"),
             fit: BoxFit.cover,
           ),
         ),
