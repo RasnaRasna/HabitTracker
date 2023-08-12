@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/reminder/reminder.dart';
 import 'package:habits_track/reminder/reminderweekbox.dart';
-
 import '../const.dart';
 
 class AddReminders extends StatefulWidget {
-  const AddReminders({super.key});
+  const AddReminders({Key? key}) : super(key: key);
 
   @override
   State<AddReminders> createState() => _AddRemindersState();
 }
 
 class _AddRemindersState extends State<AddReminders> {
+  final CollectionReference addReminder =
+      FirebaseFirestore.instance.collection("AddReminder");
+
   TimeOfDay? selectedTime;
+  Set<String> selectedDays = {};
+  TextEditingController notificationTitleController = TextEditingController();
+  TextEditingController notificationMessageController = TextEditingController();
 
   void _showTimePicker() {
     showCupertinoModalPopup(
@@ -35,46 +41,91 @@ class _AddRemindersState extends State<AddReminders> {
     );
   }
 
+  void toggleSelectedDay(String day) {
+    setState(() {
+      if (selectedDays.contains(day)) {
+        selectedDays.remove(day);
+      } else {
+        selectedDays.add(day);
+      }
+    });
+  }
+
+  Future<void> addReminders() async {
+    if (selectedTime != null && selectedDays.isNotEmpty) {
+      final String title = notificationTitleController.text;
+      final String message = notificationMessageController.text;
+
+      await addReminder.add({
+        'Title': title,
+        'selectedDays': selectedDays.toList(),
+        'Time': selectedTime!.format(context),
+        'NotificationMessage': message,
+      });
+
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => const Reminderpage()),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Incomplete Reminder Settings"),
+            content: const Text(
+                "Please select both time and days for the reminder."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => Reminderpage()),
-                );
-              },
-              icon: Icon(Icons.cancel)),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => const Reminderpage()),
+              );
+            },
+            icon: const Icon(Icons.cancel),
+          ),
           actions: [
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => Reminderpage()),
-                  );
-                },
-                child: Text("Save"))
+              onPressed: addReminders,
+              child: const Text("Save"),
+            ),
           ],
         ),
         body: ListView(children: [
           kheight10,
           const Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: Text(
-                      "New Reminder",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    ),
+            alignment: Alignment.topLeft,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Text(
+                    "New Reminder",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
           kheight10,
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 20,
             ),
             child: Text(
@@ -90,11 +141,14 @@ class _AddRemindersState extends State<AddReminders> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    border:
-                        Border.all(color: Color.fromARGB(255, 229, 113, 151))),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
+                    border: Border.all(color: korangecolor)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: TextField(
+                    controller: notificationTitleController,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
               ),
@@ -116,27 +170,32 @@ class _AddRemindersState extends State<AddReminders> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    border:
-                        Border.all(color: Color.fromARGB(255, 229, 113, 151))),
-                child: TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
+                    border: Border.all(color: korangecolor)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: TextField(
+                    controller:
+                        notificationMessageController, // Connect controller
+
+                    decoration: const InputDecoration(border: InputBorder.none),
+                  ),
                 ),
               ),
             ),
           ),
           kheight10,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Time",
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 GestureDetector(
                   onTap: _showTimePicker,
                   //The AbsorbPointer widget ensures
@@ -145,12 +204,11 @@ class _AddRemindersState extends State<AddReminders> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                              color: Color.fromARGB(255, 229, 113, 151))),
+                          border: Border.all(color: korangecolor)),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
                           controller: TextEditingController(
@@ -167,15 +225,21 @@ class _AddRemindersState extends State<AddReminders> {
             ),
           ),
           kheight20,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               "Notify on the following week days",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
           kheight10,
-          Reminderweeks()
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Reminderweeks(
+              selectedDays: selectedDays,
+              onDaySelected: toggleSelectedDay,
+            ),
+          )
         ]));
   }
 }

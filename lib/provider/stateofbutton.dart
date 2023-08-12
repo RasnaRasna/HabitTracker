@@ -85,6 +85,15 @@ class MyButtonClickedProvider with ChangeNotifier {
     return selectedHabitIds.containsKey(habitId);
   }
 
+  Map<String, dynamic> getHabitData(String habitId) {
+    final int index =
+        habitHistory.indexWhere((habit) => habit['habitId'] == habitId);
+    if (index != -1) {
+      return habitHistory[index];
+    }
+    return {}; // Return an empty map if habit not found
+  }
+
   int? getSelectedDayIndex(String habitId) {
     return selectedDayIndices[habitId];
   }
