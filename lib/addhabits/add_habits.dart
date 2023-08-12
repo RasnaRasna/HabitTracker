@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/Firebase/Addhabits.dart';
+import 'package:habits_track/addhabits/leading_cancel.dart';
+import 'package:habits_track/addhabits/reminder_button.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
@@ -26,51 +28,23 @@ class _AddhabitsState extends State<Addhabits> {
 
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
+  bool _isFormValid() {
+    return selectedHabit != null &&
+        selectedHabit!.isNotEmpty &&
+        selectedDaysPerWeek != -1 &&
+        selectedDate != null;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Center(child: Text(' Warning')),
-                    content: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child:
-                          Text('if you made changes they will\n be discarded'),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => bottombar(
-                                      habitHistory: widget.habitHistory,
-                                      habitId: '',
-                                      startDate: DateTime.now(),
-                                      habitName: '',
-                                    ))),
-                        child: const Text(
-                          'Discard changes',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            icon: const Icon(
-              Icons.cancel_sharp,
-              color: Colors.black,
-            )),
+        leading: LeadingCancelButton(widget: widget),
         actions: [
           TextButton(
-              onPressed: () {
+            onPressed: () {
+              if (_isFormValid()) {
                 AddHabitData(
                   context: context,
                   selectedHabit: selectedHabit!,
@@ -79,16 +53,34 @@ class _AddhabitsState extends State<Addhabits> {
                 );
 
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (ctx) => MyHomePageToday(
-                              habitHistory: widget.habitHistory,
-                            )));
-              },
-              child: const Text(
-                "Save",
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
-              ))
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => MyHomePageToday(
+                      habitHistory: widget.habitHistory,
+                    ),
+                  ),
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Error'),
+                      content:
+                          const Text('Please fill in all required fields.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            child: const Text("Save"),
+          ),
         ],
         title: const Text(
           "New Habit",
@@ -217,48 +209,7 @@ class _AddhabitsState extends State<Addhabits> {
                   color: Colors.black),
             ),
             kheight10,
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const Reminderpage()),
-                );
-              },
-              child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('AddReminder')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("Error: ${snapshot.error}");
-                  }
-
-                  if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
-                  }
-
-                  final reminders = snapshot.data!.docs;
-                  int reminderCount =
-                      reminders.length; // Get the count of reminders
-
-                  return Row(children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(color: kredcolor),
-                      ),
-                      width: 350,
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          '$reminderCount Reminder${reminderCount != 1 ? 's' : ''}', // Pluralize if count is not 1
-                          style: TextStyle(fontSize: 18, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ]);
-                },
-              ),
-            ),
+            ReminderButton(),
           ],
         ),
       ),
