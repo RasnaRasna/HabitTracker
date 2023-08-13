@@ -11,8 +11,8 @@ class ChallengesPage extends StatelessWidget {
       child: Scaffold(
           body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: Text(
               "Your habits will \ndetermine your future",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
