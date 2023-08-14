@@ -86,10 +86,10 @@ class EditHabits extends StatelessWidget {
                   width: 30,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => const Reminderpage()));
-                  },
+                  // onTap: () {
+                  //   Navigator.of(context).push(MaterialPageRoute(
+                  //       builder: (ctx) => const Reminderpage()));
+                  // },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),

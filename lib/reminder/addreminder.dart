@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habits_track/Firebase/notification_service.dart';
 import 'package:habits_track/reminder/reminder.dart';
 import 'package:habits_track/reminder/reminderweekbox.dart';
 import '../const.dart';
@@ -15,6 +16,7 @@ class AddReminders extends StatefulWidget {
 class _AddRemindersState extends State<AddReminders> {
   final CollectionReference addReminder =
       FirebaseFirestore.instance.collection("AddReminder");
+  DateTime sheduleTime = DateTime.now();
 
   TimeOfDay? selectedTime;
   Set<String> selectedDays = {};
@@ -29,9 +31,10 @@ class _AddRemindersState extends State<AddReminders> {
           height: 300.0,
           child: CupertinoDatePicker(
             mode: CupertinoDatePickerMode.time,
-            initialDateTime: DateTime.now(),
+            initialDateTime: sheduleTime,
             onDateTimeChanged: (DateTime dateTime) {
               setState(() {
+                sheduleTime = dateTime;
                 selectedTime = TimeOfDay.fromDateTime(dateTime);
               });
             },
@@ -40,6 +43,35 @@ class _AddRemindersState extends State<AddReminders> {
       },
     );
   }
+
+  // void _showDateTimePicker() async {
+  //   final selectedDate = await showDatePicker(
+  //     context: context,
+  //     initialDate: sheduleTime,
+  //     firstDate: DateTime(DateTime.now().year - 5),
+  //     lastDate: DateTime(DateTime.now().year + 5),
+  //   );
+
+  //   if (selectedDate != null) {
+  //     final selectedTimeOfDay = await showTimePicker(
+  //       context: context,
+  //       initialTime: TimeOfDay.fromDateTime(sheduleTime),
+  //     );
+
+  //     if (selectedTimeOfDay != null) {
+  //       setState(() {
+  //         sheduleTime = DateTime(
+  //           selectedDate.year,
+  //           selectedDate.month,
+  //           selectedDate.day,
+  //           selectedTimeOfDay.hour,
+  //           selectedTimeOfDay.minute,
+  //         );
+  //         selectedTime = selectedTimeOfDay;
+  //       });
+  //     }
+  //   }
+  // }
 
   void toggleSelectedDay(String day) {
     setState(() {
@@ -102,7 +134,13 @@ class _AddRemindersState extends State<AddReminders> {
           ),
           actions: [
             TextButton(
-              onPressed: addReminders,
+              onPressed: () {
+                addReminders();
+                NotificationService().SheduleNotification(
+                    title: "Sehdule Notification",
+                    body: '$sheduleTime',
+                    sheduleNotificationDateTime: sheduleTime);
+              },
               child: const Text("Save"),
             ),
           ],

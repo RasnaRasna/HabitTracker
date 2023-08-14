@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/Firebase/notification_service.dart';
 import 'package:habits_track/bottom_pages/Today/completion.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:habits_track/provider/buttonclickedstate.dart';
 import 'package:habits_track/provider/check_cirlebothpage.dart';
 import 'package:habits_track/provider/habitcomplition.dart';
@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   NotificationService().initNotification();
-
+  tz.initializeTimeZones();
   runApp(const MyApp());
 }
 

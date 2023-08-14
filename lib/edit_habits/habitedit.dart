@@ -317,10 +317,10 @@ class _HabitEditState extends State<HabitEdit> {
             ),
             kheight10,
             GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const Reminderpage()));
-              },
+              // onTap: () {
+              //   Navigator.of(context).push(
+              //       MaterialPageRoute(builder: (ctx) => const Reminderpage()));
+              // },
               child: Row(children: [
                 // const SizedBox(
                 //   width: 25,

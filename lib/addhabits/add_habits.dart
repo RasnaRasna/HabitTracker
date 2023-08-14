@@ -8,8 +8,6 @@ import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
 
-import '../bottom_pages/bottom_bar.dart';
-import '../reminder/reminder.dart';
 import 'weekbox.dart';
 
 class Addhabits extends StatefulWidget {
