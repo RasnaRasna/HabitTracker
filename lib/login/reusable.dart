@@ -14,7 +14,7 @@ TextFormField reusableTextfield(
     enableSuggestions: isPasswordType,
     autocorrect: isPasswordType,
     cursorColor: kwhite,
-    style: const TextStyle(color: kblack),
+    style: const TextStyle(color: kwhite),
     decoration: InputDecoration(
       fillColor: korangecolor,
       prefixIcon: Icon(icon, color: Colors.white),

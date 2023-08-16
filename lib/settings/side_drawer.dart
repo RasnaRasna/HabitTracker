@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/Firebase/logout.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/settings/entery.dart';
 
@@ -110,11 +111,12 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: kredcolor),
               ),
               onTap: () {
-                FirebaseAuth.instance.signOut().then((value) {
-                  print("Signed Out");
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => const SignPage()));
-                });
+                showLogoutConfirmationDialog(context);
+                // FirebaseAuth.instance.signOut().then((value) {
+                //   print("Signed Out");
+                //   Navigator.push(context,
+                //       MaterialPageRoute(builder: (ctx) => const SignPage()));
+                // });
               }),
         ],
       ),
