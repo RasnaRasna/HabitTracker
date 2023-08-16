@@ -182,30 +182,25 @@ class _AddhabitsState extends State<Addhabits> {
               onTap: () {
                 _showDatePicker(context);
               },
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(color: kredcolor)),
-                    width: 350,
-                    height: 50,
-                    child: Center(
-                      child: Text(
-                        selectedDate != null
-                            ? getFormattedDate(selectedDate!)
-                            : 'Select Date',
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.black),
-                      ),
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: kredcolor)),
+                width: 340,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    selectedDate != null
+                        ? getFormattedDate(selectedDate!)
+                        : 'Select Date',
+                    style: const TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                ],
+                ),
               ),
             ),
             kheight10,
             const Text(
-              "Reminders  ",
+              "Reminders ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,

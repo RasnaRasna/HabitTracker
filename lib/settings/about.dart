@@ -31,24 +31,28 @@ class AboutScreen extends StatelessWidget {
                   color: korangecolor,
                 ),
                 width: double.infinity,
-                height: 240,
-                child: const Padding(
+                height: 250,
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Column(
+                  child: ListView(
                     children: [
-                      Text(
-                        'Habit Tracker is your personal companion for building healthy habits and achieving your goals. With features like habit tracking, completion status, and history visualization, our app helps you stay motivated and focused on your journey to a better you.',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Text(
-                          "Developed by Rasna",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
+                      Column(
+                        children: [
+                          Text(
+                            'Habit Tracker is your personal companion for building healthy habits and achieving your goals. With features like habit tracking, completion status, and history visualization, our app helps you stay motivated and focused on your journey to a better you.',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Text(
+                              "Developed by Rasna",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

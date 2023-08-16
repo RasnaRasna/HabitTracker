@@ -112,7 +112,7 @@ class _MonthBaseState extends State<MonthBase> {
                         leftChevronVisible: false,
                         rightChevronVisible: false,
                         formatButtonVisible: false,
-                        titleCentered: true,
+                        // titleCentered: true,
                         titleTextStyle: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -171,13 +171,13 @@ class _MonthBaseState extends State<MonthBase> {
                 ),
                 Positioned(
                   top: 10,
-                  left: 3,
+                  right: 30,
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       habitName,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

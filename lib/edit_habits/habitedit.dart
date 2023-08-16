@@ -294,29 +294,21 @@ class _HabitEditState extends State<HabitEdit> {
               onTap: () {
                 _showDatePicker(context);
               },
-              child: Row(
-                children: [
-                  // const SizedBox(
-                  //   width: 25,
-                  // ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 229, 113, 151))),
-                    width: 350,
-                    height: 50,
-                    child: Center(
-                      child: Text(
-                        selectedDate != null
-                            ? getFormattedDate(selectedDate!)
-                            : 'Select Date',
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.black),
-                      ),
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 229, 113, 151))),
+                width: 350,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    selectedDate != null
+                        ? getFormattedDate(selectedDate!)
+                        : 'Select Date',
+                    style: const TextStyle(fontSize: 18, color: Colors.black),
                   ),
-                ],
+                ),
               ),
             ),
             kheight10,
@@ -339,25 +331,20 @@ class _HabitEditState extends State<HabitEdit> {
                               habitId: widget.habitData.id,
                             )));
               },
-              child: Row(children: [
-                // const SizedBox(
-                //   width: 25,
-                // ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 229, 113, 151))),
-                  width: 350,
-                  height: 50,
-                  child: Center(
-                    child: Text(
-                      ' Reminders (${reminderCount.toString()})',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 229, 113, 151))),
+                width: 350,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    ' Reminders (${reminderCount.toString()})',
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 ),
-              ]),
+              ),
             ),
             kheight20,
             deletbutton(context),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habits_track/Firebase/notification_service.dart';
 import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/homepage/card.dart';
 import 'package:habits_track/bottom_pages/homepage/moodcheck.dart';
@@ -76,6 +75,7 @@ class Homapage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       width: 70.0,
@@ -101,8 +101,7 @@ class Homapage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                    FittedBox(
                       child: Text(
                         "${getGreeting()} $name .,",
                         style: const TextStyle(fontSize: 20),

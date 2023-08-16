@@ -32,31 +32,22 @@ class NotificationService {
         id, title, body, await notificationDetails());
   }
 
-  Future<void> SheduleNotification({
-    int id = 0,
-    String? title,
-    String? body,
-    String? payLoad,
-    required DateTime sheduleNotificationDateTime,
-  }) async {
-    DateTime currentTime = DateTime.now();
-
-    if (sheduleNotificationDateTime.isBefore(currentTime)) {
-      // The scheduled time is in the past
-      return;
-    }
-
+  Future SheduleNotification(
+      {int id = 0,
+      String? title,
+      String? body,
+      String? payLoad,
+      required DateTime sheduleNotificationDateTime}) async {
     return notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(
-        sheduleNotificationDateTime,
-        tz.local,
-      ),
-      await notificationDetails(),
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
+        id,
+        title,
+        body,
+        tz.TZDateTime.from(
+          sheduleNotificationDateTime,
+          tz.local,
+        ),
+        await notificationDetails(),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }

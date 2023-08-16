@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habits_track/bottom_pages/challenges/card.dart';
 import 'package:habits_track/challenges/card_cahllenges.dart';
 import 'package:habits_track/const.dart';
 
@@ -20,7 +21,7 @@ class ChallengesPage extends StatelessWidget {
           ),
           kheight10,
           Expanded(
-              child: SingleChildScrollView(child: challengeitems(context))),
+              child: SingleChildScrollView(child: challengeitemss(context))),
         ],
       )),
     );
