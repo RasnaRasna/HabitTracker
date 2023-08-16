@@ -161,12 +161,6 @@ class Homapage extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      NotificationService().shownotification(
-                          title: "sample title", body: 'it works');
-                    },
-                    child: Text("notification"))
               ],
             ),
           ),

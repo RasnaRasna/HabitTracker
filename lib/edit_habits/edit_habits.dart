@@ -10,9 +10,9 @@ import 'package:habits_track/history.dart/history.dart';
 import 'package:habits_track/reminder/reminder.dart';
 
 class EditHabits extends StatelessWidget {
-  final String? habitName;
+  final String habitName;
   final int? daysPerWeek;
-  final DateTime? startDate;
+  final DateTime startDate;
   final String habitId;
   final List<Map<String, dynamic>> habitHistory; // Add this parameter
 
@@ -20,11 +20,11 @@ class EditHabits extends StatelessWidget {
 
   const EditHabits(
       {super.key,
-      this.habitName,
+      required this.habitName,
       this.daysPerWeek,
       required this.startDate,
       required this.habitId,
-      required selectedDate,
+      // required selectedDate,
       required this.habitData,
       required this.habitHistory});
 
@@ -44,7 +44,7 @@ class EditHabits extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back)),
         centerTitle: true,
-        title: Text(habitName!),
+        title: Text(habitName),
       ),
       body: ListView(children: [
         Column(
@@ -86,10 +86,14 @@ class EditHabits extends StatelessWidget {
                   width: 30,
                 ),
                 GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(MaterialPageRoute(
-                  //       builder: (ctx) => const Reminderpage()));
-                  // },
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => Reminderpage(
+                              habitHistory: habitHistory,
+                              habitName: habitName,
+                              habitId: habitId,
+                            )));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
@@ -122,8 +126,9 @@ class EditHabits extends StatelessWidget {
 
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (ctx) => History(
-                        selectedDate: startDate!,
-                        habitId: habitId, habitHistory: habitHistory,
+                        selectedDate: startDate,
+                        habitId: habitId,
+                        habitHistory: habitHistory,
 
                         // Pass the documentId to the History widget
                       ),
@@ -201,7 +206,7 @@ class EditHabits extends StatelessWidget {
                       Kwidth,
                       Text(
                         startDate != null
-                            ? getFormattedDate(startDate!)
+                            ? getFormattedDate(startDate)
                             : 'Select Date',
                         style:
                             const TextStyle(fontSize: 15, color: Colors.black),
@@ -215,7 +220,7 @@ class EditHabits extends StatelessWidget {
             buildHeatMap(habitId),
             // buildHeatMapyear(context)
             kheight20,
-            buildHeatMapYear(startDate!, habitHistory, habitId, habitName!),
+            buildHeatMapYear(startDate, habitHistory, habitId, habitName),
             kheight20,
           ],
         ),

@@ -9,15 +9,15 @@
 // class HabitItemsCard extends StatefulWidget {
 //   const HabitItemsCard({
 //     super.key,
-//     required this.habitData,
-//     required this.habitName,
-//     required this.daysPerWeek,
-//     required this.startDate,
-//     required this.completedCount,
-//     required this.daySymbols,
-//     required this.habitId,
-//     required this.currentDayIndex,
-//     required this.habitHistory,
+//      this.habitData,
+//      this.habitName,
+//      this.daysPerWeek,
+//      this.startDate,
+//      this.completedCount,
+//      this.daySymbols,
+//      this.habitId,
+//      this.currentDayIndex,
+//      this.habitHistory,
 //   });
 
 //   final QueryDocumentSnapshot<Object?> habitData;
@@ -208,26 +208,26 @@ import '../../provider/stateofbutton.dart';
 class HabitItemsCard extends StatefulWidget {
   const HabitItemsCard({
     super.key,
-    required this.habitData,
-    required this.habitName,
-    required this.daysPerWeek,
-    required this.startDate,
-    required this.completedCount,
-    required this.daySymbols,
-    required this.habitId,
-    required this.currentDayIndex,
-    required this.habitHistory,
+    this.habitData,
+    this.habitName,
+    this.daysPerWeek,
+    this.startDate,
+    this.completedCount,
+    this.daySymbols,
+    this.habitId,
+    this.currentDayIndex,
+    this.habitHistory,
   });
 
-  final QueryDocumentSnapshot<Object?> habitData;
+  final QueryDocumentSnapshot<Object?>? habitData;
   final String? habitName;
   final int? daysPerWeek;
   final DateTime? startDate;
-  final int completedCount;
-  final List<Widget> daySymbols;
-  final String habitId;
-  final int currentDayIndex;
-  final List<Map<String, dynamic>> habitHistory;
+  final int? completedCount;
+  final List<Widget>? daySymbols;
+  final String? habitId;
+  final int? currentDayIndex;
+  final List<Map<String, dynamic>>? habitHistory;
   @override
   State<HabitItemsCard> createState() => _HabitItemsCardState();
 }
@@ -238,7 +238,7 @@ class _HabitItemsCardState extends State<HabitItemsCard> {
   @override
   void initState() {
     super.initState();
-    _completionCount = widget.completedCount;
+    _completionCount = widget.completedCount!;
   }
 
   // Add this parameter
@@ -257,13 +257,13 @@ class _HabitItemsCardState extends State<HabitItemsCard> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (ctx) => EditHabits(
-                    habitId: widget.habitData.id,
-                    habitName: widget.habitName,
+                    habitId: widget.habitData!.id,
+                    habitName: widget.habitName!,
                     daysPerWeek: widget.daysPerWeek,
-                    startDate: widget.startDate,
-                    selectedDate: widget.startDate,
-                    habitData: widget.habitData,
-                    habitHistory: widget.habitHistory,
+                    startDate: widget.startDate!,
+                    // selectedDate: widget.startDate,
+                    habitData: widget.habitData!,
+                    habitHistory: widget.habitHistory!,
                   ),
                 ),
               );
@@ -315,27 +315,27 @@ class _HabitItemsCardState extends State<HabitItemsCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ...widget.daySymbols,
+                            ...widget.daySymbols!,
                             KWidth7,
                             IconButton(
                               onPressed: () {
                                 // Check if the habit with habitId is already selected
                                 if (buttonProvider
-                                    .isHabitSelected(widget.habitId)) {
+                                    .isHabitSelected(widget.habitId!)) {
                                   // If it is selected, deselect the habit and reset the selected day index for the habit
                                   buttonProvider
-                                      .toggleHabitSelection(widget.habitId);
+                                      .toggleHabitSelection(widget.habitId!);
                                   buttonProvider.setSelectedDayIndex(
-                                      widget.habitId, -1);
+                                      widget.habitId!, -1);
                                   setState(() {
                                     _completionCount--; // Decrease the completion count
                                   });
                                 } else {
                                   // If it is not selected, select the habit and set the selected day index to the currentDayIndex
                                   buttonProvider
-                                      .toggleHabitSelection(widget.habitId);
+                                      .toggleHabitSelection(widget.habitId!);
                                   buttonProvider.setSelectedDayIndex(
-                                      widget.habitId, widget.currentDayIndex);
+                                      widget.habitId!, widget.currentDayIndex!);
                                   setState(() {
                                     _completionCount++; // Increase the completion count
                                   });

@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:habits_track/addhabits/add_habits.dart';
+import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/reminder/addreminder.dart';
 import 'package:habits_track/reminder/editreminder.dart';
 
 class Reminderpage extends StatelessWidget {
-  const Reminderpage({Key? key}) : super(key: key);
+  final String habitName;
+  final int? daysPerWeek;
+  final DateTime? startDate;
+  final String habitId;
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+
+  const Reminderpage({
+    Key? key,
+    required this.habitName,
+    this.daysPerWeek,
+    this.startDate,
+    required this.habitId,
+    required this.habitHistory,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +28,11 @@ class Reminderpage extends StatelessWidget {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => Addhabits(
-                habitHistory: [],
-              ),
-            ));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (ctx) => bottombar(
+                        startDate: startDate, habitHistory: habitHistory)));
           },
           child: const Icon(
             Icons.arrow_back,
@@ -30,7 +44,12 @@ class Reminderpage extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const AddReminders()),
+                  MaterialPageRoute(
+                      builder: (ctx) => AddReminders(
+                            habitHistory: habitHistory,
+                            habitName: habitName,
+                            habitId: habitId,
+                          )),
                 );
               },
               child: const Icon(
@@ -44,8 +63,10 @@ class Reminderpage extends StatelessWidget {
         title: const Text("Reminders"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream:
-            FirebaseFirestore.instance.collection('AddReminder').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('AddReminder')
+            .where('habitId', isEqualTo: habitId) // Filter by habitId
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -54,7 +75,7 @@ class Reminderpage extends StatelessWidget {
           }
 
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -102,12 +123,14 @@ class Reminderpage extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (ctx) => EditReminder(
+                          habitName: habitName,
+                          habitHistory: habitHistory,
                           title: reminderData['Title'],
-                          message: reminderData[
-                              'NotificationMessage'], // Use 'NotificationMessage' key
+                          message: reminderData['NotificationMessage'],
                           time: reminderData['Time'],
-                          selectedDays: List<String>.from(reminderData[
-                              'selectedDays']), // Pass selected days here
+                          selectedDays:
+                              List<String>.from(reminderData['selectedDays']),
+                          habitId: habitId,
                         ),
                       ),
                     );

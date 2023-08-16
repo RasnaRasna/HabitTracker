@@ -1,18 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/Firebase/Addhabits.dart';
 import 'package:habits_track/addhabits/leading_cancel.dart';
-import 'package:habits_track/addhabits/reminder_button.dart';
 import 'package:habits_track/bottom_pages/Today/today.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/reminder/reminder.dart';
 import 'package:intl/intl.dart';
 
 import 'weekbox.dart';
 
 class Addhabits extends StatefulWidget {
   final List<Map<String, dynamic>> habitHistory;
-  const Addhabits({super.key, required this.habitHistory});
+  final String? habitName;
+
+  const Addhabits({
+    super.key,
+    required this.habitHistory,
+    this.habitName,
+  });
 
   @override
   State<Addhabits> createState() => _AddhabitsState();
@@ -22,8 +29,8 @@ class _AddhabitsState extends State<Addhabits> {
   DateTime? selectedDate;
   String? selectedHabit = '';
   int selectedDaysPerWeek = -1;
-  TextEditingController Habitname = TextEditingController();
 
+  TextEditingController Habitname = TextEditingController();
   final CollectionReference HabitsTemplates =
       FirebaseFirestore.instance.collection("HabitsTemplates");
   bool _isFormValid() {
@@ -44,12 +51,10 @@ class _AddhabitsState extends State<Addhabits> {
             onPressed: () {
               if (_isFormValid()) {
                 AddHabitData(
-                  context: context,
-                  selectedHabit: selectedHabit!,
-                  selectedDaysPerWeek: selectedDaysPerWeek,
-                  selectedDate: selectedDate!,
-                );
-
+                    selectedHabit: selectedHabit!,
+                    selectedDaysPerWeek: selectedDaysPerWeek,
+                    selectedDate: selectedDate!,
+                    context: context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -207,7 +212,81 @@ class _AddhabitsState extends State<Addhabits> {
                   color: Colors.black),
             ),
             kheight10,
-            ReminderButton(),
+            GestureDetector(
+              onTap: () async {
+                if (_isFormValid()) {
+                  await AddHabitData(
+                    selectedHabit: selectedHabit!,
+                    selectedDaysPerWeek: selectedDaysPerWeek,
+                    selectedDate: selectedDate!,
+                    context: context,
+                  );
+                  Future<String> getHabitIdFromFirestore() async {
+                    final user = FirebaseAuth.instance.currentUser;
+                    final userId = user?.uid;
+
+                    final habitSnapshot = await FirebaseFirestore.instance
+                        .collection('add_habits')
+                        .where('name', isEqualTo: selectedHabit)
+                        .where('userId', isEqualTo: userId)
+                        .get();
+
+                    if (habitSnapshot.docs.isNotEmpty) {
+                      return habitSnapshot.docs.first.id;
+                    }
+
+                    return ''; // Return a default value if no habitId is found
+                  }
+
+                  final habitId =
+                      await getHabitIdFromFirestore(); // Fetch the habitId
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => Reminderpage(
+                        habitId: habitId,
+                        habitName: Habitname.text.isNotEmpty
+                            ? Habitname.text
+                            : selectedHabit!,
+                        habitHistory: widget.habitHistory,
+                      ),
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Error'),
+                        content:
+                            const Text('Please fill in all required fields.'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: kredcolor),
+                ),
+                width: 350,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    'Reminders',
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -321,6 +400,12 @@ class _AddhabitsState extends State<Addhabits> {
       },
     );
   }
+}
+
+String getFormattedDate(DateTime date) {
+  final formatter = DateFormat('d-MMMM-yyyy');
+  return formatter.format(date);
+}
 
   // Future<void> AddHabitData() async {
   //   try {
@@ -390,9 +475,3 @@ class _AddhabitsState extends State<Addhabits> {
   //     );
   //   }
   // }
-}
-
-String getFormattedDate(DateTime date) {
-  final formatter = DateFormat('d-MMMM-yyyy');
-  return formatter.format(date);
-}

@@ -7,7 +7,16 @@ import 'package:habits_track/reminder/reminderweekbox.dart';
 import '../const.dart';
 
 class AddReminders extends StatefulWidget {
-  const AddReminders({Key? key}) : super(key: key);
+  final String? habitName;
+  final String habitId;
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
+
+  const AddReminders(
+      {Key? key,
+      this.habitName,
+      required this.habitId,
+      required this.habitHistory})
+      : super(key: key);
 
   @override
   State<AddReminders> createState() => _AddRemindersState();
@@ -18,7 +27,8 @@ class _AddRemindersState extends State<AddReminders> {
       FirebaseFirestore.instance.collection("AddReminder");
   DateTime sheduleTime = DateTime.now();
 
-  TimeOfDay? selectedTime;
+  TimeOfDay? selectedTime =
+      TimeOfDay.fromDateTime(DateTime.now()); // Initialize with current time
   Set<String> selectedDays = {};
   TextEditingController notificationTitleController = TextEditingController();
   TextEditingController notificationMessageController = TextEditingController();
@@ -44,35 +54,6 @@ class _AddRemindersState extends State<AddReminders> {
     );
   }
 
-  // void _showDateTimePicker() async {
-  //   final selectedDate = await showDatePicker(
-  //     context: context,
-  //     initialDate: sheduleTime,
-  //     firstDate: DateTime(DateTime.now().year - 5),
-  //     lastDate: DateTime(DateTime.now().year + 5),
-  //   );
-
-  //   if (selectedDate != null) {
-  //     final selectedTimeOfDay = await showTimePicker(
-  //       context: context,
-  //       initialTime: TimeOfDay.fromDateTime(sheduleTime),
-  //     );
-
-  //     if (selectedTimeOfDay != null) {
-  //       setState(() {
-  //         sheduleTime = DateTime(
-  //           selectedDate.year,
-  //           selectedDate.month,
-  //           selectedDate.day,
-  //           selectedTimeOfDay.hour,
-  //           selectedTimeOfDay.minute,
-  //         );
-  //         selectedTime = selectedTimeOfDay;
-  //       });
-  //     }
-  //   }
-  // }
-
   void toggleSelectedDay(String day) {
     setState(() {
       if (selectedDays.contains(day)) {
@@ -85,18 +66,59 @@ class _AddRemindersState extends State<AddReminders> {
 
   Future<void> addReminders() async {
     if (selectedTime != null && selectedDays.isNotEmpty) {
+      DateTime currentTime = DateTime.now();
+      DateTime selectedDateTime = DateTime(
+        currentTime.year,
+        currentTime.month,
+        currentTime.day,
+        selectedTime!.hour,
+        selectedTime!.minute,
+      );
+
+      if (selectedDateTime.isBefore(currentTime)) {
+        // The selected time is in the past
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Invalid Time"),
+              content: const Text(
+                "Please select a future time for the reminder.",
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+        return; // Do not proceed with saving
+      }
+
       final String title = notificationTitleController.text;
       final String message = notificationMessageController.text;
 
       await addReminder.add({
         'Title': title,
+        'habitName': widget.habitName!, // Add the habitName here
+        'habitId': widget.habitId,
         'selectedDays': selectedDays.toList(),
         'Time': selectedTime!.format(context),
         'NotificationMessage': message,
       });
 
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (ctx) => const Reminderpage()),
+        MaterialPageRoute(
+          builder: (ctx) => Reminderpage(
+            habitName: widget.habitName!, // Pass the habitName
+            habitHistory: widget.habitHistory,
+            habitId: widget.habitId, // Pass the habitId
+          ),
+        ),
       );
     } else {
       showDialog(
@@ -105,7 +127,8 @@ class _AddRemindersState extends State<AddReminders> {
           return AlertDialog(
             title: const Text("Incomplete Reminder Settings"),
             content: const Text(
-                "Please select both time and days for the reminder."),
+              "Please select both time and days for the reminder.",
+            ),
             actions: [
               TextButton(
                 onPressed: () {
@@ -121,13 +144,26 @@ class _AddRemindersState extends State<AddReminders> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    notificationTitleController.text = 'Reminder'; // Set default title
+    notificationMessageController.text =
+        widget.habitName!; // Set default message
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => const Reminderpage()),
+                MaterialPageRoute(
+                    builder: (ctx) => Reminderpage(
+                          habitHistory: widget.habitHistory,
+                          habitName: widget.habitName!,
+                          habitId: widget.habitId,
+                        )),
               );
             },
             icon: const Icon(Icons.cancel),
@@ -137,8 +173,8 @@ class _AddRemindersState extends State<AddReminders> {
               onPressed: () {
                 addReminders();
                 NotificationService().SheduleNotification(
-                    title: "Sehdule Notification",
-                    body: '$sheduleTime',
+                    title: notificationTitleController.text,
+                    body: notificationMessageController.text,
                     sheduleNotificationDateTime: sheduleTime);
               },
               child: const Text("Save"),
@@ -154,7 +190,7 @@ class _AddRemindersState extends State<AddReminders> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
                   child: Text(
-                    "New Reminder",
+                    " New Reminder",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                 ),

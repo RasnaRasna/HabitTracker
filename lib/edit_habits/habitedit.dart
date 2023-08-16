@@ -35,6 +35,7 @@ class HabitEdit extends StatefulWidget {
 
 class _HabitEditState extends State<HabitEdit> {
   DateTime? selectedDate;
+  int reminderCount = 0; // Initialize with 0
 
   String? selectedHabit;
   int selectedDaysPerWeek = -1;
@@ -48,6 +49,17 @@ class _HabitEditState extends State<HabitEdit> {
   @override
   void initState() {
     super.initState();
+    final String habitId = widget.habitData.id; // Get the habit ID
+
+    FirebaseFirestore.instance
+        .collection('AddReminder')
+        .where('habitId', isEqualTo: habitId) // Filter based on habitId
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      setState(() {
+        reminderCount = querySnapshot.docs.length; // Calculate reminder count
+      });
+    });
     print('Document ID: ${widget.documentId}');
     print("habit history in editpage${widget.habitHistory}");
 
@@ -317,10 +329,16 @@ class _HabitEditState extends State<HabitEdit> {
             ),
             kheight10,
             GestureDetector(
-              // onTap: () {
-              //   Navigator.of(context).push(
-              //       MaterialPageRoute(builder: (ctx) => const Reminderpage()));
-              // },
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => Reminderpage(
+                              habitName: widget.habitName!,
+                              habitHistory: widget.habitHistory,
+                              habitId: widget.habitData.id,
+                            )));
+              },
               child: Row(children: [
                 // const SizedBox(
                 //   width: 25,
@@ -332,9 +350,9 @@ class _HabitEditState extends State<HabitEdit> {
                           color: const Color.fromARGB(255, 229, 113, 151))),
                   width: 350,
                   height: 50,
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Remindes ',
+                      ' Reminders (${reminderCount.toString()})',
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                   ),

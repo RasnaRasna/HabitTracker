@@ -1,23 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:habits_track/reminder/addreminder.dart';
 import 'package:habits_track/reminder/reminder.dart';
 import 'package:habits_track/reminder/reminderweekbox.dart';
 
 import '../const.dart';
 
 class EditReminder extends StatefulWidget {
+  final String habitName;
   final String title;
   final String message;
+  final String habitId;
+
   final String time; // Change the type to DateTime
   final List<String> selectedDays; // Receive selected days here
+  final List<Map<String, dynamic>> habitHistory; // Add this parameter
 
   const EditReminder({
     super.key,
     required this.title,
     required this.message,
     required this.time,
-    required this.selectedDays, // Include selected days in the constructor
+    required this.selectedDays,
+    required this.habitHistory,
+    required this.habitName,
+    required this.habitId, // Include selected days in the constructor
   });
 
   @override
@@ -79,16 +87,19 @@ class _EditReminderState extends State<EditReminder> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => const Reminderpage()),
-              );
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.cancel)),
         actions: [
           TextButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const Reminderpage()),
+                  MaterialPageRoute(
+                      builder: (ctx) => Reminderpage(
+                            habitHistory: widget.habitHistory,
+                            habitName: widget.habitName,
+                            habitId: widget.habitId,
+                          )),
                 );
               },
               child: const Text("Save"))
@@ -271,7 +282,11 @@ class _EditReminderState extends State<EditReminder> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (ctx) => Reminderpage()),
+                                    builder: (ctx) => Reminderpage(
+                                          habitHistory: [],
+                                          habitName: widget.habitName,
+                                          habitId: widget.habitId,
+                                        )),
                               );
                             },
                             child: const Text(
