@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:habits_track/reminder/addreminder.dart';
 import 'package:habits_track/reminder/reminder.dart';
 import 'package:habits_track/reminder/reminderweekbox.dart';
 
@@ -81,6 +80,60 @@ class _EditReminderState extends State<EditReminder> {
     );
   }
 
+  Future<void> _updateReminder() async {
+    final updatedTitle = titleController.text;
+    final updatedSelectedDays = _selectedDays.toList();
+    final updatedTime =
+        selectedTime != null ? selectedTime!.format(context) : widget.time;
+    final updatedNotificationMessage = messageController.text;
+
+    // Fetch the current reminder document
+    final querySnapshot =
+        await editReminder.where("Title", isEqualTo: widget.title).get();
+
+    // Check if any of the fields have actually changed
+    bool fieldsChanged = false;
+    querySnapshot.docs.forEach((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      if (data['Title'] != updatedTitle ||
+          !ListEquality().equals(data['selectedDays'], updatedSelectedDays) ||
+          data['Time'] != updatedTime ||
+          data['NotificationMessage'] != updatedNotificationMessage) {
+        fieldsChanged = true;
+        return; // Exit the loop early if any field changed
+      }
+    });
+
+    if (!fieldsChanged) {
+      // Fields haven't changed, show a "Didn't Update" message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Reminder didn't change"),
+        ),
+      );
+      return; // No need to proceed further
+    }
+
+    // Fields have changed, update the reminder
+    querySnapshot.docs.forEach((doc) {
+      doc.reference.update({
+        'Title': updatedTitle,
+        'selectedDays': updatedSelectedDays,
+        'Time': updatedTime,
+        'NotificationMessage': updatedNotificationMessage,
+      });
+    });
+
+    // Show a success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.green,
+        content: Text('Reminder updated successfully'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +146,7 @@ class _EditReminderState extends State<EditReminder> {
         actions: [
           TextButton(
               onPressed: () {
+                _updateReminder();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (ctx) => Reminderpage(

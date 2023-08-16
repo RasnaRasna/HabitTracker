@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
-import 'package:habits_track/addhabits/add_habits.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/reminder/addreminder.dart';
