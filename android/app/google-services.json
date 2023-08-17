@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:846873566374:android:24de3b957afe9abea1a867",
         "android_client_info": {
-          "package_name": "com.example.habits_track"
+          "package_name": "in.brototype.habits_track"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "846873566374-6gjpuhb1umq0g3mpnjuhn68vjcl0072m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.habits_track",
+            "package_name": "in.brototype.habits_track",
             "certificate_hash": "65180319ff093fc44e61d968079c95b170e9c516"
           }
         },
