@@ -64,58 +64,58 @@ class _AddRemindersState extends State<AddReminders> {
     });
   }
 
-  Future<void> _scheduleRemindersOnSelectedDays() async {
-    for (String day in selectedDays) {
-      int dayIndex = DateTime.now().weekday;
+  // Future<void> _scheduleRemindersOnSelectedDays() async {
+  //   for (String day in selectedDays) {
+  //     int dayIndex = DateTime.now().weekday;
 
-      // Map the selected day to its index (0 = Monday, 6 = Sunday)
-      switch (day.toLowerCase()) {
-        case 'monday':
-          dayIndex = 1;
-          break;
-        case 'tuesday':
-          dayIndex = 2;
-          break;
-        case 'wednesday':
-          dayIndex = 3;
-          break;
-        case 'thursday':
-          dayIndex = 4;
-          break;
-        case 'friday':
-          dayIndex = 5;
-          break;
-        case 'saturday':
-          dayIndex = 6;
-          break;
-        case 'sunday':
-          dayIndex = 7;
-          break;
-      }
+  //     // Map the selected day to its index (0 = Monday, 6 = Sunday)
+  //     switch (day.toLowerCase()) {
+  //       case 'monday':
+  //         dayIndex = 1;
+  //         break;
+  //       case 'tuesday':
+  //         dayIndex = 2;
+  //         break;
+  //       case 'wednesday':
+  //         dayIndex = 3;
+  //         break;
+  //       case 'thursday':
+  //         dayIndex = 4;
+  //         break;
+  //       case 'friday':
+  //         dayIndex = 5;
+  //         break;
+  //       case 'saturday':
+  //         dayIndex = 6;
+  //         break;
+  //       case 'sunday':
+  //         dayIndex = 7;
+  //         break;
+  //     }
 
-      // Calculate the number of days to add to get to the selected day
-      int daysToAdd = dayIndex - DateTime.now().weekday;
-      if (daysToAdd <= 0) {
-        daysToAdd += 7;
-      }
+  //     // Calculate the number of days to add to get to the selected day
+  //     int daysToAdd = dayIndex - DateTime.now().weekday;
+  //     if (daysToAdd <= 0) {
+  //       daysToAdd += 7;
+  //     }
 
-      // Calculate the scheduledDateTime for the selected day and time
-      DateTime scheduledDateTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day + daysToAdd,
-        selectedTime!.hour,
-        selectedTime!.minute,
-      );
+  //     // Calculate the scheduledDateTime for the selected day and time
+  //     DateTime scheduledDateTime = DateTime(
+  //       DateTime.now().year,
+  //       DateTime.now().month,
+  //       DateTime.now().day + daysToAdd,
+  //       selectedTime!.hour,
+  //       selectedTime!.minute,
+  //     );
 
-      // Schedule the reminder for the calculated date and time
-      NotificationService().SheduleNotification(
-        title: notificationTitleController.text,
-        body: notificationMessageController.text,
-        sheduleNotificationDateTime: scheduledDateTime,
-      );
-    }
-  }
+  //     // Schedule the reminder for the calculated date and time
+  //     NotificationService().sheduleNotification(
+  //       title: notificationTitleController.text,
+  //       body: notificationMessageController.text,
+  //       sheduleNotificationDateTime: scheduledDateTime,
+  //     );
+  //   }
+  // }
 
   Future<void> addReminders() async {
     if (selectedTime != null && selectedDays.isNotEmpty) {
@@ -163,7 +163,7 @@ class _AddRemindersState extends State<AddReminders> {
         'Time': selectedTime!.format(context),
         'NotificationMessage': message,
       });
-      await _scheduleRemindersOnSelectedDays();
+      // await _scheduleRemindersOnSelectedDays();
 
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -226,7 +226,7 @@ class _AddRemindersState extends State<AddReminders> {
             TextButton(
               onPressed: () {
                 addReminders();
-                NotificationService().SheduleNotification(
+                NotificationService().sheduleNotification(
                     title: notificationTitleController.text,
                     body: notificationMessageController.text,
                     sheduleNotificationDateTime: sheduleTime);

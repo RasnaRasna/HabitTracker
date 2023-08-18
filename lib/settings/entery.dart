@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habits_track/bottom_pages/Entry/editcardtwo.dart';
 import 'package:habits_track/bottom_pages/bottom_bar.dart';
 import 'package:habits_track/const.dart';
-import 'package:habits_track/settings/favorite.dart';
 import 'package:intl/intl.dart';
 
 class Entery extends StatefulWidget {
@@ -37,24 +36,24 @@ class _EnteryState extends State<Entery> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Delete'),
+          title: const Text('Confirm Delete'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Are you sure you want to delete this entry?'),
+                const Text('Are you sure you want to delete this entry?'),
                 Text('Question: $question'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Delete'),
+              child: const Text('Delete'),
               onPressed: () async {
                 Navigator.of(context).pop();
                 await _deleteEntry(docId, collection, index);
@@ -70,7 +69,7 @@ class _EnteryState extends State<Entery> {
       String docId, CollectionReference collection, int index) async {
     try {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.green,
           content: Text('Entry deleted successfully'),
         ),
@@ -103,7 +102,7 @@ class _EnteryState extends State<Entery> {
                 ),
               );
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
           centerTitle: true,
           title: const Text("Entries"),
@@ -116,7 +115,7 @@ class _EnteryState extends State<Entery> {
                 horizontal: 10,
                 vertical: 5,
               ),
-              decoration: BoxDecoration(color: Colors.white),
+              decoration: const BoxDecoration(color: Colors.white),
               child: TabBar(
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black,
@@ -129,14 +128,14 @@ class _EnteryState extends State<Entery> {
                     child: Container(
                       width: MediaQuery.of(context).size.width *
                           0.5, // Adjust this value to your preference
-                      child: Center(child: Text("Prompt of the Day")),
+                      child: const Center(child: Text("Prompt of the Day")),
                     ),
                   ),
                   Tab(
                     child: Container(
                       width: MediaQuery.of(context).size.width *
                           0.5, // Adjust this value to your preference
-                      child: Center(child: Text("Guided Journaling")),
+                      child: const Center(child: Text("Guided Journaling")),
                     ),
                   ),
                 ],
@@ -159,11 +158,11 @@ class _EnteryState extends State<Entery> {
       stream: collection.orderBy("date", descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (!snapshot.hasData) {
-          return Center(child: Text("No data available"));
+          return const Center(child: Text("No data available"));
         }
 
         notes = snapshot.data!.docs;
@@ -196,7 +195,7 @@ class _EnteryState extends State<Entery> {
                         padding: const EdgeInsets.all(4),
                         child: Text(
                           formattedDate,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -209,7 +208,7 @@ class _EnteryState extends State<Entery> {
                             child: TextFormField(
                               initialValue: note,
                               readOnly: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                               ),
                             ),
@@ -219,7 +218,7 @@ class _EnteryState extends State<Entery> {
                               _showDeleteConfirmationDialog(
                                   docId, question, collection, index);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.delete_outline_outlined,
                             ),
                           ),
@@ -238,7 +237,7 @@ class _EnteryState extends State<Entery> {
                                 ),
                               );
                             },
-                            icon: Icon(Icons.edit_outlined),
+                            icon: const Icon(Icons.edit_outlined),
                           ),
                         ],
                       ),

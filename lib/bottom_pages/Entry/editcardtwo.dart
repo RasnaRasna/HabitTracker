@@ -54,7 +54,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
 
         // Show a success Snackbar for successful edit
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Colors.green,
             content: Text('Note edited successfully'),
           ),
@@ -62,7 +62,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
       } else {
         // Show a message indicating that no changes were made
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Colors.red,
             content: Text('No changes made'),
           ),
@@ -80,13 +80,13 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Edit Entry",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -94,7 +94,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 17),
               child: Text(
                 widget.formattedDate,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
@@ -103,21 +103,22 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 17),
               child: Text(
                 widget.question,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 17),
               child: TextField(
                 controller: noteController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "Edit your answer",
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
@@ -125,7 +126,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                 onPressed: () {
                   updateNoteAndPop(); // Call the update function
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.check,
                   color: Colors.white,
                 ),

@@ -274,7 +274,7 @@ class _AddhabitsState extends State<Addhabits> {
                 ),
                 width: 350,
                 height: 50,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Reminders',
                     style: TextStyle(fontSize: 18, color: Colors.black),
