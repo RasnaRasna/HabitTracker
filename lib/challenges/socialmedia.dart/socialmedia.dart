@@ -13,7 +13,7 @@ class SocialMedia extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Social Media Detox",
+            "Digital Detox",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(

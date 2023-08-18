@@ -16,14 +16,24 @@ class MorningRoutineChallange extends StatefulWidget {
 
 class _MorningRoutineChallangeState extends State<MorningRoutineChallange> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Start your day with a glass of water to hydrate your body and kickstart your metabolism.",
+    "Create a morning gratitude practice by listing three things you're thankful for.",
+    "Incorporate stretching or light yoga to wake up your body and boost circulation.",
+    "Practice deep breathing or meditation for a few minutes to set a positive tone for the day.",
+    "Enjoy a nutritious breakfast that includes a balance of protein, carbs, and healthy fats.",
+    "Set aside time for a quick workout or brisk walk to energize your body.",
+    "Limit screen time during the first hour after waking up to avoid overwhelm.",
+    "Plan your day by creating a to-do list or setting your priorities.",
+    "Avoid checking emails or messages until after your morning routine to reduce stress.",
+    "Create a specific and consistent morning routine to establish a sense of structure.",
+    "Make your bed as soon as you wake up to start your day with a sense of accomplishment.",
+    "Spend a few minutes visualizing your goals and intentions for the day.",
+    "Read or listen to something inspiring to set a positive and motivated mindset.",
+    "Practice a skincare routine to refresh your skin and boost your confidence.",
+    "Enjoy a moment of silence or listen to calming music to ease into your day.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

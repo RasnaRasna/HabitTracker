@@ -14,11 +14,21 @@ class NoJunckfoodd extends StatefulWidget {
 
 class _NoJunckfooddState extends State<NoJunckfoodd> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Replace one junk food item with a healthier snack each day for a week.",
+    "Commit to drinking water whenever you feel the urge to snack on junk food.",
+    "Clear your pantry of junk food and stock up on nutritious alternatives.",
+    "Try a week of meal prepping to ensure you have healthy options readily available.",
+    "Keep a food journal to track your progress and identify triggers for junk food cravings.",
+    "Experiment with making your favorite junk food at home using healthier ingredients.",
+    "Practice mindful eating by savoring each bite of your meals and snacks.",
+    "Plan balanced meals that include a mix of lean protein, whole grains, and vegetables.",
+    "Reward yourself with a non-food treat every time you successfully resist junk food.",
+    "Find healthy substitutions for your favorite junk food cravings, like baked sweet potato fries instead of regular fries.",
+    "Avoid eating in front of screens to prevent mindless snacking.",
+    "Choose whole, unprocessed foods that are both nutritious and satisfying.",
+    "Create a colorful plate by incorporating a variety of fruits and vegetables.",
+    "Practice portion control by using smaller plates and bowls for your meals.",
+    "Remind yourself of your health goals whenever you're tempted by junk food.",
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);

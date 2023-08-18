@@ -17,14 +17,24 @@ class PositiveAffirmationChallanges extends StatefulWidget {
 class _PositiveAffirmationChallangesState
     extends State<PositiveAffirmationChallanges> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Compliment at least one person each day, focusing on their strengths and qualities.",
+    "Send a thoughtful text or message to someone who might be in need of encouragement.",
+    "Write a note of appreciation to a coworker, friend, or family member to brighten their day.",
+    "Offer words of support to someone facing a challenge or difficult situation.",
+    "Share an inspiring quote or story on your social media to uplift others.",
+    "Express genuine interest and enthusiasm when listening to someone's ideas or experiences.",
+    "Celebrate the accomplishments of others by acknowledging their achievements.",
+    "Practice active encouragement by providing constructive feedback in a positive way.",
+    "Reach out to someone you haven't spoken to in a while and let them know you care.",
+    "Leave kind and encouraging comments on social media posts that resonate with you.",
+    "Participate in a local community event or fundraiser to show support.",
+    "Offer a helping hand or assistance to someone who might be struggling.",
+    "Host a virtual or in-person group discussion centered around sharing and offering encouragement.",
+    "Practice self-encouragement by reminding yourself of your achievements and capabilities.",
+    "Use positive language and focus on solutions when discussing challenges with others.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.
@@ -52,7 +62,7 @@ class _PositiveAffirmationChallangesState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Positive Affirmation",
+          "Encouragement",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         actions: [Showdialoguee(challengeValues: challengeValues)],

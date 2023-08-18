@@ -15,11 +15,21 @@ class Productivity extends StatefulWidget {
 
 class _ProductivityState extends State<Productivity> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Start your day with a to-do list and prioritize tasks for increased productivity.",
+    "Try the Pomodoro Technique: Work for 25 minutes, then take a 5-minute break.",
+    "Set specific goals for the day to stay focused and motivated.",
+    "Declutter your workspace for improved concentration and efficiency.",
+    "Limit multitasking and focus on one task at a time to enhance productivity.",
+    "Allocate dedicated time for emails and messages to avoid constant interruptions.",
+    "Take on a challenging task first thing in the morning to tackle it with fresh energy.",
+    "Use productivity apps to track tasks, set reminders, and manage your time.",
+    "Review your achievements at the end of the day and plan for tomorrow.",
+    "Practice deep work: Set aside uninterrupted blocks of time for focused tasks.",
+    "Delegate tasks that can be handled by others to free up your time.",
+    "Experiment with different methods of organizing your tasks, such as the Eisenhower Matrix.",
+    "Create a minimalist workspace to minimize distractions and boost concentration.",
+    "Practice mindfulness or meditation to clear your mind and enhance your focus.",
+    "Take breaks and stretch throughout the day to recharge your energy.",
   ];
 
   List<bool> challengeValues = List<bool>.generate(5, (index) => false);

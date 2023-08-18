@@ -12,7 +12,7 @@ class PositiveAffirmation extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Positive Affirmation",
+            "Encouragement",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
@@ -37,7 +37,7 @@ class PositiveAffirmation extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
-              " Practicing Positive affirmation can help you feel more confident and boost positive vibes .it,s a wonderful way to start the day !",
+              " Practicing Encouragement can help you feel more confident and boost positive vibes .it,s a wonderful way to start the day !",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),

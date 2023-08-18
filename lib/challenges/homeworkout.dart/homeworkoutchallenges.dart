@@ -14,14 +14,24 @@ class HomeWrokOutChallages extends StatefulWidget {
 
 class _HomeWrokOutChallagesState extends State<HomeWrokOutChallages> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Commit to a 10-minute home workout routine every morning.",
+    "Try a different home workout video or routine each day to keep things interesting.",
+    "Set a goal to complete a certain number of push-ups, squats, or other exercises each day.",
+    "Create a home workout playlist with motivating music to keep you pumped.",
+    "Challenge yourself to improve your flexibility through daily stretching.",
+    "Engage in a HIIT (High-Intensity Interval Training) workout for 20 minutes every day.",
+    "Use household items like water bottles or chairs for resistance exercises.",
+    "Join an online fitness class or follow a live workout session each day.",
+    "Mix cardio and strength training with alternating days of running or jumping rope.",
+    "Start your day with a morning yoga routine to energize your body and mind.",
+    "Set a timer and do a mini workout break every hour during your work or study sessions.",
+    "Include bodyweight exercises like planks, lunges, and burpees in your routine.",
+    "Create a workout calendar with specific exercises for each day of the week.",
+    "Challenge yourself to hold a plank for a longer duration each day.",
+    "Document your progress by tracking the number of reps or weights used in your workouts.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

@@ -15,14 +15,24 @@ class StudyChallanges extends StatefulWidget {
 
 class _StudyChallangesState extends State<StudyChallanges> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Create a dedicated study space and commit to using it for a certain amount of time each day.",
+    "Set specific goals for each study session, such as completing a certain number of pages or problems.",
+    "Practice the Pomodoro Technique: Study for 25 minutes, then take a 5-minute break.",
+    "Review your notes or materials from the previous day's study session before starting anew.",
+    "Use active learning techniques, such as summarizing, teaching, or quizzing yourself.",
+    "Seek out different resources like videos, articles, or podcasts to enhance your understanding.",
+    "Join a study group or find a study partner to discuss and review concepts.",
+    "Take handwritten notes to improve retention and comprehension.",
+    "Break down larger topics into smaller, manageable chunks to avoid feeling overwhelmed.",
+    "Quiz yourself on the material you've studied at the end of each session.",
+    "Teach a concept or topic to someone else, even if it's just explaining it out loud.",
+    "Stay organized with digital tools or physical planners to track your study progress.",
+    "Reward yourself with a short break or a treat after completing a study session.",
+    "Set a schedule and stick to it, allocating specific time slots for studying.",
+    "Review your progress at the end of each week and adjust your study strategies as needed.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

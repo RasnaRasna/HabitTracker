@@ -15,14 +15,24 @@ class Socailmedia extends StatefulWidget {
 
 class _SocailmediaState extends State<Socailmedia> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Disconnect from screens in the morning and night for a refreshing start and restful sleep.",
+    "Enjoy meals without screens to fully appreciate the flavors and be in the moment.",
+    "Take device-free walks to immerse yourself in nature and your surroundings.",
+    "Allocate an hour daily without notifications to focus on other activities.",
+    "Dedicate time to read a physical book, embracing the joy of turning pages.",
+    "Prioritize screen-free evenings to promote better sleep and relaxation.",
+    "Step away from social media for a day to reclaim time and mental clarity.",
+    "Rediscover offline hobbies like drawing, crafting, or playing an instrument.",
+    "Designate phone-free zones at home, such as the dining area or bedroom.",
+    "Organize digital files, emails, and apps for a clutter-free digital space.",
+    "Swap typing for writing with pen and paper for a tactile experience.",
+    "Engage in tech-free conversations, giving your full attention to the interaction.",
+    "Embrace outdoor activities and adventure without the presence of screens.",
+    "Practice mindfulness instead of reaching for your phone during your detox.",
+    "Unfollow accounts that bring negativity during your detox, curating a positive digital environment.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.
@@ -48,7 +58,7 @@ class _SocailmediaState extends State<Socailmedia> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Social Media Detox",
+          "Digital Detox",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         actions: [Showdialoguee(challengeValues: challengeValues)],

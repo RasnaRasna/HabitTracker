@@ -14,14 +14,24 @@ class FamilyChallanges extends StatefulWidget {
 
 class _FamilyChallangesState extends State<FamilyChallanges> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Have a technology-free family dinner at least three times a week.",
+    "Plan a family game night with board games, card games, or interactive video games.",
+    "Designate a 'Family Fun Day' once a month for an outing or special activity.",
+    "Cook a meal or bake together as a family, involving everyone in the process.",
+    "Share stories or memories from each family member's day during a designated time.",
+    "Create a family photo album or scrapbook together to capture and cherish memories.",
+    "Engage in a DIY project or craft as a family, working collaboratively.",
+    "Set aside time for a weekly family movie or TV show night.",
+    "Plan a family hike, picnic, or outdoor adventure to enjoy nature together.",
+    "Hold a family book club where everyone reads the same book and discusses it.",
+    "Take turns choosing and preparing a meal or activity, rotating responsibilities.",
+    "Organize a family talent show, allowing each member to showcase their skills.",
+    "Visit a local museum, park, or attraction as a family to explore and learn together.",
+    "Practice gratitude by sharing one thing each family member is thankful for daily.",
+    "Engage in a family volunteer activity to give back to the community together.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

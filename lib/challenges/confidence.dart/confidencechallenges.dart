@@ -14,14 +14,24 @@ class confidenceChallange extends StatefulWidget {
 
 class _confidenceChallangeState extends State<confidenceChallange> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Each day, write down one thing you appreciate about yourself.",
+    "Challenge negative self-talk by replacing it with positive affirmations.",
+    "Set a goal to step out of your comfort zone at least once a week.",
+    "Practice good posture and body language to convey confidence.",
+    "Reflect on your achievements and past successes to boost your self-esteem.",
+    "Try a new skill or hobby to expand your abilities and build self-assurance.",
+    "Compliment others sincerely and notice how it lifts your own confidence.",
+    "Dress in a way that makes you feel confident and empowered.",
+    "Eliminate 'should' and 'must' from your self-talk to foster self-acceptance.",
+    "Visualize yourself succeeding in a challenging situation to boost your confidence.",
+    "Speak up and share your thoughts in group discussions or meetings.",
+    "Accept compliments graciously instead of downplaying your achievements.",
+    "Practice positive self-affirmations in front of the mirror each morning.",
+    "Reflect on past obstacles you've overcome and how they've made you stronger.",
+    "Surround yourself with supportive and positive people who uplift your confidence.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   @override
   void initState() {
     super.initState();

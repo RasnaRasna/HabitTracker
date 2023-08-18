@@ -91,7 +91,7 @@ GridView challengeitemss(BuildContext context) {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => const PamberYouself()));
       }),
-      buildChallengeCard(context, "images/no jucnk food.png", "No  junck food",
+      buildChallengeCard(context, "images/no jucnk food.png", "No junck food",
           () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => const NojunckFood()));
@@ -100,8 +100,7 @@ GridView challengeitemss(BuildContext context) {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => const NightRoutine()));
       }),
-      buildChallengeCard(context, "images/morning.jpeg", "Morning  Routine",
-          () {
+      buildChallengeCard(context, "images/morning.jpeg", "Morning Routine", () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => const MorningRoutine()));
       }),
@@ -129,8 +128,8 @@ GridView challengeitemss(BuildContext context) {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => const FamilyTime()));
       }),
-      buildChallengeCard(
-          context, "images/affrmation2.jpg", "positive affirmation", () {
+      buildChallengeCard(context, "images/affrmation2.jpg", "Encouragement",
+          () {
         Navigator.of(context).push(
             MaterialPageRoute(builder: (ctx) => const PositiveAffirmation()));
       }),

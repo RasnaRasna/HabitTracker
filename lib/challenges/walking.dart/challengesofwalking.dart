@@ -14,14 +14,24 @@ class walkingChallenges extends StatefulWidget {
 
 class _walkingChallengesState extends State<walkingChallenges> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "   Aim to walk a new route each week to keep things interesting.",
+    "Practice mindful walking by focusing on each step and your surroundings.",
+    "Set a daily step goal and track your progress to stay motivated.",
+    "Take a nature walk to connect with the outdoors and boost your mood.",
+    "Challenge yourself to a power walk, picking up the pace for a good workout.",
+    "Walk and talk by making calls while getting your steps in.",
+    "Capture interesting sights during your walk with a photography challenge.",
+    "Choose stairs over elevators for an extra step challenge throughout the day.",
+    "Enjoy a calming walking meditation to clear your mind and relax.",
+    "Join a charity walk to give back while improving your fitness.",
+    "Involve your family in a group walk for quality bonding time.",
+    "Listen to upbeat music as you walk to add an extra layer of fun.",
+    "Walk during sunrise or sunset for a scenic and peaceful experience.",
+    "Explore historical sites in your area on foot to learn as you move.",
+    "Incorporate intervals of faster walking for a varied workout.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

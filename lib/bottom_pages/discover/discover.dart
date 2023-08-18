@@ -139,7 +139,7 @@ class Discover extends StatelessWidget {
                   Kwidth,
                   Text(
                     "	Overcoming a Bad Habit",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   )
                 ],
               ),

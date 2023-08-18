@@ -12,7 +12,7 @@ class FixSleep extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Text(
-            "Fix your Sleep Shedule",
+            "Better Sleep",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(

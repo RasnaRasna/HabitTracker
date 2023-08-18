@@ -15,14 +15,24 @@ class LanguageChallenge extends StatefulWidget {
 
 class _LanguageChallengeState extends State<LanguageChallenge> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Learn five new vocabulary words in your target language every day.",
+    "Watch a short video or listen to a podcast in the language you're learning each day.",
+    "Set a timer for 15 minutes and practice speaking or writing in the new language.",
+    "Label objects around your home with their names in the target language.",
+    "Read a news article or a passage in the language you're learning daily.",
+    "Engage in a language exchange with a native speaker or fellow learner.",
+    "Learn a popular song or poem in the target language and practice singing or reciting it.",
+    "Use language learning apps or platforms for consistent practice.",
+    "Write a journal entry about your day in the new language.",
+    "Challenge yourself to hold a conversation in the new language each day, even if it's just with yourself.",
+    "Immerse yourself by changing the language settings on your devices.",
+    "Listen to an audiobook or an e-book in the language you're learning.",
+    "Engage in language-related games or puzzles to make learning fun.",
+    "Join online language learning communities to interact with fellow learners.",
+    "Set a specific language learning goal for the day, such as mastering a particular grammar concept.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

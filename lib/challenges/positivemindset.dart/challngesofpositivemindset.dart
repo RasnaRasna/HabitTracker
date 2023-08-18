@@ -16,14 +16,24 @@ class PositiveChallenges extends StatefulWidget {
 
 class _PositiveChallengesState extends State<PositiveChallenges> {
   final List<String> challenges = [
-    "Practice smiling.smile at strangers,in the mirror,smile Whenever you can! You'll feel so much of more positive",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Start your day with a positive affirmation or mantra.",
+    "Practice gratitude by writing down three things you're thankful for each day.",
+    "Replace negative self-talk with positive and empowering thoughts.",
+    "Challenge yourself to find the silver lining in a challenging situation.",
+    "Engage in mindfulness or meditation to center yourself and promote positivity.",
+    "Surround yourself with positive influences, whether it's people, books, or media.",
+    "Practice reframing: Turn a negative thought into a positive or constructive one.",
+    "Reflect on your accomplishments and progress regularly.",
+    "Choose to see setbacks as opportunities for growth and learning.",
+    "Limit exposure to negative news or content that brings you down.",
+    "Practice kindness and compassion toward yourself and others.",
+    "Visualize your goals and dreams as if they're already happening.",
+    "Laugh daily, whether by watching a comedy show or sharing a funny story.",
+    "Focus on solutions instead of dwelling on problems.",
+    "Surprise someone with a random act of kindness to boost your own positivity.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.

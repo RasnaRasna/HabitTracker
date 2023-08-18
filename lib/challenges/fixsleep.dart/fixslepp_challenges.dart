@@ -14,14 +14,24 @@ class FixsleepShedule extends StatefulWidget {
 
 class _FixsleepSheduleState extends State<FixsleepShedule> {
   final List<String> challenges = [
-    "Write down 10 things you love about yourself.",
-    "Look in the mirror and repeat these things to yourself.",
-    "Spend time with someone who makes you feel loved and supported. Notice how their presence makes you feel.",
-    "Do something that makes you feel good, such as taking a bath, reading a book, or listening to music. Focus on the positive feelings you experience during this activity.",
-    "Do something else that makes you feel good."
+    "Create a calming bedtime routine and stick to it for a week to promote better sleep.",
+    "Limit screen time at least an hour before bed to signal your body it's time to wind down.",
+    "Set a consistent sleep schedule, aiming for the same bedtime and wake-up time every day.",
+    "Create a comfortable sleep environment by adjusting lighting, noise, and temperature.",
+    "Try a week of meditation or deep breathing exercises before bed to relax your mind.",
+    "Avoid caffeine and heavy meals in the evening for more peaceful sleep.",
+    "Replace evening digital entertainment with reading a book to prepare your mind for sleep.",
+    "Experiment with different pillow and mattress setups to find what provides the best comfort.",
+    "Engage in light stretching or yoga before bed to release tension and promote relaxation.",
+    "Practice gratitude journaling before sleep, focusing on positive thoughts.",
+    "Keep a sleep journal for a week to track patterns and identify areas for improvement.",
+    "Use a white noise machine or calming sounds to create a soothing sleep environment.",
+    "Opt for herbal tea or warm milk instead of caffeinated drinks before bedtime.",
+    "Avoid heavy exercise close to bedtime and aim for earlier in the day.",
+    "Consider a technology-free bedroom to eliminate sleep-disrupting screens.",
   ];
 
-  List<bool> challengeValues = List<bool>.generate(5, (index) => false);
+  List<bool> challengeValues = List<bool>.generate(15, (index) => false);
   void initState() {
     super.initState();
     // Load the saved checkbox states when the screen is initialized.
@@ -47,7 +57,7 @@ class _FixsleepSheduleState extends State<FixsleepShedule> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Fix your Sleep Shedule",
+          "Better Sleep",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         actions: [Showdialoguee(challengeValues: challengeValues)],

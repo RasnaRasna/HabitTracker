@@ -9,13 +9,13 @@ class ChallengeState extends ChangeNotifier {
       return List.unmodifiable(_challengeValuesMap[screenId]!);
     }
     // If the screen ID doesn't exist, create a new entry for it with default values.
-    _challengeValuesMap[screenId] = List<bool>.generate(5, (index) => false);
+    _challengeValuesMap[screenId] = List<bool>.generate(20, (index) => false);
     return List.unmodifiable(_challengeValuesMap[screenId]!);
   }
 
   void updateChallengeValue(String screenId, int index, bool value) {
     if (!_challengeValuesMap.containsKey(screenId)) {
-      _challengeValuesMap[screenId] = List<bool>.generate(5, (index) => false);
+      _challengeValuesMap[screenId] = List<bool>.generate(20, (index) => false);
     }
     _challengeValuesMap[screenId]![index] = value;
     _saveChallengeValues(screenId);
@@ -33,7 +33,7 @@ class ChallengeState extends ChangeNotifier {
   Future<void> loadSavedChallengeValues(String screenId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedValues = prefs.getStringList(screenId);
-    if (savedValues != null && savedValues.length == 5) {
+    if (savedValues != null && savedValues.length == 20) {
       List<bool> values = savedValues.map((value) => value == 'true').toList();
       _challengeValuesMap[screenId] = values;
       notifyListeners();
