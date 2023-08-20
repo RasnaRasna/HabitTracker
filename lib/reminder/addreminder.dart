@@ -34,21 +34,40 @@ class _AddRemindersState extends State<AddReminders> {
   TextEditingController notificationMessageController = TextEditingController();
 
   void _showTimePicker() {
-    showCupertinoModalPopup(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: 300.0,
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.time,
-            initialDateTime: sheduleTime,
-            onDateTimeChanged: (DateTime dateTime) {
-              setState(() {
-                sheduleTime = dateTime;
-                selectedTime = TimeOfDay.fromDateTime(dateTime);
-              });
-            },
-          ),
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 200.0,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.time,
+                initialDateTime: sheduleTime,
+                onDateTimeChanged: (DateTime dateTime) {
+                  setState(() {
+                    sheduleTime = dateTime;
+                    selectedTime = TimeOfDay.fromDateTime(dateTime);
+                  });
+                },
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Done'),
+                  ),
+                ],
+              ),
+            ),
+          ],
         );
       },
     );
@@ -64,58 +83,58 @@ class _AddRemindersState extends State<AddReminders> {
     });
   }
 
-  // Future<void> _scheduleRemindersOnSelectedDays() async {
-  //   for (String day in selectedDays) {
-  //     int dayIndex = DateTime.now().weekday;
+  Future<void> _scheduleRemindersOnSelectedDays() async {
+    for (String day in selectedDays) {
+      int dayIndex = DateTime.now().weekday;
 
-  //     // Map the selected day to its index (0 = Monday, 6 = Sunday)
-  //     switch (day.toLowerCase()) {
-  //       case 'monday':
-  //         dayIndex = 1;
-  //         break;
-  //       case 'tuesday':
-  //         dayIndex = 2;
-  //         break;
-  //       case 'wednesday':
-  //         dayIndex = 3;
-  //         break;
-  //       case 'thursday':
-  //         dayIndex = 4;
-  //         break;
-  //       case 'friday':
-  //         dayIndex = 5;
-  //         break;
-  //       case 'saturday':
-  //         dayIndex = 6;
-  //         break;
-  //       case 'sunday':
-  //         dayIndex = 7;
-  //         break;
-  //     }
+      // Map the selected day to its index (0 = Monday, 6 = Sunday)
+      switch (day.toLowerCase()) {
+        case 'monday':
+          dayIndex = 1;
+          break;
+        case 'tuesday':
+          dayIndex = 2;
+          break;
+        case 'wednesday':
+          dayIndex = 3;
+          break;
+        case 'thursday':
+          dayIndex = 4;
+          break;
+        case 'friday':
+          dayIndex = 5;
+          break;
+        case 'saturday':
+          dayIndex = 6;
+          break;
+        case 'sunday':
+          dayIndex = 7;
+          break;
+      }
 
-  //     // Calculate the number of days to add to get to the selected day
-  //     int daysToAdd = dayIndex - DateTime.now().weekday;
-  //     if (daysToAdd <= 0) {
-  //       daysToAdd += 7;
-  //     }
+      // Calculate the number of days to add to get to the selected day
+      int daysToAdd = dayIndex - DateTime.now().weekday;
+      if (daysToAdd <= 0) {
+        daysToAdd += 7;
+      }
 
-  //     // Calculate the scheduledDateTime for the selected day and time
-  //     DateTime scheduledDateTime = DateTime(
-  //       DateTime.now().year,
-  //       DateTime.now().month,
-  //       DateTime.now().day + daysToAdd,
-  //       selectedTime!.hour,
-  //       selectedTime!.minute,
-  //     );
+      // Calculate the scheduledDateTime for the selected day and time
+      DateTime scheduledDateTime = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day + daysToAdd,
+        selectedTime!.hour,
+        selectedTime!.minute,
+      );
 
-  //     // Schedule the reminder for the calculated date and time
-  //     NotificationService().sheduleNotification(
-  //       title: notificationTitleController.text,
-  //       body: notificationMessageController.text,
-  //       sheduleNotificationDateTime: scheduledDateTime,
-  //     );
-  //   }
-  // }
+      // Schedule the reminder for the calculated date and time
+      NotificationService().sheduleNotification(
+        title: notificationTitleController.text,
+        body: notificationMessageController.text,
+        sheduleNotificationDateTime: scheduledDateTime,
+      );
+    }
+  }
 
   Future<void> addReminders() async {
     if (selectedTime != null && selectedDays.isNotEmpty) {
@@ -123,7 +142,7 @@ class _AddRemindersState extends State<AddReminders> {
       DateTime selectedDateTime = DateTime(
         currentTime.year,
         currentTime.month,
-        currentTime.day,
+        currentTime.day + 1,
         selectedTime!.hour,
         selectedTime!.minute,
       );
@@ -225,6 +244,7 @@ class _AddRemindersState extends State<AddReminders> {
           actions: [
             TextButton(
               onPressed: () {
+                _scheduleRemindersOnSelectedDays();
                 addReminders();
                 NotificationService().sheduleNotification(
                     title: notificationTitleController.text,

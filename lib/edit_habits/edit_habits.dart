@@ -32,6 +32,11 @@ class EditHabits extends StatelessWidget {
   Widget build(BuildContext context) {
     print("habit name in editpage${habitName}");
     print("habit history in editpage${habitHistory}");
+    print("count ${daysPerWeek}");
+
+    int totalDaysInRange = DateTime.now().difference(startDate).inDays;
+    final int completedDaysCount = habitHistory.length;
+    print("habit count ${completedDaysCount}");
 
     return Scaffold(
       appBar: AppBar(
@@ -183,20 +188,13 @@ class EditHabits extends StatelessWidget {
                       Text("4 Days")
                     ],
                   ),
-                  const Row(
-                    children: [
-                      Kwidth,
-                      Text("Completion "),
-                      Kwidth,
-                      Text("0 %(0 of 4 weeks)")
-                    ],
-                  ),
-                  const Row(
+                  Row(
                     children: [
                       Kwidth,
                       Text("Days Completion "),
                       Kwidth,
-                      Text("24 %(9 of 37 days)")
+                      Text(
+                          "24 %($completedDaysCount of $totalDaysInRange days)")
                     ],
                   ),
                   Row(
@@ -217,7 +215,9 @@ class EditHabits extends StatelessWidget {
               ),
             ),
             kheight20,
-            buildHeatMap(habitId),
+            buildHeatMap(
+              habitId,
+            ),
             // buildHeatMapyear(context)
             kheight20,
             buildHeatMapYear(startDate, habitHistory, habitId, habitName),
