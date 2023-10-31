@@ -88,7 +88,7 @@ class EditHabits extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 30,
+                  width: 10,
                 ),
                 GestureDetector(
                   onTap: () {

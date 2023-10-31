@@ -56,7 +56,7 @@ Row continueWithGoogle(BuildContext context) {
           }
         },
         child: const Text(
-          "Continue with Gmail",
+          "Continue with Google",
         ),
       ),
     ],

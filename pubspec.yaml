@@ -40,6 +40,7 @@ dependencies:
   flutter_blurhash: ^0.7.0
   flutter_heatmap_calendar: ^1.0.5
   flutter_local_notifications: ^15.1.0+1
+  flutter_share: ^2.0.0
   flutter_timezone: ^1.0.7
   google_fonts: ^5.0.0
   google_sign_in: ^6.1.4

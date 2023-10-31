@@ -283,19 +283,22 @@ class _AddRemindersState extends State<AddReminders> {
           ),
           kheight10,
           Center(
-            child: SizedBox(
-              width: 350,
-              height: 50,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: korangecolor)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: TextField(
-                    controller: notificationTitleController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 350,
+                height: 50,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: korangecolor)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TextField(
+                      controller: notificationTitleController,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
@@ -312,20 +315,24 @@ class _AddRemindersState extends State<AddReminders> {
           ),
           kheight10,
           Center(
-            child: SizedBox(
-              width: 350,
-              height: 50,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: korangecolor)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: TextField(
-                    controller:
-                        notificationMessageController, // Connect controller
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 350,
+                height: 50,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: korangecolor)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TextField(
+                      controller:
+                          notificationMessageController, // Connect controller
 
-                    decoration: const InputDecoration(border: InputBorder.none),
+                      decoration:
+                          const InputDecoration(border: InputBorder.none),
+                    ),
                   ),
                 ),
               ),
@@ -333,7 +340,7 @@ class _AddRemindersState extends State<AddReminders> {
           ),
           kheight10,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
                 const Align(

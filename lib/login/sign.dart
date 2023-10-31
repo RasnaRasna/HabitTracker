@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/login/countinue_google.dart';
 import 'package:habits_track/login/forget_password.dart';
 import 'package:habits_track/login/reusable.dart';
 import 'package:habits_track/login/signoption.dart';
 import 'package:habits_track/onboarding/start.dart';
-
-import 'countinue_google.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignPage extends StatefulWidget {
   const SignPage({super.key, Key});
@@ -39,115 +39,124 @@ class _SignPageState extends State<SignPage> {
         ),
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
-              Text(
-                "SIGN IN TO CONTINUE",
-                style: GoogleFonts.acme(
-                  fontSize: 24,
-                ),
-              ),
-              kheight20,
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: reusableTextfield(
-                  "Enter Username",
-                  Icons.person,
-                  false,
-                  _emailcontroller,
-                  (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a username';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: reusableTextfield(
-                  "Enter password",
-                  Icons.lock_outline,
-                  true,
-                  _passwordcontroller,
-                  (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a password';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              forgetpassword(context),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child:
-                    isSigningIn // Display CircularProgressIndicator when signing in
-                        ? const CircularProgressIndicator()
-                        : FirebaseButton(
-                            context,
-                            "SIGN IN",
-                            () {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  isSigningIn = true;
-                                });
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "SIGN IN TO CONTINUE",
+                    style: GoogleFonts.acme(
+                      fontSize: 24,
+                    ),
+                  ),
+                  kheight20,
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: reusableTextfield(
+                      "Enter email",
+                      Icons.person,
+                      false,
+                      _emailcontroller,
+                      (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter an email';
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: reusableTextfield(
+                      "Enter password",
+                      Icons.lock_outline,
+                      true,
+                      _passwordcontroller,
+                      (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  forgetpassword(context),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child:
+                        isSigningIn // Display CircularProgressIndicator when signing in
+                            ? const CircularProgressIndicator()
+                            : FirebaseButton(
+                                context,
+                                "SIGN IN",
+                                () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                      isSigningIn = true;
+                                    });
 
-                                FirebaseAuth.instance
-                                    .signInWithEmailAndPassword(
-                                  email: _emailcontroller.text,
-                                  password: _passwordcontroller.text,
-                                )
-                                    .then((value) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (ctx) => const StartingPage(),
-                                    ),
-                                  );
-                                }).catchError((error) {
-                                  if (error.code == 'wrong-password') {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text(
-                                            'Wrong Password',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                          content: const Text(
-                                            'The password you entered is incorrect.',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text('OK'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
+                                    FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                      email: _emailcontroller.text,
+                                      password: _passwordcontroller.text,
+                                    )
+                                        .then((value) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (ctx) =>
+                                              const StartingPage(),
+                                        ),
+                                      );
+                                    }).catchError((error) {
+                                      if (error.code == 'wrong-password') {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                'Wrong Password',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              content: const Text(
+                                                'The password you entered is incorrect.',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: const Text('OK'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
-                                      },
-                                    );
-                                  } else {
-                                    print(
-                                        "Error occurred: ${error.toString()}");
+                                      } else {
+                                        print(
+                                            "Error occurred: ${error.toString()}");
+                                      }
+                                    }).whenComplete(() {
+                                      setState(() {
+                                        isSigningIn = false;
+                                      });
+                                    });
                                   }
-                                }).whenComplete(() {
-                                  setState(() {
-                                    isSigningIn = false;
-                                  });
-                                });
-                              }
-                            },
-                          ),
+                                },
+                              ),
+                  ),
+                  signupOption(context),
+                  const Text(
+                    "OR",
+                  ),
+                  continueWithGoogle(context),
+                ],
               ),
-              signupOption(context),
-              const Text(
-                "OR",
-              ),
-              continueWithGoogle(context),
             ],
           ),
         ),

@@ -272,14 +272,17 @@ class _HistoryState extends State<History> {
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(color: Colors.grey),
                       ),
-                      child: TextField(
-                        onChanged: (value) {
-                          setStateInsideDialog(() {
-                            notes = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: TextField(
+                          onChanged: (value) {
+                            setStateInsideDialog(() {
+                              notes = value;
+                            });
+                          },
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
                     ),

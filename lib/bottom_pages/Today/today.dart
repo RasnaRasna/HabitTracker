@@ -115,12 +115,6 @@ class MyHomePageToday extends StatelessWidget {
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            // if (snapshot.connectionState == ConnectionState.waiting) {
-            //   // If data is still loading, show the CircularProgressIndicator
-            //   return Center(
-            //     child: CircularProgressIndicator(),
-            //   );
-            // }
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             }
@@ -203,21 +197,21 @@ class MyHomePageToday extends StatelessWidget {
             : (i <= currentDayIndex ? korangecolor : Colors.black);
 
         return GestureDetector(
-          onTap: () {
-            if (isSelected) {
-              // Unselect the day
-              FirebaseFirestore.instance
-                  .collection('add_habits')
-                  .doc(habitId)
-                  .update({'selectedDayIndex': -1});
-            } else {
-              // Select the day
-              FirebaseFirestore.instance
-                  .collection('add_habits')
-                  .doc(habitId)
-                  .update({'selectedDayIndex': i});
-            }
-          },
+          // onTap: () {
+          //   if (isSelected) {
+          //     // Unselect the day
+          //     FirebaseFirestore.instance
+          //         .collection('add_habits')
+          //         .doc(habitId)
+          //         .update({'selectedDayIndex': -1});
+          //   } else {
+          //     // Select the day
+          //     FirebaseFirestore.instance
+          //         .collection('add_habits')
+          //         .doc(habitId)
+          //         .update({'selectedDayIndex': i});
+          //   }
+          // },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Container(

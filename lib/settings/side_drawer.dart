@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:habits_track/Firebase/logout.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/settings/entery.dart';
 
-import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/settings/privacy.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -99,7 +98,9 @@ class SideDrawer extends StatelessWidget {
               'Share',
               style: TextStyle(fontSize: 18, color: kredcolor),
             ),
-            onTap: () {},
+            onTap: () {
+              share();
+            },
           ),
           ListTile(
               leading: const Icon(
@@ -112,14 +113,17 @@ class SideDrawer extends StatelessWidget {
               ),
               onTap: () {
                 showLogoutConfirmationDialog(context);
-                // FirebaseAuth.instance.signOut().then((value) {
-                //   print("Signed Out");
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (ctx) => const SignPage()));
-                // });
               }),
         ],
       ),
     );
   }
+}
+
+Future share() async {
+  await FlutterShare.share(
+      title: ' Habit Tracker',
+      text: 'Habit Tracker',
+      linkUrl:
+          'https://play.google.com/store/apps/details?id=in.rasnaminnu.money_moves');
 }

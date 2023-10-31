@@ -89,6 +89,9 @@ class Moodchecking extends StatelessWidget {
                                 minRadius: 20,
                               ),
                             ),
+                            const SizedBox(
+                              width: 3,
+                            ),
                             Kwidth,
                             GestureDetector(
                               onTap: () {
@@ -125,6 +128,9 @@ class Moodchecking extends StatelessWidget {
                               ),
                             ),
                             Kwidth,
+                            const SizedBox(
+                              width: 5,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 showDialog<String>(
@@ -159,6 +165,7 @@ class Moodchecking extends StatelessWidget {
                                 minRadius: 20,
                               ),
                             ),
+                            Kwidth,
                             Kwidth,
                             GestureDetector(
                               onTap: () {
@@ -195,41 +202,41 @@ class Moodchecking extends StatelessWidget {
                               ),
                             ),
                             Kwidth,
-                            GestureDetector(
-                              onTap: () {
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                    content: const Text(
-                                      "I'm sorry to hear that you're not feeling good. Remember that it's okay to not be okay sometimes. Take some time for self-care and prioritize your well-being. Reach out to someone you trust and share your feelings with them. Remember that you're not alone, and there are people who care about you. Take small steps towards self-improvement and know that better days are ahead. You are strong and capable of overcoming this feeling. Stay positive and take care of yourself.",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        child: const Text(
-                                          "😁ok",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        onPressed: () {
-                                          // Perform any action you want when the user clicks the "OK" button
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              child: const CircleAvatar(
-                                backgroundImage: AssetImage(
-                                  "images/notokay.jpeg",
-                                ),
-                                maxRadius: 20,
-                                minRadius: 20,
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     showDialog<String>(
+                            //       context: context,
+                            //       builder: (BuildContext context) =>
+                            //           AlertDialog(
+                            //         content: const Text(
+                            //           "I'm sorry to hear that you're not feeling good. Remember that it's okay to not be okay sometimes. Take some time for self-care and prioritize your well-being. Reach out to someone you trust and share your feelings with them. Remember that you're not alone, and there are people who care about you. Take small steps towards self-improvement and know that better days are ahead. You are strong and capable of overcoming this feeling. Stay positive and take care of yourself.",
+                            //           style: TextStyle(
+                            //               fontSize: 20,
+                            //               fontWeight: FontWeight.bold),
+                            //         ),
+                            //         actions: [
+                            //           TextButton(
+                            //             child: const Text(
+                            //               "😁ok",
+                            //               style: TextStyle(fontSize: 20),
+                            //             ),
+                            //             onPressed: () {
+                            //               // Perform any action you want when the user clicks the "OK" button
+                            //               Navigator.of(context).pop();
+                            //             },
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     );
+                            //   },
+                            //   child: const CircleAvatar(
+                            //     backgroundImage: AssetImage(
+                            //       "images/notokay.jpeg",
+                            //     ),
+                            //     maxRadius: 20,
+                            //     minRadius: 20,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
