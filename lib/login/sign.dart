@@ -53,12 +53,12 @@ class _SignPageState extends State<SignPage> {
                   kheight20,
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: reusableTextfield(
-                      "Enter email",
-                      Icons.person,
-                      false,
-                      _emailcontroller,
-                      (value) {
+                    child: ReusableTextfield(
+                      text: "Enter email",
+                      icon: Icons.person,
+                      isPasswordType: false,
+                      controller: _emailcontroller,
+                      validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter an email';
                         } else if (!EmailValidator.validate(value)) {
@@ -70,12 +70,12 @@ class _SignPageState extends State<SignPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: reusableTextfield(
-                      "Enter password",
-                      Icons.lock_outline,
-                      true,
-                      _passwordcontroller,
-                      (value) {
+                    child: ReusableTextfield(
+                      text: "Enter password",
+                      icon: Icons.lock_outline,
+                      isPasswordType: true,
+                      controller: _passwordcontroller,
+                      validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter a password';
                         }

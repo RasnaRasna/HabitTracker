@@ -36,7 +36,7 @@
 //             kheight20,
 //             Padding(
 //               padding: const EdgeInsets.all(8.0),
-//               child: reusableTextfield(
+//               child: ReusableTextfield(
 //                 "Enter UserName",
 //                 Icons.person,
 //                 false,
@@ -46,7 +46,7 @@
 //             kheight10,
 //             Padding(
 //               padding: const EdgeInsets.all(8.0),
-//               child: reusableTextfield(
+//               child: ReusableTextfield(
 //                 "Enter Email Id",
 //                 Icons.lock_outline,
 //                 true,
@@ -55,7 +55,7 @@
 //             ),
 //             Padding(
 //               padding: const EdgeInsets.all(8.0),
-//               child: reusableTextfield(
+//               child: ReusableTextfield(
 //                 "Enter Password",
 //                 Icons.lock_outline,
 //                 true,
@@ -131,7 +131,6 @@ class SignupScreen extends StatelessWidget {
         ),
         child: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.always,
           child: ListView(children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -144,12 +143,12 @@ class SignupScreen extends StatelessWidget {
                 kheight20,
                 Padding(
                   padding: const EdgeInsets.all(20),
-                  child: reusableTextfield(
-                    "Enter UserName",
-                    Icons.person,
-                    false,
-                    _usertextcontroller,
-                    (value) {
+                  child: ReusableTextfield(
+                    text: "Enter UserName",
+                    icon: Icons.person,
+                    isPasswordType: false,
+                    controller: _usertextcontroller,
+                    validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a username';
                       }
@@ -159,12 +158,12 @@ class SignupScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20),
-                  child: reusableTextfield(
-                    "Enter Email Id",
-                    Icons.email,
-                    true,
-                    _emailTextcontroller,
-                    (value) {
+                  child: ReusableTextfield(
+                    text: "Enter Email Id",
+                    icon: Icons.email,
+                    isPasswordType: false,
+                    controller: _emailTextcontroller,
+                    validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter an Email Id';
                       } else if (!EmailValidator.validate(value)) {
@@ -176,12 +175,12 @@ class SignupScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20),
-                  child: reusableTextfield(
-                    "Enter Password",
-                    Icons.lock_outline,
-                    true,
-                    _passwordTextcontroller,
-                    (value) {
+                  child: ReusableTextfield(
+                    text: "Enter Password",
+                    icon: Icons.lock_outline,
+                    isPasswordType: true,
+                    controller: _passwordTextcontroller,
+                    validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter a Password';
                       } else if (value.length < 6) {

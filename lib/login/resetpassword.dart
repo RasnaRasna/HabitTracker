@@ -1,12 +1,19 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:habits_track/login/reusable.dart';
 
-class ResetPassword extends StatelessWidget {
-  ResetPassword({super.key});
+class ResetPassword extends StatefulWidget {
+  ResetPassword({Key? key}) : super(key: key);
 
-  final TextEditingController _emailTextcontroller = TextEditingController();
+  @override
+  _ResetPasswordState createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<ResetPassword> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,10 @@ class ResetPassword extends StatelessWidget {
         title: const Text(
           "Reset password",
           style: TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold, color: kwhite),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: kblack,
+          ),
         ),
       ),
       body: Container(
@@ -33,31 +43,39 @@ class ResetPassword extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-            child: Column(
-              children: [
-                kheight10,
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: reusableTextfield(
-                    "Enter Email Id",
-                    Icons.lock_outline,
-                    true,
-                    _emailTextcontroller,
-                    (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a username';
-                      }
-                      return null;
-                    },
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  kheight10,
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: ReusableTextfield(
+                      text: "Enter Email Id",
+                      icon: Icons.email,
+                      isPasswordType: false,
+                      controller: _emailTextController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter an Email Id';
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                ),
-                kheight10,
-                FirebaseButton(context, "Reset Password", () {
-                  FirebaseAuth.instance
-                      .sendPasswordResetEmail(email: _emailTextcontroller.text)
-                      .then((value) => Navigator.of(context).pop());
-                })
-              ],
+                  kheight10,
+                  FirebaseButton(context, "Reset Password", () {
+                    if (_formKey.currentState!.validate()) {
+                      FirebaseAuth.instance
+                          .sendPasswordResetEmail(
+                              email: _emailTextController.text)
+                          .then((value) => Navigator.of(context).pop());
+                    }
+                  }),
+                ],
+              ),
             ),
           ),
         ),

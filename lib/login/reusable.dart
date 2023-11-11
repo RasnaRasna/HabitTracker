@@ -1,37 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 
-TextFormField reusableTextfield(
-  String text,
-  IconData icon,
-  bool isPasswordType,
-  TextEditingController controller,
-  FormFieldValidator<String> validator,
-) {
-  return TextFormField(
-    controller: controller,
-    obscureText: isPasswordType,
-    enableSuggestions: isPasswordType,
-    autocorrect: isPasswordType,
-    cursorColor: kwhite,
-    style: const TextStyle(color: kwhite),
-    decoration: InputDecoration(
-      fillColor: korangecolor,
-      prefixIcon: Icon(icon, color: Colors.white),
-      hintText: text,
-      floatingLabelBehavior: FloatingLabelBehavior.never,
-      hintStyle: const TextStyle(color: Colors.white),
-      filled: true,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+class ReusableTextfield extends StatefulWidget {
+  final String text;
+  final IconData icon;
+  final bool isPasswordType;
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+
+  const ReusableTextfield({
+    Key? key,
+    required this.text,
+    required this.icon,
+    required this.isPasswordType,
+    required this.controller,
+    required this.validator,
+  }) : super(key: key);
+
+  @override
+  _ReusableTextfieldState createState() => _ReusableTextfieldState();
+}
+
+class _ReusableTextfieldState extends State<ReusableTextfield> {
+  bool obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.controller,
+      obscureText: obscureText,
+      enableSuggestions: widget.isPasswordType,
+      autocorrect: widget.isPasswordType,
+      cursorColor: kwhite,
+      style: const TextStyle(color: kwhite),
+      decoration: InputDecoration(
+        fillColor: korangecolor,
+        prefixIcon: Icon(widget.icon, color: Colors.white),
+        suffixIcon: widget.isPasswordType
+            ? GestureDetector(
+                onTap: () {
+                  // Toggle password visibility
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+                child: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white,
+                ),
+              )
+            : null,
+        hintText: widget.text,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        hintStyle: const TextStyle(color: Colors.white),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+        ),
       ),
-    ),
-    keyboardType: isPasswordType
-        ? TextInputType.visiblePassword
-        : TextInputType.emailAddress,
-    validator: validator, // Pass the validator parameter here
-  );
+      maxLength: widget.isPasswordType ? 6 : null,
+      keyboardType: widget.isPasswordType
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
+      validator: widget.validator,
+    );
+  }
 }
 
 Container FirebaseButton(BuildContext context, String title, Function ontap) {
