@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habits_track/const.dart';
-import 'package:habits_track/login/countinue_google.dart';
 import 'package:habits_track/login/forget_password.dart';
 import 'package:habits_track/login/reusable.dart';
 import 'package:habits_track/login/signoption.dart';
@@ -107,6 +106,8 @@ class _SignPageState extends State<SignPage> {
                                       password: _passwordcontroller.text,
                                     )
                                         .then((value) {
+                                      // Successful sign-in logic
+
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (ctx) =>
@@ -114,7 +115,30 @@ class _SignPageState extends State<SignPage> {
                                         ),
                                       );
                                     }).catchError((error) {
-                                      if (error.code == 'wrong-password') {
+                                      if (error.code == 'user-not-found') {
+                                        // Handle the case where the user doesn't exist (may have been deleted)
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                  'Account Not Found'),
+                                              content: const Text(
+                                                'There is no account associated with this email. If you believe this is a mistake, please check your email or sign up for a new account.',
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('OK'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else if (error.code ==
+                                          'wrong-password') {
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {

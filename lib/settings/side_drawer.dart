@@ -42,7 +42,7 @@ class SideDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (ctx) => Entery(
+                        builder: (ctx) => const Entery(
                               fromGuidedJournaling: false,
                             )));
               }),
@@ -75,11 +75,11 @@ class SideDrawer extends StatelessWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     backgroundColor: korangecolor,
-                    title: Text(
+                    title: const Text(
                       'Delete Account',
                       style: TextStyle(color: Colors.white),
                     ),
-                    content: Text(
+                    content: const Text(
                       'Are you sure you want to Delete your Account  ?',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
@@ -104,7 +104,7 @@ class SideDrawer extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (ctx) => SignPage()));
+                                    builder: (ctx) => const SignPage()));
                           } catch (error) {
                             // Handle errors, e.g., display a snackbar or show an error dialog
                             print("Error occurred: ${error.toString()}");
