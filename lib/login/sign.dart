@@ -71,13 +71,16 @@ class _SignPageState extends State<SignPage> {
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: ReusableTextfield(
-                      text: "Enter password",
+                      text: "Enter Password",
                       icon: Icons.lock_outline,
                       isPasswordType: true,
                       controller: _passwordcontroller,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter a password';
+                          return 'Please enter a Password';
+                        } else if (value.length < 6) {
+                          // You can adjust the minimum length as needed
+                          return 'Password must be at least 6 characters';
                         }
                         return null;
                       },
@@ -151,10 +154,10 @@ class _SignPageState extends State<SignPage> {
                               ),
                   ),
                   signupOption(context),
-                  const Text(
-                    "OR",
-                  ),
-                  continueWithGoogle(context),
+                  // const Text(
+                  //   "OR",
+                  // ),
+                  // continueWithGoogle(context),
                 ],
               ),
             ],

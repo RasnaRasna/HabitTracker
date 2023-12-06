@@ -28,31 +28,33 @@ class _ReusableTextfieldState extends State<ReusableTextfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: obscureText,
+      obscureText: widget.isPasswordType ? obscureText : false,
       enableSuggestions: widget.isPasswordType,
       autocorrect: widget.isPasswordType,
       cursorColor: kwhite,
       style: const TextStyle(color: kwhite),
       decoration: InputDecoration(
         fillColor: korangecolor,
-        prefixIcon: Icon(widget.icon, color: Colors.white),
+        prefixIcon: Icon(widget.icon, color: kwhite),
         suffixIcon: widget.isPasswordType
             ? GestureDetector(
                 onTap: () {
                   // Toggle password visibility
-                  setState(() {
-                    obscureText = !obscureText;
-                  });
+                  if (widget.isPasswordType) {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  }
                 },
                 child: Icon(
                   obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.white,
+                  color: kwhite,
                 ),
               )
             : null,
         hintText: widget.text,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        hintStyle: const TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: kwhite),
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),

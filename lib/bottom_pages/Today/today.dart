@@ -197,21 +197,6 @@ class MyHomePageToday extends StatelessWidget {
             : (i <= currentDayIndex ? korangecolor : Colors.black);
 
         return GestureDetector(
-          // onTap: () {
-          //   if (isSelected) {
-          //     // Unselect the day
-          //     FirebaseFirestore.instance
-          //         .collection('add_habits')
-          //         .doc(habitId)
-          //         .update({'selectedDayIndex': -1});
-          //   } else {
-          //     // Select the day
-          //     FirebaseFirestore.instance
-          //         .collection('add_habits')
-          //         .doc(habitId)
-          //         .update({'selectedDayIndex': i});
-          //   }
-          // },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Container(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -22,8 +23,20 @@ class _MonthBaseState extends State<MonthBase> {
   }
 
   Future<void> fetchHabitsData() async {
-    final habitSnapshot =
-        await FirebaseFirestore.instance.collection('add_habits').get();
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null) {
+      // Handle the case where the user is not authenticated
+      return;
+    }
+
+    final userId = currentUser.uid;
+
+    final habitSnapshot = await FirebaseFirestore.instance
+        .collection('add_habits')
+        .where('userId', isEqualTo: userId) // Filter habits by user ID
+        .get();
+    await FirebaseFirestore.instance.collection('add_habits').get();
     final habitNames =
         habitSnapshot.docs.map((doc) => doc['name'] as String).toList();
 
@@ -75,16 +88,20 @@ class _MonthBaseState extends State<MonthBase> {
         ),
         backgroundColor: Colors.white,
         body: isLoading // Check the isLoading value
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(), // Show progress indicator
               )
-            : ListView.builder(
-                itemCount: habitsData.length,
-                itemBuilder: (context, index) {
-                  final habitName = habitsData.keys.toList()[index];
-                  return monthCalendar(habitName);
-                },
-              ),
+            : habitsData.isEmpty
+                ? const Center(
+                    child: Text("No data available"),
+                  )
+                : ListView.builder(
+                    itemCount: habitsData.length,
+                    itemBuilder: (context, index) {
+                      final habitName = habitsData.keys.toList()[index];
+                      return monthCalendar(habitName);
+                    },
+                  ),
       ),
     );
   }

@@ -1,90 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:habits_track/const.dart';
-// import 'package:habits_track/login/reusable.dart';
-// import 'package:habits_track/onboarding/start.dart';
-
-// class SignupScreen extends StatelessWidget {
-//   SignupScreen({super.key});
-//   TextEditingController _usertextcontroller = TextEditingController();
-
-//   TextEditingController _emailTextcontroller = TextEditingController();
-//   TextEditingController _passwordTextcontroller = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         width: MediaQuery.of(context).size.width,
-//         height: MediaQuery.of(context).size.height,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//             image:
-//                 AssetImage("images/waal.jpg"), // Replace with your image path
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text("SIGN UP TO COUNTINUE",
-//                 style: TextStyle(
-//                   fontSize: 24,
-//                 )),
-//             kheight20,
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: ReusableTextfield(
-//                 "Enter UserName",
-//                 Icons.person,
-//                 false,
-//                 _usertextcontroller,
-//               ),
-//             ),
-//             kheight10,
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: ReusableTextfield(
-//                 "Enter Email Id",
-//                 Icons.lock_outline,
-//                 true,
-//                 _emailTextcontroller,
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: ReusableTextfield(
-//                 "Enter Password",
-//                 Icons.lock_outline,
-//                 true,
-//                 _passwordTextcontroller,
-//               ),
-//             ),
-//             kheight10,
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: FirebaseButton(context, "Sign up", () {
-//                 FirebaseAuth.instance
-//                     .createUserWithEmailAndPassword(
-//                         email: _emailTextcontroller.text,
-//                         password: _passwordTextcontroller.text)
-//                     .then((value) {
-//                   print("Created new account");
-//                   Navigator.of(context).push(
-//                       MaterialPageRoute(builder: (ctx) => StartingPage()));
-//                 }).onError((error, stackTrace) {
-//                   print("Error${error.toString()}");
-//                 });
-//               }),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -92,14 +5,30 @@ import 'package:habits_track/const.dart';
 import 'package:habits_track/login/reusable.dart';
 import 'package:habits_track/onboarding/start.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   SignupScreen({super.key});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   TextEditingController _usertextcontroller = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController _emailTextcontroller = TextEditingController();
+
   TextEditingController _passwordTextcontroller = TextEditingController();
-  void _signUp(BuildContext context) async {
+
+  bool _isLoading = false;
+
+  Future<void> _signUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       try {
         UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -108,10 +37,16 @@ class SignupScreen extends StatelessWidget {
         );
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => StartingPage()));
+          context,
+          MaterialPageRoute(builder: (ctx) => StartingPage()),
+        );
       } catch (error) {
-        // ignore: avoid_print
-        print('Error:$error');
+        // Handle the error
+        print('Error: $error');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -193,9 +128,11 @@ class SignupScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: FirebaseButton(context, "Sign up", () {
-                    _signUp(context);
-                  }),
+                  child: _isLoading
+                      ? CircularProgressIndicator()
+                      : FirebaseButton(context, "Sign up", () {
+                          _signUp(context);
+                        }),
                 )
               ],
             )

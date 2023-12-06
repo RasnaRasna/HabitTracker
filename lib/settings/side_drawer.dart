@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:habits_track/Firebase/logout.dart';
 import 'package:habits_track/const.dart';
+import 'package:habits_track/login/sign.dart';
 import 'package:habits_track/settings/entery.dart';
 
 import 'package:habits_track/settings/privacy.dart';
@@ -56,6 +58,67 @@ class SideDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (ctx) => AboutScreen()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.delete,
+              color: kredcolor,
+            ),
+            title: const Text(
+              ' Delete Account',
+              style: TextStyle(fontSize: 18, color: kredcolor),
+            ),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: korangecolor,
+                    title: Text(
+                      'Delete Account',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    content: Text(
+                      'Are you sure you want to Delete your Account  ?',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'CANCEL',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          try {
+                            // Delete the user's account
+                            await FirebaseAuth.instance.currentUser?.delete();
+
+                            // Redirect to the login page or any appropriate screen after deletion
+                            Navigator.of(context).pop();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => SignPage()));
+                          } catch (error) {
+                            // Handle errors, e.g., display a snackbar or show an error dialog
+                            print("Error occurred: ${error.toString()}");
+                          }
+                        },
+                        child: const Text(
+                          'YES',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
           ),
           ListTile(
@@ -125,5 +188,5 @@ Future share() async {
       title: ' Habit Tracker',
       text: 'Habit Tracker',
       linkUrl:
-          'https://play.google.com/store/apps/details?id=in.rasnaminnu.money_moves');
+          'https://play.google.com/store/apps/details?id=in.brototype.habits_track&pcampaignid=web_share');
 }

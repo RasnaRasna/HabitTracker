@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habits_track/const.dart';
 import 'package:intl/intl.dart';
@@ -26,9 +27,19 @@ class _YearBaseState extends State<YearBase> {
     setState(() {
       isLoading = true;
     });
+    final currentUser = FirebaseAuth.instance.currentUser;
 
-    final habitSnapshot =
-        await FirebaseFirestore.instance.collection('add_habits').get();
+    if (currentUser == null) {
+      // Handle the case where the user is not authenticated
+      return;
+    }
+    final userId = currentUser.uid;
+
+    final habitSnapshot = await FirebaseFirestore.instance
+        .collection('add_habits')
+        .where('userId', isEqualTo: userId) // Filter habits by user ID
+        .get();
+    await FirebaseFirestore.instance.collection('add_habits').get();
     final habitNames =
         habitSnapshot.docs.map((doc) => doc['name'] as String).toList();
     print(habitsData);
@@ -88,10 +99,14 @@ class _YearBaseState extends State<YearBase> {
         title: Text("${today.year}"), // Display the current year dynamically
       ),
       body: isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(), // Show loading indicator
             )
-          : buildHeatMapYeartototalheatmap(), // Show actual content      ),
+          : habitsData.isEmpty
+              ? const Center(
+                  child: Text("No data available"),
+                )
+              : buildHeatMapYeartototalheatmap(), // Show actual content      ),
     ));
   }
 
